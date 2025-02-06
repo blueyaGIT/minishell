@@ -83,6 +83,6 @@ For more details, refer to the project documentation or the `42` subject PDF.
 
 <a href="https://github.com/LauraNierobisch/cub3d"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=BF94E4&width=435&lines=cub3d"></a> -->
 
-## ⏳ Previous Project
+<!-- ## ⏳ Previous Project
 
-<a href="https://github.com/LauraNierobisch/philo"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=BF94E4&width=435&lines=Philosophers"></a>
+<a href="https://github.com/LauraNierobisch/philo"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=BF94E4&width=435&lines=Philosophers"></a> -->
