@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="hhttps://github.com/blueyaGIT/blueyaGIT/blob/master/42_badges/minishelln.png?raw=true" alt="minishell"/>
+  <img src="https://github.com/blueyaGIT/blueyaGIT/blob/master/42_badges/minishelln.png?raw=true" alt="minishell"/>
 </p>
 
 <p align="center">
@@ -76,3 +76,13 @@ This will run the minishell executable
   - handle `$?`
 - Support interactive and non-interactive mode
 - Signal Handling for <kbd>CRTl+C</kbd>, <kbd>CRTl+D</kbd> & <kbd>CRTl+\\</kbd>
+
+For more details, refer to the project documentation or the `42` subject PDF.
+
+<!-- ## 🚀 Next Project
+
+<a href="https://github.com/LauraNierobisch/cub3d"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=BF94E4&width=435&lines=cub3d"></a> -->
+
+## ⏳ Previous Project
+
+<a href="https://github.com/LauraNierobisch/philo"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=BF94E4&width=435&lines=Philosophers"></a>
