@@ -139,6 +139,6 @@ SUCCESS:
 	@printf "\n$(MAGENTA)██████████████████████████████████████████████████████████████████████████████████████████$(NC)"
 	@printf "$(LIGHT_PINK)$$(cat .img/asciiart.txt)$(NC)\n"
 	@printf "$(MAGENTA)██████████████████████████████████████████████████████████████████████████████████████████$(NC)"
-	@printf "\n\n$(LIGHT_PINK)                               $(UNDERLINE)$(ITALIC)lnierobi$(NC)&&    $(LIGHT_PINK)$(UNDERLINE)$(ITALIC)dalbano$(NC)\n\n"
+	@printf "\n\n$(LIGHT_PINK)                               $(UNDERLINE)$(ITALIC)lnierobi$(NC)&&   $(LIGHT_PINK)$(UNDERLINE)$(ITALIC)dalbano$(NC)\n\n"
 # Phony targets
 .PHONY: all clean fclean re libft init-submodules remove-submodules fastre

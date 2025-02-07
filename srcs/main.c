@@ -14,7 +14,7 @@ int main(void)
 		if (*mini.input)
 			add_history(mini.input);
 
-		if (strcmp(mini.input, "exit") == 0)
+		if (ft_strcmp(mini.input, "exit") == 0)
 		{
 			printf("Good bye, see you ..👋 ");
 			break;
