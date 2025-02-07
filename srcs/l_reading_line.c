@@ -51,6 +51,7 @@ char *create_token(t_mini mini)
 	int i = 0;
 	char **tokens;
 	char *start = mini.input;
+	char *end;
 	while(*start)
 	{
 		while(*start = ' ')
@@ -61,6 +62,18 @@ char *create_token(t_mini mini)
 		{
 			tokens[i] = strndup(start, 1);
 				i++;
+				start++;
+		}
+		else
+		{
+		end = start;
+		while(*end  && *end != '<' && *end != '>' && *end != '|' && *end != ' ')
+		{
+			end++;
+		}
+		tokens[i] = strndup (start, end - start);
+		i++;
+		start = end;
 		}
 	}
 }
@@ -70,6 +83,7 @@ int main()
 {
 	t_mini mini;
 	char *input;
+	char *token;
 	while (1)
 	{
 		mini.input = readline("🧚:");
@@ -80,8 +94,11 @@ int main()
 		}
 		if (*mini.input)
 			add_history(mini.input);
-		mini.input = one_space(mini);
-		// prom = put_space_after_tube(prom);
+
+		mini.input = malloc(sizeof(char) * (strlen(mini.input) + 1));
+		token = create_token(mini);
+		printf("token: %s", token);
+
 		if(strcmp(mini.input, "exit") == 0)
 		{
 			printf("Good bye, see you ..👋 ");
