@@ -1,21 +1,34 @@
 #include "../includes/minishell.h"
+void print_tokens(char **token)
+{
+	int i = 0;
+	while (token[i])
+	{
+		printf("Token[%d]: %s\n", i, token[i]);
+		i++;
+	}
+}
 
 char **create_token(t_mini mini)
 {
 	int i = 0;
-	char **tokens;
 	char *start = mini.input;
 	char *end;
-	tokens = malloc(sizeof(char *) * 100);
-	if (!tokens)
+	mini.tokens = malloc(sizeof(char *) * 100);
+	if (!mini.tokens)
 		return NULL;
 	while (*start)
 	{
 		while (*start == ' ')
 			start++;
-		if (*start == '|' || *start == '<' || *start == '>')
+		if ((*start == '<' && start[1] == '<') || (*start == '>' && start[1] == '>'))
 		{
-			tokens[i++] = strndup(start, 1);
+			mini.tokens[i++] = strndup(start, 2);
+			start += 2;
+		}
+		else if (*start == '|' || *start == '<' || *start == '>')
+		{
+			mini.tokens[i++] = strndup(start, 1);
 			start++;
 		}
 		else
@@ -23,11 +36,10 @@ char **create_token(t_mini mini)
 			end = start;
 			while (*end && *end != '<' && *end != '>' && *end != '|' && *end != ' ')
 				end++;
-			tokens[i++] = strndup(start, end - start);
+			mini.tokens[i++] = strndup(start, end - start);
 			start = end;
 		}
 	}
-	tokens[i] = NULL;
-	return tokens;
+	mini.tokens[i] = NULL;
+	return mini.tokens;
 }
-

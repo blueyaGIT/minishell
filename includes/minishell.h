@@ -13,7 +13,9 @@ typedef struct s_node
 typedef struct s_mini
 {
 	char *input;
+	char **tokens;
 	t_node node;
 } t_mini;
 
 char **create_token(t_mini mini);
+void print_tokens(char **token);
