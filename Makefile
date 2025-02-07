@@ -32,7 +32,7 @@ CLEAR_LINE = \033[2K\r
 
 # Source files
 SRCS =	main.c \
-		reading_line.c
+		l_reading_line.c
 		
 
 # Object files
