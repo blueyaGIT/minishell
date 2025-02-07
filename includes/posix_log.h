@@ -1,14 +1,15 @@
 #ifndef POSIX_LOG_H
-#define POSIX_LOG_H
-#include <fcntl.h>
-#include <unistd.h>
-#include <time.h>
-#include <string.h>
-#include <stdio.h>
-#include <errno.h>
-#include <sys/stat.h>
-#define LOG_PATH "./minishell.log"
-#define BUFFER_SIZE 4096
+# define POSIX_LOG_H
+
+# include <fcntl.h>
+# include <unistd.h>
+# include <time.h>
+# include <string.h>
+# include <stdio.h>
+# include <errno.h>
+# include <sys/stat.h>
+# define LOG_PATH "./minishell.log"
+# define BUFFER_SIZE 4096
 int write_log(const char *message) {
     int fd = open(LOG_PATH, O_WRONLY | O_CREAT | O_APPEND, 0644);
     if (fd == -1) {
@@ -29,4 +30,5 @@ int write_log(const char *message) {
     int close_result = close(fd);
     return (bytes_written == len && close_result == 0) ? 0 : -1;
 }
-#endif // POSIX_LOG_H
+
+#endif /* POSIX_LOG_H */

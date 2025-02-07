@@ -1,7 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+#ifndef MINISHELL_H
+# define MINISHELL_H
+
+# include <stdio.h>
+# include <stdlib.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct s_node
 {
@@ -19,3 +22,5 @@ typedef struct s_mini
 
 char **create_token(t_mini mini);
 void print_tokens(char **token);
+
+#endif /* MINISHELL_H */
