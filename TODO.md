@@ -1,8 +1,8 @@
 # TODO List
 
 ### Laura
-- [ ][enum implementation](./includes/minishell.h)
+- [ ] [enum implementation](./includes/minishell.h)
 
 ### Marzia
-- [ ][pipes verstehen]
-- [ ][anfangen execution commands]
+- [ ] [pipes verstehen]
+- [ ] [anfangen execution commands]
