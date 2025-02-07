@@ -1,112 +1,33 @@
 #include "../../includes/minishell.h"
 
-char *one_space(t_mini mini)
-{
-	int i = 0;
-	int j = 0;
-	char *trim;
-	int space_found = 1;
-	char quote = 0;
-
-	trim = malloc(sizeof(char) * (strlen(mini.input) + 1));
-	if (!trim)
-		return NULL;
-
-	while (mini.input[i])
-	{
-		if(quote)
-		{
-			trim[j++] = mini.input[i];
-			if(mini.input[i] == quote)
-				quote = 0;
-		}
-		else
-		{
-		if(mini.input[i] == '\'' || mini.input[i]== '"')
-		{
-			quote = mini.input[i];
-			trim[j++] = mini.input[i];
-		}
-		else if (mini.input[i] != ' ')
-		{
-			trim[j++] = mini.input[i];
-			space_found = 0;
-		}
-		else if (!space_found)
-		{
-			trim[j++] = ' ';
-			space_found = 1;
-		}
-		}
-		i++;
-	}
-	if (j > 0 && trim[j - 1] == ' ')
-		j--;
-	trim[j] = '\0';
-	return (trim);
-}
-
-char *create_token(t_mini mini)
+char **create_token(t_mini mini)
 {
 	int i = 0;
 	char **tokens;
 	char *start = mini.input;
 	char *end;
-	while(*start)
+	tokens = malloc(sizeof(char *) * 100);
+	if (!tokens)
+		return NULL;
+	while (*start)
 	{
-		while(*start = ' ')
+		while (*start == ' ')
+			start++;
+		if (*start == '|' || *start == '<' || *start == '>')
 		{
-			start ++;
-		}
-		if(*start == '|' || *start == '<' || *start == '>')
-		{
-			tokens[i] = strndup(start, 1);
-				i++;
-				start++;
+			tokens[i++] = strndup(start, 1);
+			start++;
 		}
 		else
 		{
-		end = start;
-		while(*end  && *end != '<' && *end != '>' && *end != '|' && *end != ' ')
-		{
-			end++;
-		}
-		tokens[i] = strndup (start, end - start);
-		i++;
-		start = end;
+			end = start;
+			while (*end && *end != '<' && *end != '>' && *end != '|' && *end != ' ')
+				end++;
+			tokens[i++] = strndup(start, end - start);
+			start = end;
 		}
 	}
+	tokens[i] = NULL;
+	return tokens;
 }
 
-
-int main()
-{
-	t_mini mini;
-	char *input;
-	char *token;
-	while (1)
-	{
-		mini.input = readline("🧚:");
-		if (!mini.input)
-		{
-			printf(" End of File. End of Minishell! \n");
-			break;
-		}
-		if (*mini.input)
-			add_history(mini.input);
-
-		mini.input = malloc(sizeof(char) * (strlen(mini.input) + 1));
-		token = create_token(mini);
-		printf("token: %s", token);
-
-		if(strcmp(mini.input, "exit") == 0)
-		{
-			printf("Good bye, see you ..👋 ");
-			break;
-		}
-		printf(" Prompt: %s \n", mini.input);
-
-		free(mini.input);
-	}
-	return (0);
-}

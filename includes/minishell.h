@@ -15,3 +15,5 @@ typedef struct s_mini
 	char *input;
 	t_node node;
 } t_mini;
+
+char **create_token(t_mini mini);
