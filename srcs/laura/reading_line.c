@@ -1,4 +1,5 @@
-#include "minishell.h"
+#include "../../includes/minishell.h"
+
 char *one_space(t_mini mini)
 {
 	int i = 0;
