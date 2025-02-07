@@ -45,6 +45,26 @@ char *one_space(t_mini mini)
 	return (trim);
 }
 
+char *create_token(t_mini mini)
+{
+	int i = 0;
+	char **tokens;
+	char *start = mini.input;
+	while(*start)
+	{
+		while(*start = ' ')
+		{
+			start ++;
+		}
+		if(*start == '|' || *start == '<' || *start == '>')
+		{
+			tokens[i] = strndup(start, 1);
+				i++;
+				
+		}
+	}
+}
+
 
 int main()
 {
