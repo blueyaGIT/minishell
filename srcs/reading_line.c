@@ -60,7 +60,7 @@ char *create_token(t_mini mini)
 		{
 			tokens[i] = strndup(start, 1);
 				i++;
-				
+
 		}
 	}
 }
