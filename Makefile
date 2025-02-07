@@ -21,14 +21,25 @@ LIBFT_LIB = $(LIBFT_DIR)/$(LIBFT)
 LIBFTFLAGS = -L$(LIBFT_DIR) -lft
 LIBFT_REPO = https://github.com/blueyaGIT/libft.git
 
-RED = \033[31m
-GREEN = \033[32m
-YELLOW = \033[33m
-BLUE = \033[34m
-MAGENTA = \033[35m
-CYAN = \033[36m
-NC = \033[0m
-CLEAR_LINE = \033[2K\r
+# Regular Colors
+BLACK       = \033[30m
+RED         = \033[31m
+GREEN       = \033[32m
+YELLOW      = \033[33m
+BLUE        = \033[34m
+MAGENTA     = \033[35m
+CYAN        = \033[36m
+WHITE       = \033[37m
+LIGHT_PINK  = \033[38;5;168m
+NC          = \033[0m   # No Color (Reset)
+
+# Other Formatting
+UNDERLINE   = \033[4m
+REVERSED    = \033[7m
+BLINK       = \033[5m
+ITALIC      = \033[3m
+STRIKE      = \033[9m
+CLEAR_LINE  = \033[2K\r
 
 # Source files
 SRCS =	main.c \
@@ -92,6 +103,7 @@ $(NAME): init-submodules $(LIBFT_LIB) $(OBJS)
 	@echo "$(CLEAR_LINE)$(YELLOW)🚧 Building 🧚 Minishell 🧚 🚧$(NC)"
 	@$(CC) -o $(NAME) $(OBJS) $(LIBFTFLAGS) $(SYSLIBFLAGS) $(LDFLAGS)
 	@echo "$(CLEAR_LINE)$(GREEN)✅🧚 Done Compiling 🧚✅$(NC)"
+	@make SUCCESS
 
 # Clean object files and libraries
 clean: remove-submodules
@@ -123,5 +135,10 @@ fastre: remove-submodules
 	@rm -rf $(NAME)
 	@make
 
+SUCCESS:
+	@printf "\n$(MAGENTA)██████████████████████████████████████████████████████████████████████████████████████████$(NC)"
+	@printf "$(LIGHT_PINK)$$(cat .img/asciiart.txt)$(NC)\n"
+	@printf "$(MAGENTA)██████████████████████████████████████████████████████████████████████████████████████████$(NC)"
+	@printf "\n\n$(LIGHT_PINK)                               $(UNDERLINE)$(ITALIC)lnierobi$(NC)&&    $(LIGHT_PINK)$(UNDERLINE)$(ITALIC)dalbano$(NC)\n\n"
 # Phony targets
 .PHONY: all clean fclean re libft init-submodules remove-submodules fastre

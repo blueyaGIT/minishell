@@ -3,6 +3,7 @@
 # Compiled source #
 # minishell
 ./minishell.dSYM
+./includes/minishell.log
 *.out
 
 # Object files #
