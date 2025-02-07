@@ -2,10 +2,7 @@
 int main(void)
 {
 	t_mini mini;
-	char *input;
-	char *token;
-
-	input = NULL;
+	char **tokens;
 	while (1)
 	{
 		mini.input = readline("🧚:");
@@ -24,9 +21,11 @@ int main(void)
 		}
 
 		// mini.input = malloc(sizeof(char) * (strlen(mini.input) + 1));
-		token = *create_token(mini);
-		printf("token: %s", token);
+		create_token(mini);
+
 		printf("Prompt: %s\n", mini.input);
+		tokens = create_token(mini);
+		print_tokens(tokens);
 		free(mini.input);
 	}
 	return (0);
