@@ -1,5 +1,5 @@
 #include "minishell.h"
-char *one_space(char *prom)
+char *one_space(t_mini mini)
 {
 	int i = 0;
 	int j = 0;
@@ -7,28 +7,28 @@ char *one_space(char *prom)
 	int space_found = 1;
 	char quote = 0;
 
-	trim = malloc(sizeof(char) * (strlen(prom) + 1));
+	trim = malloc(sizeof(char) * (strlen(mini.input) + 1));
 	if (!trim)
 		return NULL;
 
-	while (prom[i])
+	while (mini.input[i])
 	{
 		if(quote)
 		{
-			trim[j++] = prom[i];
-			if(prom[i] == quote)
+			trim[j++] = mini.input[i];
+			if(mini.input[i] == quote)
 				quote = 0;
 		}
 		else
 		{
-		if(prom[i] == '\'' || prom[i]== '"')
+		if(mini.input[i] == '\'' || mini.input[i]== '"')
 		{
-			quote = prom[i];
-			trim[j++] = prom[i];
+			quote = mini.input[i];
+			trim[j++] = mini.input[i];
 		}
-		else if (prom[i] != ' ')
+		else if (mini.input[i] != ' ')
 		{
-			trim[j++] = prom[i];
+			trim[j++] = mini.input[i];
 			space_found = 0;
 		}
 		else if (!space_found)
@@ -42,27 +42,34 @@ char *one_space(char *prom)
 	if (j > 0 && trim[j - 1] == ' ')
 		j--;
 	trim[j] = '\0';
-	return trim;
+	return (trim);
 }
 
 
 int main()
 {
-	char *prom;
+	t_mini mini;
+	char *input;
 	while (1)
 	{
-		prom = readline("🧚:");
-		if (!prom)
+		mini.input = readline("🧚:");
+		if (!mini.input)
 		{
 			printf(" End of File. End of Minishell! \n");
 			break;
 		}
-		if (*prom)
-			add_history(prom);
-		prom = one_space(prom);
+		if (*mini.input)
+			add_history(mini.input);
+		mini.input = one_space(mini);
 		// prom = put_space_after_tube(prom);
-		printf(" Prompt: %s \n", prom);
-		free(prom);
+		if(strcmp(mini.input, "exit") == 0)
+		{
+			printf("Good bye, see you ..👋 ");
+			break;
+		}
+		printf(" Prompt: %s \n", mini.input);
+
+		free(mini.input);
 	}
 	return (0);
 }

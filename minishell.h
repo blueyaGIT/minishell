@@ -9,3 +9,9 @@ typedef struct s_node
 	char **filename;
 	char **redirections;
 } t_node;
+
+typedef struct s_mini
+{
+	char *input;
+	t_node node;
+} t_mini;
