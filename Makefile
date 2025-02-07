@@ -31,7 +31,9 @@ NC = \033[0m
 CLEAR_LINE = \033[2K\r
 
 # Source files
-SRCS =	reading_line.c
+SRCS =	main.c \
+		reading_line.c
+		
 
 # Object files
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
@@ -88,7 +90,7 @@ $(LIBFT_LIB): init-libft
 # Rule to compile program
 $(NAME): init-submodules $(LIBFT_LIB) $(OBJS)
 	@echo "$(CLEAR_LINE)$(YELLOW)🚧 Building 🧚 Minishell 🧚 🚧$(NC)"
-	@$(CC) -o $@ $^ $(LIBFTFLAGS) $(SYSLIBFLAGS) $(LDFLAGS)
+	@$(CC) -o $(NAME) $(OBJS) $(LIBFTFLAGS) $(SYSLIBFLAGS) $(LDFLAGS)
 	@echo "$(CLEAR_LINE)$(GREEN)✅🧚 Done Compiling 🧚✅$(NC)"
 
 # Clean object files and libraries
