@@ -1,0 +1,31 @@
+# MINISHELL GITIGNORE #
+
+# Compiled source #
+# minishell
+./minishell.dSYM
+*.out
+
+# Object files #
+*.o
+
+# Libraries #
+*.a
+
+# Test files #
+
+# Subjet files #
+*.pdf
+
+# Weird stuff #
+.DS_Store
+.vscode
+.*.swp
+
+*.dot
+.venv
+*.svg
+
+readline.supp
+
+.minishell_history
+.minishell_heredoc*
