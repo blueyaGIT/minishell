@@ -28,7 +28,7 @@ char *create_word_token(char **start)
 			char *end = *start;
 			while (*end && *end != '<' && *end != '>' && *end != '|' && *end != ' ')
 				end++;
-			char *token = ft_strndup(*start, end - start);
+			char *token = ft_strndup(*start, end - *start);
 			*start = end;
 	return token;
 }
