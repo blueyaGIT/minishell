@@ -1,16 +1,5 @@
 #include "../includes/minishell.h"
 
-// void	print_tokens(char **token)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (token[i])
-// 	{
-// 		printf("Token[%d]: %s\n", i, token[i]);
-// 		i++;
-// 	}
-// }
 char	*create_quote_token(char **start)
 {
 	char	quote;
@@ -22,13 +11,13 @@ char	*create_quote_token(char **start)
 	end = *start;
 	while (*end && *end != quote)
 		end++;
-	token = ft_strndup(*start, end - *start);
 	if (*end == quote)
-		*start = end + 1;
-	else
-		*start = end;
+		end++;
+	token = ft_strndup((*start) - 1, end - (*start) + 1);
+	*start = end;
 	return (token);
 }
+
 char	*create_word_token(char **start)
 {
 	char	*end;
@@ -55,6 +44,8 @@ char	**create_token(t_mini mini)
 	{
 		while (*start == ' ')
 			start++;
+		if(!*start)
+			break;
 		if (*start == '"' || *start == '\'')
 			mini.tokens[num++] = create_quote_token(&start);
 		else if ((*start == '<' && start[1] == '<') || (*start == '>'
@@ -81,7 +72,7 @@ void	print_tokens(t_token **tokens)
 	i = 0;
 	while (tokens[i])
 	{
-		printf("Token: %-10s | Type: %s\n", tokens[i]->token_value,
+		printf("Token: %s Type: %s\n", tokens[i]->token_value,
 			token_type_to_string(tokens[i]->type));
 		i++;
 	}
@@ -101,8 +92,10 @@ const char	*token_type_to_string(t_token_type type)
 		return ("HEREDOC");
 	if (type == APPEND)
 		return ("APPEND");
-	if (type == QUOTED)
-		return ("QUOTED");
+	if (type == DOUBLEQUOTED)
+		return ("DOUBLEQUOTED");
+	if (type == SINGLEQUOTED)
+		return ("SINGELQUOTED");
 	return ("UNKNOWN");
 }
 t_token	**convert_tokens(char **tokens)
@@ -147,8 +140,9 @@ t_token_type	token_type(char *token)
 		return (HEREDOC);
 	if (ft_strcmp(token, ">>") == 0)
 		return (APPEND);
-	if ((token[0] == '"' && token[strlen(token) - 1] == '"')
-		|| (token[0] == '\'' && token[strlen(token) - 1] == '\''))
-		return (QUOTED);
+	if (token[0] == '"' && token[strlen(token) - 1] == '"')
+		return (DOUBLEQUOTED);
+	if (token[0] == '\'' && token[strlen(token) - 1] == '\'')
+		return (SINGLEQUOTED);
 	return (WORD);
 }
