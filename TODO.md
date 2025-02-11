@@ -6,8 +6,8 @@
 - [x] [enum implementation](./includes/minishell.h)
 
 ### Marzia
-- [ ] [research pipe code implementation]
 - [ ] [research builtin shell cmds]
-- [ ] [get familiar with allowed funcs]
 - [ ] [anfangen execution commands]
+- [x] [get familiar with allowed funcs]
+- [x] [research pipe code implementation]
 - [x] [pipes verstehen]
