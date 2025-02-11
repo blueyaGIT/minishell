@@ -21,9 +21,7 @@ int main(void)
 			printf("Good bye, see you ..👋 ");
 			break;
 		}
-
-		// mini.input = malloc(sizeof(char) * (strlen(mini.input) + 1));
-		mini.tokens =create_token(mini);
+		mini.tokens = create_token(mini);
 		printf("Prompt: %s\n", mini.input);
 		tokens = convert_tokens(mini.tokens);
 		print_tokens(tokens);
