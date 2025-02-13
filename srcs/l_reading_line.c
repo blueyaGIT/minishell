@@ -65,18 +65,18 @@ char	**create_token(t_mini mini)
 	return (mini.tokens[num] = NULL, mini.tokens);
 }
 /*debug*/
-void	print_tokens(t_token **tokens)
-{
-	int	i;
+// void	print_tokens(t_token **tokens)
+// {
+// 	int	i;
 
-	i = 0;
-	while (tokens[i])
-	{
-		printf("Token: %s Type: %s\n", tokens[i]->token_value,
-			token_type_to_string(tokens[i]->type));
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (tokens[i])
+// 	{
+// 		printf("Token: %s Type: %s\n", tokens[i]->token_value,
+// 			token_type_to_string(tokens[i]->type));
+// 		i++;
+// 	}
+// }
 /*bebug*/
 const char	*token_type_to_string(t_token_type type)
 {
@@ -98,31 +98,51 @@ const char	*token_type_to_string(t_token_type type)
 		return ("SINGELQUOTED");
 	return ("UNKNOWN");
 }
-t_token	**convert_tokens(char **tokens)
+// t_token	**convert_tokens(char **tokens)
+// {
+// 	int		count;
+// 	t_token	**new_tokens;
+// 	int		i;
+
+// 	count = 0;
+// 	while (tokens[count])
+// 		count++;
+// 	new_tokens = malloc(sizeof(t_token *) * (count + 1));
+// 	if (!new_tokens)
+// 		return (NULL);
+// 	i = 0;
+// 	while (tokens[i])
+// 	{
+// 		new_tokens[i] = malloc(sizeof(t_token));
+// 		if (!new_tokens[i])
+// 			return (NULL);
+// 		new_tokens[i]->token_value = tokens[i];
+// 		new_tokens[i]->type = token_type(tokens[i]);
+// 		i++;
+// 	}
+// 	new_tokens[i] = NULL;
+// 	return (new_tokens);
+// }
+
+void convert_tokens(t_mini *mini)
 {
-	int		count;
-	t_token	**new_tokens;
+	t_token	*tmp_token;
 	int		i;
 
-	count = 0;
-	while (tokens[count])
-		count++;
-	new_tokens = malloc(sizeof(t_token *) * (count + 1));
-	if (!new_tokens)
-		return (NULL);
 	i = 0;
-	while (tokens[i])
+	while (mini->tokens[i])
 	{
-		new_tokens[i] = malloc(sizeof(t_token));
-		if (!new_tokens[i])
-			return (NULL);
-		new_tokens[i]->token_value = tokens[i];
-		new_tokens[i]->type = token_type(tokens[i]);
+		tmp_token = malloc(sizeof(t_token));
+		if (!tmp_token)
+			return;
+		tmp_token->token_value = mini->tokens[i];
+		tmp_token->type = token_type(mini->tokens[i]);
+		ft_lstadd_back(&mini->list, ft_lstnew((void *)tmp_token));
 		i++;
 	}
-	new_tokens[i] = NULL;
-	return (new_tokens);
 }
+
+
 
 t_token_type	token_type(char *token)
 {

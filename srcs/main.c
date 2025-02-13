@@ -2,9 +2,9 @@
 int main(void)
 {
 	t_mini mini;
-	t_token **tokens;
+	// t_token **tokens;
 
-	tokens = 0;
+	// tokens = 0;
 	while (1)
 	{
 		mini.input = readline("🧚:");
@@ -23,8 +23,8 @@ int main(void)
 		}
 		mini.tokens = create_token(mini);
 		printf("Prompt: %s\n", mini.input);
-		tokens = convert_tokens(mini.tokens);
-		print_tokens(tokens);
+		convert_tokens(&mini);
+		// print_tokens(mini.tokens);
 		free(mini.input);
 	}
 	return (0);
