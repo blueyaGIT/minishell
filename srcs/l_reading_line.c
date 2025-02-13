@@ -78,26 +78,26 @@ char	**create_token(t_mini mini)
 // 	}
 // }
 /*bebug*/
-const char	*token_type_to_string(t_token_type type)
-{
-	if (type == WORD)
-		return ("WORD");
-	if (type == PIPE)
-		return ("PIPE");
-	if (type == REDIR_IN)
-		return ("REDIR_IN");
-	if (type == REDIR_OUT)
-		return ("REDIR_OUT");
-	if (type == HEREDOC)
-		return ("HEREDOC");
-	if (type == APPEND)
-		return ("APPEND");
-	if (type == DOUBLEQUOTED)
-		return ("DOUBLEQUOTED");
-	if (type == SINGLEQUOTED)
-		return ("SINGELQUOTED");
-	return ("UNKNOWN");
-}
+// const char	*token_type_to_string(t_token_type type)
+// {
+// 	if (type == WORD)
+// 		return ("WORD");
+// 	if (type == PIPE)
+// 		return ("PIPE");
+// 	if (type == REDIR_IN)
+// 		return ("REDIR_IN");
+// 	if (type == REDIR_OUT)
+// 		return ("REDIR_OUT");
+// 	if (type == HEREDOC)
+// 		return ("HEREDOC");
+// 	if (type == APPEND)
+// 		return ("APPEND");
+// 	if (type == DOUBLEQUOTED)
+// 		return ("DOUBLEQUOTED");
+// 	if (type == SINGLEQUOTED)
+// 		return ("SINGELQUOTED");
+// 	return ("UNKNOWN");
+// }
 // t_token	**convert_tokens(char **tokens)
 // {
 // 	int		count;
@@ -124,6 +124,8 @@ const char	*token_type_to_string(t_token_type type)
 // 	return (new_tokens);
 // }
 
+
+//alt
 void convert_tokens(t_mini *mini)
 {
 	t_token	*tmp_token;
@@ -141,8 +143,6 @@ void convert_tokens(t_mini *mini)
 		i++;
 	}
 }
-
-
 
 t_token_type	token_type(char *token)
 {

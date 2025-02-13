@@ -24,7 +24,7 @@ int main(void)
 		mini.tokens = create_token(mini);
 		printf("Prompt: %s\n", mini.input);
 		convert_tokens(&mini);
-		// print_tokens(mini.tokens);
+		// printf(char)
 		free(mini.input);
 	}
 	return (0);
