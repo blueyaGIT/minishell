@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 /*debug zum drucekn von der Liste */
 void	print_token_list(t_list *list)
 {

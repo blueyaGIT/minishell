@@ -10,7 +10,7 @@ SYSLIBFLAGS=-lreadline
 OBJ_DIR := ./obj
 DEP_DIR := $(OBJ_DIR)/.deps
 INC_DIRS := ./includes
-SRC_DIRS := ./srcs
+SRC_DIRS := $(shell find ./srcs -type d)
 vpath %.c $(SRC_DIRS)
 vpath %.h $(INC_DIRS)
 vpath %.d $(DEP_DIR)
@@ -42,9 +42,16 @@ STRIKE      = \033[9m
 CLEAR_LINE  = \033[2K\r
 
 # Source files
-SRCS =	main.c \
-		l_reading_line.c
+LAURA_SRCS = 	l_reading_line.c
+
+MARZIA_SRCS = 	cd.c \
+				echo.c \
+				exit.c \
+				pwd.c
+
+MAIN_SRCS =		main.c 
 		
+SRCS = $(LAURA_SRCS) $(MARZIA_SRCS) $(MAIN_SRCS)
 
 # Object files
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
