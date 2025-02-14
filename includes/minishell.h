@@ -9,14 +9,14 @@
 
 typedef enum e_token_type
 {
-	WORD,
-	PIPE,
-	REDIR_IN,
-	REDIR_OUT,
-	HEREDOC,
-	APPEND,
-	DOUBLEQUOTED,
-	SINGLEQUOTED,
+	WORD,  //0
+	PIPE, //1
+	REDIR_IN, //2
+	REDIR_OUT, //3
+	HEREDOC,    //4
+	APPEND,  //5
+	DOUBLEQUOTED, //6
+	SINGLEQUOTED,    //7
 }t_token_type;
 
 typedef struct s_node
@@ -46,6 +46,7 @@ char **create_token(t_mini mini);
 // void print_tokens(t_token **tokens);
 void convert_tokens(t_mini *mini);
 t_token_type	token_type(char *token);
+void print_token_list(t_list *list);
 // const char *token_type_to_string(t_token_type type);
 // void collect_list_values(t_list *head, char *buffer, int buffer_size);
 

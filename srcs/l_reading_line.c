@@ -1,4 +1,18 @@
 #include "../includes/minishell.h"
+/*debug zum drucekn von der Liste */
+void	print_token_list(t_list *list)
+{
+	t_token	*token_data;
+
+	while (list)
+	{
+		token_data = (t_token *)list->content;
+		if (token_data)
+			printf("Token: %-15s | Type: %d\n", token_data->token_value,
+				token_data->type);
+		list = list->next;
+	}
+}
 
 char	*create_quote_token(char **start)
 {
@@ -44,8 +58,8 @@ char	**create_token(t_mini mini)
 	{
 		while (*start == ' ')
 			start++;
-		if(!*start)
-			break;
+		if (!*start)
+			break ;
 		if (*start == '"' || *start == '\'')
 			mini.tokens[num++] = create_quote_token(&start);
 		else if ((*start == '<' && start[1] == '<') || (*start == '>'
@@ -64,69 +78,10 @@ char	**create_token(t_mini mini)
 	}
 	return (mini.tokens[num] = NULL, mini.tokens);
 }
-/*debug*/
-// void	print_tokens(t_token **tokens)
-// {
-// 	int	i;
 
-// 	i = 0;
-// 	while (tokens[i])
-// 	{
-// 		printf("Token: %s Type: %s\n", tokens[i]->token_value,
-// 			token_type_to_string(tokens[i]->type));
-// 		i++;
-// 	}
-// }
-/*bebug*/
-// const char	*token_type_to_string(t_token_type type)
-// {
-// 	if (type == WORD)
-// 		return ("WORD");
-// 	if (type == PIPE)
-// 		return ("PIPE");
-// 	if (type == REDIR_IN)
-// 		return ("REDIR_IN");
-// 	if (type == REDIR_OUT)
-// 		return ("REDIR_OUT");
-// 	if (type == HEREDOC)
-// 		return ("HEREDOC");
-// 	if (type == APPEND)
-// 		return ("APPEND");
-// 	if (type == DOUBLEQUOTED)
-// 		return ("DOUBLEQUOTED");
-// 	if (type == SINGLEQUOTED)
-// 		return ("SINGELQUOTED");
-// 	return ("UNKNOWN");
-// }
-// t_token	**convert_tokens(char **tokens)
-// {
-// 	int		count;
-// 	t_token	**new_tokens;
-// 	int		i;
-
-// 	count = 0;
-// 	while (tokens[count])
-// 		count++;
-// 	new_tokens = malloc(sizeof(t_token *) * (count + 1));
-// 	if (!new_tokens)
-// 		return (NULL);
-// 	i = 0;
-// 	while (tokens[i])
-// 	{
-// 		new_tokens[i] = malloc(sizeof(t_token));
-// 		if (!new_tokens[i])
-// 			return (NULL);
-// 		new_tokens[i]->token_value = tokens[i];
-// 		new_tokens[i]->type = token_type(tokens[i]);
-// 		i++;
-// 	}
-// 	new_tokens[i] = NULL;
-// 	return (new_tokens);
-// }
-
-
-//alt
-void convert_tokens(t_mini *mini)
+/*here i converting my tokens who are in the
+ array into the linekd list and adding the ENUM Type */
+void	convert_tokens(t_mini *mini)
 {
 	t_token	*tmp_token;
 	int		i;
@@ -136,7 +91,7 @@ void convert_tokens(t_mini *mini)
 	{
 		tmp_token = malloc(sizeof(t_token));
 		if (!tmp_token)
-			return;
+			return ;
 		tmp_token->token_value = mini->tokens[i];
 		tmp_token->type = token_type(mini->tokens[i]);
 		ft_lstadd_back(&mini->list, ft_lstnew((void *)tmp_token));

@@ -1,7 +1,8 @@
 #include "../includes/minishell.h"
 int main(void)
 {
-	t_mini mini;
+	// t_mini mini;
+	t_mini mini = {0};
 	// t_token **tokens;
 
 	// tokens = 0;
@@ -24,7 +25,7 @@ int main(void)
 		mini.tokens = create_token(mini);
 		printf("Prompt: %s\n", mini.input);
 		convert_tokens(&mini);
-		// printf(char)
+		print_token_list(mini.list);
 		free(mini.input);
 	}
 	return (0);
