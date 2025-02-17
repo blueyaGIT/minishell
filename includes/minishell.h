@@ -20,6 +20,9 @@
 # include "format.h"
 # include "posix_log.h"
 # include "builtin.h"
+# include "signals.h"
+# include "env.h"
+# include "exec.h"
 
 /* READLINE INCLUDES */
 # include <readline/history.h>
