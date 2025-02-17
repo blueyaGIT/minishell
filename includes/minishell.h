@@ -55,7 +55,7 @@ typedef struct s_mini
 /* INCLUDES */
 # include "laura.h"
 # include "format.h"
-# include "posix_log.h"
+// # include "posix_log.h"
 # include "builtin.h"
 # include "signals.h"
 # include "env.h"
