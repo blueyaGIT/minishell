@@ -1,13 +1,7 @@
 #ifndef POSIX_LOG_H
 # define POSIX_LOG_H
 
-# include <fcntl.h>
-# include <unistd.h>
-# include <time.h>
-# include <string.h>
-# include <stdio.h>
-# include <errno.h>
-# include <sys/stat.h>
+# include "minishell.h"
 # define LOG_PATH "./minishell.log"
 # define BUFFER_SIZE 4096
 int write_log(const char *message) {

@@ -1,11 +1,31 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+/* EXTERNAL INCLUDES */
+# include <dirent.h>
+# include <fcntl.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
+# include <sys/ioctl.h>
+# include <sys/stat.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <unistd.h>
+
+/* INCLUDES */
 # include "libft/libft.h"
-# include <readline/readline.h>
+# include "laura.h"
+# include "format.h"
+# include "posix_log.h"
+# include "builtin.h"
+
+/* READLINE INCLUDES */
 # include <readline/history.h>
+# include <readline/readline.h>
+
+extern volatile sig_atomic_t	g_sig;
 
 typedef enum e_token_type
 {
@@ -41,13 +61,5 @@ typedef struct s_mini
 	t_node node;
 	t_list *list;
 } t_mini;
-
-char **create_token(t_mini mini);
-// void print_tokens(t_token **tokens);
-void convert_tokens(t_mini *mini);
-t_token_type	token_type(char *token);
-void print_token_list(t_list *list);
-// const char *token_type_to_string(t_token_type type);
-// void collect_list_values(t_list *head, char *buffer, int buffer_size);
 
 #endif /* MINISHELL_H */
