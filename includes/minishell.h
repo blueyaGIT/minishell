@@ -13,20 +13,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-
-/* INCLUDES */
 # include "libft/libft.h"
-# include "laura.h"
-# include "format.h"
-# include "posix_log.h"
-# include "builtin.h"
-# include "signals.h"
-# include "env.h"
-# include "exec.h"
-
-/* READLINE INCLUDES */
-# include <readline/history.h>
-# include <readline/readline.h>
 
 extern volatile sig_atomic_t	g_sig;
 
@@ -64,5 +51,18 @@ typedef struct s_mini
 	t_node node;
 	t_list *list;
 } t_mini;
+
+/* INCLUDES */
+# include "laura.h"
+# include "format.h"
+# include "posix_log.h"
+# include "builtin.h"
+# include "signals.h"
+# include "env.h"
+# include "exec.h"
+
+/* READLINE INCLUDES */
+# include <readline/history.h>
+# include <readline/readline.h>
 
 #endif /* MINISHELL_H */

@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 /*adding the type of the token with teh ENUM code*/
 t_token_type	token_type(char *token)
