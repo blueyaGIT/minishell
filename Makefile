@@ -42,15 +42,16 @@ STRIKE      = \033[9m
 CLEAR_LINE  = \033[2K\r
 
 # Source files
-LAURA_SRCS = 	l_reading_line.c
+LAURA_SRCS = 	create_token.c \
+				token_to_list.c
 
 MARZIA_SRCS = 	cd.c \
 				echo.c \
 				exit.c \
 				pwd.c
 
-MAIN_SRCS =		main.c 
-		
+MAIN_SRCS =		main.c
+
 SRCS = $(LAURA_SRCS) $(MARZIA_SRCS) $(MAIN_SRCS)
 
 # Object files
