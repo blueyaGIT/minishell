@@ -2,6 +2,7 @@
 
 int main(void)
 {
+
 	// t_mini mini;
 	t_mini mini = {0};
 	// t_token **tokens;
@@ -27,7 +28,11 @@ int main(void)
 		printf("Prompt: %s\n", mini.input);
 		convert_tokens(&mini);
 		print_token_list(mini.list);
+		enviroment_list(mini.list);
+		ft_lstfree(&mini);
+		mini.list = NULL;
 		free(mini.input);
 	}
+
 	return (0);
 }

@@ -42,3 +42,17 @@ void	convert_tokens(t_mini *mini)
 		i++;
 	}
 }
+
+void enviroment_list(t_mini mini)
+{
+	t_node *tmp_token;
+
+	while(*token_type != PIPE)
+	{
+		tmp_token = malloc(sizeof(t_node));
+		if(!tmp_token)
+			return ;
+		tmp_token->args =
+	}
+
+}
