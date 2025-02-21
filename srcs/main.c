@@ -28,8 +28,8 @@ int main(void)
 		printf("Prompt: %s\n", mini.input);
 		convert_tokens(&mini);
 		print_token_list(mini.list);
-		enviroment_list(mini.list);
-		ft_lstfree(&mini);
+		// enviroment_list(mini.list);
+		ft_lstfree(mini.list);
 		mini.list = NULL;
 		free(mini.input);
 	}
