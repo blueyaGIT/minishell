@@ -29,6 +29,9 @@ typedef enum e_token_type
 	SINGLEQUOTED,    //7
 }t_token_type;
 
+/*
+only exampel for how we can sort the tokens in the list nothing in ore decided for now :)
+*/
 typedef struct s_node
 {
 	char *args;
@@ -36,6 +39,10 @@ typedef struct s_node
 	char **redirections;
 } t_node;
 
+/*
+token value == the string witch is teh token
+type == ENUM Value
+*/
 typedef struct s_token
 {
 	char *token_value;
@@ -43,7 +50,12 @@ typedef struct s_token
 	// struct s_token *next;
 }	t_token;
 
-
+/*
+input = the input from readline function
+tokens = string with has all token strings inside
+node = shoulde be int the future the node prom pipe to pipe
+list = is the struct from libft with this i can use the ft_lstadd_back and the ft_lstnew function from libft
+*/
 typedef struct s_mini
 {
 	char *input;
