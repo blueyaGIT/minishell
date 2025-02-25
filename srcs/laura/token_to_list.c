@@ -43,7 +43,7 @@ void	convert_tokens(t_mini *mini)
 	}
 }
 
-// void enviroment_list(t_mini mini)
+// void enviroment_list(t_mini *mini)
 // {
 // 	t_node *tmp_token;
 
