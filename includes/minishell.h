@@ -37,6 +37,7 @@ typedef struct s_node
 	char *args;
 	char **filename;
 	char **redirections;
+	struct s_node *next;
 } t_node;
 
 /*
@@ -47,7 +48,7 @@ typedef struct s_token
 {
 	char *token_value;
 	t_token_type type;
-	// struct s_token *next;
+	struct s_token *next;
 }	t_token;
 
 /*

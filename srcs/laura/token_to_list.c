@@ -43,16 +43,44 @@ void	convert_tokens(t_mini *mini)
 	}
 }
 
-// void enviroment_list(t_mini *mini)
-// {
-// 	t_node *tmp_token;
+void build_parsing_nodes(t_mini *mini)
+{
+	t_token *current_token;
+	t_list *tmp_list;
+	t_node *new_node;
 
-// 	while(*token_type != PIPE)
-// 	{
-// 		tmp_token = malloc(sizeof(t_node));
-// 		if(!tmp_token)
-// 			return ;
-// 		tmp_token->args =
-// 	}
+	// mini->node = NULL;
+	tmp_list = NULL;
+	new_node = malloc(sizeof(t_node));
+	if(!new_node)
+		return;
+	new_node->args = NULL;
+	new_node->filename= NULL;
+	new_node->redirections = NULL;
 
-// }
+	current_token = mini->list;
+
+	while(current_token)
+	{
+		if(current_token->type == PIPE)
+		{
+			if(new_node->args)
+			{
+				ft_lstadd_back(&mini->node, ft_lstnew((void *)new_node));
+				new_node = malloc(sizeof(t_node));
+				if(!new_node)
+					return;
+				new_node->args = NULL;
+				new_node->filename = NULL;
+				new_node->redirections = NULL;
+			}
+			t_token *to_free = current_token;
+			current_token = current_token->next;
+			free(to_free);
+			continue;
+		}
+		current_token = current_token->next;
+	}
+	if(new_node->args)
+		ft_lstadd_back(&mini->node, ft_lstnew((void *)new_node));
+}
