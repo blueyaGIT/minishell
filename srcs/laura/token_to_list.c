@@ -43,44 +43,129 @@ void	convert_tokens(t_mini *mini)
 	}
 }
 
+char **ft_add_to_array(char **array, char *new_entry)
+{
+    int len = 0;
+    char **new_array;
+
+    while (array && array[len])
+        len++;
+    new_array = malloc((len + 2) * sizeof(char *));
+    if (!new_array)
+        return NULL;
+    if (array)
+        memcpy(new_array, array, len * sizeof(char *));
+    new_array[len] = strdup(new_entry);
+    new_array[len + 1] = NULL;
+    free(array);
+    return new_array;
+}
+/*here i parse the */
 void build_parsing_nodes(t_mini *mini)
 {
-	t_token *current_token;
-	t_list *tmp_list;
-	t_node *new_node;
+    t_list *token_lst = mini->list; 
+    t_node *head_node = NULL;
+    t_node *current_node = NULL;
 
-	// mini->node = NULL;
-	tmp_list = NULL;
-	new_node = malloc(sizeof(t_node));
-	if(!new_node)
-		return;
-	new_node->args = NULL;
-	new_node->filename= NULL;
-	new_node->redirections = NULL;
+    while (token_lst)
+    {
+        t_node *new_node = malloc(sizeof(t_node));
+        if (!new_node)
+            return; 
+        new_node->args = NULL;
+        new_node->filename = NULL;
+        new_node->redirections = NULL;
+        new_node->next = NULL;
+        while (token_lst && ((t_token *)token_lst->content)->type != PIPE)
+        {
+            t_token *token = (t_token *)token_lst->content;
 
-	current_token = mini->list;
+            if (token->type == WORD || token->type == DOUBLEQUOTED || token->type == SINGLEQUOTED)
+            {
+                if (!new_node->args)
+                    new_node->args = strdup(token->token_value);
+                else
+                {
+                    char *temp = ft_strjoin(new_node->args, " ");
+                    free(new_node->args);
+                    new_node->args = ft_strjoin(temp, token->token_value);
+                    free(temp);
+                }
+                token_lst = token_lst->next;
+            }
+            else if (token->type == REDIR_IN || token->type == REDIR_OUT ||
+                     token->type == HEREDOC  || token->type == APPEND)
+            {
+                new_node->redirections = ft_add_to_array(new_node->redirections, token->token_value);
+                token_lst = token_lst->next;
+                if (token_lst)
+                {
+                    t_token *next_token = (t_token *)token_lst->content;
+                    new_node->filename = ft_add_to_array(new_node->filename, next_token->token_value);
+                    token_lst = token_lst->next;
+                }
+                continue;
+            }
+            else
+                token_lst = token_lst->next;
+        }
+        if (!head_node)
+        {
+            head_node = new_node;
+            current_node = new_node;
+        }
+        else
+        {
+            current_node->next = new_node;
+            current_node = new_node;
+        }
+        if (token_lst && ((t_token *)token_lst->content)->type == PIPE)
+            token_lst = token_lst->next;
+    }
+    mini->node = head_node;
+}
+/*debug function witch prints the linked list with the nodes out */
+void print_node_list(t_node *node_list)
+{
+    t_node *current = node_list;
+    int index = 0;
 
-	while(current_token)
-	{
-		if(current_token->type == PIPE)
-		{
-			if(new_node->args)
-			{
-				ft_lstadd_back(&mini->node, ft_lstnew((void *)new_node));
-				new_node = malloc(sizeof(t_node));
-				if(!new_node)
-					return;
-				new_node->args = NULL;
-				new_node->filename = NULL;
-				new_node->redirections = NULL;
-			}
-			t_token *to_free = current_token;
-			current_token = current_token->next;
-			free(to_free);
-			continue;
-		}
-		current_token = current_token->next;
-	}
-	if(new_node->args)
-		ft_lstadd_back(&mini->node, ft_lstnew((void *)new_node));
+    while (current)
+    {
+        printf("Node %d:\n", index);
+        printf("  args: %s\n", current->args ? current->args : "NULL");
+        printf("  filename: ");
+        if (current->filename)
+        {
+            int i = 0;
+            while (current->filename[i])
+            {
+                printf("\"%s\" ", current->filename[i]);
+                i++;
+            }
+        }
+        else
+        {
+            printf("NULL");
+        }
+        printf("\n");
+        printf("  redirections: ");
+        if (current->redirections)
+        {
+            int i = 0;
+            while (current->redirections[i])
+            {
+                printf("\"%s\" ", current->redirections[i]);
+                i++;
+            }
+        }
+        else
+        {
+            printf("NULL");
+        }
+        printf("\n\n");
+
+        current = current->next;
+        index++;
+    }
 }

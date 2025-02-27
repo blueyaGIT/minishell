@@ -24,9 +24,10 @@ int main(void)
 			mini.tokens = create_token(mini);
 			printf("Prompt: %s\n", mini.input);
 			convert_tokens(&mini);
-			print_token_list(mini.list);
+			// print_token_list(mini.list);
 		}
-		// enviroment_list(mini.list);
+		build_parsing_nodes(&mini);
+		print_node_list(mini.node);
 		ft_lstfree(mini.list);
 		mini.list = NULL;
 		free(mini.input);
