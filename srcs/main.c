@@ -2,12 +2,7 @@
 
 int main(void)
 {
-
-	// t_mini mini;
 	t_mini mini = {0};
-	// t_token **tokens;
-
-	// tokens = 0;
 	while (1)
 	{
 		mini.input = readline("🧚:");
@@ -19,16 +14,20 @@ int main(void)
 		if (*mini.input)
 			add_history(mini.input);
 
-		if (ft_strcmp(mini.input, "exit") == 0)
+		if(syntax_error(mini.input) == 0)
 		{
-			printf("Good bye, see you ..👋 ");
-			break;
+			if (ft_strcmp(mini.input, "exit") == 0)
+			{
+				printf("Good bye, see you ..👋 ");
+				break;
+			}
+			mini.tokens = create_token(mini);
+			printf("Prompt: %s\n", mini.input);
+			convert_tokens(&mini);
+			// print_token_list(mini.list);
 		}
-		mini.tokens = create_token(mini);
-		printf("Prompt: %s\n", mini.input);
-		convert_tokens(&mini);
-		print_token_list(mini.list);
-		// enviroment_list(mini.list);
+		build_parsing_nodes(&mini);
+		print_node_list(mini.node);
 		ft_lstfree(mini.list);
 		mini.list = NULL;
 		free(mini.input);

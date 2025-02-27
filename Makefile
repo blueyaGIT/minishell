@@ -43,7 +43,8 @@ CLEAR_LINE  = \033[2K\r
 
 # Source files
 LAURA_SRCS = 	create_token.c \
-				token_to_list.c
+				token_to_list.c \
+				syntax_error.c
 
 MARZIA_SRCS = 	cd.c \
 				echo.c \
