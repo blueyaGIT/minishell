@@ -60,70 +60,148 @@ char **ft_add_to_array(char **array, char *new_entry)
     free(array);
     return new_array;
 }
-/*here i parse the */
+// /*old funktion for parsing the input splitted by the pipe*/
+// void build_parsing_nodes(t_mini *mini)
+// {
+//     t_list *token_lst = mini->list; 
+//     t_node *head_node = NULL;
+//     t_node *current_node = NULL;
+
+//     while (token_lst)
+//     {
+//         t_node *new_node = malloc(sizeof(t_node));
+//         if (!new_node)
+//             return; 
+//         new_node->args = NULL;
+//         new_node->filename = NULL;
+//         new_node->redirections = NULL;
+//         new_node->next = NULL;
+//         while (token_lst && ((t_token *)token_lst->content)->type != PIPE)
+//         {
+//             t_token *token = (t_token *)token_lst->content;
+
+//             if (token->type == WORD || token->type == DOUBLEQUOTED || token->type == SINGLEQUOTED)
+//             {
+//                 if (!new_node->args)
+//                     new_node->args = strdup(token->token_value);
+//                 else
+//                 {
+//                     char *temp = ft_strjoin(new_node->args, " ");
+//                     free(new_node->args);
+//                     new_node->args = ft_strjoin(temp, token->token_value);
+//                     free(temp);
+//                 }
+//                 token_lst = token_lst->next;
+//             }
+//             else if (token->type == REDIR_IN || token->type == REDIR_OUT ||
+//                      token->type == HEREDOC  || token->type == APPEND)
+//             {
+//                 new_node->redirections = ft_add_to_array(new_node->redirections, token->token_value);
+//                 token_lst = token_lst->next;
+//                 if (token_lst)
+//                 {
+//                     t_token *next_token = (t_token *)token_lst->content;
+//                     new_node->filename = ft_add_to_array(new_node->filename, next_token->token_value);
+//                     token_lst = token_lst->next;
+//                 }
+//                 continue;
+//             }
+//             else
+//                 token_lst = token_lst->next;
+//         }
+//         if (!head_node)
+//         {
+//             head_node = new_node;
+//             current_node = new_node;
+//         }
+//         else
+//         {
+//             current_node->next = new_node;
+//             current_node = new_node;
+//         }
+//         if (token_lst && ((t_token *)token_lst->content)->type == PIPE)
+//             token_lst = token_lst->next;
+//     }
+//     mini->node = head_node;
+// }
+
+t_node *create_new_node()
+{
+    t_node *new_node = malloc(sizeof(t_node));
+    if (!new_node)
+        return NULL;
+    new_node->args = NULL;
+    new_node->filename = NULL;
+    new_node->redirections = NULL;
+    new_node->next = NULL;
+    return new_node;
+}
+
+void process_word_token(t_node *new_node, t_list **token_lst)
+{
+    t_token *token = (t_token *)(*token_lst)->content;
+    if (!new_node->args)
+        new_node->args = strdup(token->token_value);
+    else
+    {
+        char *temp = ft_strjoin(new_node->args, " ");
+        free(new_node->args);
+        new_node->args = ft_strjoin(temp, token->token_value);
+        free(temp);
+    }
+    *token_lst = (*token_lst)->next;
+}
+
+void process_redirection_token(t_node *new_node, t_list **token_lst)
+{
+    t_token *token = (t_token *)(*token_lst)->content;
+    new_node->redirections = ft_add_to_array(new_node->redirections, token->token_value);
+    *token_lst = (*token_lst)->next;
+    if (*token_lst)
+    {
+        t_token *next_token = (t_token *)(*token_lst)->content;
+        new_node->filename = ft_add_to_array(new_node->filename, next_token->token_value);
+        *token_lst = (*token_lst)->next;
+    }
+}
+
+t_node *parse_tokens(t_list **token_lst)
+{
+    t_node *new_node = create_new_node();
+    if (!new_node)
+        return NULL;
+    while (*token_lst && ((t_token *)(*token_lst)->content)->type != PIPE)
+    {
+        t_token *token = (t_token *)(*token_lst)->content;
+        if (token->type == WORD || token->type == DOUBLEQUOTED || token->type == SINGLEQUOTED)
+            process_word_token(new_node, token_lst);
+        else if (token->type == REDIR_IN || token->type == REDIR_OUT || token->type == HEREDOC || token->type == APPEND)
+            process_redirection_token(new_node, token_lst);
+        else
+            *token_lst = (*token_lst)->next;
+    }
+    return new_node;
+}
+
 void build_parsing_nodes(t_mini *mini)
 {
-    t_list *token_lst = mini->list; 
+    t_list *token_lst = mini->list;
     t_node *head_node = NULL;
     t_node *current_node = NULL;
-
     while (token_lst)
     {
-        t_node *new_node = malloc(sizeof(t_node));
-        if (!new_node)
-            return; 
-        new_node->args = NULL;
-        new_node->filename = NULL;
-        new_node->redirections = NULL;
-        new_node->next = NULL;
-        while (token_lst && ((t_token *)token_lst->content)->type != PIPE)
-        {
-            t_token *token = (t_token *)token_lst->content;
-
-            if (token->type == WORD || token->type == DOUBLEQUOTED || token->type == SINGLEQUOTED)
-            {
-                if (!new_node->args)
-                    new_node->args = strdup(token->token_value);
-                else
-                {
-                    char *temp = ft_strjoin(new_node->args, " ");
-                    free(new_node->args);
-                    new_node->args = ft_strjoin(temp, token->token_value);
-                    free(temp);
-                }
-                token_lst = token_lst->next;
-            }
-            else if (token->type == REDIR_IN || token->type == REDIR_OUT ||
-                     token->type == HEREDOC  || token->type == APPEND)
-            {
-                new_node->redirections = ft_add_to_array(new_node->redirections, token->token_value);
-                token_lst = token_lst->next;
-                if (token_lst)
-                {
-                    t_token *next_token = (t_token *)token_lst->content;
-                    new_node->filename = ft_add_to_array(new_node->filename, next_token->token_value);
-                    token_lst = token_lst->next;
-                }
-                continue;
-            }
-            else
-                token_lst = token_lst->next;
-        }
+        t_node *new_node = parse_tokens(&token_lst);
         if (!head_node)
-        {
             head_node = new_node;
-            current_node = new_node;
-        }
         else
-        {
             current_node->next = new_node;
-            current_node = new_node;
-        }
+        current_node = new_node;
         if (token_lst && ((t_token *)token_lst->content)->type == PIPE)
             token_lst = token_lst->next;
     }
     mini->node = head_node;
 }
+
 /*debug function witch prints the linked list with the nodes out */
 void print_node_list(t_node *node_list)
 {
@@ -140,7 +218,7 @@ void print_node_list(t_node *node_list)
             int i = 0;
             while (current->filename[i])
             {
-                printf("\"%s\" ", current->filename[i]);
+                printf("%s[%d]", current->filename[i], i);
                 i++;
             }
         }
@@ -155,7 +233,7 @@ void print_node_list(t_node *node_list)
             int i = 0;
             while (current->redirections[i])
             {
-                printf("\"%s\" ", current->redirections[i]);
+                printf("%s[%d]", current->redirections[i], i);
                 i++;
             }
         }

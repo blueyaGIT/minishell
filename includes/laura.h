@@ -13,7 +13,9 @@ void build_parsing_nodes(t_mini *mini);
 char	*ft_strjoin_free(char *s1, char *s2);
 char	**ft_add_to_array(char **array, char *new_entry);
 void print_node_list(t_node *node_list);
-
+t_node *create_new_node();
+void process_word_token(t_node *new_node, t_list **token_lst);
+t_node *parse_tokens(t_list **token_lst);
 
 
 #endif /* LAURA_H */
