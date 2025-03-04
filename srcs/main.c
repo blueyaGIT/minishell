@@ -1,8 +1,11 @@
 #include "../includes/minishell.h"
 
-int main(void)
+int main(int argc, char *argv[], char **env)
 {
+	(void) argv;
+	(void) argc;
 	t_mini mini = {0};
+	mini.env = copy_env(env);
 	while (1)
 	{
 		mini.input = readline("🧚:");
@@ -32,5 +35,6 @@ int main(void)
 		mini.list = NULL;
 		free(mini.input);
 	}
+	free_env(mini.env);
 	return (0);
 }

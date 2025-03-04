@@ -61,6 +61,7 @@ typedef struct s_mini
 {
 	char *input;
 	char **tokens;
+	char **env;
 	t_node *node;
 	t_list *list;
 } t_mini;
