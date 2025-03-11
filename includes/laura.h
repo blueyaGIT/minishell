@@ -18,5 +18,7 @@ void process_word_token(t_node *new_node, t_list **token_lst);
 t_node *parse_tokens(t_list **token_lst);
 void free_env(char **env);
 char **copy_env(char **env);
+char *get_env_value(const char *name, char **env);
+char *replace_env_var(char *input, char **env);
 
 #endif /* LAURA_H */
