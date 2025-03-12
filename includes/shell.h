@@ -3,6 +3,18 @@
 
 # include "minishell.h"
 
+typedef struct s_shell
+{
+	char						**env;
+	char						**exp;
+	char						*history_file;
+	char						*heredoc_file;
+	int							heredoc_index;
+	bool						has_error;
+	char						*ms_dir;
+	int							exit_code;
+}								t_shell;
+
 t_shell		*get_shell(void);
 
 #endif /* SHELL_H */

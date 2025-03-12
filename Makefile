@@ -57,7 +57,9 @@ SRCS	+=	env_get.c \
 			env_idx.c \
 
 # LAURA
-SRCS	+=	create_token.c \
+SRCS	+=	copy_enviroment.c \
+			create_token.c \
+			syntax_error.c \
 			token_to_list.c \
 
 # SHELL

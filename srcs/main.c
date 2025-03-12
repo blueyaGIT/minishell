@@ -1,17 +1,16 @@
 #include "minishell.h"
 
-int	main(int ac, char **av, char **env)
+int main(int argc, char *argv[], char **env)
 {
 	t_shell	*minishell;
 
-	(void)ac;
-	(void)av;
-	(void)env;
 	init_signals();
 	write_log("Program started.");
-	// tokens = 0;
-	t_mini mini = {0};	
-	ft_print_logo();
+	(void) argv;
+	(void) argc;
+	(void) env;
+	t_mini mini = {0};
+	mini.env = copy_env(env);
 	while (1)
 	{
 		mini.input = readline("🧚:");
@@ -23,20 +22,25 @@ int	main(int ac, char **av, char **env)
 		if (*mini.input)
 			add_history(mini.input);
 
-		if (ft_strcmp(mini.input, "exit") == 0)
+		if(syntax_error(mini.input) == 0)
 		{
-			printf("Goodbye, cya next time ..👋 ");
-			break ;
+			if (ft_strcmp(mini.input, "exit") == 0)
+			{
+				printf("Good bye, see you ..👋 ");
+				break;
+			}
+			mini.tokens = create_token(mini);
+			printf("Prompt: %s\n", mini.input);
+			convert_tokens(&mini);
+			print_token_list(mini.list);
 		}
-		mini.tokens = create_token(mini);
-		printf("Prompt: %s\n", mini.input);
-		convert_tokens(&mini);
-		print_token_list(mini.list);
-		// enviroment_list(mini.list);
+		build_parsing_nodes(&mini);
+		print_node_list(mini.node);
 		ft_lstfree(mini.list);
 		mini.list = NULL;
 		free(mini.input);
 	}
 	write_log("Program closed by 'exit'.");
+	free_env(mini.env);
 	return (0);
 }

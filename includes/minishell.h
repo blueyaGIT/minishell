@@ -34,16 +34,4 @@
 
 extern volatile sig_atomic_t	g_sig;
 
-typedef struct s_shell
-{
-	char						**env;
-	char						**exp;
-	char						*history_file;
-	char						*heredoc_file;
-	int							heredoc_index;
-	bool						has_error;
-	char						*ms_dir;
-	int							exit_code;
-}								t_shell;
-
 #endif /* MINISHELL_H */
