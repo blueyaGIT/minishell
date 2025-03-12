@@ -1,28 +1,32 @@
-#include "../includes/minishell.h"
+#include "minishell.h"
 
-int main(void)
+int	main(int ac, char **av, char **env)
 {
+	t_shell	*minishell;
 
-	// t_mini mini;
-	t_mini mini = {0};
-	// t_token **tokens;
-
+	(void)ac;
+	(void)av;
+	(void)env;
+	init_signals();
+	write_log("Program started.");
 	// tokens = 0;
+	t_mini mini = {0};	
+	ft_print_logo();
 	while (1)
 	{
 		mini.input = readline("🧚:");
 		if (!mini.input)
 		{
 			printf(" End of File. End of Minishell! \n");
-			break;
+			break ;
 		}
 		if (*mini.input)
 			add_history(mini.input);
 
 		if (ft_strcmp(mini.input, "exit") == 0)
 		{
-			printf("Good bye, see you ..👋 ");
-			break;
+			printf("Goodbye, cya next time ..👋 ");
+			break ;
 		}
 		mini.tokens = create_token(mini);
 		printf("Prompt: %s\n", mini.input);
@@ -33,6 +37,6 @@ int main(void)
 		mini.list = NULL;
 		free(mini.input);
 	}
-
+	write_log("Program closed by 'exit'.");
 	return (0);
 }

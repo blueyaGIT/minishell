@@ -1,21 +1,23 @@
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I/usr/local/opt/readline/include
+CFLAGS = -Wall -Wextra -Werror
 LDFLAGS=
 ifeq ($(DEBUG), 1)
 	CFLAGS += -fsanitize=address -g
 endif
-DEPFLAGS=-MMD -MP
-SYSLIBFLAGS=-lreadline
-OBJ_DIR := ./obj
+DEPFLAGS = -MMD -MP
+SYSLIBFLAGS = -lreadline
+OBJ_DIR := obj
 DEP_DIR := $(OBJ_DIR)/.deps
-INC_DIRS := ./includes
+INC_DIR := includes
+# TMP_DIR := tmp
 SRC_DIRS := $(shell find ./srcs -type d)
 vpath %.c $(SRC_DIRS)
-vpath %.h $(INC_DIRS)
+vpath %.h $(INC_DIR)
 vpath %.d $(DEP_DIR)
+CFLAGS += -I$(INC_DIR)
 
-LIBFT_DIR = $(INC_DIRS)/libft
+LIBFT_DIR = $(INC_DIR)/libft
 LIBFT = libft.a
 LIBFT_LIB = $(LIBFT_DIR)/$(LIBFT)
 LIBFTFLAGS = -L$(LIBFT_DIR) -lft
@@ -42,20 +44,51 @@ STRIKE      = \033[9m
 CLEAR_LINE  = \033[2K\r
 
 # Source files
-LAURA_SRCS = 	create_token.c \
-				token_to_list.c
+SRCS	:=	main.c \
 
-MARZIA_SRCS = 	cd.c \
-				echo.c \
-				exit.c \
-				pwd.c
+# BUILTINS
+SRCS	+=	cd.c \
+			echo.c \
+			exit.c \
+			pwd.c \
 
-MAIN_SRCS =		main.c
+# ENV
+SRCS	+=	env_get.c \
+			env_idx.c \
 
-SRCS = $(LAURA_SRCS) $(MARZIA_SRCS) $(MAIN_SRCS)
+# LAURA
+SRCS	+=	create_token.c \
+			token_to_list.c \
+
+# SHELL
+SRCS	+=	shell_static.c \
+
+# SIGNALS
+SRCS	+=	handler_hrdc.c \
+			handler_nrml.c \
+			init_signals.c \
+
+# UTILS
+SRCS	+=	posix_log.c \
+			print_logo.c \
 
 # Object files
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
+
+# HEADER_FILES := builtin.h \
+# 				env.h \
+# 				exec.h \
+# 				format.h \
+# 				gcollector.h \
+# 				laura.h \
+# 				libft.h \
+# 				minishell.h \
+# 				posix_log.h \
+# 				shell.h \
+# 				signals.h \
+# 				utils.h \
+
+# HEADER = $(addprefix $(INC_DIR)/, $(HEADER_FILES))
 
 TOTAL_SRCS = $(words $(SRCS))
 CURRENT = 0
@@ -111,7 +144,6 @@ $(NAME): init-submodules $(LIBFT_LIB) $(OBJS)
 	@echo "$(CLEAR_LINE)$(YELLOW)🚧 Building 🧚 Minishell 🧚 🚧$(NC)"
 	@$(CC) -o $(NAME) $(OBJS) $(LIBFTFLAGS) $(SYSLIBFLAGS) $(LDFLAGS)
 	@echo "$(CLEAR_LINE)$(GREEN)✅🧚 Done Compiling 🧚✅$(NC)"
-	@make SUCCESS
 
 # Clean object files and libraries
 clean: remove-submodules
@@ -143,10 +175,5 @@ fastre: remove-submodules
 	@rm -rf $(NAME)
 	@make
 
-SUCCESS:
-	@printf "\n$(MAGENTA)██████████████████████████████████████████████████████████████████████████████████████████$(NC)"
-	@printf "$(LIGHT_PINK)$$(cat .img/asciiart.txt)$(NC)\n"
-	@printf "$(MAGENTA)██████████████████████████████████████████████████████████████████████████████████████████$(NC)"
-	@printf "\n\n$(LIGHT_PINK)                               $(UNDERLINE)$(ITALIC)lnierobi$(NC)&&   $(LIGHT_PINK)$(UNDERLINE)$(ITALIC)dalbano$(NC)\n\n"
 # Phony targets
 .PHONY: all clean fclean re libft init-submodules remove-submodules fastre

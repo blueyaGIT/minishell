@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 18:14:48 by dalbano           #+#    #+#             */
-/*   Updated: 2025/02/17 02:10:31 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/12 15:23:15 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define BLUE		"\033[34m"
 # define MAGENTA	"\033[35m"
 # define CYAN		"\033[36m"
+# define LIGHT_PINK "\033[38;5;168m"
 # define WHITE		"\033[37m"
 
 /* Extended: Background Colours */

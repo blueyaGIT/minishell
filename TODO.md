@@ -6,7 +6,9 @@
 - [x] [enum implementation](./includes/minishell.h)
 - [ ] [syntax error for single pipes without words after]
 - [ ] [new linked list what includes arg, redirect and file]
+
 ### Marzia
+- [ ] [research environ]("extern char **environ")
 - [ ] [research builtin shell cmds]
 - [ ] [anfangen execution commands]
 - [x] [get familiar with allowed funcs]
