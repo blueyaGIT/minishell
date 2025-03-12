@@ -31,3 +31,25 @@ int syntax_error(const char *str)
 	}
 	return(0);
 }
+
+int check_unclosed_quotes(const char *input)
+{
+    int single_quotes = 0;
+    int double_quotes = 0;
+
+    while (*input)
+    {
+        if (*input == '\'')
+            single_quotes = !single_quotes; 
+        else if (*input == '"')
+            double_quotes = !double_quotes; 
+        input++;
+    }
+
+    if (single_quotes || double_quotes)
+    {
+        printf("Syntax Error: Unclosed quotes detected.\n");
+        return 1; 
+    }
+    return 0;
+}

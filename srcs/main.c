@@ -17,12 +17,13 @@ int main(int argc, char *argv[], char **env)
 		if (*mini.input)
 			add_history(mini.input);
 
-		char *expanded_input = replace_env_var(mini.input, mini.env);
+		//char *expanded_input = replace_env_var(mini.input, mini.env);
+		char *expanded_input = expand_variables(mini.input, mini.env);
 		free(mini.input);  
 		mini.input = expanded_input;
 		
 
-		if(syntax_error(mini.input) == 0)
+		if(syntax_error(mini.input) == 0 && check_unclosed_quotes(mini.input) == 0)
 		{
 			if (ft_strcmp(mini.input, "exit") == 0)
 			{
