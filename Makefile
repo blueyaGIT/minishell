@@ -1,10 +1,6 @@
 NAME = minishell
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS=
-ifeq ($(DEBUG), 1)
-	CFLAGS += -fsanitize=address -g
-endif
 DEPFLAGS = -MMD -MP
 SYSLIBFLAGS = -lreadline
 OBJ_DIR := obj
@@ -144,7 +140,7 @@ $(LIBFT_LIB): init-libft
 # Rule to compile program
 $(NAME): init-submodules $(LIBFT_LIB) $(OBJS)
 	@echo "$(CLEAR_LINE)$(YELLOW)🚧 Building 🧚 Minishell 🧚 🚧$(NC)"
-	@$(CC) -o $(NAME) $(OBJS) $(LIBFTFLAGS) $(SYSLIBFLAGS) $(LDFLAGS)
+	@$(CC) -o $(NAME) $(OBJS) $(LIBFTFLAGS) $(SYSLIBFLAGS)
 	@echo "$(CLEAR_LINE)$(GREEN)✅🧚 Done Compiling 🧚✅$(NC)"
 
 # Clean object files and libraries

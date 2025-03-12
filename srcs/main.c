@@ -4,6 +4,9 @@ int main(int argc, char *argv[], char **env)
 {
 	t_shell	*minishell;
 
+	minishell = NULL;
+	if (minishell == NULL)
+		printf("test\n");
 	init_signals();
 	write_log("Program started.");
 	(void) argv;

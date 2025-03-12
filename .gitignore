@@ -4,7 +4,7 @@
 # minishell
 ./minishell.dSYM
 *.out
-./minishell.log
+minishell.log
 
 # Object files #
 *.o
