@@ -3,8 +3,8 @@
 # Compiled source #
 # minishell
 ./minishell.dSYM
-./includes/minishell.log
 *.out
+./minishell.log
 
 # Object files #
 *.o
