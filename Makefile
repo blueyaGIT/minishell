@@ -92,7 +92,7 @@ TOTAL_SRCS = $(words $(SRCS))
 CURRENT = 0
 
 # Default rule to compile all
-all: $(NAME)
+all: init-submodules $(LIBFT_LIB) $(NAME)
 
 -include $(OBJS:.o=.d)
 
@@ -138,10 +138,21 @@ $(LIBFT_LIB): init-libft
 	fi
 
 # Rule to compile program
-$(NAME): init-submodules $(LIBFT_LIB) $(OBJS)
-	@echo "$(CLEAR_LINE)$(YELLOW)🚧 Building 🧚 Minishell 🧚 🚧$(NC)"
-	@$(CC) -o $(NAME) $(OBJS) $(LIBFTFLAGS) $(SYSLIBFLAGS)
-	@echo "$(CLEAR_LINE)$(GREEN)✅🧚 Done Compiling 🧚✅$(NC)"
+$(NAME): $(OBJS)
+	@newer=0; \
+	for obj in $(OBJS); do \
+		if [ $$obj -nt $(NAME) ]; then \
+			newer=1; \
+			break; \
+		fi \
+	done; \
+	if [ $$newer -eq 1 ]; then \
+		echo "$(CLEAR_LINE)$(YELLOW)🚧 Building 🧚 Minishell 🧚 🚧$(NC)"; \
+		$(CC) -o $(NAME) $(OBJS) $(LIBFTFLAGS) $(SYSLIBFLAGS); \
+		echo "$(CLEAR_LINE)$(GREEN)✅🧚 Done Compiling 🧚✅$(NC)" \
+	else \
+		echo "$(CLEAR_LINE)$(GREEN)✅🧚 Skipping relink: $(NAME) is up-to-date 🧚✅$(NC)"; \
+	fi
 
 # Clean object files and libraries
 clean: remove-submodules
