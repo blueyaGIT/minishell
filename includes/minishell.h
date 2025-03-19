@@ -14,6 +14,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include <errno.h>
 
 /* INCLUDES */
 # include "libft/libft.h"

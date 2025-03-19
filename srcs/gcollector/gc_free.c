@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   gc_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 16:03:07 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/28 19:02:40 by flfische         ###   ########.fr       */
+/*   Updated: 2025/03/19 13:31:46 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @brief works like `free()` but also removes the address from the gc list
  * @param address The address to free.
  */
-void	ft_free(void *address)
+void	gc_free(void *address)
 {
 	t_memblock	**head;
 	t_memblock	*prev;

@@ -6,13 +6,13 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:47:24 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/12 17:03:08 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/19 13:31:08 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	set_signal_handler(int signbr, void (*handler)(void))
+static void	set_signal_handler(int signbr, void (*handler)(int))
 {
 	struct sigaction	sa;
 
@@ -28,13 +28,13 @@ static void	set_signal_handler(int signbr, void (*handler)(void))
 
 void	switch_to_normal_mode(void)
 {
-	set_signal_handler(SIGINT, sigint_handler_normal);
+	set_signal_handler(SIGINT, ft_sigint_handler_normal);
 	set_signal_handler(SIGQUIT, SIG_IGN);
 }
 
 void	switch_to_heredoc_mode(void)
 {
-	set_signal_handler(SIGINT, sigint_handler_heredoc);
+	set_signal_handler(SIGINT, ft_sigint_handler_heredoc);
 	set_signal_handler(SIGQUIT, SIG_IGN);
 }
 
