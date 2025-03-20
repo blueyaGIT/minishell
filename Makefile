@@ -52,6 +52,11 @@ SRCS	+=	cd.c \
 SRCS	+=	env_get.c \
 			env_idx.c \
 
+# GCOLLECTOR
+SRCS	+=	gc_add.c \
+			gc_free.c \
+			gcollector.c \
+
 # LAURA
 SRCS	+=	copy_enviroment.c \
 			create_token.c \
@@ -59,7 +64,8 @@ SRCS	+=	copy_enviroment.c \
 			token_to_list.c \
 
 # SHELL
-SRCS	+=	shell_static.c \
+SRCS	+=	kill_shell.c \
+			shell_utils.c \
 
 # SIGNALS
 SRCS	+=	handler_hrdc.c \
@@ -67,8 +73,10 @@ SRCS	+=	handler_hrdc.c \
 			init_signals.c \
 
 # UTILS
-SRCS	+=	posix_log.c \
-			print_logo.c \
+SRCS	+=	print_logo.c \
+
+# DEBUG
+SRCS	+=	msg.c \
 
 # Object files
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
@@ -92,7 +100,7 @@ TOTAL_SRCS = $(words $(SRCS))
 CURRENT = 0
 
 # Default rule to compile all
-all: init-submodules $(LIBFT_LIB) $(NAME)
+all: init-submodules $(LIBFT_LIB) relink
 
 -include $(OBJS:.o=.d)
 
@@ -138,7 +146,7 @@ $(LIBFT_LIB): init-libft
 	fi
 
 # Rule to compile program
-$(NAME): $(OBJS)
+relink: $(OBJS)
 	@newer=0; \
 	for obj in $(OBJS); do \
 		if [ $$obj -nt $(NAME) ]; then \
@@ -149,7 +157,7 @@ $(NAME): $(OBJS)
 	if [ $$newer -eq 1 ]; then \
 		echo "$(CLEAR_LINE)$(YELLOW)🚧 Building 🧚 Minishell 🧚 🚧$(NC)"; \
 		$(CC) -o $(NAME) $(OBJS) $(LIBFTFLAGS) $(SYSLIBFLAGS); \
-		echo "$(CLEAR_LINE)$(GREEN)✅🧚 Done Compiling 🧚✅$(NC)" \
+		echo "$(CLEAR_LINE)$(GREEN)✅🧚 Done Compiling 🧚✅$(NC)"; \
 	else \
 		echo "$(CLEAR_LINE)$(GREEN)✅🧚 Skipping relink: $(NAME) is up-to-date 🧚✅$(NC)"; \
 	fi
@@ -184,5 +192,13 @@ fastre: remove-submodules
 	@rm -rf $(NAME)
 	@make
 
+norm:
+	@norminette $(SRC_DIRS) $(INC_DIR) $(LIBFT_DIR) | grep "Error" || echo "$(GREEN)Norme OK$(NC)"
+
+debug: CFLAGS += -g
+debug: CFLAGS += -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
+debug: CFLAGS += -DDEBUG=1
+debug: clean all
+
 # Phony targets
-.PHONY: all clean fclean re libft init-submodules remove-submodules fastre
+.PHONY: all clean fclean re libft init-submodules remove-submodules fastre norm debug relink

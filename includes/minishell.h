@@ -16,10 +16,16 @@
 # include <stdbool.h>
 # include <errno.h>
 
+extern volatile sig_atomic_t	g_sig;
+
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
+
 /* INCLUDES */
 # include "libft/libft.h"
+# include "debug.h"
 # include "laura.h"
-# include "posix_log.h"
 # include "gcollector.h"
 # include "format.h"
 # include "builtin.h"
@@ -33,6 +39,9 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 
-extern volatile sig_atomic_t	g_sig;
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
+
 
 #endif /* MINISHELL_H */

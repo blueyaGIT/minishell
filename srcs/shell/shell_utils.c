@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_gc_set.c                                        :+:      :+:    :+:   */
+/*   shell_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flfische <flfische@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/28 15:48:03 by flfische          #+#    #+#             */
-/*   Updated: 2024/04/28 19:05:49 by flfische         ###   ########.fr       */
+/*   Created: 2025/03/12 15:46:33 by dalbano           #+#    #+#             */
+/*   Updated: 2025/03/20 16:20:54 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/**
- * @brief Change the static reference stored in `ft_gc_get()` to given node.
- * @param new_head The new head of the garbage collector list.
- */
-void	ft_gc_set(t_memblock *new_head)
+t_shell	*get_shell(void)
 {
-	t_memblock	**head;
-
-	head = ft_gc_get();
-	*head = new_head;
+	static t_shell	shell;
+	return (&shell);
 }

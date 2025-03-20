@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gcollector.h                                       :+:      :+:    :+:   */
+/*   kill_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/12 16:30:12 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/20 15:41:33 by dalbano          ###   ########.fr       */
+/*   Created: 2025/03/20 16:21:36 by dalbano           #+#    #+#             */
+/*   Updated: 2025/03/20 16:36:26 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GCOLLECTOR_H
-# define GCOLLECTOR_H
+#include "minishell.h"
 
-# include "minishell.h"
-
-typedef struct s_gcmem
+int	kill_shell(t_shell *shell, int close_shell)
 {
-	void			*address;
-	struct s_gcmem	*next;
-}					t_gcmem;
-
-void				*gc_malloc(size_t size);
-void				gc_free(void *address);
-t_gcmem				**get_head(void);
-void	set_newhead(t_gcmem *new_head);
-void				gc_freeall(void);
-void				gc_add(void *address);
-void				*gc_safe(void *address);
-
-#endif
+	dbmsg("Killing Shell");
+	if (shell->heredoc_file)
+		free(shell->heredoc_file);
+	if (shell->shell_dir)
+		free(shell->shell_dir);
+	if (shell->history_file)
+		free(shell->history_file);
+	gc_freeall();
+	if (close_shell)
+	{
+		rl_clear_history();
+		exit(shell->exit_code);
+	}
+	return (shell->exit_code);
+}
