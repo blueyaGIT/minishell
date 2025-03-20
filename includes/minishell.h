@@ -64,6 +64,7 @@ typedef struct s_mini
 	char **env;
 	t_node *node;
 	t_list *list;
+	int last_exitcode;
 } t_mini;
 
 /* INCLUDES */

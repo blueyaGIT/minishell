@@ -19,9 +19,10 @@ t_node *parse_tokens(t_list **token_lst);
 void free_env(char **env);
 char **copy_env(char **env);
 char *get_env_value(const char *name, char **env);
-char *replace_env_var(char *input, char **env);
-char *expand_variables(char *input, char **env);
+// char *replace_env_var(char *input, char **env);
+// char *expand_variables(char *input, char **env);
 char *extract_var_name(char *input);
 int check_unclosed_quotes(const char *input);
-
+char *replace_env_var(char *input, char **env, int last_exitcode);
+char *expand_variables(char *input, char **env, int last_exitcode);
 #endif /* LAURA_H */
