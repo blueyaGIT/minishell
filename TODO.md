@@ -10,7 +10,7 @@
 ### Marzia
 - [ ] [start builtin cmds](./srcs/builtin/)
 - [ ] [ensure signal functionality](./srcs/signals/)
-- [ ] [finish gcollector](./srcs/gcollector/)
+- [x] [finish gcollector](./srcs/gcollector/)
 - [x] [research environ]("extern char **environ")
 - [x] [research builtin shell cmds]
 - [x] [anfangen execution commands]
