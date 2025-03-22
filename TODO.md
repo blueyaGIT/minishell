@@ -11,6 +11,7 @@
 - [ ] [start builtin cmds](./srcs/builtin/)
 - [ ] [ensure signal functionality](./srcs/signals/)
 - [ ] [finish env_init and shlvl handling]
+- [ ] [reset envp after username usage](https://github.com/JulieHXJ/minishell42/blob/master/srcs/init_shell.c)
 - [x] [customize all libft-funcs that malloc to gc_malloc]
 - [x] [finish gcollector](./srcs/gcollector/)
 - [x] [research environ]("extern char **environ")
