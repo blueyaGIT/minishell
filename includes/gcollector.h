@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:30:12 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/22 16:29:38 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/22 17:35:14 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,7 @@ char				**gc_split(char const *s, char c);
 char				*gc_strdup(char *src);
 char				*gc_strjoin(char const *s1, char const *s2);
 char				*gc_substr(char const *s, unsigned int start, size_t len);
-#endif
+char				**gc_arr_cpy(char **arr);
+void				gc_free_arr(char **arr);
+	
+#endif /* GCOLLECTOR_H */

@@ -22,8 +22,15 @@ extern volatile sig_atomic_t	g_sig;
 # define STDOUT 1
 # define STDERR 2
 
+# define HISTORY_FILE ".minishell_history"
+# define HEREDOC_FILE "/tmp/.minishell_heredoc_"
+
+# define success true
+# define fail false
+
 /* INCLUDES */
 # include "libft/libft.h"
+# include "history.h"
 # include "debug.h"
 # include "laura.h"
 # include "gcollector.h"
