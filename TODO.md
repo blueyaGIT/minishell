@@ -10,7 +10,7 @@
 ### Marzia
 - [ ] [start builtin cmds](./srcs/builtin/)
 - [ ] [ensure signal functionality](./srcs/signals/)
-- [ ] [customize all libft-funcs that malloc to gc_malloc]
+- [x] [customize all libft-funcs that malloc to gc_malloc]
 - [x] [finish gcollector](./srcs/gcollector/)
 - [x] [research environ]("extern char **environ")
 - [x] [research builtin shell cmds]
