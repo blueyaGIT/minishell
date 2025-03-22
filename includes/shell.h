@@ -6,7 +6,6 @@
 typedef struct s_shell
 {
 	char	**env;
-	char	**exp;
 	char	*history_file;
 	char	*heredoc_file;
 	int		heredoc_index;
