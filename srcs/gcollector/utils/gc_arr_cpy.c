@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 17:21:28 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/22 17:29:36 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/23 12:25:48 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**gc_arr_cpy(char **arr)
 	i = 0;
 	while (arr[i])
 		i++;
-	temp = ft_malloc((i + 1) * sizeof(char *));
+	temp = gc_malloc((i + 1) * sizeof(char *));
 	if (!temp)
 		return (NULL);
 	i = 0;

@@ -6,17 +6,28 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:20:37 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/22 16:35:09 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/23 12:39:25 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_username(void)
+static void	print_username(char **envp)
 {
 	char	*username;
+	int		i;
 
-	username = env_get(get_shell()->env, "USER");
+	username = NULL;
+	i = 0;
+	while (envp[i])
+	{
+        if (strstr(envp[i], "USER=") == envp[i])
+		{
+			username = envp[i] + ft_strlen("USER="); // Print only the value after "USER="
+            break;
+        }
+        i++;
+    }
 	if (username)
 	{
 		printf(BOLD LIGHT_PINK"\n🧚 " ITALIC " Hello, %s" RESET BOLD "  🧚\n\n"RESET, username);
@@ -24,7 +35,7 @@ static void	print_username(void)
 	}
 }
 
-void	ft_print_logo(void)
+void	ft_print_logo(char **envp)
 {
 	printf("\033[H\033[J");
 	printf(
@@ -50,5 +61,5 @@ void	ft_print_logo(void)
 		"lnierobi && dalbano\n"
 		"\033[0m" // Reset color
 		"\n");
-	print_username();
+	print_username(envp);
 }
