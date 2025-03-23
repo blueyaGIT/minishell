@@ -55,17 +55,17 @@ SRCS	+=	env_get.c \
 			set_env_var.c \
 
 # GCOLLECTOR
-SRCS	+=	gc_add.c \
-			gc_free.c \
-			gcollector.c \
-			gc_arr_cpy.c \
-			gc_calloc.c \
-			gc_free_arr.c \
-			gc_itoa.c \
-			gc_split.c \
-			gc_strdup.c \
-			gc_strjoin.c \
-			gc_substr.c \
+# SRCS	+=	gc_add.c \
+# 			gc_free.c \
+# 			gcollector.c \
+# 			gc_arr_cpy.c \
+# 			gc_calloc.c \
+# 			gc_free_arr.c \
+# 			gc_itoa.c \
+# 			gc_split.c \
+# 			gc_strdup.c \
+# 			gc_strjoin.c \
+# 			gc_substr.c \
 
 # HISTORY
 SRCS	+=	history.c \

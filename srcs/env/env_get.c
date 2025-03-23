@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:01:55 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/22 16:35:09 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/23 14:36:46 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ char	*env_get(char **env, char *key)
 	if (temp == NULL)
 		return (NULL);
 	if (temp[1] == '\0')
-		value = (char *)gc_safe(ft_strdup(""));
+		value = (char *)ft_strdup("");
 	else
-		value = (char *)gc_safe(ft_strdup(temp + 1));
+		value = (char *)ft_strdup(temp + 1);
 	if (value == NULL)
 		return (NULL);
 	return (value);

@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:20:37 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/23 13:45:17 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/23 14:42:52 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	print_username(char **envp)
 	if (username)
 	{
 		printf(BOLD LIGHT_PINK"\n🧚 " ITALIC " Hello, %s" RESET BOLD "  🧚\n\n"RESET, username);
-		gc_free(username);
+		free(username);
 	}
 }
 
@@ -58,7 +58,7 @@ void	ft_print_logo(char **envp)
 		"\n"
 		"				"
 		LIGHT_PINK UNDERLINE ITALIC
-		"lnierobi && dalbano\n"
+		"lnierobi" NO_UNDERLINE " && " UNDERLINE"dalbano\n"
 		"\033[0m" // Reset color
 		"\n");
 	print_username(envp);

@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 17:40:10 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/23 14:25:50 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/23 14:37:35 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,21 @@ static void	check_shlvl(t_shell *shell)
 	shlvl = find_shlvl_value(shell->env);
 	if (!shlvl)
 	{
-		value = gc_itoa(1);
+		value = ft_itoa(1);
 		if (!value)
 			return ;
 		set_env_var(shell, "SHLVL", value);
-		gc_free(value);
+		free(value);
 		return ;
 	}
 	lvl = ft_atoi(shlvl) + 1;
 	if (lvl < 0 || lvl > 999)
 		lvl = 0;
-	value = gc_itoa(lvl);
+	value = ft_itoa(lvl);
 	if (!value)
 		return ;
 	set_env_var(shell, "SHLVL", value);
-	gc_free(value);
+	free(value);
 }
 
 /**
@@ -63,19 +63,19 @@ static void configure_env(t_shell *shell)
 {
 	char	temp[PATH_MAX];
 	
-	shell->env = gc_malloc(sizeof(char *) * 3);
+	shell->env = malloc(sizeof(char *) * 3);
 	if (!shell->env)
 	{
 		printf(RED"Error: FAILED TO ALLOCATE SHELL->ENV"RESET);
 		exit(EXIT_FAILURE);
 	}
-	shell->env[0] = gc_strjoin("PWD=", getcwd(temp, PATH_MAX));
+	shell->env[0] = ft_strjoin("PWD=", getcwd(temp, PATH_MAX));
 	if (!shell->env[0])
 	{
 		printf(RED"Error: FAILED TO SET PWD IN SHELL->ENV[0]"RESET);
 		exit(EXIT_FAILURE);
 	}
-	shell->env[1] = gc_strdup("SHLVL=1");
+	shell->env[1] = ft_strdup("SHLVL=1");
 	if (!shell->env[1])
 	{
 		printf(RED"Error: FAILED TO SET SHLVL IN SHELL->ENV[1]"RESET);
@@ -97,6 +97,6 @@ void	env_init(t_shell *shell, char **envp)
 		configure_env(shell);
 		return ;
 	}
-	shell->env = gc_arr_cpy(envp);
+	shell->env = ft_arr_cpy(envp);
 	check_shlvl(shell);
 }
