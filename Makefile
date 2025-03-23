@@ -52,6 +52,7 @@ SRCS	+=	cd.c \
 SRCS	+=	env_get.c \
 			env_idx.c \
 			env_init.c \
+			set_env_var.c \
 
 # GCOLLECTOR
 SRCS	+=	gc_add.c \
@@ -121,7 +122,7 @@ $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
 	@$(eval CURRENT := $(shell echo $$(($(CURRENT) + 1))))
 	@$(eval PERCENT := $(shell echo $$(($(CURRENT) * 100 / $(TOTAL_SRCS)))))
-	@printf "$(CLEAR_LINE)$(YELLOW)🚧 Compiling $(PERCENT)%% [$(CURRENT)/$(TOTAL_SRCS)] $(CYAN)$<$(NC) 🚧"
+	@printf "$(CLEAR_LINE)$(YELLOW)🚧 Compiling $(PERCENT)%% [$(CURRENT)/$(TOTAL_SRCS)] $(CYAN)$<$(NC) 🚧 "
 	@$(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
 
 # Initialize submodules

@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:20:37 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/23 12:39:25 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/23 13:45:17 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	print_username(char **envp)
 	{
         if (strstr(envp[i], "USER=") == envp[i])
 		{
-			username = envp[i] + ft_strlen("USER="); // Print only the value after "USER="
+			username = envp[i] + ft_strlen("USER=");
             break;
         }
         i++;

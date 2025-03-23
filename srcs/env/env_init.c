@@ -6,24 +6,97 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 17:40:10 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/23 12:25:22 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/23 14:25:50 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static char	*find_shlvl_value(char **env)
+{
+	int	i;
+
+	i = env_idx(env, "SHLVL");
+	if (strstr(env[i], "SHLVL=") == env[i])
+		return(env[i] + ft_strlen("SHLVL="));
+	return (NULL);
+}
+
+/**
+ * @brief handles SHLVL value
+ * if shlvl value doesn't exist, we create it with value (1)
+ * if shlvl value exists, we add to it in steps of value (1)
+ * @param shell t_shell struct
+ */
+static void	check_shlvl(t_shell *shell)
+{
+	char	*shlvl;
+	char	*value;
+	int		lvl;
+
+	shlvl = find_shlvl_value(shell->env);
+	if (!shlvl)
+	{
+		value = gc_itoa(1);
+		if (!value)
+			return ;
+		set_env_var(shell, "SHLVL", value);
+		gc_free(value);
+		return ;
+	}
+	lvl = ft_atoi(shlvl) + 1;
+	if (lvl < 0 || lvl > 999)
+		lvl = 0;
+	value = gc_itoa(lvl);
+	if (!value)
+		return ;
+	set_env_var(shell, "SHLVL", value);
+	gc_free(value);
+}
+
+/**
+ * @brief Manually sets shell->env with all necessary data
+ * sets PWD, SHLVL and adds another NULL-string
+ * @param shell our t_shell struct
+ */
+static void configure_env(t_shell *shell)
+{
+	char	temp[PATH_MAX];
+	
+	shell->env = gc_malloc(sizeof(char *) * 3);
+	if (!shell->env)
+	{
+		printf(RED"Error: FAILED TO ALLOCATE SHELL->ENV"RESET);
+		exit(EXIT_FAILURE);
+	}
+	shell->env[0] = gc_strjoin("PWD=", getcwd(temp, PATH_MAX));
+	if (!shell->env[0])
+	{
+		printf(RED"Error: FAILED TO SET PWD IN SHELL->ENV[0]"RESET);
+		exit(EXIT_FAILURE);
+	}
+	shell->env[1] = gc_strdup("SHLVL=1");
+	if (!shell->env[1])
+	{
+		printf(RED"Error: FAILED TO SET SHLVL IN SHELL->ENV[1]"RESET);
+		exit(EXIT_FAILURE);
+	}
+	shell->env[2] = NULL;
+}
+
 /**
  * Sets pwd to init env if not set already
  * handles SHLVL
+ * @param shell t_shell struct
  * @param env env-variable
- * @return true on success, false on error
  */
-// bool	env_init(char ***env)
-// {
-// 	int	result;
-	
-// 	result = check_shlvl(env);
-// 	if (result != 0)
-// 		return (fail);
-	
-// }
+void	env_init(t_shell *shell, char **envp)
+{
+	if (!envp || envp[0] == NULL)
+	{
+		configure_env(shell);
+		return ;
+	}
+	shell->env = gc_arr_cpy(envp);
+	check_shlvl(shell);
+}

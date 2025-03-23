@@ -12,6 +12,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <limits.h>
 # include <unistd.h>
 # include <stdbool.h>
 # include <errno.h>

@@ -4,22 +4,23 @@ volatile sig_atomic_t g_sig = 0;
 
 int main(int argc, char *argv[], char **envp)
 {
-	// t_shell	*shell;
+	t_shell	*shell;
 
 	ft_print_logo(envp);
-	// init_signals();
-	(void) envp;
+	shell = NULL;
+	if (argc != 1)
+		return (printf(RED"ERROR Input format: ./minishell\n"RESET));
+	ft_memset(shell, 0, sizeof(t_shell));
+	if (shell_init(shell, envp) != success)
+		exit(EXIT_FAILURE);
+
+
+
+	init_signals();
 	(void) argv;
 	(void) argc;
-	// shell = get_shell();
-	// shell->shell_dir = getcwd(NULL, 0);
-	// shell->heredoc_file = gc_strjoin(shell->shell_dir, HEREDOC_FILE);
-	// shell->heredoc_index = -1;	
-	// shell->history_file = gc_strjoin(shell->shell_dir, HISTORY_FILE);
-	// if (isatty(STDIN_FILENO))
-	// 	history_init();
-	// if (argc != 1 || shell_init(shell, envp))
-	// 	return (1);
+	if (isatty(STDIN_FILENO))
+		history_init();
 	// t_mini mini = {0};
 	// mini.env = copy_env(env);
 	// while (1)

@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:21:36 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/20 16:36:26 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/23 14:08:57 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	kill_shell(t_shell *shell, int close_shell)
 	dbmsg("Killing Shell");
 	if (shell->heredoc_file)
 		free(shell->heredoc_file);
-	if (shell->shell_dir)
-		free(shell->shell_dir);
+	if (shell->cur_dir)
+		free(shell->cur_dir);
 	if (shell->history_file)
 		free(shell->history_file);
 	gc_freeall();

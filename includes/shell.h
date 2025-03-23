@@ -6,15 +6,16 @@
 typedef struct s_shell
 {
 	char	**env;
-	char	*history_file;
+	char	*cur_dir;
+	char	*old_dir;
 	char	*heredoc_file;
 	int		heredoc_index;
+	char	*history_file;
 	bool	has_error;
-	char	*shell_dir;
 	int		exit_code;
 }			t_shell;
 
-int			shell_init(t_shell *shell, char **envp);
+bool		shell_init(t_shell *shell, char **envp);
 t_shell		*get_shell(void);
 int			kill_shell(t_shell *shell, int close_shell);
 #endif /* SHELL_H */
