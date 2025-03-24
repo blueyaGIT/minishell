@@ -33,6 +33,7 @@ extern volatile sig_atomic_t	g_sig;
 
 /* INCLUDES */
 # include "libft/libft.h"
+# include "shell.h"
 # include "history.h"
 # include "debug.h"
 # include "laura.h"
@@ -43,7 +44,6 @@ extern volatile sig_atomic_t	g_sig;
 # include "env.h"
 # include "exec.h"
 # include "utils.h"
-# include "shell.h"
 
 /* READLINE INCLUDES */
 # include <readline/history.h>

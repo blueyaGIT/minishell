@@ -53,6 +53,6 @@ int main(int argc, char *argv[], char **envp)
 	// 	mini.list = NULL;
 	// 	free(mini.input);
 	// }
-	// free_env(mini.env);
+	// ft_free_arr(mini.env);
 	return (0);
 }

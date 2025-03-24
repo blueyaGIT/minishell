@@ -49,7 +49,8 @@ SRCS	+=	cd.c \
 			pwd.c \
 
 # ENV
-SRCS	+=	env_get.c \
+SRCS	+=	env_copy.c \
+			env_get.c \
 			env_idx.c \
 			env_init.c \
 			set_env_var.c \
@@ -71,8 +72,7 @@ SRCS	+=	env_get.c \
 SRCS	+=	history.c \
 
 # LAURA
-SRCS	+=	copy_enviroment.c \
-			create_token.c \
+SRCS	+=	create_token.c \
 			syntax_error.c \
 			token_to_list.c \
 
