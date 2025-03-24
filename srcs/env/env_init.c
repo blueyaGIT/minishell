@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 17:40:10 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/23 14:37:35 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/24 13:56:47 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ static char	*find_shlvl_value(char **env)
 {
 	int	i;
 
+	i = -1;
 	i = env_idx(env, "SHLVL");
-	if (strstr(env[i], "SHLVL=") == env[i])
+	if (i != -1)
 		return(env[i] + ft_strlen("SHLVL="));
 	return (NULL);
 }
@@ -97,6 +98,6 @@ void	env_init(t_shell *shell, char **envp)
 		configure_env(shell);
 		return ;
 	}
-	shell->env = ft_arr_cpy(envp);
+	shell->env = copy_env(envp);
 	check_shlvl(shell);
 }

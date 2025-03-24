@@ -19,11 +19,13 @@
 
 extern volatile sig_atomic_t	g_sig;
 
+# define TEST printf
+
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
 
-# define HISTORY_FILE ".minishell_history"
+# define HISTORY_FILE "/.minishell_history"
 # define HEREDOC_FILE "/tmp/.minishell_heredoc_"
 
 # define success true

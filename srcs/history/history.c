@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 16:56:30 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/22 17:06:38 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/24 14:03:18 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	history_init(void)
 	int	fd;
 	char	*line;
 
+	
 	fd = open(get_shell()->history_file, O_RDONLY | O_CREAT, 0644);
 	if (fd < 0)
 	{

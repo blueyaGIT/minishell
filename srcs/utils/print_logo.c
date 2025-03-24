@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:20:37 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/23 14:42:52 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/24 13:41:44 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	print_username(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-        if (strstr(envp[i], "USER=") == envp[i])
+        if (ft_strstr(envp[i], "USER=") == envp[i])
 		{
 			username = envp[i] + ft_strlen("USER=");
             break;
@@ -29,10 +29,7 @@ static void	print_username(char **envp)
         i++;
     }
 	if (username)
-	{
 		printf(BOLD LIGHT_PINK"\n🧚 " ITALIC " Hello, %s" RESET BOLD "  🧚\n\n"RESET, username);
-		free(username);
-	}
 }
 
 void	ft_print_logo(char **envp)

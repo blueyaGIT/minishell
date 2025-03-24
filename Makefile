@@ -91,6 +91,7 @@ SRCS	+=	print_logo.c \
 
 # DEBUG
 SRCS	+=	msg.c \
+			print_shell.c \
 
 # Object files
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))

@@ -9,8 +9,8 @@
 
 ### Marzia
 - [ ] [start builtin cmds](./srcs/builtin/)
-- [ ] [ensure signal functionality](./srcs/signals/)
-- [ ] [fix memleaks in shell_init]
+- [ ] [ensure signal functionality)](./srcs/signals/)
+- [x] [fix memleaks in shell_init]
 - [x] [finish env_init and shlvl handling]
 - [x] [reset envp after username usage](https://github.com/JulieHXJ/minishell42/blob/master/srcs/init_shell.c)
 - [x] [customize all libft-funcs that malloc to gc_malloc]
