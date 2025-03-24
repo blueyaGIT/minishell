@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:21:36 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/23 14:38:17 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/24 14:47:58 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	kill_shell(t_shell *shell, int close_shell)
 	if (close_shell)
 	{
 		rl_clear_history();
-		exit(shell->exit_code);
+		exit(shell->last_exitcode);
 	}
-	return (shell->exit_code);
+	return (shell->last_exitcode);
 }

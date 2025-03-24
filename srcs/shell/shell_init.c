@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 17:32:03 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/24 14:03:01 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/24 14:47:58 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ bool	shell_init(t_shell *shell, char **envp)
 	shell->heredoc_index = -1;	
 	shell->history_file = ft_strjoin(shell->cur_dir, HISTORY_FILE);
 	shell->has_error = false;
-	shell->exit_code = 0;
+	shell->last_exitcode = 0;
 	return (success);	
 }

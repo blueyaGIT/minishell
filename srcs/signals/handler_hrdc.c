@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:51:51 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/19 13:31:00 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/24 14:47:58 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	ft_sigint_handler_heredoc(int signbr)
 	g_sig = 1;
 	rl_done = 1;
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
-	get_shell()->exit_code = 1;
+	get_shell()->last_exitcode = 1;
 }

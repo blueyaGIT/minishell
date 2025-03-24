@@ -51,7 +51,7 @@ typedef struct s_shell
 	int		heredoc_index;
 	char	*history_file;
 	bool	has_error;
-	int		exit_code;
+	int		last_exitcode;
 }			t_shell;
 
 bool		shell_init(t_shell *shell, char **envp);

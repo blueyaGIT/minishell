@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 13:47:02 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/24 14:12:46 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/24 14:47:58 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void print_shell(t_shell *shell)
     // Print error state
     printf("Has Error: %s\n", shell->has_error ? "true" : "false");
     // Print exit code
-    printf("Exit Code: %d\n", shell->exit_code);
+    printf("Exit Code: %d\n", shell->last_exitcode);
     printf("------------------");
 	printf("\n\n\n");
 }

@@ -5,7 +5,7 @@ volatile sig_atomic_t g_sig = 0;
 int main(int argc, char *argv[], char **envp)
 {
 	t_shell	shell;
-	
+
 	if (argc != 1)
 		return (printf(RED"ERROR Input format: ./minishell\n"RESET));
 	ft_memset(&shell, 0, sizeof(t_shell));

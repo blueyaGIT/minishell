@@ -9,6 +9,7 @@
 
 ### Marzia
 - [ ] [start builtin cmds](./srcs/builtin/)
+- [ ] []
 - [ ] [ensure signal functionality)](./srcs/signals/)
 - [x] [fix memleaks in shell_init]
 - [x] [finish env_init and shlvl handling]
