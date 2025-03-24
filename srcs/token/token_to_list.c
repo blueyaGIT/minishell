@@ -61,7 +61,7 @@ char **ft_add_to_array(char **array, char *new_entry)
     return new_array;
 }
 
-t_node *create_new_node()
+t_node *create_new_node(void)
 {
     t_node *new_node = malloc(sizeof(t_node));
     if (!new_node)
@@ -139,6 +139,7 @@ void build_parsing_nodes(t_mini *mini)
 }
 
 /*debug function witch prints the linked list with the nodes out */
+
 void print_node_list(t_node *node_list)
 {
     t_node *current = node_list;

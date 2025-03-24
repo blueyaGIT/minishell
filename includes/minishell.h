@@ -34,9 +34,11 @@ extern volatile sig_atomic_t	g_sig;
 /* INCLUDES */
 # include "libft/libft.h"
 # include "shell.h"
+# include "token.h"
+# include "error.h"
 # include "history.h"
 # include "debug.h"
-# include "laura.h"
+# include "expander.h"
 // # include "gcollector.h"
 # include "format.h"
 # include "builtin.h"

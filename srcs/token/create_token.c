@@ -1,4 +1,5 @@
 #include "minishell.h"
+
 /*debug zum drucekn von der Liste */
 void	print_token_list(t_list *list)
 {
@@ -14,6 +15,7 @@ void	print_token_list(t_list *list)
 	}
 }
 /**/
+
 char	*create_quote_token(char **start)
 {
 	char	quote;
@@ -44,6 +46,7 @@ char	*create_word_token(char **start)
 	*start = end;
 	return (token);
 }
+
 char	**create_token(t_mini mini)
 {
 	int		num;

@@ -71,10 +71,14 @@ SRCS	+=	env_copy.c \
 # HISTORY
 SRCS	+=	history.c \
 
-# LAURA
+# EXPANDER
+SRCS	+=	expand_var.c \
+
+# ERROR
+SRCS	+=	syntax_error.c \
+			
+# TOKENIZER
 SRCS	+=	create_token.c \
-			expand_var.c \
-			syntax_error.c \
 			token_to_list.c \
 
 # SHELL
@@ -96,21 +100,6 @@ SRCS	+=	msg.c \
 
 # Object files
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
-
-# HEADER_FILES := builtin.h \
-# 				env.h \
-# 				exec.h \
-# 				format.h \
-# 				gcollector.h \
-# 				laura.h \
-# 				libft.h \
-# 				minishell.h \
-# 				posix_log.h \
-# 				shell.h \
-# 				signals.h \
-# 				utils.h \
-
-# HEADER = $(addprefix $(INC_DIR)/, $(HEADER_FILES))
 
 TOTAL_SRCS = $(words $(SRCS))
 CURRENT = 0
