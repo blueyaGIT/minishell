@@ -14,7 +14,7 @@
 - [ ] [ensure signal functionality)](./srcs/signals/)
 - [x] [fix memleaks in shell_init]
 - [x] [finish env_init and shlvl handling]
-- [x] [reset envp after username usage](https://github.com/JulieHXJ/minishell42/blob/master/srcs/init_shell.c)
+- [x] [reset envp after username usage]
 - [x] [customize all libft-funcs that malloc to gc_malloc]
 - [x] [finish gcollector](./srcs/gcollector/)
 - [x] [research environ]("extern char **environ")
