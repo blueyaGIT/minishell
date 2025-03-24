@@ -34,7 +34,7 @@ extern volatile sig_atomic_t	g_sig;
 # include "history.h"
 # include "debug.h"
 # include "laura.h"
-# include "gcollector.h"
+// # include "gcollector.h"
 # include "format.h"
 # include "builtin.h"
 # include "signals.h"
