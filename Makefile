@@ -73,6 +73,7 @@ SRCS	+=	history.c \
 
 # LAURA
 SRCS	+=	create_token.c \
+			expand_var.c \
 			syntax_error.c \
 			token_to_list.c \
 
