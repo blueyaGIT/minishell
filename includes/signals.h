@@ -4,9 +4,6 @@
 # include "minishell.h"
 
 void	init_signals(void);
-void	switch_to_normal_mode(void);
-void	ft_sigint_handler_normal(int signbr);
-void	switch_to_heredoc_mode(void);
-void	ft_sigint_handler_heredoc(int signbr);
+void	refresh_signals(void);
 
 #endif /* SIGNALS_H */

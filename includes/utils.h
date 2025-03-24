@@ -3,6 +3,6 @@
 
 # include "minishell.h"
 
-void	ft_print_logo(char **envp);
+void	ft_print_logo(char **envp, char **argv);
 
 #endif /* UTILS_H */

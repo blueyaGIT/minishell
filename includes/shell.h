@@ -5,26 +5,26 @@
 
 typedef enum e_token_type
 {
-	WORD,  //0
-	PIPE, //1
-	REDIR_IN, //2
-	REDIR_OUT, //3
-	HEREDOC,    //4
-	APPEND,  //5
+	WORD,         //0
+	PIPE,         //1
+	REDIR_IN,     //2
+	REDIR_OUT,    //3
+	HEREDOC,      //4
+	APPEND,       //5
 	DOUBLEQUOTED, //6
-	SINGLEQUOTED,    //7
-}t_token_type;
+	SINGLEQUOTED, //7
+}					t_token_type;
 
 /*
 only exampel for how we can sort the tokens in the list nothing in ore decided for now :)
 */
 typedef struct s_node
 {
-	char *args;
-	char **filename;
-	char **redirections;
-	struct s_node *next;
-} t_node;
+	char			*args;
+	char			**filename;
+	char			**redirections;
+	struct s_node	*next;
+}					t_node;
 
 /*
 token value == the string witch is teh token
@@ -32,10 +32,10 @@ type == ENUM Value
 */
 typedef struct s_token
 {
-	char *token_value;
-	t_token_type type;
-	struct s_token *next;
-}	t_token;
+	char			*token_value;
+	t_token_type	type;
+	struct s_token	*next;
+}					t_token;
 
 /*
 input = the input from readline function
@@ -45,12 +45,12 @@ list = is the struct from libft with this i can use the ft_lstadd_back and the f
 */
 typedef struct s_mini
 {
-	char *input;
-	char **tokens;
-	char **env;
-	t_node *node;
-	t_list *list;
-} t_mini;
+	char			*input;
+	char			**tokens;
+	char			**env;
+	t_node			*node;
+	t_list			*list;
+}					t_mini;
 
 /**
  * typedef struct s_token
@@ -92,19 +92,24 @@ typedef struct s_cmd
 
 typedef struct s_shell
 {
-	char	*input;
-	char	**env;
-	char	*cur_dir;
-	char	*old_dir;
-	char	*heredoc_file;
-	int		heredoc_index;
-	char	*history_file;
-	bool	has_error;
-	int		last_exitcode;
-}			t_shell;
+	char			*input;
+	char			**env;
+	char			*cur_dir;
+	char			*old_dir;
+	char			*heredoc_file;
+	int				heredoc_index;
+	char			*history_file;
+	bool			has_error;
+	int				last_exitcode;
+	t_node			*node_ll;
+	t_token			*token_ll;
+}					t_shell;
 
-bool		shell_init(t_shell *shell, char **envp);
-t_shell		*get_shell(void);
-int			kill_shell(t_shell *shell, int close_shell);
+bool				shell_init(t_shell *shell, char **envp);
+t_shell				*get_shell(void);
+int					kill_shell(t_shell *shell, int close_shell);
+void				refresh_shell(t_shell *shell);
+void				ft_free_node(t_node **lst, void (*del)(void *));
+void				ft_free_token(t_token **lst, void (*del)(void *));
 
 #endif /* SHELL_H */

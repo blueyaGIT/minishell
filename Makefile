@@ -83,13 +83,12 @@ SRCS	+=	create_token.c \
 
 # SHELL
 SRCS	+=	kill_shell.c \
+			refresh_shell.c \
 			shell_init.c \
 			shell_utils.c \
 
 # SIGNALS
-SRCS	+=	handler_hrdc.c \
-			handler_nrml.c \
-			init_signals.c \
+SRCS	+=	init_signals.c \
 
 # UTILS
 SRCS	+=	print_logo.c \

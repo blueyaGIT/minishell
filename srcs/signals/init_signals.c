@@ -6,40 +6,46 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:47:24 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/19 13:31:08 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/24 19:20:22 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	set_signal_handler(int signbr, void (*handler)(int))
+static void	print_nl(int temp)
 {
-	struct sigaction	sa;
-
-	sa.sa_handler = handler;
-	sa.sa_flags = SA_RESTART;
-	sigemptyset(&sa.sa_mask);
-	if (sigaction(signbr, &sa, NULL) == -1)
-	{
-		perror("sigaction");
-		exit(EXIT_FAILURE);
-	}
+	(void)temp;
+	printf("\n");
+	rl_on_new_line();
 }
 
-void	switch_to_normal_mode(void)
+static void	refresh_rl(int signum)
 {
-	set_signal_handler(SIGINT, ft_sigint_handler_normal);
-	set_signal_handler(SIGQUIT, SIG_IGN);
-}
-
-void	switch_to_heredoc_mode(void)
-{
-	set_signal_handler(SIGINT, ft_sigint_handler_heredoc);
-	set_signal_handler(SIGQUIT, SIG_IGN);
+	(void)signum;
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
 void	init_signals(void)
 {
-	rl_catch_signals = 0;
-	switch_to_normal_mode();
+	struct sigaction	sa;
+
+	ft_memset(&sa, 0, sizeof(sa));
+	sa.sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, &sa, NULL);
+	ft_memset(&sa, 0, sizeof(sa));
+	sa.sa_handler = &refresh_rl;
+	sigaction(SIGINT, &sa, NULL);
+}
+
+void	refresh_signals(void)
+{
+	struct sigaction	sa;
+
+	ft_memset(&sa, 0, sizeof(sa));
+	sa.sa_handler = &print_nl;
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
 }
