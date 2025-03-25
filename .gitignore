@@ -4,7 +4,6 @@
 # minishell
 ./minishell.dSYM
 *.out
-minishell.log
 
 # Object files #
 *.o
@@ -28,5 +27,4 @@ minishell.log
 
 readline.supp
 
-.minishell_history
 .minishell_heredoc*

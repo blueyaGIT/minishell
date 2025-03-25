@@ -38,6 +38,8 @@ extern volatile sig_atomic_t	g_sig;
 # include "token.h"
 # include "error.h"
 # include "debug.h"
+# include "pipes.h"
+# include "io.h"
 # include "expander.h"
 # include "format.h"
 # include "builtin.h"

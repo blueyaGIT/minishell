@@ -10,7 +10,8 @@
 ### Marzia
 - [ ] [start builtin cmds](./srcs/builtin/)
 - [ ] [create cat, ls, etc. execution]
-- [ ] [create filepath recognition]
+- [ ] [further develop ft_exec.c]
+- [ ] [Makefile relink check if minishel.exe exists]
 - [x] [ensure signal functionality)](./srcs/signals/)
 - [x] [fix memleaks in shell_init]
 - [x] [finish env_init and shlvl handling]

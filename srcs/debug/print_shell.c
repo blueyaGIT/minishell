@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 13:47:02 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/25 15:34:29 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/25 18:16:50 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,6 @@ void print_shell(t_shell *shell)
     printf("Current Directory: %s\n", shell->cur_dir ? shell->cur_dir : "null");
     // Print previous/old directory
     printf("Old Directory: %s\n", shell->old_dir ? shell->old_dir : "null");
-    // Print heredoc file if available
-    printf("Heredoc File: %s\n", shell->heredoc_file ? shell->heredoc_file : "null");
-    // Print heredoc index
-    printf("Heredoc Index: %d\n", shell->heredoc_index);
     // Print error state
     printf("Has Error: %s\n", shell->has_error ? "true" : "false");
     // Print exit code

@@ -12,5 +12,6 @@ int						env_idx(char **envp, char *key);
 bool					set_env_var(t_shell *shell, char *key, char *value);
 char					**refresh_env(t_shell *shell, int size);
 char					**copy_env(char **env);
+void					check_shlvl(t_shell *shell);
 
 #endif /* ENV_H */

@@ -3,4 +3,6 @@
 
 # include "minishell.h"
 
+int	ft_exec(t_shell *shell);
+
 #endif /* EXEC_H */

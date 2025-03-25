@@ -7,24 +7,24 @@ typedef enum e_token_type
 {
 	WORD,         //0
 	PIPE,         //1
-	REDIR_IN,     //2
-	REDIR_OUT,    //3
+	REDIR_IN,    //2
+	REDIR_OUT,   //3
 	HEREDOC,      //4
 	APPEND,       //5
 	DOUBLEQUOTED, //6
 	SINGLEQUOTED, //7
-}					t_token_type;
+}						t_token_type;
 
 /*
 only exampel for how we can sort the tokens in the list nothing in ore decided for now :)
 */
 typedef struct s_node
 {
-	char			*args;
-	char			**filename;
-	char			**redirections;
-	struct s_node	*next;
-}					t_node;
+	char				*args;
+	char				**filename;
+	char				**redirections;
+	struct s_node		*next;
+}						t_node;
 
 /*
 token value == the string witch is teh token
@@ -32,25 +32,19 @@ type == ENUM Value
 */
 typedef struct s_token
 {
-	char			*token_value;
-	t_token_type	type;
-	struct s_token	*next;
-}					t_token;
+	char				*token_value;
+	t_token_type		type;
+	struct s_token		*next;
+}						t_token;
 
-/*
-input = the input from readline function
-tokens = string with has all token strings inside
-node = shoulde be int the future the node prom pipe to pipe
-list = is the struct from libft with this i can use the ft_lstadd_back and the ft_lstnew function from libft
-*/
 typedef struct s_mini
 {
-	char			*input;
-	char			**tokens;
-	char			**env;
-	t_node			*node;
-	t_list			*list;
-}					t_mini;
+	char *input;
+	char **tokens;
+	char **env;
+	t_node *node;
+	t_list *list;
+} t_mini;
 
 /**
  * typedef struct s_token
@@ -63,52 +57,51 @@ typedef struct s_mini
 	bool			joined;
 	struct s_token	*prev;
 	struct s_token	*next;
-}					t_token;
+}						t_token;
+*/
 
 typedef struct s_redir
 {
-	char			*infile;
-	char			*outfile;
-	char			*heredoc_delimiter;
-	bool			heredoc_quotes;
-	int				fd_in;
-	int				fd_out;
-	int				stdin_backup;
-	int				stdout_backup;
-}					t_redir;
+	char				*infile; //gleiche wie type=redir_IN | Wenn in t_token type=redir_IN -> token_value hier reinschreiben
+	char				*outfile; //gleiche nur mit redir_OUT
+	char				*hrd_sep; //token_value -> hierrein (">>") + hrd_flag = true
+	bool				hrd_flag; //sagt wenn heredoc vorhanden 
+	int					fd_in;
+	int					fd_out;
+	int					stdin_backup;
+	int					stdout_backup;
+}						t_redir;
 
-typedef struct s_cmd
+typedef struct s_command
 {
-	char			*cmd;
-	char			*cmd_path;
-	char			**args_list;
-	bool			if_pipe;
-	int				*pipe_fd;
-	t_redir			*io;
-	struct s_cmd	*next;
-	struct s_cmd	*prev;
-}					t_cmd;
- */
+	char				*command; //der command als string ("echo")
+	char				*filename; //der Dateiname as string ("test.txt")
+	char				**args; //die Argumente fuer *command ({"-1", "-a", ...})
+	bool				pipe_flag; //wenn | dann flag auf true
+	int					*pipe_fd; //ignorieren, wird von marzia gesetzt
+	t_redir				*io; // io_file, heredoc hier drinnen
+	struct s_command	*next;
+	struct s_command	*prev;
+}						t_command;
 
 typedef struct s_shell
 {
-	char			*input;
-	char			**env;
-	char			*cur_dir;
-	char			*old_dir;
-	char			*heredoc_file;
-	int				heredoc_index;
-	bool			has_error;
-	int				last_exitcode;
-	t_node			*node_ll;
-	t_token			*token_ll;
-}					t_shell;
+	char				*input;
+	char				**env;
+	char				*cur_dir;
+	char				*old_dir;
+	bool				has_error;
+	int					last_exitcode;
+	t_token				*token_ll;
+	t_command			*command_ll;
+	pid_t				pid;
+}						t_shell;
 
-bool				shell_init(t_shell *shell, char **envp);
-t_shell				*get_shell(void);
-int					kill_shell(t_shell *shell, int close_shell);
-void				refresh_shell(t_shell *shell);
-void				ft_free_node(t_node **lst, void (*del)(void *));
-void				ft_free_token(t_token **lst, void (*del)(void *));
+bool					shell_init(t_shell *shell, char **envp);
+t_shell					*get_shell(void);
+int						kill_shell(t_shell *shell, int close_shell);
+void					refresh_shell(t_shell *shell);
+void					ft_free_node(t_node **lst, void (*del)(void *));
+void					ft_free_token(t_token **lst, void (*del)(void *));
 
 #endif /* SHELL_H */

@@ -45,6 +45,7 @@ SRCS	:=	main.c \
 # BUILTINS
 SRCS	+=	cd.c \
 			echo.c \
+			env.c \
 			exit.c \
 			pwd.c \
 
@@ -55,21 +56,8 @@ SRCS	+=	env_copy.c \
 			env_init.c \
 			set_env_var.c \
 
-# GCOLLECTOR
-# SRCS	+=	gc_add.c \
-# 			gc_free.c \
-# 			gcollector.c \
-# 			gc_arr_cpy.c \
-# 			gc_calloc.c \
-# 			gc_free_arr.c \
-# 			gc_itoa.c \
-# 			gc_split.c \
-# 			gc_strdup.c \
-# 			gc_strjoin.c \
-# 			gc_substr.c \
-
-# HISTORY
-# SRCS	+=	history.c \
+# EXECUTION
+SRCS	+=	ft_exec.c \
 
 # EXPANDER
 SRCS	+=	expand_var.c \
@@ -81,6 +69,14 @@ SRCS	+=	syntax_error.c \
 SRCS	+=	create_token.c \
 			token_to_list.c \
 
+# PIPES
+SRCS	+=	pipes_init.c \
+			refresh_pipes.c \
+
+# IO
+SRCS	+=	check_io.c \
+			refresh_io.c \
+
 # SHELL
 SRCS	+=	kill_shell.c \
 			refresh_shell.c \
@@ -91,7 +87,8 @@ SRCS	+=	kill_shell.c \
 SRCS	+=	init_signals.c \
 
 # UTILS
-SRCS	+=	print_logo.c \
+SRCS	+=	file_extractor.c \
+			print_logo.c \
 
 # DEBUG
 SRCS	+=	msg.c \
@@ -152,12 +149,16 @@ $(LIBFT_LIB): init-libft
 # Rule to compile program
 relink: $(OBJS)
 	@newer=0; \
-	for obj in $(OBJS); do \
-		if [ $$obj -nt $(NAME) ]; then \
-			newer=1; \
-			break; \
-		fi \
-	done; \
+	if [ ! -f "$(NAME)" ]; then \
+		newer=1; \
+	else \
+		for obj in $(OBJS); do \
+			if [ $$obj -nt $(NAME) ]; then \
+				newer=1; \
+				break; \
+			fi; \
+		done; \
+	fi; \
 	if [ $$newer -eq 1 ]; then \
 		echo "$(CLEAR_LINE)$(YELLOW)🚧 Building 🧚 Minishell 🧚 🚧$(NC)"; \
 		$(CC) -o $(NAME) $(OBJS) $(LIBFTFLAGS) $(SYSLIBFLAGS); \
