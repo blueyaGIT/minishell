@@ -8,10 +8,17 @@
 - [ ] [new linked list what includes arg, redirect and file]
 
 ### Marzia
-- [ ] [start builtin cmds](./srcs/builtin/)
+- [ ] [develop builtin cmds](./srcs/builtin/)
+	- [ ] [echo]
+	- [ ] [cd]
+	- [ ] [pwd]
+	- [ ] [export]
+	- [ ] [unset]
+	- [x] [env]
+	- [ ] [exit]
 - [ ] [create cat, ls, etc. execution]
 - [ ] [further develop ft_exec.c]
-- [ ] [Makefile relink check if minishel.exe exists]
+- [x] [Makefile relink check if minishel.exe exists]
 - [x] [ensure signal functionality)](./srcs/signals/)
 - [x] [fix memleaks in shell_init]
 - [x] [finish env_init and shlvl handling]
