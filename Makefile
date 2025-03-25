@@ -69,7 +69,7 @@ SRCS	+=	env_copy.c \
 # 			gc_substr.c \
 
 # HISTORY
-SRCS	+=	history.c \
+# SRCS	+=	history.c \
 
 # EXPANDER
 SRCS	+=	expand_var.c \

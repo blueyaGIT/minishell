@@ -21,11 +21,12 @@ extern volatile sig_atomic_t	g_sig;
 
 # define TEST printf
 
+# define PROMPT "🧚>$ \033[0m"
+
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
 
-# define HISTORY_FILE "/.minishell_history"
 # define HEREDOC_FILE "/tmp/.minishell_heredoc_"
 
 # define success true
@@ -36,16 +37,16 @@ extern volatile sig_atomic_t	g_sig;
 # include "shell.h"
 # include "token.h"
 # include "error.h"
-# include "history.h"
 # include "debug.h"
 # include "expander.h"
-// # include "gcollector.h"
 # include "format.h"
 # include "builtin.h"
 # include "signals.h"
 # include "env.h"
 # include "exec.h"
 # include "utils.h"
+// # include "history.h"
+// # include "gcollector.h"
 
 /* READLINE INCLUDES */
 # include <readline/history.h>

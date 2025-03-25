@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:21:36 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/24 18:07:11 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/25 15:34:19 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int	kill_shell(t_shell *shell, int close_shell)
 		free(shell->heredoc_file);
 	if (shell->cur_dir)
 		free(shell->cur_dir);
-	if (shell->history_file)
-		free(shell->history_file);
 	if (close_shell)
 	{
 		rl_clear_history();

@@ -98,7 +98,6 @@ typedef struct s_shell
 	char			*old_dir;
 	char			*heredoc_file;
 	int				heredoc_index;
-	char			*history_file;
 	bool			has_error;
 	int				last_exitcode;
 	t_node			*node_ll;

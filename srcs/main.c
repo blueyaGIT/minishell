@@ -45,7 +45,7 @@ int main(int argc, char *argv[], char **envp)
 	while (1)
 	{
 		init_signals();
-		shell.input = readline("🧚:");
+		shell.input = readline(PROMPT);
 		refresh_signals();
 		if (!shell.input)
 			break;
