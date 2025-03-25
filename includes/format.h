@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 18:14:48 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/12 15:23:15 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/25 15:46:37 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@
 # define BRIGHT_WHITE	"\033[97m"
 
 /* Extended: Additional Text Effects */
-# define BLINK       "\033[5m"
-# define REVERSE     "\033[7m"
-# define HIDDEN      "\033[8m"
-# define STRIKETHROUGH   "\033[9m"
+# define BLINK       	  "\033[5m"
+# define REVERSE     	  "\033[7m"
+# define HIDDEN      	  "\033[8m"
+# define STRIKETHROUGH    "\033[9m"
 # define OVERLINED        "\033[53m"  // Also known as "double overline"
 # define FRAMED           "\033[51m"  // Add a frame around the text
 # define ENCIRCLED        "\033[52m"  // Encircle the text

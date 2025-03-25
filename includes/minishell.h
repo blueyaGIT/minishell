@@ -21,7 +21,7 @@ extern volatile sig_atomic_t	g_sig;
 
 # define TEST printf
 
-# define PROMPT "🧚>$ \033[0m"
+# define PROMPT "\033[38;5;168m\033[1m🧚>$ \033[0m"
 
 # define STDIN 0
 # define STDOUT 1
