@@ -24,42 +24,42 @@ t_token_type	token_type(char *token)
 	return (WORD);
 }
 /*here i converting my tokens who are in the
- array into the linekd list and adding the ENUM Type */
-void	convert_tokens(t_mini *mini)
+ array into the lined list and adding the ENUM Type */
+void	convert_tokens(t_shell *shell)
 {
 	t_token	*tmp_token;
 	int		i;
 
 	i = 0;
-	while (mini->tokens[i])
+	while (shell->tokens[i])
 	{
 		tmp_token = malloc(sizeof(t_token));
 		if (!tmp_token)
 			return ;
-		tmp_token->token_value = mini->tokens[i];
-		tmp_token->type = token_type(mini->tokens[i]);
-		ft_lstadd_back(&mini->list, ft_lstnew((void *)tmp_token));
+		tmp_token->token_value = shell->tokens[i];
+		tmp_token->type = token_type(shell->tokens[i]);
+		ft_lstadd_back(&shell->list, ft_lstnew((void *)tmp_token));
 		i++;
 	}
 }
 
-char **ft_add_to_array(char **array, char *new_entry)
-{
-    int len = 0;
-    char **new_array;
+// char **ft_add_to_array(char **array, char *new_entry)
+// {
+//     int len = 0;
+//     char **new_array;
 
-    while (array && array[len])
-        len++;
-    new_array = malloc((len + 2) * sizeof(char *));
-    if (!new_array)
-        return NULL;
-    if (array)
-        memcpy(new_array, array, len * sizeof(char *));
-    new_array[len] = strdup(new_entry);
-    new_array[len + 1] = NULL;
-    free(array);
-    return new_array;
-}
+//     while (array && array[len])
+//         len++;
+//     new_array = malloc((len + 2) * sizeof(char *));
+//     if (!new_array)
+//         return NULL;
+//     if (array)
+//         memcpy(new_array, array, len * sizeof(char *));
+//     new_array[len] = strdup(new_entry);
+//     new_array[len + 1] = NULL;
+//     free(array);
+//     return new_array;
+// }
 
 t_node *create_new_node(void)
 {
@@ -71,6 +71,48 @@ t_node *create_new_node(void)
     new_node->redirections = NULL;
     new_node->next = NULL;
     return new_node;
+}
+
+// void process_word_token(t_node *new_node, t_list **token_lst)
+// {
+//     t_token *token = (t_token *)(*token_lst)->content;
+//     if (!new_node->args)
+//         new_node->args = strdup(token->token_value);
+//     else
+//     {
+//         char *temp = ft_strjoin(new_node->args, " ");
+//         free(new_node->args);
+//         new_node->args = ft_strjoin(temp, token->token_value);
+//         free(temp);
+//     }
+//     *token_lst = (*token_lst)->next;
+// }
+
+int is_known_command(char *token_value)
+{
+    if (strcmp(token_value, "echo") == 0)
+        return 1;
+    if (strcmp(token_value, "ls") == 0)
+        return 1;
+    if (strcmp(token_value, "cat") == 0)
+        return 1;
+    if (strcmp(token_value, "pwd") == 0)
+        return 1;
+    return 0;
+}
+int is_operator(char *token_value)
+{
+    if (strcmp(token_value, "<") == 0)
+        return 1;
+    if (strcmp(token_value, ">") == 0)
+        return 1;
+    if (strcmp(token_value, "<<") == 0)
+        return 1;
+    if (strcmp(token_value, ">>") == 0)
+        return 1;
+    if (strcmp(token_value, "|") == 0)
+        return 1;
+    return 0;
 }
 
 void process_word_token(t_node *new_node, t_list **token_lst)
@@ -85,8 +127,39 @@ void process_word_token(t_node *new_node, t_list **token_lst)
         new_node->args = ft_strjoin(temp, token->token_value);
         free(temp);
     }
+    if (is_known_command(token->token_value))
+    {
+
+    }
+    else if (is_operator(token->token_value))
+    {
+
+    }
+    else
+    {
+        new_node->filename = ft_add_to_array(new_node->filename, token->token_value);
+    }
+
     *token_lst = (*token_lst)->next;
 }
+char **ft_add_to_array(char **array, char *new_entry)
+{
+    int len = 0;
+    char **new_array;
+    while (array && array[len])
+        len++;
+    new_array = malloc((len + 2) * sizeof(char *));
+    if (!new_array)
+        return NULL;
+    if (array)
+        memcpy(new_array, array, len * sizeof(char *));
+    
+    new_array[len] = strdup(new_entry);
+    new_array[len + 1] = NULL; 
+    free(array);
+    return new_array;
+}
+
 
 void process_redirection_token(t_node *new_node, t_list **token_lst)
 {
@@ -96,7 +169,7 @@ void process_redirection_token(t_node *new_node, t_list **token_lst)
     if (*token_lst)
     {
         t_token *next_token = (t_token *)(*token_lst)->content;
-        new_node->filename = ft_add_to_array(new_node->filename, next_token->token_value);
+        new_node->filename = ft_add_to_array(new_node->filename, next_token->token_value); 
         *token_lst = (*token_lst)->next;
     }
 }
@@ -106,6 +179,7 @@ t_node *parse_tokens(t_list **token_lst)
     t_node *new_node = create_new_node();
     if (!new_node)
         return NULL;
+    
     while (*token_lst && ((t_token *)(*token_lst)->content)->type != PIPE)
     {
         t_token *token = (t_token *)(*token_lst)->content;
@@ -119,9 +193,10 @@ t_node *parse_tokens(t_list **token_lst)
     return new_node;
 }
 
-void build_parsing_nodes(t_mini *mini)
+
+void build_parsing_nodes(t_shell *shell)
 {
-    t_list *token_lst = mini->list;
+    t_list *token_lst = shell->list;
     t_node *head_node = NULL;
     t_node *current_node = NULL;
     while (token_lst)
@@ -135,7 +210,7 @@ void build_parsing_nodes(t_mini *mini)
         if (token_lst && ((t_token *)token_lst->content)->type == PIPE)
             token_lst = token_lst->next;
     }
-    mini->node = head_node;
+    shell->node = head_node;
 }
 
 /*debug function witch prints the linked list with the nodes out */
@@ -144,7 +219,6 @@ void print_node_list(t_node *node_list)
 {
     t_node *current = node_list;
     int index = 0;
-
     while (current)
     {
         printf("Node %d:\n", index);

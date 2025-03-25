@@ -38,8 +38,9 @@ void print_shell(t_shell *shell)
         }
     }
     else
+    {
         printf("Environment Variables: (null)\n");
-
+    }
 	printf("\n");
     // Print current input
     printf("Current Input: %s\n", shell->input ? shell->input : "null");

@@ -90,11 +90,24 @@ typedef struct s_cmd
 	struct s_cmd	*prev;
 }					t_cmd;
  */
+// alter struct
+// typedef struct s_mini
+// {
+// 	char *input;
+// 	char **tokens;
+// 	char **env;
+// 	t_node *node;
+// 	t_list *list;
+// } t_mini;
 
 typedef struct s_shell
 {
 	char	*input;
+	char	**tokens; //neu
 	char	**env;
+	t_node *node;
+	t_list *list;
+
 	char	*cur_dir;
 	char	*old_dir;
 	char	*heredoc_file;
