@@ -49,7 +49,6 @@ int main(int argc, char *argv[], char **envp)
 		refresh_signals();
 		if (!shell.input)
 			break;
-		extract_filepaths(shell.input);
 		// if (ft_strcmp(shell.input, "./minishell") == 0)
 		// 	check_shlvl(&shell);
 		// if (check_input(&shell))
