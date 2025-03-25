@@ -73,21 +73,6 @@ t_node *create_new_node(void)
     return new_node;
 }
 
-// void process_word_token(t_node *new_node, t_list **token_lst)
-// {
-//     t_token *token = (t_token *)(*token_lst)->content;
-//     if (!new_node->args)
-//         new_node->args = strdup(token->token_value);
-//     else
-//     {
-//         char *temp = ft_strjoin(new_node->args, " ");
-//         free(new_node->args);
-//         new_node->args = ft_strjoin(temp, token->token_value);
-//         free(temp);
-//     }
-//     *token_lst = (*token_lst)->next;
-// }
-
 int is_known_command(char *token_value)
 {
     if (strcmp(token_value, "echo") == 0)
@@ -115,9 +100,11 @@ int is_operator(char *token_value)
     return 0;
 }
 
-void process_word_token(t_node *new_node, t_list **token_lst)
+void process_word_token(t_node *new_node, t_list **token_lst, bool *prev_was_redirect)
 {
     t_token *token = (t_token *)(*token_lst)->content;
+
+    // 1. Argument speichern
     if (!new_node->args)
         new_node->args = strdup(token->token_value);
     else
@@ -127,21 +114,20 @@ void process_word_token(t_node *new_node, t_list **token_lst)
         new_node->args = ft_strjoin(temp, token->token_value);
         free(temp);
     }
-    if (is_known_command(token->token_value))
-    {
 
-    }
-    else if (is_operator(token->token_value))
-    {
-
-    }
-    else
+    // 2. Falls vorher ein Redirect war, speichere als Dateiname
+    if (*prev_was_redirect)
     {
         new_node->filename = ft_add_to_array(new_node->filename, token->token_value);
     }
 
+    // 3. Merken, ob dieser Token ein Redirect ist
+    *prev_was_redirect = is_operator(token->token_value);
+
     *token_lst = (*token_lst)->next;
 }
+
+
 char **ft_add_to_array(char **array, char *new_entry)
 {
     int len = 0;
@@ -179,19 +165,28 @@ t_node *parse_tokens(t_list **token_lst)
     t_node *new_node = create_new_node();
     if (!new_node)
         return NULL;
-    
+
+    bool prev_was_redirect = false; // 🟢 Merkt sich, ob der vorherige Token ein Redirect war
+
     while (*token_lst && ((t_token *)(*token_lst)->content)->type != PIPE)
     {
         t_token *token = (t_token *)(*token_lst)->content;
         if (token->type == WORD || token->type == DOUBLEQUOTED || token->type == SINGLEQUOTED)
-            process_word_token(new_node, token_lst);
+            process_word_token(new_node, token_lst, &prev_was_redirect);
         else if (token->type == REDIR_IN || token->type == REDIR_OUT || token->type == HEREDOC || token->type == APPEND)
+        {
             process_redirection_token(new_node, token_lst);
+            prev_was_redirect = true;  // 🟢 Nach einem Redirect merken wir uns das
+        }
         else
+        {
             *token_lst = (*token_lst)->next;
+            prev_was_redirect = false; // 🟢 Falls etwas anderes kommt, zurücksetzen
+        }
     }
     return new_node;
 }
+
 
 
 void build_parsing_nodes(t_shell *shell)

@@ -11,7 +11,7 @@ t_token_type	token_type(char *token);
 void			convert_tokens(t_shell *shell);
 // char			**ft_add_to_array(char **array, char *new_entry);
 t_node			*create_new_node(void);
-void			process_word_token(t_node *new_node, t_list **token_lst);
+void process_word_token(t_node *new_node, t_list **token_lst, bool *prev_was_redirect);
 void			process_redirection_token(t_node *new_node, t_list **token_lst);
 t_node			*parse_tokens(t_list **token_lst);
 void			build_parsing_nodes(t_shell *shell);
