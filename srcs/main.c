@@ -93,10 +93,28 @@ void process_input( t_shell *shell)
     shell->input = expanded_input;
 }
 
+// int handle_syntax_and_exit(t_shell *shell)
+// {
+//     int syntax_result = syntax_error(shell->input);
+//     if (syntax_result == 0 && check_unclosed_quotes(shell->input) == 0)
+//     {
+//         if (ft_strcmp(shell->input, "exit") == 0)
+//         {
+//             printf("Good bye, see you .. ");
+//             return 1;
+//         }
+//         shell->tokens = create_token(*shell);
+//         printf("Prompt: %s\n", shell->input);
+//         convert_tokens(shell);
+//         print_token_list(shell->list);
+//     }
+//     return 0;
+// }
 int handle_syntax_and_exit(t_shell *shell)
 {
-    int syntax_result = syntax_error(shell->input);
-    if (syntax_result == 0 && check_unclosed_quotes(shell->input) == 0)
+    // Pass both arguments to syntax_error and check_unclosed_quotes
+    int syntax_result = syntax_error(shell->input, shell);  // Zweites Argument hinzugefügt
+    if (syntax_result == 0 && check_unclosed_quotes(shell->input, shell) == 0)  // Zweites Argument hinzugefügt
     {
         if (ft_strcmp(shell->input, "exit") == 0)
         {
@@ -111,13 +129,21 @@ int handle_syntax_and_exit(t_shell *shell)
     return 0;
 }
 
+
 void execute_commands( t_shell *shell, int syntax_result)
 {
     if (syntax_result != 0)
-        shell->last_exitcode = 2;
+    {
+        set_exit_code(shell, 1); // Fehler 1, wenn Syntaxfehler
+    }
     else
-        shell->last_exitcode = 0;
-    
+    {
+        // Setze den Exit-Code nur auf 0, wenn keine Fehler aufgetreten sind
+        if (shell->lastexitcode != 1 && shell->lastexitcode != 2)
+        {
+            set_exit_code(shell, 0);
+        }
+    }
     build_parsing_nodes(shell);
     print_node_list(shell->node);
     ft_lstfree(shell->list);
@@ -127,7 +153,7 @@ void execute_commands( t_shell *shell, int syntax_result)
 
 int main(int argc, char *argv[], char **envp)
 {
-    t_shell shell = {0};;
+    t_shell shell = {0};
     // t_mini mini = {0};
 
     if (argc != 1)
@@ -141,7 +167,7 @@ int main(int argc, char *argv[], char **envp)
         process_input( &shell);
         if (handle_syntax_and_exit(&shell))
             break;
-        execute_commands( &shell, syntax_error(shell.input));
+        execute_commands( &shell, 0);
     }
     
     ft_free_arr(shell.env);
