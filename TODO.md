@@ -18,6 +18,7 @@
 	- [x] [exit]
 - [ ] [create cat, ls, etc. execution]
 - [ ] [further develop ft_exec.c]
+- [ ] [handle $PATH when env -i ?]
 - [x] [Makefile relink check if minishel.exe exists]
 - [x] [ensure signal functionality)](./srcs/signals/)
 - [x] [fix memleaks in shell_init]
