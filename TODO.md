@@ -15,7 +15,7 @@
 	- [ ] [export]
 	- [ ] [unset]
 	- [x] [env]
-	- [ ] [exit]
+	- [x] [exit]
 - [ ] [create cat, ls, etc. execution]
 - [ ] [further develop ft_exec.c]
 - [x] [Makefile relink check if minishel.exe exists]
