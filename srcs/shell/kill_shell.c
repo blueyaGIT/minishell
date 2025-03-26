@@ -6,21 +6,19 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:21:36 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/25 18:16:18 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/26 14:57:13 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	kill_shell(t_shell *shell, int close_shell)
+int	kill_shell(t_shell *shell, int ecode)
 {
-	dbmsg("Killing Shell");
-	if (shell->cur_dir)
-		free(shell->cur_dir);
-	if (close_shell)
+	if (shell)
 	{
-		rl_clear_history();
-		exit(shell->last_exitcode);
+		if (shell->command_ll && shell->command_ll->io)
+			kill_fds(shell->command_ll, true);
+		ft_free_shell(shell);
 	}
-	return (shell->last_exitcode);
+	exit(ecode);
 }

@@ -7,8 +7,8 @@ typedef enum e_token_type
 {
 	WORD,         //0
 	PIPE,         //1
-	REDIR_IN,    //2
-	REDIR_OUT,   //3
+	REDIR_IN,     //2
+	REDIR_OUT,    //3
 	HEREDOC,      //4
 	APPEND,       //5
 	DOUBLEQUOTED, //6
@@ -39,12 +39,12 @@ typedef struct s_token
 
 typedef struct s_mini
 {
-	char *input;
-	char **tokens;
-	char **env;
-	t_node *node;
-	t_list *list;
-} t_mini;
+	char				*input;
+	char				**tokens;
+	char				**env;
+	t_node				*node;
+	t_list				*list;
+}						t_mini;
 
 /**
  * typedef struct s_token
@@ -62,10 +62,10 @@ typedef struct s_mini
 
 typedef struct s_redir
 {
-	char				*infile; //gleiche wie type=redir_IN | Wenn in t_token type=redir_IN -> token_value hier reinschreiben
-	char				*outfile; //gleiche nur mit redir_OUT
-	char				*hrd_sep; //token_value -> hierrein (">>") + hrd_flag = true
-	bool				hrd_flag; //sagt wenn heredoc vorhanden 
+	char *infile;  //gleiche wie type=redir_IN | Wenn in t_token type=redir_IN -> token_value hier reinschreiben
+	char *outfile; //gleiche nur mit redir_OUT
+	char *hrd_sep; //token_value -> hierrein (">>") + hrd_flag = true
+	bool hrd_flag; //sagt wenn heredoc vorhanden
 	int					fd_in;
 	int					fd_out;
 	int					stdin_backup;
@@ -74,12 +74,12 @@ typedef struct s_redir
 
 typedef struct s_command
 {
-	char				*command; //der command als string ("echo")
-	char				*filename; //der Dateiname as string ("test.txt")
-	char				**args; //die Argumente fuer *command ({"-1", "-a", ...})
-	bool				pipe_flag; //wenn | dann flag auf true
-	int					*pipe_fd; //ignorieren, wird von marzia gesetzt
-	t_redir				*io; // io_file, heredoc hier drinnen
+	char *command;  //der command als string ("echo")
+	char *filename; //der Dateiname as string ("test.txt")
+	char **args;    //die Argumente fuer *command ({"-1", "-a", ...})
+	bool pipe_flag; //wenn | dann flag auf true
+	int *pipe_fd;   //ignorieren, wird von marzia gesetzt
+	t_redir *io;    // io_file, heredoc hier drinnen
 	struct s_command	*next;
 	struct s_command	*prev;
 }						t_command;
@@ -103,5 +103,6 @@ int						kill_shell(t_shell *shell, int close_shell);
 void					refresh_shell(t_shell *shell);
 void					ft_free_node(t_node **lst, void (*del)(void *));
 void					ft_free_token(t_token **lst, void (*del)(void *));
+void					ft_free_shell(t_shell *shell);
 
 #endif /* SHELL_H */

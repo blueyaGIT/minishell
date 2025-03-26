@@ -70,7 +70,8 @@ SRCS	+=	create_token.c \
 			token_to_list.c \
 
 # PIPES
-SRCS	+=	pipes_init.c \
+SRCS	+=	kill_pipes.c \
+			pipes_init.c \
 			refresh_pipes.c \
 
 # IO
@@ -88,11 +89,11 @@ SRCS	+=	init_signals.c \
 
 # UTILS
 SRCS	+=	file_extractor.c \
+			free.c \
 			print_logo.c \
 
 # DEBUG
-SRCS	+=	msg.c \
-			print_shell.c \
+SRCS	+=	print_shell.c \
 
 # Object files
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
