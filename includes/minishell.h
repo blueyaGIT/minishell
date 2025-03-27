@@ -47,8 +47,6 @@ extern volatile sig_atomic_t	g_sig;
 # include "env.h"
 # include "exec.h"
 # include "utils.h"
-// # include "history.h"
-// # include "gcollector.h"
 
 /* READLINE INCLUDES */
 # include <readline/history.h>
