@@ -64,8 +64,8 @@ typedef struct s_redir
 {
 	char *infile;  //gleiche wie type=redir_IN | Wenn in t_token type=redir_IN -> token_value hier reinschreiben
 	char *outfile; //gleiche nur mit redir_OUT
-	char *hrd_sep; //token_value -> hierrein (">>") + hrd_flag = true
-	bool hrd_flag; //sagt wenn heredoc vorhanden
+	char *hrd_sep; //token_value -> hierrein (">>")
+	bool hrd_flag; //wenn heredoc vorhanden true
 	int					fd_in;
 	int					fd_out;
 	int					stdin_backup;
