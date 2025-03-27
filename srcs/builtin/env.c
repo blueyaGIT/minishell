@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 18:04:50 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/25 18:22:01 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/27 14:27:52 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	exec_env(t_shell *shell, char **args)
 
 	i = 0;
 	if (args && args[1])
-		return (printf(RED"ERROR: TOO MANY ARGUMENTS\n"RESET), 3);
+		return (printf(RED"ERROR: TOO MANY ARGUMENTS\n"RESET), 2);
 	if (!shell->env)
-		return (printf(RED"ERROR: ENV NOT FOUND\n"RESET), 3);
+		return (printf(RED"ERROR: ENV NOT FOUND\n"RESET), 1);
 	while (shell->env[i])
 		ft_putendl_fd(shell->env[i++], STDOUT_FILENO);
 	return (EXIT_SUCCESS);

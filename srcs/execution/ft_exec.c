@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:00:12 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/26 14:58:39 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/27 14:24:59 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // {
 // 	int	temp;
 
-// 	temp = 2;
+// 	temp = 127;
 // 	if (ft_strncmp(instr->command, "cd", 3))
 // 		temp = exec_cd(shell, instr->args);
 // 	else if (ft_strncmp(instr->command, "echo", 5))
@@ -31,6 +31,7 @@
 // 		temp = exec_env(shell, instr->args);
 // 	else if (ft_strncmp(instr->command, "exit", 5))
 // 		temp = exec_exit(shell, instr->args);
+// 	shell->last_exitcode = temp;
 // 	return (temp);
 // }
 
@@ -46,7 +47,7 @@
 // 	}
 // 	if (!pipes_init(shell))
 // 		return (EXIT_FAILURE);
-// 	return (2);
+// 	return (127);
 // }
 
 // int	ft_exec(t_shell *shell)
@@ -54,7 +55,7 @@
 // 	int	temp;
 
 // 	temp = check_data(shell);
-// 	if (temp != 2)
+// 	if (temp != 127)
 // 		return (temp);
 // 	if (!shell->command_ll->pipe_flag && !shell->command_ll->prev && !check_io(shell->command_ll->io, false))
 // 	{
@@ -62,7 +63,7 @@
 // 		temp = exec_builtin(shell, shell->command_ll);
 // 		refresh_io(shell->command_ll->io);
 // 	}
-// 	if (temp != 2)
+// 	if (temp != 127)
 // 		return (temp);
 // 	return (make_children(shell));
 // }

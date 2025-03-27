@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 18:01:56 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/26 14:53:22 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/27 14:22:04 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,9 @@ int	exec_exit(t_shell *shell, char **args)
 	{
 		ecode = get_ecode(args[1], &temp);
 		if (temp)
-		{
-			ft_putendl_fd("numeric argument required", 2);
-			return (kill_shell(shell, 255), 255);
-		}
+			return (ft_putendl_fd("numeric argument required", 2), kill_shell(shell, 255), 255);
 		else if (args[2])
-		{
-			ft_putendl_fd("too many arguments", 2);
-			return (1);
-		}
+			return (ft_putendl_fd("too many arguments", 2), 1);
 	}
 	return (kill_shell(shell, ecode), ecode);
 }

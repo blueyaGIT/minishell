@@ -66,10 +66,10 @@ typedef struct s_redir
 	char *outfile; //gleiche nur mit redir_OUT
 	char *hrd_sep; //token_value -> hierrein (">>")
 	bool hrd_flag; //wenn heredoc vorhanden true
-	int					fd_in;
-	int					fd_out;
-	int					stdin_backup;
-	int					stdout_backup;
+	int					fd_in; // ignorieren
+	int					fd_out; // ignorieren
+	int					stdin_backup; // ignorieren
+	int					stdout_backup; // ignorieren
 }						t_redir;
 
 typedef struct s_command
