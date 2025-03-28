@@ -21,11 +21,38 @@ only exampel for how we can sort the tokens in the list nothing in ore decided f
 */
 typedef struct s_node
 {
+	char *command;
 	char *args;
 	char **filename;
 	char **redirections;
 	struct s_node *next;
 } t_node;
+
+
+//neuer Struct für command 
+typedef struct s_redir
+{
+	char *infile;  //gleiche wie type=redir_IN | Wenn in t_token type=redir_IN -> token_value hier reinschreiben
+	char *outfile; //gleiche nur mit redir_OUT
+	char *hrd_sep; //token_value -> hierrein (">>")
+	bool hrd_flag; //wenn heredoc vorhanden true
+	int					fd_in; // ignorieren
+	int					fd_out; // ignorieren
+	int					stdin_backup; // ignorieren
+	int					stdout_backup; // ignorieren
+}						t_redir;
+
+typedef struct s_command
+{
+	char *command;  //der command als string ("echo")
+	char *filename; //der Dateiname as string ("test.txt")
+	char **args;    //die Argumente fuer *command ({"-1", "-a", ...})
+	bool pipe_flag; //wenn | dann flag auf true
+	int *pipe_fd;   //ignorieren, wird von marzia gesetzt
+	t_redir *io;    // io_file, heredoc hier drinnen
+	struct s_command	*next;
+	struct s_command	*prev;
+}	t_command;
 
 /*
 token value == the string witch is teh token
@@ -38,75 +65,15 @@ typedef struct s_token
 	struct s_token *next;
 }	t_token;
 
-/*
-input = the input from readline function
-tokens = string with has all token strings inside
-node = shoulde be int the future the node prom pipe to pipe
-list = is the struct from libft with this i can use the ft_lstadd_back and the ft_lstnew function from libft
-*/
-typedef struct s_mini
-{
-	char *input;
-	char **tokens;
-	char **env;
-	t_node *node;
-	t_list *list;
-} t_mini;
-
-/**
- * typedef struct s_token
-{
-	char			*input;
-	char			*input_backup;
-	bool			var_check;
-	int				type;
-	int				status;
-	bool			joined;
-	struct s_token	*prev;
-	struct s_token	*next;
-}					t_token;
-
-typedef struct s_redir
-{
-	char			*infile;
-	char			*outfile;
-	char			*heredoc_delimiter;
-	bool			heredoc_quotes;
-	int				fd_in;
-	int				fd_out;
-	int				stdin_backup;
-	int				stdout_backup;
-}					t_redir;
-
-typedef struct s_cmd
-{
-	char			*cmd;
-	char			*cmd_path;
-	char			**args_list;
-	bool			if_pipe;
-	int				*pipe_fd;
-	t_redir			*io;
-	struct s_cmd	*next;
-	struct s_cmd	*prev;
-}					t_cmd;
- */
-// alter struct
-// typedef struct s_mini
-// {
-// 	char *input;
-// 	char **tokens;
-// 	char **env;
-// 	t_node *node;
-// 	t_list *list;
-// } t_mini;
 
 typedef struct s_shell
 {
 	char	*input;
-	char	**tokens; //neu
+	char	**tokens; 
 	char	**env;
 	t_node *node;
 	t_list *list;
+	t_command *cmd_list;
 
 	char	*cur_dir;
 	char	*old_dir;

@@ -43,29 +43,12 @@ void	convert_tokens(t_shell *shell)
 	}
 }
 
-// char **ft_add_to_array(char **array, char *new_entry)
-// {
-//     int len = 0;
-//     char **new_array;
-
-//     while (array && array[len])
-//         len++;
-//     new_array = malloc((len + 2) * sizeof(char *));
-//     if (!new_array)
-//         return NULL;
-//     if (array)
-//         memcpy(new_array, array, len * sizeof(char *));
-//     new_array[len] = strdup(new_entry);
-//     new_array[len + 1] = NULL;
-//     free(array);
-//     return new_array;
-// }
-
 t_node *create_new_node(void)
 {
     t_node *new_node = malloc(sizeof(t_node));
     if (!new_node)
         return NULL;
+    new_node->command = NULL;
     new_node->args = NULL;
     new_node->filename = NULL;
     new_node->redirections = NULL;
@@ -100,30 +83,34 @@ int is_operator(char *token_value)
     return 0;
 }
 
+
+
 void process_word_token(t_node *new_node, t_list **token_lst, bool *prev_was_redirect)
 {
     t_token *token = (t_token *)(*token_lst)->content;
 
-    // 1. Argument speichern
-    if (!new_node->args)
-        new_node->args = strdup(token->token_value);
-    else
-    {
-        char *temp = ft_strjoin(new_node->args, " ");
-        free(new_node->args);
-        new_node->args = ft_strjoin(temp, token->token_value);
-        free(temp);
-    }
-
-    // 2. Falls vorher ein Redirect war, speichere als Dateiname
+    // Falls vorher ein Redirect war, speichere als Dateiname
     if (*prev_was_redirect)
     {
         new_node->filename = ft_add_to_array(new_node->filename, token->token_value);
+        *prev_was_redirect = false;
     }
-
-    // 3. Merken, ob dieser Token ein Redirect ist
-    *prev_was_redirect = is_operator(token->token_value);
-
+    else if (!new_node->command) // Falls noch kein command gesetzt wurde
+    {
+        new_node->command = strdup(token->token_value);
+    }
+    else // Falls command schon gesetzt wurde, speichere in args
+    {
+        if (!new_node->args)
+            new_node->args = strdup(token->token_value);
+        else
+        {
+            char *temp = ft_strjoin(new_node->args, " ");
+            free(new_node->args);
+            new_node->args = ft_strjoin(temp, token->token_value);
+            free(temp);
+        }
+    }
     *token_lst = (*token_lst)->next;
 }
 
@@ -166,7 +153,7 @@ t_node *parse_tokens(t_list **token_lst)
     if (!new_node)
         return NULL;
 
-    bool prev_was_redirect = false; // 🟢 Merkt sich, ob der vorherige Token ein Redirect war
+    bool prev_was_redirect = false; // Merkt sich, ob der vorherige Token ein Redirect war
 
     while (*token_lst && ((t_token *)(*token_lst)->content)->type != PIPE)
     {
@@ -176,12 +163,12 @@ t_node *parse_tokens(t_list **token_lst)
         else if (token->type == REDIR_IN || token->type == REDIR_OUT || token->type == HEREDOC || token->type == APPEND)
         {
             process_redirection_token(new_node, token_lst);
-            prev_was_redirect = true;  // 🟢 Nach einem Redirect merken wir uns das
+            prev_was_redirect = true;  //  Nach einem Redirect merken wir uns das
         }
         else
         {
             *token_lst = (*token_lst)->next;
-            prev_was_redirect = false; // 🟢 Falls etwas anderes kommt, zurücksetzen
+            prev_was_redirect = false; // Falls etwas anderes kommt, zurücksetzen
         }
     }
     return new_node;
@@ -217,6 +204,7 @@ void print_node_list(t_node *node_list)
     while (current)
     {
         printf("Node %d:\n", index);
+        printf(" command: %s \n", current->command);
         printf("  args: %s\n", current->args ? current->args : "NULL");
         printf("  filename: ");
         if (current->filename)
@@ -251,5 +239,200 @@ void print_node_list(t_node *node_list)
 
         current = current->next;
         index++;
+    }
+}
+
+int count_words(const char *str)
+{
+	int count;
+	int in_word;
+
+	count = 0;
+	in_word = 0;
+	while (*str)
+	{
+		if (*str != ' ' && in_word == 0)
+		{
+			in_word = 1;
+			count++;
+		}
+		else if (*str == ' ')
+			in_word = 0;
+		str++;
+	}
+	return count;
+}
+
+
+void init_command_fields(t_command *cmd, t_node *node)
+{
+	cmd->command = NULL;
+	cmd->filename = NULL;
+	if (node->command)
+		cmd->command = ft_strdup(node->command);
+	if (node->filename && node->filename[0])
+		cmd->filename = ft_strdup(node->filename[0]);
+	cmd->args = split_args(node->args);
+	cmd->io->infile = NULL;
+	cmd->io->outfile = NULL;
+	cmd->io->hrd_sep = NULL;
+	cmd->io->hrd_flag = false;
+}
+void fill_redirections(t_command *cmd, t_node *node)
+{
+	int i;
+	i = 0;
+	while (node && node->redirections && node->redirections[i])
+	{
+		printf("DEBUG: i = %d\n", i);
+		printf("  redirection = %s\n", node->redirections[i]);
+
+		if (node->filename && node->filename[i])
+			printf("  filename[%d] = %s\n", i, node->filename[i]);
+		else
+			printf("  filename[%d] = NULL\n", i);
+
+		if (ft_strcmp(node->redirections[i], "<") == 0)
+		{
+			if (node->filename && node->filename[i])
+				cmd->io->infile = ft_strdup(node->filename[i]);
+		}
+		else if ((ft_strcmp(node->redirections[i], ">") == 0
+			|| ft_strcmp(node->redirections[i], ">>") == 0))
+		{
+			if (node->filename && node->filename[i])
+				cmd->io->outfile = ft_strdup(node->filename[i]);
+		}
+		else if (ft_strcmp(node->redirections[i], "<<") == 0)
+		{
+			if (node->filename && node->filename[i])
+			{
+				cmd->io->hrd_sep = ft_strdup(node->filename[i]);
+				cmd->io->hrd_flag = true;
+			}
+		}
+		i++;
+	}
+}
+
+t_command *convert_node_list_to_command_list(t_node *node)
+{
+	t_command *head;
+	t_command *prev;
+	t_command *curr;
+
+	head = NULL;
+	prev = NULL;
+	while (node)
+	{
+		curr = malloc(sizeof(t_command));
+		if (!curr)
+		{
+			printf("malloc für t_command fehlgeschlagen!\n");
+			return NULL;
+		}
+		curr->io = malloc(sizeof(t_redir));
+		if (!curr->io)
+		{
+			free(curr);
+			printf("malloc für t_redir fehlgeschlagen!\n");
+			return NULL;
+		}
+		curr->command = NULL;
+		curr->filename = NULL;
+		curr->args = NULL;
+		curr->pipe_flag = false;
+		curr->next = NULL;
+		curr->prev = prev;
+		curr->io->infile = NULL;
+		curr->io->outfile = NULL;
+		curr->io->hrd_sep = NULL;
+		curr->io->hrd_flag = false;
+		if (node->command)
+			curr->command = ft_strdup(node->command);
+		if (node->filename && node->filename[0])
+			curr->filename = ft_strdup(node->filename[0]);
+		if (node->args)
+			curr->args = split_args(node->args);
+		fill_redirections(curr, node);
+		if (node->next)
+			curr->pipe_flag = true;
+		if (prev)
+			prev->next = curr;
+		else
+			head = curr;
+
+		prev = curr;
+		node = node->next;
+	}
+	return head;
+}
+
+char **split_args(char *args)
+{
+	char **res;
+	int i;
+	int p;
+	int s;
+
+	i = 0;
+	p = 0;
+	res = malloc(sizeof(char *) * (count_words(args) + 1));
+	if (!res)
+		return NULL;
+	while (args[p])
+	{
+		while (args[p] == ' ')
+			p++;
+		if (args[p])
+		{
+			s = p;
+			while (args[p] && args[p] != ' ')
+				p++;
+			res[i] = ft_substr(args, s, p - s);
+			i++;
+		}
+	}
+	res[i] = NULL;
+	return res;
+}
+
+
+void print_command_list(t_command *cmd_list)
+{
+    int i = 0;
+    while (cmd_list)
+    {
+        printf("┌───────────────────────────┐\n");
+        printf("│      Command Node %d       │\n", i);
+        printf("├───────────────────────────┤\n");
+        printf("│ command:     %s\n", cmd_list->command ? cmd_list->command : "NULL");
+        printf("│ filename:    %s\n", cmd_list->filename ? cmd_list->filename : "NULL");
+
+        printf("│ args:        ");
+        if (cmd_list->args)
+        {
+            int j = 0;
+            while (cmd_list->args[j])
+            {
+                printf("%s ", cmd_list->args[j]);
+                j++;
+            }
+            printf("\n");
+        }
+        else
+            printf("NULL\n");
+
+        printf("│ infile:      %s\n", cmd_list->io->infile ? cmd_list->io->infile : "NULL");
+        printf("│ outfile:     %s\n", cmd_list->io->outfile ? cmd_list->io->outfile : "NULL");
+        printf("│ hrd_sep:     %s\n", cmd_list->io->hrd_sep ? cmd_list->io->hrd_sep : "NULL");
+        printf("│ hrd_flag:    %s\n", cmd_list->io->hrd_flag ? "true" : "false");
+        printf("│ pipe_flag:   %s\n", cmd_list->pipe_flag ? "true" : "false");
+        printf("│ prev:        %p\n", (void *)cmd_list->prev);
+        printf("│ next:        %p\n", (void *)cmd_list->next);
+        printf("└───────────────────────────┘\n\n");
+
+        cmd_list = cmd_list->next;
+        i++;
     }
 }

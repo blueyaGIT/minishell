@@ -128,28 +128,39 @@ int handle_syntax_and_exit(t_shell *shell)
     }
     return 0;
 }
-
-
-void execute_commands( t_shell *shell, int syntax_result)
+void execute_commands(t_shell *shell)
 {
-    if (syntax_result != 0)
-    {
-        set_exit_code(shell, 1); // Fehler 1, wenn Syntaxfehler
-    }
-    else
-    {
-        // Setze den Exit-Code nur auf 0, wenn keine Fehler aufgetreten sind
-        if (shell->lastexitcode != 1 && shell->lastexitcode != 2)
-        {
-            set_exit_code(shell, 0);
-        }
-    }
-    build_parsing_nodes(shell);
-    print_node_list(shell->node);
-    ft_lstfree(shell->list);
-    shell->list = NULL;
-    free(shell->input);
+	build_parsing_nodes(shell); // Erstellt shell->node wie bisher
+
+	print_node_list(shell->node); // Debug: Alt
+	shell->cmd_list = convert_node_list_to_command_list(shell->node);
+	print_command_list(shell->cmd_list);
+	ft_lstfree(shell->list);
+	shell->list = NULL;
+	free(shell->input);
 }
+
+
+// void execute_commands( t_shell *shell, int syntax_result)
+// {
+//     if (syntax_result != 0)
+//     {
+//         set_exit_code(shell, 1); // Fehler 1, wenn Syntaxfehler
+//     }
+//     else
+//     {
+//         // Setze den Exit-Code nur auf 0, wenn keine Fehler aufgetreten sind
+//         if (shell->lastexitcode != 1 && shell->lastexitcode != 2)
+//         {
+//             set_exit_code(shell, 0);
+//         }
+//     }
+//     build_parsing_nodes(shell);
+//     print_node_list(shell->node);
+//     ft_lstfree(shell->list);
+//     shell->list = NULL;
+//     free(shell->input);
+// }
 
 int main(int argc, char *argv[], char **envp)
 {
@@ -167,7 +178,7 @@ int main(int argc, char *argv[], char **envp)
         process_input( &shell);
         if (handle_syntax_and_exit(&shell))
             break;
-        execute_commands( &shell, 0);
+        execute_commands( &shell);
     }
     
     ft_free_arr(shell.env);

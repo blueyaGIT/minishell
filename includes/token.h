@@ -19,4 +19,10 @@ void			print_node_list(t_node *node_list);
 char **ft_add_to_array(char **array, char *new_entry);
 int is_operator(char *token_value);
 int is_known_command(char *token_value);
+t_command *convert_node_list_to_command_list(t_node *node);
+void fill_redirections(t_command *cmd, t_node *node);
+void init_command_fields(t_command *cmd, t_node *node);
+char **split_args(char *args);
+void print_command_list(t_command *cmd_list);
+int count_words(const char *str);
 #endif /* TOKEN_H */
