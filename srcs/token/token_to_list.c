@@ -327,15 +327,11 @@ t_command *convert_node_list_to_command_list(t_node *node)
 	{
 		curr = malloc(sizeof(t_command));
 		if (!curr)
-		{
-			printf("malloc für t_command fehlgeschlagen!\n");
 			return NULL;
-		}
 		curr->io = malloc(sizeof(t_redir));
 		if (!curr->io)
 		{
 			free(curr);
-			printf("malloc für t_redir fehlgeschlagen!\n");
 			return NULL;
 		}
 		curr->command = NULL;
@@ -361,7 +357,6 @@ t_command *convert_node_list_to_command_list(t_node *node)
 			prev->next = curr;
 		else
 			head = curr;
-
 		prev = curr;
 		node = node->next;
 	}

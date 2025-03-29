@@ -82,7 +82,6 @@ typedef struct s_shell
 	char	*history_file;
 	bool	has_error;
 	int		last_exitcode;
-	int		lastexitcode;
 }			t_shell;
 
 bool		shell_init(t_shell *shell, char **envp);
