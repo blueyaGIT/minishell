@@ -17,7 +17,7 @@
 # include <stdbool.h>
 # include <errno.h>
 
-extern volatile sig_atomic_t	g_sig;
+extern volatile sig_atomic_t	g_ecode;
 
 # define TEST printf
 

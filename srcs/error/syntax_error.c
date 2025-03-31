@@ -121,4 +121,3 @@ int run_syntax_checks(t_shell *shell)
 
 	return 0;
 }
-

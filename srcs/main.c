@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-volatile sig_atomic_t g_sig = 0;
+volatile sig_atomic_t g_ecode = 0;
 
 // static bool	empty_input(char *temp)
 // {
@@ -61,9 +61,9 @@ int main(int argc, char *argv[], char **envp)
 		// if (ft_strcmp(shell.input, "./minishell") == 0)
 		// 	check_shlvl(&shell);
 		// if (check_input(&shell))
-		// 	g_sig = ft_exec(&shell);
+		// 	g_ecode = ft_exec(&shell);
 		// else
-		// 	g_sig = 1;
+		// 	g_ecode = 1;
 		refresh_shell(&shell);
 	}
 	kill_shell(&shell, 1);

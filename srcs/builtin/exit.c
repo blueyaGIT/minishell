@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 18:01:56 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/31 15:02:47 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/31 15:33:05 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	get_ecode(char *param, bool *temp)
 
 	i = 0;
 	if (!param)
-		return (g_sig);
+		return (g_ecode);
 	while (ft_isspace(param[i]))
 		i++;
 	if (param[i] == '\0')
@@ -57,7 +57,7 @@ int	exec_exit(t_shell *shell, char **args)
 	if (check_commands(shell))
 		ft_putendl_fd("exit", 2);
 	if (!args || !args[1])
-		ecode = g_sig;
+		ecode = g_ecode;
 	else
 	{
 		ecode = get_ecode(args[1], &temp);
