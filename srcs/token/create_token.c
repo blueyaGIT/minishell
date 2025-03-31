@@ -47,15 +47,15 @@ char	*create_word_token(char **start)
 	return (token);
 }
 
-char	**create_token(t_mini mini)
+char	**create_token(t_shell shell)
 {
 	int		num;
 	char	*start;
 
 	num = 0;
-	start = mini.input;
-	mini.tokens = malloc(sizeof(char *) * ft_strlen(start));
-	if (!mini.tokens)
+	start = shell.input;
+	shell.tokens = malloc(sizeof(char *) * ft_strlen(start));
+	if (!shell.tokens)
 		return (NULL);
 	while (*start)
 	{
@@ -64,22 +64,22 @@ char	**create_token(t_mini mini)
 		if (!*start)
 			break ;
 		if (*start == '"' || *start == '\'')
-			mini.tokens[num++] = create_quote_token(&start);
+			shell.tokens[num++] = create_quote_token(&start);
 		else if ((*start == '<' && start[1] == '<') || (*start == '>'
 				&& start[1] == '>'))
 		{
-			mini.tokens[num++] = ft_strndup(start, 2);
+			shell.tokens[num++] = ft_strndup(start, 2);
 			start += 2;
 		}
 		else if (*start == '|' || *start == '<' || *start == '>')
 		{
-			mini.tokens[num++] = ft_strndup(start, 1);
+			shell.tokens[num++] = ft_strndup(start, 1);
 			start++;
 		}
 		else
-			mini.tokens[num++] = create_word_token(&start);
+			shell.tokens[num++] = create_word_token(&start);
 	}
-	return (mini.tokens[num] = NULL, mini.tokens);
+	return (shell.tokens[num] = NULL, shell.tokens);
 }
 
 

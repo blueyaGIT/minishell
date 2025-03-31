@@ -3,8 +3,8 @@
 
 # include "minishell.h"
 
-char	*replace_env_var(char *input, char **env, int last_exitcode);
+char	*replace_env_var(char *input, char **env, int lastexitcode);
 char	*extract_var_name(char *input);
-char	*expand_variables(char *input, char **env, int last_exitcode);
+char	*expand_variables(char *input, char **env, int lastexitcode);
 
 #endif /* EXPANDER_H */

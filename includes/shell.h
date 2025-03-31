@@ -20,56 +20,24 @@ only exampel for how we can sort the tokens in the list nothing in ore decided f
 */
 typedef struct s_node
 {
+	char				*command;
 	char				*args;
 	char				**filename;
 	char				**redirections;
 	struct s_node		*next;
 }						t_node;
 
-/*
-token value == the string witch is teh token
-type == ENUM Value
-*/
-typedef struct s_token
-{
-	char				*token_value;
-	t_token_type		type;
-	struct s_token		*next;
-}						t_token;
-
-typedef struct s_mini
-{
-	char				*input;
-	char				**tokens;
-	char				**env;
-	t_node				*node;
-	t_list				*list;
-}						t_mini;
-
-/**
- * typedef struct s_token
-{
-	char			*input;
-	char			*input_backup;
-	bool			var_check;
-	int				type;
-	int				status;
-	bool			joined;
-	struct s_token	*prev;
-	struct s_token	*next;
-}						t_token;
-*/
-
+//neuer Struct für command
 typedef struct s_redir
 {
-	char *infile;  //gleiche wie type=redir_IN | Wenn in t_token type=redir_IN -> token_value hier reinschreiben
-	char *outfile; //gleiche nur mit redir_OUT
-	char *hrd_sep; //token_value -> hierrein (">>")
-	bool hrd_flag; //wenn heredoc vorhanden true
-	int					fd_in; // ignorieren
-	int					fd_out; // ignorieren
-	int					stdin_backup; // ignorieren
-	int					stdout_backup; // ignorieren
+	char *infile;      //gleiche wie type=redir_IN | Wenn in t_token type=redir_IN -> token_value hier reinschreiben
+	char *outfile;     //gleiche nur mit redir_OUT
+	char *hrd_sep;     //token_value -> hierrein (">>")
+	bool hrd_flag;     //wenn heredoc vorhanden true
+	int fd_in;         // ignorieren
+	int fd_out;        // ignorieren
+	int stdin_backup;  // ignorieren
+	int stdout_backup; // ignorieren
 }						t_redir;
 
 typedef struct s_command
@@ -84,10 +52,25 @@ typedef struct s_command
 	struct s_command	*prev;
 }						t_command;
 
+/*
+token value == the string witch is teh token
+type == ENUM Value
+*/
+typedef struct s_token
+{
+	char				*token_value;
+	t_token_type		type;
+	struct s_token		*next;
+}						t_token;
+
 typedef struct s_shell
 {
 	char				*input;
+	char				**tokens;
 	char				**env;
+	t_node				*node;
+	t_list				*list;
+	t_command			*cmd_list;
 	char				*cur_dir;
 	char				*old_dir;
 	bool				has_error;
