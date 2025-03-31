@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:00:12 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/27 14:24:59 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/31 15:02:47 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@
 
 // static int	check_data(t_shell *shell)
 // {
-// 	if (!shell || !shell->command_ll)
+// 	if (!shell || !shell->cmd_list)
 // 		return (EXIT_SUCCESS);
-// 	if (!shell->command_ll->command)
+// 	if (!shell->cmd_list->command)
 // 	{
-// 		if (shell->command_ll->io && !check_io(shell->command_ll->io, true))
+// 		if (shell->cmd_list->io && !check_io(shell->cmd_list->io, true))
 // 			return (EXIT_FAILURE);
 // 		return (EXIT_SUCCESS);
 // 	}
@@ -57,11 +57,11 @@
 // 	temp = check_data(shell);
 // 	if (temp != 127)
 // 		return (temp);
-// 	if (!shell->command_ll->pipe_flag && !shell->command_ll->prev && !check_io(shell->command_ll->io, false))
+// 	if (!shell->cmd_list->pipe_flag && !shell->cmd_list->prev && !check_io(shell->cmd_list->io, false))
 // 	{
-// 		refresh_pipes(shell->command_ll->io);
-// 		temp = exec_builtin(shell, shell->command_ll);
-// 		refresh_io(shell->command_ll->io);
+// 		refresh_pipes(shell->cmd_list->io);
+// 		temp = exec_builtin(shell, shell->cmd_list);
+// 		refresh_io(shell->cmd_list->io);
 // 	}
 // 	if (temp != 127)
 // 		return (temp);

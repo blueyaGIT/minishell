@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 18:01:56 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/27 14:22:04 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/03/31 15:02:47 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static bool	check_commands(t_shell *shell)
 {
 	t_command *temp;
 
-	temp = shell->command_ll;
+	temp = shell->cmd_list;
 	if (!temp)
 		return (true);
 	if (temp->next != NULL || temp->prev != NULL)

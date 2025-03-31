@@ -75,8 +75,6 @@ typedef struct s_shell
 	char				*old_dir;
 	bool				has_error;
 	int					last_exitcode;
-	t_token				*token_ll;
-	t_command			*command_ll;
 	pid_t				pid;
 }						t_shell;
 
