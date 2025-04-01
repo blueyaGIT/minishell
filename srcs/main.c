@@ -35,7 +35,7 @@ int main(int argc, char *argv[], char **envp)
 		shell.input = readline(PROMPT);
 		refresh_signals();
 		if (!shell.input)
-			break;
+			break ;
 		if (ft_strcmp(shell.input, "./minishell") == 0)
 			check_shlvl(&shell);
 		if (check_input(&shell))
