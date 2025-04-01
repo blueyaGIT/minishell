@@ -57,7 +57,9 @@ SRCS	+=	env_copy.c \
 			set_env_var.c \
 
 # EXECUTION
-SRCS	+=	ft_exec.c \
+SRCS	+=	bin.c \
+			children.c \
+			ft_exec.c \
 
 # EXPANDER
 SRCS	+=	expand_var.c \
@@ -92,6 +94,7 @@ SRCS	+=	file_extractor.c \
 			free.c \
 			parser_helper.c \
 			print_logo.c \
+			sys_path_extractor.c \
 
 # DEBUG
 SRCS	+=	print_shell.c \

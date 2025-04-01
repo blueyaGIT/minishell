@@ -10,5 +10,6 @@ void	ft_free_io(t_redir *io);
 void	process_input(t_shell *shell);
 void	handle_syntax_and_exit(t_shell *shell);
 void	execute_commands(t_shell *shell);
+char	*find_command_path(t_shell *shell, char *cmd);
 
 #endif /* UTILS_H */

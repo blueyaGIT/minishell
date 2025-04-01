@@ -43,6 +43,7 @@ typedef struct s_redir
 typedef struct s_command
 {
 	char *command;  //der command als string ("echo")
+	char *cpath;
 	char *filename; //der Dateiname as string ("test.txt")
 	char **args;    //die Argumente fuer *command ({"-1", "-a", ...})
 	bool pipe_flag; //wenn | dann flag auf true
@@ -80,7 +81,7 @@ typedef struct s_shell
 
 bool					shell_init(t_shell *shell, char **envp);
 t_shell					*get_shell(void);
-int						kill_shell(t_shell *shell, int close_shell);
+int						kill_shell(t_shell *shell, int ecode);
 void					refresh_shell(t_shell *shell);
 void					ft_free_node(t_node **lst, void (*del)(void *));
 void					ft_free_token(t_token **lst, void (*del)(void *));
