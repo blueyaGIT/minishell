@@ -2,16 +2,6 @@
 
 volatile sig_atomic_t g_ecode = 0;
 
-static bool	check_input(t_shell *shell)
-{
-	if (!shell->input)
-		exec_exit(shell, NULL);
-	process_input(shell);
-	handle_syntax_and_exit(shell);
-	execute_commands(shell);
-	return (true);
-}
-
 static void initialize_shell(t_shell *shell, char **argv, char **envp)
 {
 	(void) argv;
@@ -33,15 +23,15 @@ int main(int argc, char *argv[], char **envp)
 	{
 		init_signals();
 		shell.input = readline(PROMPT);
-		refresh_signals();
 		if (!shell.input)
-			break ;
+			break;
+		process_input(&shell);
+		handle_syntax_and_exit(&shell);
+		execute_commands(&shell);
+		refresh_signals();
 		if (ft_strcmp(shell.input, "./minishell") == 0)
 			check_shlvl(&shell);
-		if (check_input(&shell))
-			g_ecode = ft_exec(&shell);
-		else
-			g_ecode = 1;
+		// g_ecode = ft_exec(&shell);
 		refresh_shell(&shell);
 	}
 	kill_shell(&shell, 1);
