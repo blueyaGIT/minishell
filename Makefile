@@ -92,6 +92,7 @@ SRCS	+=	init_signals.c \
 # UTILS
 SRCS	+=	file_extractor.c \
 			free.c \
+			ft_arrcat.c \
 			parser_helper.c \
 			print_logo.c \
 			sys_path_extractor.c \

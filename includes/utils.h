@@ -11,5 +11,6 @@ void	process_input(t_shell *shell);
 void	handle_syntax_and_exit(t_shell *shell);
 void	execute_commands(t_shell *shell);
 char	*find_command_path(t_shell *shell, char *cmd);
+char	**add_str_to_array(char **array, char *str);
 
 #endif /* UTILS_H */
