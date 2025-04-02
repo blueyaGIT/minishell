@@ -12,7 +12,7 @@ static void	initialize_shell(t_shell *shell, char **argv, char **envp)
 	print_shell(shell);
 }
 
-int	main(int argc, char *argv[], char **envp)
+int main(int argc, char *argv[], char **envp)
 {
 	t_shell	shell;
 
