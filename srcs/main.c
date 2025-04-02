@@ -101,12 +101,16 @@ int handle_syntax_and_exit(t_shell *shell)
     printf("Good bye, see you ..\n");
     return 1;
 }
-        shell->tokens = create_token(*shell);
-        printf("Prompt: %s\n", shell->input);
-        convert_tokens(shell);
-        print_token_list(shell->list);
+char *expanded = expand_variables(shell->input, shell->env, shell->last_exitcode);
+free(shell->input);
+shell->input = expanded;
 
-    return 0;
+shell->tokens = create_token(*shell);
+printf("Prompt: %s\n", shell->input);
+convert_tokens(shell);
+print_token_list(shell->list);
+
+return 0;
 }
 void execute_commands(t_shell *shell)
 {
