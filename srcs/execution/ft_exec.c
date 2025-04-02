@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:00:12 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/02 16:31:22 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/02 17:47:49 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	prep_cmd(t_shell *shell, t_command *cmd)
 		ecode = exec_builtin(shell, cmd);
 		if (ecode != 127)
 			kill_shell(shell, ecode);
-		ecode = exec_sys(shell, cmd, cmd->args);
+		ecode = exec_sys(shell, cmd);
 		if (ecode != 127)
 			kill_shell(shell, ecode);
 	}
