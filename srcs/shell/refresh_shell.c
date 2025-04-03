@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 18:35:50 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/03 09:36:59 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/03 11:36:23 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	refresh_shell(t_shell *shell)
 {
 	if (!shell)
 		return ;
-	if (shell->input)
-		ft_free_ptr(shell->input);
+	// if (shell->input)
+	// 	ft_free_ptr(shell->input);
 	// if (shell->token_ll)
 	// 	ft_free_token(&shell->token_ll, &ft_free_ptr);
 }

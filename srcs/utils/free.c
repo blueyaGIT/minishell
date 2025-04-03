@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:48:05 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/26 14:55:22 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/03 11:55:37 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ void	ft_free_io(t_redir *io)
 	if (io->hrd_sep)
 	{
 		unlink(io->infile);
-		ft_free_ptr(io->hrd_sep);
+		// ft_free_ptr(io->hrd_sep);
 	}
-	if (io->infile)
-		ft_free_ptr(io->infile);
-	if (io->outfile)
-		ft_free_ptr(io->outfile);
-	if (io)
-		ft_free_ptr(io);
+	// if (io->infile)
+	// 	ft_free_ptr(io->infile);
+	// if (io->outfile)
+	// 	ft_free_ptr(io->outfile);
+	// if (io)
+	// 	ft_free_ptr(io);
 }
 
 static void	delone_command(t_command *lst, void (*del)(void *))
