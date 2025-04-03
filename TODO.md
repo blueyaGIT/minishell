@@ -16,9 +16,11 @@
 	- [ ] [unset]
 	- [x] [env]
 	- [x] [exit]
-- [ ] [create cat, ls, etc. execution]
-- [ ] [further develop ft_exec.c]
-- [ ] [handle $PATH when env -i ?]
+- [ ] [kill_fds if pipe_flag == true](./srcs/execution/children.c#L43)
+- [ ] [free tokens]
+- [x] [create cat, ls, etc. execution]
+- [x] [further develop ft_exec.c]
+- [x] [handle $PATH when env -i ?]
 - [x] [Makefile relink check if minishel.exe exists]
 - [x] [ensure signal functionality)](./srcs/signals/)
 - [x] [fix memleaks in shell_init]
