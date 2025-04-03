@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 11:01:18 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/03 09:38:10 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/03 09:48:28 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	check_children(t_shell *shell)
  *   - For each command:
  *       - Forks a new process.
  *       - If fork() fails, prints an error message and returns EXIT_FAILURE.
- *       - If in the child process (fork() returns 0), calls execute_command() to execute the command.
+ *       - If in the child process (fork() returns 0), calls prep_cmd() to execute the command.
  * 
  *   - After processing all commands, calls check_children() to wait for all child processes
  *     to finish and to retrieve the final exit status.
