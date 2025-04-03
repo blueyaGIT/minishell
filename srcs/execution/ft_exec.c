@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:00:12 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/03 01:00:06 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/03 14:13:21 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	ft_exec(t_shell *shell)
 	temp = check_data(shell);
 	if (temp != 127)
 		return (temp);
-	if (!shell->cmd_list->pipe_flag && !shell->cmd_list->prev && !check_io(shell->cmd_list->io, false))
+	if (!shell->cmd_list->pipe_flag && !shell->cmd_list->prev)
 	{
 		refresh_pipes(shell->cmd_list->io);
 		temp = exec_builtin(shell, shell->cmd_list);

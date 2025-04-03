@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:46:33 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/03 12:02:34 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/03 14:12:57 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void	ft_free_shell(t_shell *shell)
 {
-	// if (shell && shell->input)
-	// 	ft_free_ptr(shell->input);
+	if (shell && shell->input)
+	{
+		free(shell->input);
+		shell->input = NULL;
+	}
 	// if (shell && shell->token_ll)
 	// 	ft_free_token(&shell->token_ll, &ft_free_ptr);
 	// if (shell && shell->cmd_list)

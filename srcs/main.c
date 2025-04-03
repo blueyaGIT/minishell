@@ -2,11 +2,11 @@
 
 volatile sig_atomic_t	g_ecode = 0;
 
-void leaks(void)
-{
- printf("\n");
- system("leaks minishell");
-}
+// void leaks(void)
+// {
+//  printf("\n");
+//  system("leaks minishell");
+// }
 
 static void	initialize_shell(t_shell *shell, char **argv, char **envp)
 {
@@ -20,7 +20,7 @@ static void	initialize_shell(t_shell *shell, char **argv, char **envp)
 
 int main(int argc, char *argv[], char **envp)
 {
-	atexit(leaks);
+	// atexit(leaks);
 	t_shell	shell;
 
 	if (argc != 1)

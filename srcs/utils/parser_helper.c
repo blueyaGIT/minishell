@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 15:04:44 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/02 15:40:45 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/03 14:14:24 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ void	execute_commands(t_shell *shell)
 	print_command_list(shell->cmd_list);
 	ft_lstfree(shell->list);
 	shell->list = NULL;
-	free(shell->input);
+	// free(shell->input);
 }
