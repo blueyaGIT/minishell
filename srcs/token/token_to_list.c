@@ -33,7 +33,7 @@ void	convert_tokens(t_shell *shell)
 	i = 0;
 	while (shell->tokens[i])
 	{
-		tmp_token = malloc(sizeof(t_token));
+		tmp_token = ft_calloc(sizeof(t_token), 1);
 		if (!tmp_token)
 			return ;
 		tmp_token->token_value = shell->tokens[i];
@@ -45,7 +45,7 @@ void	convert_tokens(t_shell *shell)
 
 t_node *create_new_node(void)
 {
-    t_node *new_node = malloc(sizeof(t_node));
+    t_node *new_node = ft_calloc(sizeof(t_node), 1);
     if (!new_node)
         return NULL;
     new_node->command = NULL;
@@ -121,7 +121,7 @@ char **ft_add_to_array(char **array, char *new_entry)
     char **new_array;
     while (array && array[len])
         len++;
-    new_array = malloc((len + 2) * sizeof(char *));
+    new_array = ft_calloc((len + 2), sizeof(char *));
     if (!new_array)
         return NULL;
     if (array)
@@ -325,10 +325,10 @@ t_command *convert_node_list_to_command_list(t_node *node)
 	prev = NULL;
 	while (node)
 	{
-		curr = malloc(sizeof(t_command));
+		curr = ft_calloc(sizeof(t_command), 1);
 		if (!curr)
 			return NULL;
-		curr->io = malloc(sizeof(t_redir));
+		curr->io = ft_calloc(sizeof(t_redir), 1);
 		if (!curr->io)
 		{
 			free(curr);
@@ -372,7 +372,7 @@ char **split_args(char *args)
 
 	i = 0;
 	p = 0;
-	res = malloc(sizeof(char *) * (count_words(args) + 1));
+	res = ft_calloc(sizeof(char *), (count_words(args) + 1));
 	if (!res)
 		return NULL;
 	while (args[p])

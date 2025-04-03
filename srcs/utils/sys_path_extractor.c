@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 13:48:58 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/01 15:04:19 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/03 14:30:46 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*build_full_command_path(char *dir, char *cmd)
 {
     char	*full_path;
 
-    full_path = malloc(ft_strlen(dir) + ft_strlen(cmd) + 2);
+    full_path = ft_calloc(ft_strlen(dir) + ft_strlen(cmd) + 2, 1);
     if (!full_path)
         return (NULL);
     ft_strcpy(full_path, dir);

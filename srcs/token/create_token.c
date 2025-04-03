@@ -54,7 +54,7 @@ char	**create_token(t_shell shell)
 
 	num = 0;
 	start = shell.input;
-	shell.tokens = malloc(sizeof(char *) * ft_strlen(start));
+	shell.tokens = ft_calloc(sizeof(char *), ft_strlen(start));
 	if (!shell.tokens)
 		return (NULL);
 	while (*start)
