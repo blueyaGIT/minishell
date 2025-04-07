@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:48:05 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/03 11:55:37 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/07 15:46:45 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,19 @@ void	ft_free_command(t_command **lst, void (*del)(void *))
 		temp = (*lst)->next;
 		delone_command(*lst, del);
 		*lst = temp;
+	}
+}
+
+void	ft_free_tokens(t_token **lst)
+{
+	t_token	*tmp;
+
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		if ((*lst)->token_value)
+			free((*lst)->token_value);
+		free(*lst);
+		*lst = tmp;
 	}
 }
