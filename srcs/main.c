@@ -14,7 +14,7 @@ static void	initialize_shell(t_shell *shell, char **argv, char **envp)
 	ft_memset(shell, 0, sizeof(t_shell));
 	if (shell_init(shell, envp) != success)
 		exit(EXIT_FAILURE);
-	// ft_print_logo(envp);
+	ft_print_logo(envp);
 	// print_shell(shell);
 }
 
@@ -28,7 +28,7 @@ int main(int argc, char *argv[], char **envp)
 	initialize_shell(&shell, argv, envp);
 	while (1)
 	{
-		
+
 		init_signals();
 		shell.input = readline(PROMPT);
 		if (!shell.input)
