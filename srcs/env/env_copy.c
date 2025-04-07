@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 14:20:27 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/24 14:20:40 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/07 17:22:10 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char **copy_env(char **env)
     i = 0;
     while (env[i])
     {
-        env_copy[i] = strdup(env[i]);
+        env_copy[i] = ft_strdup(env[i]);
         if (!env_copy[i])
         {
             while (i > 0)

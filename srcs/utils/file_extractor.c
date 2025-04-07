@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:50:36 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/25 15:53:27 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/07 17:23:12 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int is_filepath(const char *token)
 // Function to extract file paths from shell input
 void extract_filepaths(const char *input)
 {
-    char *input_copy = strdup(input);
+    char *input_copy = ft_strdup((char *)input);
     if (!input_copy) {
-        perror("strdup");
+        perror("ft_strdup");
         return;
     }
 

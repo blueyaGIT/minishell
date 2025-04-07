@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:01:55 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/24 14:32:43 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/07 17:22:10 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ char *get_env_value(const char *name, char **env)
             j++;
 
         if (strncmp(entry, name, j) == 0 && name[j] == '\0') 
-            return strdup(entry + j + 1); 
+            return ft_strdup(entry + j + 1); 
 
         i++;
     }
-    return strdup(""); 
+    return ft_strdup(""); 
 }

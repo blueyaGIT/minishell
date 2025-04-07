@@ -6,7 +6,7 @@
 //     char *value;
 
 //     if (!input || input[0] != '$') 
-//         return strdup(input);
+//         return ft_strdup(input);
     
 //     if (strcmp(input, "$?") == 0) 
 //     {
@@ -24,7 +24,7 @@
 //     if (value) 
 //         return value;
 //     else 
-//         return strdup("");
+//         return ft_strdup("");
 // }
 
 char *replace_env_var(char *input, char **env, int lastexitcode)
@@ -33,7 +33,7 @@ char *replace_env_var(char *input, char **env, int lastexitcode)
     char *value;
 
     if (!input || input[0] != '$') 
-        return strdup(input);
+        return ft_strdup(input);
     
     if (strcmp(input, "$?") == 0) 
     {
@@ -50,7 +50,7 @@ char *replace_env_var(char *input, char **env, int lastexitcode)
     if (value) 
         return value;
     else 
-        return strdup("");
+        return ft_strdup("");
 }
 
 
@@ -59,7 +59,7 @@ char *extract_var_name(char *input)
     int i = 0;
 
     if (!input || !input[i] || !(ft_isalpha(input[i]) || input[i] == '_'))
-        return strdup(""); 
+        return ft_strdup(""); 
 
     while (input[i] && (ft_isalnum(input[i]) || input[i] == '_'))
         i++;
