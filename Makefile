@@ -203,22 +203,22 @@ fastre: remove-submodules
 	@make
 
 norm:
-	@norminette $(SRC_DIRS) $(INC_DIR) $(LIBFT_DIR) | grep "Error" || printf "$(GREEN)✅ Norme OK ✅ $(NC)"
+	@norminette $(SRC_DIRS) $(INC_DIR) $(LIBFT_DIR) | grep "Error" || printf "$(GREEN)✅ Norme OK ✅ $(NC)\n"
 
 container-build:
 	@if ! docker ps | grep -q dev_container; then \
-		printf "$(YELLOW)🚧 Building the container environment 🚧 $(NC)"; \
+		printf "$(YELLOW)🚧 Building the container environment 🚧 $(NC)\n"; \
 		docker compose -f ./.docker/docker-compose.yml build --no-cache; \
 	else \
-		printf "$(YELLOW)🚧 Container already built.. skip build process 🚧 $(NC)"; \
+		printf "$(YELLOW)🚧 Container already built.. skip build process 🚧 $(NC)\n"; \
 	fi
 
 container-up:
 	@if ! docker ps | grep -q dev_container; then \
-		prinf "$(YELLOW)🚧 Starting the container environment 🚧 $(NC)"; \
+		prinf "$(YELLOW)🚧 Starting the container environment 🚧 $(NC)\n"; \
 		docker compose -p dev_container -f ./.docker/docker-compose.yml up -d; \
 	else \
-		printf "$(YELLOW)🚧 Container already running.. skip its creation 🚧 $(NC)"; \
+		printf "$(YELLOW)🚧 Container already running.. skip its creation 🚧 $(NC)\n"; \
 	fi
 
 container:
@@ -228,12 +228,12 @@ container:
 
 prune:
 	@if docker ps -a | grep -q dev_container; then \
-		printf "$(RED)🚧 Removing existing container... 🚧 $(NC)"; \
+		printf "$(RED)🚧 Removing existing container... 🚧 $(NC)\n"; \
 		docker stop dev_container && docker rm dev_container; \
 	else \
-		printf "$(YELLOW)🚧 No container named 'dev_container' to remove. 🚧 $(NC)"; \
+		printf "$(YELLOW)🚧 No container named 'dev_container' to remove. 🚧 $(NC)\n"; \
 	fi
-	@printf "$(GREEN)✅ All done! ✅ $(NC)"
+	@printf "$(GREEN)✅ All done! ✅$(NC)\n"
 
 debug: CFLAGS += -g
 debug: CFLAGS += -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
