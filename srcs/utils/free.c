@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:48:05 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/07 16:07:04 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:14:24 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,35 +70,22 @@ void	ft_free_tokens(t_token **lst)
 	}
 }
 
-void ft_free_nodes(t_node *head)
+void	ft_free_nodes(t_node *head)
 {
-    t_node *temp;
-    int i;
+	t_node	*temp;
 
-    while (head)
-    {
-        temp = head;
-        head = head->next;
-        
-        if (temp->command)
-            free(temp->command);
-        if (temp->args)
-            free(temp->args);
-        
-        if (temp->filename)
-        {
-            for (i = 0; temp->filename[i] != NULL; i++)
-                free(temp->filename[i]);
-            free(temp->filename);
-        }
-        
-        if (temp->redirections)
-        {
-            for (i = 0; temp->redirections[i] != NULL; i++)
-                free(temp->redirections[i]);
-            free(temp->redirections);
-        }
-        
-        free(temp);
-    }
+	while (head)
+	{
+		temp = head;
+		head = head->next;
+		if (temp->command)
+			free(temp->command);
+		if (temp->args)
+			free(temp->args);
+		if (temp->filename)
+			ft_free_arr(temp->filename);
+		if (temp->redirections)
+			ft_free_arr(temp->redirections);
+		free(temp);
+	}
 }

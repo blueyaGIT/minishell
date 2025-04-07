@@ -112,7 +112,7 @@ char *expand_variables(char *input, char **env, int lastexitcode)
 
                 i += strlen(var); 
                 free(var);
-                // free(value);
+                free(value);
             }
         }
         else
