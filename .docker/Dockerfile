@@ -8,8 +8,6 @@ RUN apt-get update && \
     apt-get install -y \
         software-properties-common && \
     add-apt-repository universe && \
-	apt-get update && \
-	apt-get install libreadline-dev \
     apt-get update && \
     apt-get install -y \
         valgrind \
@@ -20,6 +18,7 @@ RUN apt-get update && \
         curl \
         python3 \
         nano \
+		libreadline-dev \
         git && \
     apt-get clean
 
