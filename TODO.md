@@ -17,7 +17,7 @@
 	- [x] [env]
 	- [x] [exit]
 - [ ] [kill_fds if pipe_flag == true](./srcs/execution/children.c#L43)
-- [ ] [free tokens]
+- [x] [free tokens]
 - [x] [create cat, ls, etc. execution]
 - [x] [further develop ft_exec.c]
 - [x] [handle $PATH when env -i ?]
