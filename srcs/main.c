@@ -114,11 +114,19 @@ return 0;
 }
 void execute_commands(t_shell *shell)
 {
+    t_command *cmd;
 	build_parsing_nodes(shell); 
 
 	print_node_list(shell->node); 
 	shell->cmd_list = convert_node_list_to_command_list(shell->node);
 	print_command_list(shell->cmd_list);
+    cmd = shell->cmd_list;
+	while (cmd)
+	{
+		if (check_redirections(cmd, shell)) // ➤ bricht ab bei Fehler
+			return;
+		cmd = cmd->next;
+	}
 	ft_lstfree(shell->list);
 	shell->list = NULL;
 	free(shell->input);

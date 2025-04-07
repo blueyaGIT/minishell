@@ -93,9 +93,9 @@ int check_empty_input(const char *str, t_shell *shell)
 		}
 		i++;
 	}
-    (printf(RED"minishell: syntax error: empty input\n"RESET));
-	printf("minishell: syntax error: empty input\n");
-	set_exit_code(shell, 2);
+    // (printf(RED"minishell: syntax error: empty input\n"RESET));
+	// printf("minishell: syntax error: empty input\n");
+	// set_exit_code(shell, 2);
 	return 1;
 }
 
@@ -122,3 +122,31 @@ int run_syntax_checks(t_shell *shell)
 	return 0;
 }
 
+int	check_redirections(t_command *cmd, t_shell *shell)
+{
+	int	fd;
+
+	if (cmd->io->infile)
+	{
+		fd = open(cmd->io->infile, O_RDONLY);
+		if (fd == -1)
+		{
+			perror(cmd->io->infile);
+			set_exit_code(shell, 1); // wie in Bash: 1 bei fehlender Datei
+			return (1);
+		}
+		close(fd);
+	}
+	if (cmd->io->outfile)
+	{
+		fd = open(cmd->io->outfile, O_WRONLY);
+		if (fd == -1)
+		{
+			perror(cmd->io->outfile);
+			set_exit_code(shell, 1);
+			return (1);
+		}
+		close(fd);
+	}
+	return (0); // alles okay
+}
