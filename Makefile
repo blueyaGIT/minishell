@@ -215,7 +215,7 @@ container-build:
 
 container-up:
 	@if ! docker ps | grep -q dev_container; then \
-		prinf "$(YELLOW)🚧 Starting the container environment 🚧 $(NC)\n"; \
+		printf "$(YELLOW)🚧 Starting the container environment 🚧 $(NC)\n"; \
 		docker compose -p dev_container -f ./.docker/docker-compose.yml up -d; \
 	else \
 		printf "$(YELLOW)🚧 Container already running.. skip its creation 🚧 $(NC)\n"; \
@@ -229,7 +229,7 @@ container:
 prune:
 	@if docker ps -a | grep -q dev_container; then \
 		printf "$(RED)🚧 Removing existing container... 🚧 $(NC)\n"; \
-		docker stop dev_container && docker rm dev_container; \
+		docker stop dev_container > /dev/null 2>&1 && docker rm dev_container > /dev/null 2>&1; \
 	else \
 		printf "$(YELLOW)🚧 No container named 'dev_container' to remove. 🚧 $(NC)\n"; \
 	fi
