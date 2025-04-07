@@ -79,7 +79,8 @@ char	**create_token(t_shell shell)
 		else
 			shell.tokens[num++] = create_word_token(&start);
 	}
-	return (shell.tokens[num] = NULL, shell.tokens);
+	// return (shell.tokens[num] = NULL, shell.tokens);
+	return (shell.tokens);
 }
 
 

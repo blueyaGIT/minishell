@@ -97,12 +97,12 @@ void process_word_token(t_node *new_node, t_list **token_lst, bool *prev_was_red
     }
     else if (!new_node->command) // Falls noch kein command gesetzt wurde
     {
-        new_node->command = strdup(token->token_value);
+        new_node->command = ft_strdup(token->token_value);
     }
     else // Falls command schon gesetzt wurde, speichere in args
     {
         if (!new_node->args)
-            new_node->args = strdup(token->token_value);
+            new_node->args = ft_strdup(token->token_value);
         else
         {
             char *temp = ft_strjoin(new_node->args, " ");
@@ -125,9 +125,9 @@ char **ft_add_to_array(char **array, char *new_entry)
     if (!new_array)
         return NULL;
     if (array)
-        memcpy(new_array, array, len * sizeof(char *));
+        ft_memcpy(new_array, array, len * sizeof(char *));
     
-    new_array[len] = strdup(new_entry);
+    new_array[len] = ft_strdup(new_entry);
     new_array[len + 1] = NULL; 
     free(array);
     return new_array;
@@ -334,16 +334,7 @@ t_command *convert_node_list_to_command_list(t_node *node)
 			free(curr);
 			return NULL;
 		}
-		curr->command = NULL;
-		curr->filename = NULL;
-		curr->args = NULL;
-		curr->pipe_flag = false;
-		curr->next = NULL;
 		curr->prev = prev;
-		curr->io->infile = NULL;
-		curr->io->outfile = NULL;
-		curr->io->hrd_sep = NULL;
-		curr->io->hrd_flag = false;
 		if (node->command)
 			curr->command = ft_strdup(node->command);
 		if (node->filename && node->filename[0])
