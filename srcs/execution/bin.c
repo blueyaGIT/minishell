@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:50:06 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/09 14:56:04 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/09 16:34:03 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ int	exec_sys(t_shell *shell, t_command *cmd)
 	cmd->cpath = find_command_path(shell, cmd->command);
 	if (cmd->cpath == NULL)
 		return (127);
-	cmd->args = ft_str_to_array_frontneu(cmd->args, cmd->command);
-	TEST("%s\n", cmd->args[0]);
-	TEST("%s\n", cmd->args[1]);
-	TEST("%s\n", cmd->args[2]);
+	cmd->args = ft_str_to_array_front(cmd->args, cmd->command);
 	if (execve(cmd->cpath, cmd->args, shell->env) == -1)
 		return (errno);
 	return (EXIT_FAILURE);
