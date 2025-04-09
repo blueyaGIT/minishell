@@ -10,7 +10,7 @@ void	print_token_list(t_list *list)
 		token_data = (t_token *)list->content;
 		if (token_data)
 			printf("Token: %-15s | Type: %d\n", token_data->token_value,
-				token_data->type);
+					token_data->type);
 		list = list->next;
 	}
 }
@@ -66,7 +66,7 @@ char	**create_token(t_shell shell)
 		if (*start == '"' || *start == '\'')
 			shell.tokens[num++] = create_quote_token(&start);
 		else if ((*start == '<' && start[1] == '<') || (*start == '>'
-				&& start[1] == '>'))
+					&& start[1] == '>'))
 		{
 			shell.tokens[num++] = ft_strndup(start, 2);
 			start += 2;
@@ -83,55 +83,53 @@ char	**create_token(t_shell shell)
 	return (shell.tokens);
 }
 
-
-
-
-char **ft_str_to_array_frontneu(char **array, char *str)
+char	**ft_str_to_array_frontneu(char **array, char *str)
 {
-	int len = 0;
-	char **new_array;
+	int		len;
+	char	**new_array;
+	int		i;
 
+	len = 0;
+	i = 1;
 	while (array && array[len])
 		len++;
-
 	new_array = malloc(sizeof(char *) * (len + 2));
 	if (!new_array)
-		return NULL;
-
-	new_array[0] = ft_strdup(str); 
-	while (len > 0)
+		return (NULL);
+	new_array[0] = ft_strdup(str);
+	while (i <= len)
 	{
-		new_array[len] = array[len - 1];
-		len--;
+		new_array[i] = ft_strdup(array[i - 1]);
+		i++;
 	}
-	new_array[len + 1] = NULL;
-
-	free(array); 
-	return new_array;
+	new_array[i] = NULL;
+	free(array);
+	return (new_array);
 }
-char **ft_str_to_array_backneu(char **array, char *str)
+
+char	**ft_str_to_array_backneu(char **array, char *str)
 {
-    size_t i = 0;
-    char **new_array;
-    if (array)
-    {
-        while (array[i])
-            i++;
-    }
-    new_array = malloc(sizeof(char *) * (i + 2));
-    if (!new_array)
-        return (NULL);
-    i = 0;
-    while (array && array[i])
-    {
-        new_array[i] = array[i];
-        i++;
-    }
+	size_t	i;
+	char	**new_array;
 
-    new_array[i] = ft_strdup(str);
-    if (!new_array[i])
-        return (NULL);
-
-    new_array[i + 1] = NULL;
-    return (new_array);
+	i = 0;
+	if (array)
+	{
+		while (array[i])
+			i++;
+	}
+	new_array = malloc(sizeof(char *) * (i + 2));
+	if (!new_array)
+		return (NULL);
+	i = 0;
+	while (array && array[i])
+	{
+		new_array[i] = array[i];
+		i++;
+	}
+	new_array[i] = ft_strdup(str);
+	if (!new_array[i])
+		return (NULL);
+	new_array[i + 1] = NULL;
+	return (new_array);
 }
