@@ -96,7 +96,7 @@ void process_word_token(t_node *new_node, t_list **token_lst, bool *prev_was_red
     }
     else if (!new_node->command) 
     {
-        new_node->command = ft_strdup(token->token_value);
+        new_node->command = ft_strdup(token->token_value); // LEAKS HERE: 9 bytes in 2 blocks are indirectly lost in loss record 5 of 66
     }
     else 
     {
