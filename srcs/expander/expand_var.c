@@ -1,32 +1,5 @@
 #include "minishell.h"
 
-// char *replace_env_var(char *input, char **env, int last_exitcode)
-// {
-//     char *var_name;
-//     char *value;
-
-//     if (!input || input[0] != '$') 
-//         return ft_strdup(input);
-    
-//     if (strcmp(input, "$?") == 0) 
-//     {
-//         char *exit_code_str = malloc(12);
-//         if (!exit_code_str)
-//             return NULL;
-//         sprintf(exit_code_str, "%d", last_exitcode); 
-//         return exit_code_str;
-//     }
-
-
-//     var_name = input + 1; 
-//     value = get_env_value(var_name, env);
-
-//     if (value) 
-//         return value;
-//     else 
-//         return ft_strdup("");
-// }
-
 char *replace_env_var(char *input, char **env, int lastexitcode)
 {
     char *var_name;
@@ -40,7 +13,7 @@ char *replace_env_var(char *input, char **env, int lastexitcode)
         char *exit_code_str = malloc(12);
         if (!exit_code_str)
             return NULL;
-        sprintf(exit_code_str, "%d", lastexitcode); // Setzt den aktuellen Exit-Code
+        sprintf(exit_code_str, "%d", lastexitcode); 
         return exit_code_str;
     }
 
@@ -67,15 +40,21 @@ char *extract_var_name(char *input)
     return strndup(input, i); 
 }
 
+
 char *expand_variables(char *input, char **env, int lastexitcode)
 {
     char *new_str = malloc(1000); 
+    if (!new_str)
+{
+	perror("malloc failed");
+	exit(1);
+}
     int i = 0, j = 0;
     int in_single_quotes = 0;
     int in_double_quotes = 0;
     char exit_code_str[12];
 
-    sprintf(exit_code_str, "%d", lastexitcode);  // Exit-Code als String speichern
+    sprintf(exit_code_str, "%d", lastexitcode); 
 
     while (input[i])
     {
@@ -86,11 +65,11 @@ char *expand_variables(char *input, char **env, int lastexitcode)
 
         if (input[i] == '$' && !in_single_quotes) 
         {
-            if (input[i + 1] == '?')  // Sonderfall: $? ersetzen
+            if (input[i + 1] == '?') 
             {
                 strcpy(new_str + j, exit_code_str);
                 j += strlen(exit_code_str);
-                i += 2;  // Überspringe `$?`
+                i += 2;  
             }
             else
             {

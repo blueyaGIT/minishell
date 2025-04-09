@@ -20,7 +20,7 @@ static void	initialize_shell(t_shell *shell, char **argv, char **envp)
 
 int main(int argc, char *argv[], char **envp)
 {
-	atexit(leaks);
+	// atexit(leaks);
 	t_shell	shell;
 
 	if (argc != 1)
@@ -30,14 +30,14 @@ int main(int argc, char *argv[], char **envp)
 	{
 		init_signals();
 		shell.input = readline(PROMPT);
-		if (!shell.input)
-			break ;
+		if (!shell.input || shell.input[0] == '\0')
+   			 continue; 
 		process_input(&shell);
 		handle_syntax_and_exit(&shell);
 		execute_commands(&shell);
 		refresh_signals();
 		if (ft_strcmp(shell.input, "./minishell") == 0)
-			check_shlvl(&shell);
+		check_shlvl(&shell);
 		g_ecode = ft_exec(&shell);
 		refresh_shell(&shell);
 	}
