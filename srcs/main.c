@@ -28,7 +28,6 @@ int main(int argc, char *argv[], char **envp)
 	initialize_shell(&shell, argv, envp);
 	while (1)
 	{
-
 		init_signals();
 		shell.input = readline(PROMPT);
 		if (!shell.input)
