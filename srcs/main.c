@@ -24,7 +24,7 @@ int	main(int argc, char *argv[], char **envp)
 	t_shell	shell;
 
 	if (argc != 1)
-		return (printf(RED "ERROR Input format: ./minishell\n" RESET));
+		return (ft_printf(RED "ERROR Input format: ./minishell\n" RESET));
 	initialize_shell(&shell, argv, envp);
 	while (1)
 	{
