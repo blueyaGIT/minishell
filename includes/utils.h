@@ -5,7 +5,7 @@
 
 void	ft_print_logo(char **envp);
 void	extract_filepaths(const char *input);
-void	ft_free_command(t_command **lst, void (*del)(void *));
+void	ft_free_command(t_command *cmd);
 void	ft_free_io(t_redir *io);
 void	ft_free_nodes(t_node *head);
 void	ft_free_tokens(t_token **lst);

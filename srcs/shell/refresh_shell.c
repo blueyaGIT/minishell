@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 18:35:50 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/07 16:40:17 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/09 16:41:08 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ void	refresh_shell(t_shell *shell)
 	if (shell->tokens)
 		ft_free_arr(shell->tokens);
 	if (shell->cmd_list)
-		ft_free_command(&shell->cmd_list, &ft_free_ptr);
+		ft_free_command(shell->cmd_list);
 }

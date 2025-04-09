@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:48:05 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/07 17:19:04 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/09 16:42:11 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,30 +30,41 @@ void	ft_free_io(t_redir *io)
 		ft_free_ptr(io);
 }
 
-static void	delone_command(t_command *lst, void (*del)(void *))
-{
-	if (lst->command)
-		(*del)(lst->command);
-	if (lst->args)
-		ft_free_arr(lst->args);
-	if (lst->pipe_fd)
-		(*del)(lst->pipe_fd);
-	if (lst->io)
-		ft_free_io(lst->io);
-	(*del)(lst);
-}
+// static void	delone_command(t_command *lst, void (*del)(void *))
+// {
+// 	if (lst->command)
+// 		(*del)(lst->command);
+// 	if (lst->args)
+// 		ft_free_arr(lst->args);
+// 	if (lst->pipe_fd)
+// 		(*del)(lst->pipe_fd);
+// 	if (lst->io)
+// 		ft_free_io(lst->io);
+// 	(*del)(lst);
+// }
 
-void	ft_free_command(t_command **lst, void (*del)(void *))
+void	ft_free_command(t_command *cmd)
 {
-	t_command	*temp;
+	int	i;
 
-	temp = NULL;
-	while (*lst != NULL)
+	i = 0;
+	if (!cmd)
+		return ;
+	free(cmd->command);
+	free(cmd->cpath);
+	free(cmd->filename);
+	if (cmd->args)
 	{
-		temp = (*lst)->next;
-		delone_command(*lst, del);
-		*lst = temp;
+		while (cmd->args[i])
+		{
+			free(cmd->args[i]);
+			i++;
+		}
+		free(cmd->args);
 	}
+	free(cmd->pipe_fd);
+	ft_free_io(cmd->io);
+	free(cmd);
 }
 
 void	ft_free_tokens(t_token **lst)
