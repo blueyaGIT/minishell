@@ -26,4 +26,6 @@ void			init_command_fields(t_command *cmd, t_node *node);
 char			**split_args(char *args);
 void			print_command_list(t_command *cmd_list);
 int				count_words(const char *str);
+char **ft_str_to_array_frontneu(char **array, char *str);
+char **ft_str_to_array_backneu(char **array, char *str);
 #endif /* TOKEN_H */

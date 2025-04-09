@@ -20,7 +20,7 @@ static void	initialize_shell(t_shell *shell, char **argv, char **envp)
 
 int main(int argc, char *argv[], char **envp)
 {
-	// atexit(leaks);
+	atexit(leaks);
 	t_shell	shell;
 
 	if (argc != 1)

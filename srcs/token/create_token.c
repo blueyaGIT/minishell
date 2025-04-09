@@ -86,3 +86,52 @@ char	**create_token(t_shell shell)
 
 
 
+char **ft_str_to_array_frontneu(char **array, char *str)
+{
+	int len = 0;
+	char **new_array;
+
+	while (array && array[len])
+		len++;
+
+	new_array = malloc(sizeof(char *) * (len + 2));
+	if (!new_array)
+		return NULL;
+
+	new_array[0] = ft_strdup(str); 
+	while (len > 0)
+	{
+		new_array[len] = array[len - 1];
+		len--;
+	}
+	new_array[len + 1] = NULL;
+
+	free(array); 
+	return new_array;
+}
+char **ft_str_to_array_backneu(char **array, char *str)
+{
+    size_t i = 0;
+    char **new_array;
+    if (array)
+    {
+        while (array[i])
+            i++;
+    }
+    new_array = malloc(sizeof(char *) * (i + 2));
+    if (!new_array)
+        return (NULL);
+    i = 0;
+    while (array && array[i])
+    {
+        new_array[i] = array[i];
+        i++;
+    }
+
+    new_array[i] = ft_strdup(str);
+    if (!new_array[i])
+        return (NULL);
+
+    new_array[i + 1] = NULL;
+    return (new_array);
+}

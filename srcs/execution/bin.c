@@ -28,7 +28,7 @@ int	exec_sys(t_shell *shell, t_command *cmd)
 	cmd->cpath = find_command_path(shell, cmd->command);
 	if (cmd->cpath == NULL)
 		return (127);
-	cmd->args = ft_str_to_array_front(cmd->args, cmd->command);
+	cmd->args = ft_str_to_array_frontneu(cmd->args, cmd->command);
 	if (execve(cmd->cpath, cmd->args, shell->env) == -1)
 		return (errno);
 	return (EXIT_FAILURE);

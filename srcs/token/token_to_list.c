@@ -89,17 +89,16 @@ void process_word_token(t_node *new_node, t_list **token_lst, bool *prev_was_red
 {
     t_token *token = (t_token *)(*token_lst)->content;
 
-    // Falls vorher ein Redirect war, speichere als Dateiname
     if (*prev_was_redirect)
     {
         new_node->filename = ft_add_to_array(new_node->filename, token->token_value);
         *prev_was_redirect = false;
     }
-    else if (!new_node->command) // Falls noch kein command gesetzt wurde
+    else if (!new_node->command) 
     {
         new_node->command = ft_strdup(token->token_value);
     }
-    else // Falls command schon gesetzt wurde, speichere in args
+    else 
     {
         if (!new_node->args)
             new_node->args = ft_strdup(token->token_value);
@@ -153,7 +152,7 @@ t_node *parse_tokens(t_list **token_lst)
     if (!new_node)
         return NULL;
 
-    bool prev_was_redirect = false; // Merkt sich, ob der vorherige Token ein Redirect war
+    bool prev_was_redirect = false; 
 
     while (*token_lst && ((t_token *)(*token_lst)->content)->type != PIPE)
     {
@@ -163,12 +162,12 @@ t_node *parse_tokens(t_list **token_lst)
         else if (token->type == REDIR_IN || token->type == REDIR_OUT || token->type == HEREDOC || token->type == APPEND)
         {
             process_redirection_token(new_node, token_lst);
-            prev_was_redirect = true;  //  Nach einem Redirect merken wir uns das
+            prev_was_redirect = true;  
         }
         else
         {
             *token_lst = (*token_lst)->next;
-            prev_was_redirect = false; // Falls etwas anderes kommt, zurücksetzen
+            prev_was_redirect = false; 
         }
     }
     return new_node;
