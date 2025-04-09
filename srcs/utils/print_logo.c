@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:20:37 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/31 14:59:38 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/09 10:10:52 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,31 @@
 
 static void	print_username(char **envp)
 {
-	char	*username;
-	int		i;
+    char	*username;
+    char	*slash;
+    int		i;
 
-	username = NULL;
-	i = 0;
-	while (envp[i])
-	{
-		if (ft_strstr(envp[i], "PWD=/Users/") == envp[i])
-		{
-			username = envp[i] + ft_strlen("PWD=/Users/");
-			break ;
-		}
-		i++;
-	}
-	username = ft_strndup(username, (ft_strlen(username)
-				- ft_strlen(ft_strchr(username, '/'))));
-	printf(BOLD LIGHT_PINK
-		"\n🧚 " ITALIC " Hello, %s" RESET BOLD "  🧚\n\n" RESET, username);
-	free(username);
+    username = NULL;
+    i = 0;
+    while (envp[i])
+    {
+        if (ft_strstr(envp[i], "PWD=/Users/") == envp[i])
+        {
+            username = envp[i] + ft_strlen("PWD=/Users/");
+            break ;
+        }
+        i++;
+    }
+    if (username != NULL)
+    {
+        slash = ft_strchr(username, '/');
+        if (!slash)
+            slash = username + ft_strlen(username);
+        username = ft_strndup(username, ft_strlen(username) - ft_strlen(slash));	
+        printf(BOLD LIGHT_PINK
+            "\n🧚 " ITALIC " Hello, %s" RESET BOLD "  🧚\n\n" RESET, username);
+        free(username);
+    }
 }
 
 void	ft_print_logo(char **envp)
