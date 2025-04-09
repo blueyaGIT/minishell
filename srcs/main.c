@@ -8,7 +8,7 @@ volatile sig_atomic_t	g_ecode = 0;
 //  system("leaks minishell");
 // }
 // atexit(leaks);
-	
+
 static void	initialize_shell(t_shell *shell, char **argv, char **envp)
 {
 	(void)argv;
@@ -19,7 +19,7 @@ static void	initialize_shell(t_shell *shell, char **argv, char **envp)
 	// print_shell(shell);
 }
 
-int main(int argc, char *argv[], char **envp)
+int	main(int argc, char *argv[], char **envp)
 {
 	t_shell	shell;
 
@@ -30,12 +30,14 @@ int main(int argc, char *argv[], char **envp)
 	{
 		init_signals();
 		shell.input = readline(PROMPT);
+		if (!shell.input || shell.input[0] == '\0')
+			continue ;
 		process_input(&shell);
 		handle_syntax_and_exit(&shell);
 		execute_commands(&shell);
 		refresh_signals();
 		if (ft_strcmp(shell.input, "./minishell") == 0)
-		check_shlvl(&shell);
+			check_shlvl(&shell);
 		g_ecode = ft_exec(&shell);
 		refresh_shell(&shell);
 	}
