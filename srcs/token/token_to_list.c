@@ -31,8 +31,14 @@ void	convert_tokens(t_shell *shell)
 	int		i;
 
 	i = 0;
+    if (!shell->tokens)
+		return ;  // 🛡 Fail
 	while (shell->tokens[i])
 	{
+        if (!shell->tokens[i])
+        break;
+
+
 		tmp_token = ft_calloc(sizeof(t_token), 1);
 		if (!tmp_token)
 			return ;
