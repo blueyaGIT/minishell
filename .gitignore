@@ -25,6 +25,4 @@
 .venv
 *.svg
 
-readline.supp
-
 .minishell_heredoc*

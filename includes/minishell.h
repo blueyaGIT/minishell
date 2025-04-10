@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:40:40 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/10 14:41:14 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/10 16:09:20 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # include <unistd.h>
 
 /* INCLUDES */
+# include "libft/libft.h"
+# include "shell.h"
 # include "builtin.h"
 # include "debug.h"
 # include "env.h"
@@ -38,9 +40,7 @@
 # include "expander.h"
 # include "format.h"
 # include "io.h"
-# include "libft/libft.h"
 # include "pipes.h"
-# include "shell.h"
 # include "signals.h"
 # include "token.h"
 # include "utils.h"
