@@ -29,10 +29,16 @@ void	process_input(t_shell *shell)
 
 void	handle_syntax_and_exit(t_shell *shell)
 {
-	run_syntax_checks(shell);
+	if (run_syntax_checks(shell)) 
+		return ;
 	shell->tokens = create_token(*shell);
-	printf("Prompt: %s\n", shell->input);
+	if (!shell->tokens)  
+	{
+		shell->last_exitcode = 0;
+		return ;
+	}
 	convert_tokens(shell);
+	// printf("Prompt: %s\n", shell->input);
 	print_token_list(shell->list);
 }
 void	execute_commands(t_shell *shell)

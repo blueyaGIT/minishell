@@ -1,5 +1,12 @@
 #include "minishell.h"
 
+int print_syntax_error(const char *message, t_shell *shell)
+{
+    (printf(RED"%s"RESET, message));  
+    set_exit_code(shell, 2);           
+    return 1;
+}
+
 int syntax_error(const char *str, t_shell *shell)
 {
     int i = 0;
@@ -11,17 +18,10 @@ int syntax_error(const char *str, t_shell *shell)
         if (str[i] == '|')
         {
             if (str[i + 1] == '|')
-            {
-                (printf(RED"minishell: syntax error near unexpected token '||'\n"RESET));
-                set_exit_code(shell, 2);
-                return 1;
-            }
+                return print_syntax_error("minishell: syntax error near unexpected token '||'\n", shell);
+
             if (piped_already || !found_word)
-            {
-                (printf(RED"minishell: syntax error near unexpected token '|'\n"RESET));
-                set_exit_code(shell, 2);
-                return 1;
-            }
+                return print_syntax_error("minishell: syntax error near unexpected token '|'\n", shell);
             piped_already = 1;
         }
         else if (str[i] != ' ')
@@ -31,10 +31,9 @@ int syntax_error(const char *str, t_shell *shell)
         }
         i++;
     }
-    set_exit_code(shell, 0); 
+    set_exit_code(shell, 0);  
     return 0;
 }
-
 int check_unclosed_quotes(const char *input, t_shell *shell)
 {
     int single_quotes = 0;
@@ -93,9 +92,6 @@ int check_empty_input(const char *str, t_shell *shell)
 		}
 		i++;
 	}
-    // (printf(RED"minishell: syntax error: empty input\n"RESET));
-	// printf("minishell: syntax error: empty input\n");
-	// set_exit_code(shell, 2);
 	return 1;
 }
 
@@ -132,7 +128,7 @@ int	check_redirections(t_command *cmd, t_shell *shell)
 		if (fd == -1)
 		{
 			perror(cmd->io->infile);
-			set_exit_code(shell, 1); // wie in Bash: 1 bei fehlender Datei
+			set_exit_code(shell, 1);
 			return (1);
 		}
 		close(fd);
@@ -148,5 +144,5 @@ int	check_redirections(t_command *cmd, t_shell *shell)
 		}
 		close(fd);
 	}
-	return (0); // alles okay
+	return (0); 
 }
