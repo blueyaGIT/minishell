@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:46:33 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/09 16:41:18 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/10 10:39:00 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	ft_free_shell(t_shell *shell)
 		ft_lstfree(shell->list);
 	if (shell && shell->cmd_list)
 		ft_free_command(shell->cmd_list);
-	if (shell && shell->cur_dir)
-		ft_free_ptr(shell->cur_dir);
-	if (shell && shell->old_dir)
-		ft_free_ptr(shell->old_dir);
-	if (shell && shell->env)
-		ft_free_arr(shell->env);
+	// if (shell && shell->cur_dir)
+	// 	ft_free_ptr(shell->cur_dir);
+	// if (shell && shell->old_dir)
+	// 	ft_free_ptr(shell->old_dir);
+	// if (shell && shell->env)
+	// 	ft_free_arr(shell->env);
 	rl_clear_history();
 }
 
