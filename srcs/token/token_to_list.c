@@ -32,7 +32,7 @@ void	convert_tokens(t_shell *shell)
 
 	i = 0;
     if (!shell->tokens)
-		return ;  // 🛡 Fail
+		return ;  // 🛡 FAIL
 	while (shell->tokens[i])
 	{
         if (!shell->tokens[i])

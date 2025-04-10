@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 18:01:56 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/31 15:33:05 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/10 14:37:02 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ static int	get_ecode(char *param, bool *temp)
 	while (param[i] != '\0')
 		if (!ft_isdigit(param[i]) && !ft_isspace(param[i]))
 			return (*temp = true, 0);
-		else
-			i++;
+	else
+		i++;
 	i = ft_atoll(&param[i], temp);
 	return ((int)(i % 256));
 }
 
 static bool	check_commands(t_shell *shell)
 {
-	t_command *temp;
+	t_command	*temp;
 
 	temp = shell->cmd_list;
 	if (!temp)
@@ -62,7 +62,8 @@ int	exec_exit(t_shell *shell, char **args)
 	{
 		ecode = get_ecode(args[1], &temp);
 		if (temp)
-			return (ft_putendl_fd("numeric argument required", 2), kill_shell(shell, 255), 255);
+			return (ft_putendl_fd("numeric argument required", 2),
+				kill_shell(shell, 255), 255);
 		else if (args[2])
 			return (ft_putendl_fd("too many arguments", 2), 1);
 	}

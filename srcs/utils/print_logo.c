@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:20:37 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/09 16:51:22 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/10 14:32:28 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,37 @@
 
 static void	print_username(char **envp)
 {
-    char	*username;
-    char	*slash;
-    int		i;
+	char	*u;
+	char	*slash;
+	int		i;
 
-    username = NULL;
-    i = 0;
-    while (envp[i])
-    {
-        if (ft_strstr(envp[i], "PWD=/Users/") == envp[i])
-        {
-            username = envp[i] + ft_strlen("PWD=/Users/");
-            break ;
-        }
-        i++;
-    }
-    if (username != NULL)
-    {
-        slash = ft_strchr(username, '/');
-        if (!slash)
-            slash = username + ft_strlen(username);
-        username = ft_strndup(username, ft_strlen(username) - ft_strlen(slash));	
-        printf(BOLD LIGHT_PINK
-            "\n🧚 " ITALIC " Hello, %s" RESET BOLD "  🧚\n\n" RESET, username);
-        free(username);
-    }
+	u = NULL;
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strstr(envp[i], "PWD=/Users/") == envp[i])
+		{
+			u = envp[i] + ft_strlen("PWD=/Users/");
+			break ;
+		}
+		i++;
+	}
+	if (u != NULL)
+	{
+		slash = ft_strchr(u, '/');
+		if (!slash)
+			slash = u + ft_strlen(u);
+		u = ft_strndup(u, ft_strlen(u) - ft_strlen(slash));
+		printf(BOLD LIGHT_PINK
+			"\n🧚 " ITALIC " Hello, %s" RESET BOLD "  🧚\n\n" RESET, u);
+		free(u);
+	}
 }
 
 void	ft_print_logo(char **envp)
 {
 	printf("\033[H\033[J");
-	printf("\n\n\n" MAGENTA"███████████████████████████████████████"
+	printf("\n\n\n" MAGENTA "███████████████████████████████████████"
 		"███████████████████████████████████████████████████\n\n" LIGHT_PINK
 		"    	███████╗ █████╗ ██╗██████╗ "
 		"██╗   ██╗    ███████╗██╗  ██╗███████╗██╗     ██╗     🧚 \n"
@@ -65,7 +65,7 @@ void	ft_print_logo(char **envp)
 		"\n"
 		"                             	" LIGHT_PINK UNDERLINE ITALIC
 		"lnierobi" NO_UNDERLINE LIGHT_PINK " && " UNDERLINE "dalbano\n"
-		"\033[0m" // Reset color
+		"\033[0m"
 		"\n");
 	print_username(envp);
 }

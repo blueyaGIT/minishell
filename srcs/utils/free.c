@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:48:05 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/09 16:42:11 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/10 14:27:21 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,22 @@ void	ft_free_io(t_redir *io)
 		ft_free_ptr(io);
 }
 
-// static void	delone_command(t_command *lst, void (*del)(void *))
-// {
-// 	if (lst->command)
-// 		(*del)(lst->command);
-// 	if (lst->args)
-// 		ft_free_arr(lst->args);
-// 	if (lst->pipe_fd)
-// 		(*del)(lst->pipe_fd);
-// 	if (lst->io)
-// 		ft_free_io(lst->io);
-// 	(*del)(lst);
-// }
+void	ft_free_env(char **env)
+{
+	int	i;
+
+	i = 0;
+	if (env)
+	{
+		while (env[i])
+		{
+			ft_free_ptr(env[i]);
+			i++;
+		}
+		free(env);
+		env = NULL;
+	}
+}
 
 void	ft_free_command(t_command *cmd)
 {

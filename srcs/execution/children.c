@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 11:01:18 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/03 09:48:28 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/10 14:38:23 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,29 @@
  *
  * This function performs the following steps:
  *
- *  - Calls kill_fds() to clean up file descriptors associated with the command list.
+ * 
+	- Calls kill_fds() to clean up file descriptors 
+	associated with the command list.
  * 
  *  - Enters a loop that waits for any child process to finish using waitpid().
  * 
- *  - If the PID returned by waitpid() matches the shell's tracked PID, it stores the exit status.
+ *  - If the PID returned by waitpid() matches the shell's tracked PID,
+	it stores the exit status.
  * 
- *  - Once all child processes have been reaped (when waitpid() returns -1 and errno is ECHILD), 
+ *  - Once all child processes have been reaped (when waitpid() returns
+		-1 and errno is ECHILD), 
  *    it checks the stored status:
- * 		- If the child was terminated by a signal, returns 128 plus the signal number.
+ * 		- If the child was terminated by a signal,
+			returns 128 plus the signal number.
  *		- If the child exited normally, returns its exit code.
  *		- Otherwise, returns the raw exit status.
  *
- * @param shell: Pointer to the shell structure containing command list and process IDs.
- * @return The final exit status after interpreting the exit state(s) of the child processes.
+
+	* @param shell: Pointer to the shell structure containing 
+	command list and process IDs.
+
+	* @return The final exit status after interpreting the exit 
+	state(s) of the child processes.
  */
 static int	check_children(t_shell *shell)
 {
@@ -40,7 +49,6 @@ static int	check_children(t_shell *shell)
 
 	wpid = 0;
 	temp = 0;
-	// kill_fds(shell->cmd_list, false);
 	while (wpid != -1 || errno != ECHILD)
 	{
 		wpid = waitpid(-1, &exit_status, 0);
@@ -58,7 +66,8 @@ static int	check_children(t_shell *shell)
 }
 
 /**
- * make_children - Spawns child processes for each command and waits for their termination.
+ * make_children
+	- Spawns child processes for each command and waits for their termination.
  *
  * This function performs the following steps:
  * 
@@ -67,14 +76,19 @@ static int	check_children(t_shell *shell)
  *   - For each command:
  *       - Forks a new process.
  *       - If fork() fails, prints an error message and returns EXIT_FAILURE.
- *       - If in the child process (fork() returns 0), calls prep_cmd() to execute the command.
+ *       - If in the child process (fork() returns 0),
+	calls prep_cmd() to execute the command.
  * 
- *   - After processing all commands, calls check_children() to wait for all child processes
+ *   - After processing all commands,
+	calls check_children() to wait for all child processes
  *     to finish and to retrieve the final exit status.
  *
- * @param shell Pointer to the shell structure containing the command list and process IDs.
+
+	* @param shell Pointer to the shell structure containing
+	 the command list and process IDs.
  *
- * @return The exit status determined by check_children(), or EXIT_FAILURE if a fork error occurs.
+ * @return The exit status determined by check_children(),
+	or EXIT_FAILURE if a fork error occurs.
  */
 int	make_children(t_shell *shell)
 {
@@ -85,7 +99,7 @@ int	make_children(t_shell *shell)
 	{
 		shell->pid = fork();
 		if (shell->pid == -1)
-			return (printf(RED"ERROR: FORK"RESET), EXIT_FAILURE);
+			return (printf(RED "ERROR: FORK" RESET), EXIT_FAILURE);
 		else if (shell->pid == 0)
 			prep_cmd(shell, command);
 		command = command->next;

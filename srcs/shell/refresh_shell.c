@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 18:35:50 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/10 10:39:39 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/10 14:34:10 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void	ft_delone_token(t_token *lst, void (*del)(void *))
 {
-    if (!lst)
-        return ;
-    if (del && lst->token_value)
-    {
-        del(lst->token_value);
-        lst->token_value = NULL;
-    }
-    del(lst);
+	if (!lst)
+		return ;
+	if (del && lst->token_value)
+	{
+		del(lst->token_value);
+		lst->token_value = NULL;
+	}
+	del(lst);
 }
 
 void	ft_free_token(t_token **lst, void (*del)(void *))
@@ -40,12 +40,12 @@ void	ft_free_token(t_token **lst, void (*del)(void *))
 static void	ft_delone_node(t_node *node, void (*del)(void *))
 {
 	if (node->args)
-        (*del)(node->args);
-    if (node->filename)
-        ft_free_arr(node->filename);
-    if (node->redirections)
-        ft_free_arr(node->redirections);
-    (*del)(node);
+		(*del)(node->args);
+	if (node->filename)
+		ft_free_arr(node->filename);
+	if (node->redirections)
+		ft_free_arr(node->redirections);
+	(*del)(node);
 }
 
 void	ft_free_node(t_node **lst, void (*del)(void *))
@@ -64,24 +64,6 @@ void	ft_free_node(t_node **lst, void (*del)(void *))
 void	refresh_shell(t_shell *shell)
 {
 	if (!shell)
-	return ;
+		return ;
 	ft_free_shell(shell);
-	// int	i;
-
-	// i = 0;
-	// if (shell->input)
-	// 	ft_free_ptr(shell->input);
-	// if (shell->tokens)
-	// {
-	// 	while (shell->tokens[i])
-	// 	{
-	// 		free(shell->tokens[i]);
-	// 		i++;
-	// 	}
-	// 	free(shell->tokens);
-	// }
-	// if (shell->list)
-	// 	ft_lstfree(shell->list);
-	// if (shell->cmd_list)
-	// 	ft_free_command(shell->cmd_list);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checks.c                                           :+:      :+:    :+:   */
+/*   check_io.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:27:04 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/25 17:31:23 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/10 14:41:14 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ bool	check_io(t_redir *io, bool temp)
 	{
 		if (temp)
 			printf(RED"ERROR: No such file or dir\n"RESET);
-		return (fail);
+		return (FAIL);
 	}
 	else if (io->outfile && io->fd_out == -1)
 	{
 		if (temp)
 			printf(RED"ERROR: No such file or dir\n"RESET);
-		return (fail);
+		return (FAIL);
 	}
-	return (success);
+	return (SUCCESS);
 }

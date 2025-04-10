@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shell.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
+/*   Updated: 2025/04/10 14:41:46 by dalbano          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SHELL_H
 # define SHELL_H
 
@@ -5,18 +17,19 @@
 
 typedef enum e_token_type
 {
-	WORD,         //0
-	PIPE,         //1
-	REDIR_IN,     //2
-	REDIR_OUT,    //3
-	HEREDOC,      //4
-	APPEND,       //5
-	DOUBLEQUOTED, //6
-	SINGLEQUOTED, //7
+	WORD,
+	PIPE,
+	REDIR_IN,
+	REDIR_OUT,
+	HEREDOC,
+	APPEND,
+	DOUBLEQUOTED,
+	SINGLEQUOTED,
 }						t_token_type;
 
 /*
-only exampel for how we can sort the tokens in the list nothing in ore decided for now :)
+only exampel for how we can sort the 
+tokens in the list nothing in ore decided for now :)
 */
 typedef struct s_node
 {
@@ -30,25 +43,25 @@ typedef struct s_node
 //neuer Struct für command
 typedef struct s_redir
 {
-	char *infile;      //gleiche wie type=redir_IN | Wenn in t_token type=redir_IN -> token_value hier reinschreiben
-	char *outfile;     //gleiche nur mit redir_OUT
-	char *hrd_sep;     //token_value -> hierrein (">>")
-	bool hrd_flag;     //wenn heredoc vorhanden true
-	int fd_in;         // ignorieren
-	int fd_out;        // ignorieren
-	int stdin_backup;  // ignorieren
-	int stdout_backup; // ignorieren
+	char				*infile;
+	char				*outfile;
+	char				*hrd_sep;
+	bool				hrd_flag;
+	int					fd_in;
+	int					fd_out;
+	int					stdin_backup;
+	int					stdout_backup;
 }						t_redir;
 
 typedef struct s_command
 {
-	char *command;  //der command als string ("echo")
-	char *cpath;
-	char *filename; //der Dateiname as string ("test.txt")
-	char **args;    //die Argumente fuer *command ({"-1", "-a", ...})
-	bool pipe_flag; //wenn | dann flag auf true
-	int *pipe_fd;   //ignorieren, wird von marzia gesetzt
-	t_redir *io;    // io_file, heredoc hier drinnen
+	char				*command;
+	char				*cpath;
+	char				*filename;
+	char				**args;
+	bool				pipe_flag;
+	int					*pipe_fd;
+	t_redir				*io;
 	struct s_command	*next;
 	struct s_command	*prev;
 }						t_command;
@@ -86,5 +99,6 @@ void					refresh_shell(t_shell *shell);
 void					ft_free_node(t_node **lst, void (*del)(void *));
 void					ft_free_token(t_token **lst, void (*del)(void *));
 void					ft_free_shell(t_shell *shell);
+void					reload_shell(t_shell *shell);
 
 #endif /* SHELL_H */

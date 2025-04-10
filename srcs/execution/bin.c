@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:50:06 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/09 16:34:03 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/10 14:38:01 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ int	exec_sys(t_shell *shell, t_command *cmd)
 
 int	exec_local(t_shell *shell, t_command *cmd, char **args)
 {
-	if (ft_strchr(cmd->command, '/') == NULL && env_idx(shell->env,
-		"PATH") != -1)
+	if (ft_strchr(cmd->command, '/') == NULL && env_idx(shell->env, "PATH")
+		!= -1)
 		return (127);
 	if (access(cmd->command, F_OK) != 0)
-		return (printf(RED"ERROR: No such file or directory"RESET), 127);
+		return (printf(RED "ERROR: No such file or directory" RESET), 127);
 	if (is_dir(cmd->command))
-		return (printf(RED"ERROR: Command is a Directory"RESET), 126);
+		return (printf(RED "ERROR: Command is a Directory" RESET), 126);
 	if (access(cmd->command, F_OK | X_OK) != 0)
-		return (printf(RED"ERROR: Permission denied"RESET), 126);
+		return (printf(RED "ERROR: Permission denied" RESET), 126);
 	if (execve(cmd->command, args, shell->env) == -1)
 		return (errno);
 	return (EXIT_FAILURE);

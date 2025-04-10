@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:16:04 by dalbano           #+#    #+#             */
-/*   Updated: 2025/03/24 13:40:17 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/10 14:40:52 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @brief Gets the idx of an entry in the environment.
  * @param env env to search in.
  * @param key key to search for.
- * @return idx of entry if success; -1 on error or not found.
+ * @return idx of entry if SUCCESS; -1 on error or not found.
  */
 int	env_idx(char **env, char *key)
 {

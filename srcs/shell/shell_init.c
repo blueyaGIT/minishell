@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 17:32:03 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/01 16:21:14 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/10 14:40:52 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,8 @@ bool	shell_init(t_shell *shell, char **envp)
 	env_init(shell, envp);
 	dir_init(shell);
 	shell->cmd_list = NULL;
-	// shell->token_ll = NULL;
 	shell->pid = -1;
 	shell->has_error = false;
 	shell->last_exitcode = 0;
-	return (success);
+	return (SUCCESS);
 }

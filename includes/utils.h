@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/10 14:41:56 by dalbano           #+#    #+#             */
+/*   Updated: 2025/04/10 14:41:57 by dalbano          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef UTILS_H
 # define UTILS_H
 
@@ -13,6 +25,6 @@ void	process_input(t_shell *shell);
 void	handle_syntax_and_exit(t_shell *shell);
 void	execute_commands(t_shell *shell);
 char	*find_command_path(t_shell *shell, char *cmd);
-char	**add_str_to_array(char **array, char *str);
+void	ft_free_env(char **env);
 
 #endif /* UTILS_H */
