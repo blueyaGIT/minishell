@@ -63,13 +63,16 @@ SRCS	+=	bin.c \
 
 # EXPANDER
 SRCS	+=	expand_var.c \
-
+			expand_helper.c \
 # ERROR
 SRCS	+=	syntax_error.c \
+			syntax_helper.c \
 			
 # TOKENIZER
 SRCS	+=	create_token.c \
 			token_to_list.c \
+			token_helper.c \
+			process_token.c \
 
 # PIPES
 SRCS	+=	kill_pipes.c \

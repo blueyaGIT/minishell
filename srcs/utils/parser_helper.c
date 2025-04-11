@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 15:04:44 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/10 14:32:49 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:02:45 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,11 @@ void	execute_commands(t_shell *shell)
 	}
 	ft_lstfree(shell->list);
 	shell->list = NULL;
+}
+
+void	process_and_execute_input(t_shell *shell)
+{
+	process_input(shell);
+	handle_syntax_and_exit(shell);
+	execute_commands(shell);
 }

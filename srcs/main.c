@@ -46,9 +46,7 @@ int	main(int argc, char *argv[], char **envp)
 			set_exit_code(&shell, 0);
 			continue ;
 		}
-		process_input(&shell);
-		handle_syntax_and_exit(&shell);
-		execute_commands(&shell);
+		process_and_execute_input(&shell);
 		refresh_signals();
 		if (ft_strcmp(shell.input, "./minishell") == 0)
 			check_shlvl(&shell);

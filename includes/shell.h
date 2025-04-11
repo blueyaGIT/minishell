@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/10 14:41:46 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:26:37 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ typedef enum e_token_type
 {
 	WORD,
 	PIPE,
-	REDIR_IN,
-	REDIR_OUT,
-	HEREDOC,
-	APPEND,
-	DOUBLEQUOTED,
-	SINGLEQUOTED,
+	RI,
+	RO,
+	HRD,
+	APD,
+	DQT,
+	SQT,
 }						t_token_type;
 
 /*
@@ -67,13 +67,13 @@ typedef struct s_command
 }						t_command;
 
 /*
-token value == the string witch is teh token
-type == ENUM Value
+tk value == the string witch is teh tk
+tp == ENUM Value
 */
 typedef struct s_token
 {
 	char				*token_value;
-	t_token_type		type;
+	t_token_type		tp;
 	struct s_token		*next;
 }						t_token;
 

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.h                                            :+:      :+:    :+:   */
+/*   tk.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -19,7 +19,7 @@ void			print_token_list(t_list *list);
 char			*create_quote_token(char **start);
 char			*create_word_token(char **start);
 char			**create_token(t_shell shell);
-t_token_type	token_type(char *token);
+t_token_type	token_type(char *tk);
 void			convert_tokens(t_shell *shell);
 // char			**ft_add_to_array(char **array, char *new_entry);
 t_node			*create_new_node(void);

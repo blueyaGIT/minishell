@@ -1,148 +1,103 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   syntax_error.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/11 15:05:46 by dalbano           #+#    #+#             */
+/*   Updated: 2025/04/11 15:24:20 by dalbano          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int print_syntax_error(const char *message, t_shell *shell)
+int	error_msg(const char *message, t_shell *shell)
 {
-    (printf(RED"%s"RESET, message));  
-    set_exit_code(shell, 2);           
-    return 1;
+	(printf(RED "%s" RESET, message));
+	set_exit_code(shell, 2);
+	return (1);
 }
 
-int syntax_error(const char *str, t_shell *shell)
+int	syntax_error(const char *str, t_shell *shell)
 {
-    int i = 0;
-    int piped_already = 0;
-    int found_word = 0;
+	int	i;
+	int	piped_already;
+	int	found_word;
 
-    while (str[i] != '\0')
-    {
-        if (str[i] == '|')
-        {
-            if (str[i + 1] == '|')
-                return print_syntax_error("minishell: syntax error near unexpected token '||'\n", shell);
-
-            if (piped_already || !found_word)
-                return print_syntax_error("minishell: syntax error near unexpected token '|'\n", shell);
-            piped_already = 1;
-        }
-        else if (str[i] != ' ')
-        {
-            found_word = 1;
-            piped_already = 0;
-        }
-        i++;
-    }
-    set_exit_code(shell, 0);  
-    return 0;
-}
-int check_unclosed_quotes(const char *input, t_shell *shell)
-{
-    int single_quotes = 0;
-    int double_quotes = 0;
-
-    while (*input)
-    {
-        if (*input == '\'')
-            single_quotes = !single_quotes; 
-        else if (*input == '"')
-            double_quotes = !double_quotes; 
-        input++;
-    }
-    if (single_quotes || double_quotes)
-    {
-        (printf(RED"minishell: syntax error: unclosed quote\n"RESET));
-        set_exit_code(shell, 2); 
-        return 1; 
-    }
-    set_exit_code(shell, 0); 
-    return 0;
+	i = 0;
+	piped_already = 0;
+	found_word = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '|')
+		{
+			if (str[i + 1] == '|')
+				return (error_msg("syntax: unexpected tk '||'\n", shell));
+			if (piped_already || !found_word)
+				return (error_msg("syntax: unexpected tk '|'\n", shell));
+			piped_already = 1;
+		}
+		else if (str[i] != ' ')
+		{
+			found_word = 1;
+			piped_already = 0;
+		}
+		i++;
+	}
+	return (set_exit_code(shell, 0), 0);
 }
 
-int check_redirect_syntax(const char *str, t_shell *shell)
+int	check_unclosed_quotes(const char *input, t_shell *shell)
 {
-	int i = 0;
+	int	single_quotes;
+	int	double_quotes;
+
+	single_quotes = 0;
+	double_quotes = 0;
+	while (*input)
+	{
+		if (*input == '\'')
+			single_quotes = !single_quotes;
+		else if (*input == '"')
+			double_quotes = !double_quotes;
+		input++;
+	}
+	if (single_quotes || double_quotes)
+	{
+		(printf(RED "minishell: syntax error: unclosed quote\n" RESET));
+		set_exit_code(shell, 2);
+		return (1);
+	}
+	set_exit_code(shell, 0);
+	return (0);
+}
+
+int	check_redirect_syntax(const char *str, t_shell *shell)
+{
+	int	i;
+
+	i = 0;
 	while (str[i])
 	{
 		if ((str[i] == '<' || str[i] == '>') && str[i + 1] == '\0')
 		{
-            (printf(RED"minishell: syntax error near unexpected token 'newline'\n"RESET));
+			(printf(RED "minishell: syntax error"
+					" near unexpected tk 'newline'\n" RESET));
 			set_exit_code(shell, 2);
-			return 1;
+			return (1);
 		}
-		if ((str[i] == '<' && str[i + 1] == '<' && str[i + 2] == '<') ||
-			(str[i] == '>' && str[i + 1] == '>' && str[i + 2] == '>'))
+		if ((str[i] == '<' && str[i + 1] == '<' && str[i + 2] == '<')
+			|| (str[i] == '>' && str[i + 1] == '>' && str[i + 2] == '>'))
 		{
-            printf(RED"minishell: syntax error near unexpected token '%c'"RESET"\n", str[i]);
+			printf(RED "minishell: syntax error"
+				" near unexpected tk '%c'" RESET "\n",
+				str[i]);
 			set_exit_code(shell, 2);
-			return 1;
+			return (1);
 		}
 		i++;
 	}
 	set_exit_code(shell, 0);
-	return 0;
-}
-int check_empty_input(const char *str, t_shell *shell)
-{
-	int i = 0;
-	while (str[i])
-	{
-		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
-		{
-			set_exit_code(shell, 0);
-			return 0;
-		}
-		i++;
-	}
-	return 1;
-}
-
-
-void set_exit_code(t_shell *shell, int code)
-{
-    if (shell)
-        shell->last_exitcode = code;
-}
-int run_syntax_checks(t_shell *shell)
-{
-	if (check_empty_input(shell->input, shell))
-		return 1;
-
-	if (check_unclosed_quotes(shell->input, shell))
-		return 1;
-
-	if (check_redirect_syntax(shell->input, shell))
-		return 1;
-
-	if (syntax_error(shell->input, shell))
-		return 1;
-
-	return 0;
-}
-
-int	check_redirections(t_command *cmd, t_shell *shell)
-{
-	int	fd;
-
-	if (cmd->io->infile)
-	{
-		fd = open(cmd->io->infile, O_RDONLY);
-		if (fd == -1)
-		{
-			perror(cmd->io->infile);
-			set_exit_code(shell, 1);
-			return (1);
-		}
-		close(fd);
-	}
-	if (cmd->io->outfile)
-	{
-		fd = open(cmd->io->outfile, O_WRONLY);
-		if (fd == -1)
-		{
-			perror(cmd->io->outfile);
-			set_exit_code(shell, 1);
-			return (1);
-		}
-		close(fd);
-	}
-	return (0); 
+	return (0);
 }

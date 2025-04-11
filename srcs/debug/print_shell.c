@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 13:47:02 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/10 14:37:15 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:05:13 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 //     if (!shell)
 //     {
 //         printf("Shell pointer is NULL.\n");
-//         return;
+//         return ;
 //     }
 
 //     printf("Shell Information:\n");
@@ -45,7 +45,8 @@
 //     // Print current input
 //     printf("Current Input: %s\n", shell->input ? shell->input : "null");
 //     // Print current directory
-//     printf("Current Directory: %s\n", shell->cur_dir ? shell->cur_dir : "null");
+//     printf("Current Directory: %s\n",
+// 		shell->cur_dir ? shell->cur_dir : "null");
 //     // Print previous/old directory
 //     printf("Old Directory: %s\n", shell->old_dir ? shell->old_dir : "null");
 //     // Print error state

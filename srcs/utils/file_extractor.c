@@ -6,21 +6,21 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:50:36 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/10 14:33:25 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:24:20 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <ctype.h>
 
-// Function to check if a token is a potential file path
-int	is_filepath(const char *token)
+// Function to check if a tk is a potential file path
+int	is_filepath(const char *tk)
 {
-	if (token[0] == '-' || strstr(token, "=") != NULL)
+	if (tk[0] == '-' || strstr(tk, "=") != NULL)
 	{
 		return (0);
 	}
-	if (strchr(token, '/') || strchr(token, '.'))
+	if (strchr(tk, '/') || strchr(tk, '.'))
 	{
 		return (1);
 	}
@@ -31,7 +31,7 @@ int	is_filepath(const char *token)
 void	extract_filepaths(const char *input)
 {
 	char	*input_copy;
-	char	*token;
+	char	*tk;
 	int		first;
 
 	input_copy = ft_strdup((char *)input);
@@ -40,16 +40,16 @@ void	extract_filepaths(const char *input)
 		perror("ft_strdup");
 		return ;
 	}
-	token = strtok(input_copy, " ");
+	tk = strtok(input_copy, " ");
 	first = 1;
-	while (token)
+	while (tk)
 	{
-		if (!first && is_filepath(token))
+		if (!first && is_filepath(tk))
 		{
-			printf("Found file path: %s\n", token);
+			printf("Found file path: %s\n", tk);
 		}
 		first = 0;
-		token = strtok(NULL, " ");
+		tk = strtok(NULL, " ");
 	}
 	free(input_copy);
 }
