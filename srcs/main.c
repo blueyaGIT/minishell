@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:34:35 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/10 14:40:52 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/11 16:18:39 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,5 @@ int	main(int argc, char *argv[], char **envp)
 	kill_shell(&shell, 1);
 	return (0);
 }
+
+test
