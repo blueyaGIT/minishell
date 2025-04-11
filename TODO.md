@@ -11,7 +11,7 @@
 - [ ] [develop builtin cmds](./srcs/builtin/)
 	- [ ] [echo]
 	- [ ] [cd]
-	- [ ] [pwd]
+	- [x] [pwd]
 	- [ ] [export]
 	- [ ] [unset]
 	- [x] [env]
