@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:22:47 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/11 15:26:47 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:34:12 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	process_redirection_token(t_node *new_node, t_list **token_lst)
 	t_token	*next_token;
 
 	tk = (t_token *)(*token_lst)->content;
-	new_node->redirections = ft_add_to_array(new_node->redirections,
+	new_node->rds = ft_add_to_array(new_node->rds,
 			tk->token_value);
 	*token_lst = (*token_lst)->next;
 	if (*token_lst)

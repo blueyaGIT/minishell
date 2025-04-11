@@ -6,15 +6,15 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:05:46 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/11 15:24:20 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:43:14 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	error_msg(const char *message, t_shell *shell)
+int	print_error(const char *message, t_shell *shell)
 {
-	(printf(RED "%s" RESET, message));
+	(ft_fprintf(STDERR_FILENO, RED"%s"RESET, message));
 	set_exit_code(shell, 2);
 	return (1);
 }
@@ -33,9 +33,9 @@ int	syntax_error(const char *str, t_shell *shell)
 		if (str[i] == '|')
 		{
 			if (str[i + 1] == '|')
-				return (error_msg("syntax: unexpected tk '||'\n", shell));
+				return (print_error("syntax: unexpected tk '||'\n", shell));
 			if (piped_already || !found_word)
-				return (error_msg("syntax: unexpected tk '|'\n", shell));
+				return (print_error("syntax: unexpected tk '|'\n", shell));
 			piped_already = 1;
 		}
 		else if (str[i] != ' ')

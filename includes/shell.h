@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/11 15:26:37 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:34:12 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_node
 	char				*command;
 	char				*args;
 	char				**filename;
-	char				**redirections;
+	char				**rds;
 	struct s_node		*next;
 }						t_node;
 

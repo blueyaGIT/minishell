@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:18:53 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/11 15:19:36 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:35:55 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,21 @@ void	fill_redirections(t_command *cmd, t_node *node)
 {
 	int	i;
 
-	i = 0;
-	while (node && node->redirections && node->redirections[i])
+	i = -1;
+	while (node && node->rds && node->rds[++i])
 	{
-		if (ft_strcmp(node->redirections[i], "<") == 0)
+		if (ft_strcmp(node->rds[i], "<") == 0)
+		{
 			if (node->filename && node->filename[i])
 				cmd->io->infile = ft_strdup(node->filename[i]);
-		else if (ft_strcmp(node->redirections[i], ">") == 0
-			|| ft_strcmp(node->redirections[i], ">>") == 0)
+		}
+		else if (ft_strcmp(node->rds[i], ">") == 0
+			|| ft_strcmp(node->rds[i], ">>") == 0)
+		{
 			if (node->filename && node->filename[i])
 				cmd->io->outfile = ft_strdup(node->filename[i]);
-		else if (ft_strcmp(node->redirections[i], "<<") == 0)
+		}
+		else if (ft_strcmp(node->rds[i], "<<") == 0)
 		{
 			if (node->filename && node->filename[i])
 			{
@@ -49,7 +53,6 @@ void	fill_redirections(t_command *cmd, t_node *node)
 				cmd->io->hrd_flag = true;
 			}
 		}
-		i++;
 	}
 }
 

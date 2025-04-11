@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:39:51 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/10 14:39:53 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:43:42 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ int		run_syntax_checks(t_shell *shell);
 int		check_empty_input(const char *str, t_shell *shell);
 int		check_redirect_syntax(const char *str, t_shell *shell);
 int		check_redirections(t_command *cmd, t_shell *shell);
+int		print_error(const char *message, t_shell *shell);
 #endif /* ERROR_H */

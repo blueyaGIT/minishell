@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:17:00 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/11 15:26:37 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:34:12 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_node	*create_new_node(void)
 	new_node->command = NULL;
 	new_node->args = NULL;
 	new_node->filename = NULL;
-	new_node->redirections = NULL;
+	new_node->rds = NULL;
 	new_node->next = NULL;
 	return (new_node);
 }

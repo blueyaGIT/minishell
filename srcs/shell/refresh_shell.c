@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 18:35:50 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/10 14:34:10 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:34:12 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static void	ft_delone_node(t_node *node, void (*del)(void *))
 		(*del)(node->args);
 	if (node->filename)
 		ft_free_arr(node->filename);
-	if (node->redirections)
-		ft_free_arr(node->redirections);
+	if (node->rds)
+		ft_free_arr(node->rds);
 	(*del)(node);
 }
 
