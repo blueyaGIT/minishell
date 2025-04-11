@@ -48,7 +48,7 @@ void	execute_commands(t_shell *shell)
 	build_parsing_nodes(shell);
 	print_node_list(shell->node);
 	shell->cmd_list = convert_node_list_to_command_list(shell->node);
-	print_command_list(shell->cmd_list);
+	// print_command_list(shell->cmd_list);
 	cmd = shell->cmd_list;
 	while (cmd)
 	{
@@ -58,4 +58,10 @@ void	execute_commands(t_shell *shell)
 	}
 	ft_lstfree(shell->list);
 	shell->list = NULL;
+}
+void process_and_execute_input(t_shell *shell)
+{
+    process_input(shell);                
+    handle_syntax_and_exit(shell);                  
+    execute_commands(shell);                        
 }

@@ -118,31 +118,30 @@ int run_syntax_checks(t_shell *shell)
 	return 0;
 }
 
-int	check_redirections(t_command *cmd, t_shell *shell)
+static int check_file_and_set_exit_code(const char *filename, int flags, t_shell *shell)
 {
-	int	fd;
+    int fd = open(filename, flags);
+    if (fd == -1)
+    {
+        perror(filename);          
+        set_exit_code(shell, 1);    
+        return 1;
+    }
+    close(fd);  
+    return 0;
+}
 
-	if (cmd->io->infile)
-	{
-		fd = open(cmd->io->infile, O_RDONLY);
-		if (fd == -1)
-		{
-			perror(cmd->io->infile);
-			set_exit_code(shell, 1);
-			return (1);
-		}
-		close(fd);
-	}
-	if (cmd->io->outfile)
-	{
-		fd = open(cmd->io->outfile, O_WRONLY);
-		if (fd == -1)
-		{
-			perror(cmd->io->outfile);
-			set_exit_code(shell, 1);
-			return (1);
-		}
-		close(fd);
-	}
-	return (0); 
+int check_redirections(t_command *cmd, t_shell *shell)
+{
+    if (cmd->io->infile)
+    {
+        if (check_file_and_set_exit_code(cmd->io->infile, O_RDONLY, shell))  
+            return 1;
+    }
+    if (cmd->io->outfile)
+    {
+        if (check_file_and_set_exit_code(cmd->io->outfile, O_WRONLY, shell))  
+            return 1;
+    }
+    return 0;
 }
