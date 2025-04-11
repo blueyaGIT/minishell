@@ -39,14 +39,14 @@ void	handle_syntax_and_exit(t_shell *shell)
 	}
 	convert_tokens(shell);
 	// printf("Prompt: %s\n", shell->input);
-	print_token_list(shell->list);
+	// print_token_list(shell->list);
 }
 void	execute_commands(t_shell *shell)
 {
 	t_command	*cmd;
 
 	build_parsing_nodes(shell);
-	print_node_list(shell->node);
+	// print_node_list(shell->node);
 	shell->cmd_list = convert_node_list_to_command_list(shell->node);
 	// print_command_list(shell->cmd_list);
 	cmd = shell->cmd_list;

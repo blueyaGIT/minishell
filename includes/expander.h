@@ -23,5 +23,6 @@ typedef struct s_expansion_context {
 char	*replace_env_var(char *input, char **env, int lastexitcode);
 char	*extract_var_name(char *input);
 char	*expand_variables(char *input, char **env, int lastexitcode);
+void    int_to_str(int num, char *str);
 
 #endif /* EXPANDER_H */
