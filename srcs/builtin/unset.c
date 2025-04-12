@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:58:12 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/12 16:15:19 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/12 17:14:28 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,18 @@ static int	is_valid_identifier(t_shell *shell, char *str)
 static bool	remove_env_var(t_shell *shell, int idx)
 {
 	int	i;
-	int	len;
 
 	if (idx > ft_arrlen(shell->env))
 		return (FAIL);
 	ft_free_ptr(shell->env[idx]);
 	i = idx;
-	len = idx;
 	while (shell->env[i + 1])
 	{
 		shell->env[i] = ft_strdup(shell->env[i + 1]);
 		ft_free_ptr(shell->env[i + 1]);
 		i++;
-		len++;
 	}
-	shell->env = refresh_env(shell, ft_arrlen(shell->env));
+	shell->env = refresh_env(shell, i);
 	if (!shell->env)
 		return (FAIL);
 	return (true);
