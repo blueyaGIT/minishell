@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:05:33 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/12 15:03:05 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/12 15:25:39 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	exec_cd(t_shell *shell, char **args)
 {
 	char	*cwd;
 	char	buf[PATH_MAX];
-	
+
 	if (ft_arrlen(args) > 2)
 		return (print_error("CD", shell), 2);
 	cwd = getcwd(buf, PATH_MAX);
