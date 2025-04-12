@@ -47,6 +47,8 @@ SRCS	+=	cd.c \
 			echo.c \
 			env.c \
 			exit.c \
+			export_utils.c \
+			export.c \
 			pwd.c \
 
 # ENV
