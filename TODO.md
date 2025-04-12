@@ -1,13 +1,5 @@
 # TODO List
 
-### Laura
-- [x] [space prompt token error](./srcs/l_reading_line.c#L77)
-- [x] [create linked list for elements](./includes/minishell.h)
-- [x] [enum implementation](./includes/minishell.h)
-- [ ] [syntax error for single pipes without words after]
-- [ ] [new linked list what includes arg, redirect and file]
-
-### Marzia
 - [ ] [kill_fds if pipe_flag == true](./srcs/execution/children.c#L43)
 - [ ] [fix segfault when piped input]
 - [x] [develop builtin cmds](./srcs/builtin/)
