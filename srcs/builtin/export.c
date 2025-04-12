@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:28:10 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/12 15:55:59 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/12 16:15:55 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ int	exec_export(t_shell *shell, char **args)
         free(value);
         i++;
     }
+	shell->env = refresh_env(shell, ft_arrlen(shell->env));
     return (exit_code);
 }

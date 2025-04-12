@@ -50,6 +50,7 @@ SRCS	+=	cd.c \
 			export_utils.c \
 			export.c \
 			pwd.c \
+			unset.c \
 
 # ENV
 SRCS	+=	env_copy.c \

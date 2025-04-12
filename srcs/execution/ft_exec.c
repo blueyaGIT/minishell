@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:00:12 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/12 15:54:33 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/12 16:13:36 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	exec_builtin(t_shell *shell, t_command *instr)
 		temp = exec_echo(instr->args);
 	else if (!ft_strncmp(instr->command, "export", 7))
 		temp = exec_export(shell, instr->args);
-	// else if (!ft_strncmp(instr->command, "unset", 6))
-	// 	temp = exec_unset(shell, instr->args);
+	else if (!ft_strncmp(instr->command, "unset", 6))
+		temp = exec_unset(shell, instr->args);
 	shell->last_exitcode = temp;
 	return (temp);
 }
