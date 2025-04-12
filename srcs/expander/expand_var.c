@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 15:09:30 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/11 15:18:14 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/12 14:53:42 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ char	*expand_variables(char *input, char **env, int lastexitcode)
 
 	ctx.input = input;
 	ctx.env = env;
-	ctx.new_str = malloc(100);
+	ctx.buffer_size = 100;
+	ctx.new_str = ft_calloc(1, ctx.buffer_size);
 	if (!ctx.new_str)
 	{
 		perror("malloc failed");
@@ -95,6 +96,5 @@ char	*expand_variables(char *input, char **env, int lastexitcode)
 			ctx.exp.in_double_quotes = !ctx.exp.in_double_quotes;
 		handle_current_char(&ctx);
 	}
-	ctx.new_str[ctx.exp.j] = '\0';
 	return (ctx.new_str);
 }
