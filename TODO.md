@@ -9,8 +9,8 @@
 
 ### Marzia
 - [ ] [develop builtin cmds](./srcs/builtin/)
-	- [ ] [echo]
-	- [ ] [cd]
+	- [x] [echo]
+	- [x] [cd]
 	- [x] [pwd]
 	- [ ] [export]
 	- [ ] [unset]
