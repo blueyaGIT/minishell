@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/11 15:34:12 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/12 14:28:30 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ typedef struct s_shell
 	t_node				*node;
 	t_list				*list;
 	t_command			*cmd_list;
-	char				*cur_dir;
-	char				*old_dir;
 	bool				has_error;
 	int					last_exitcode;
 	pid_t				pid;
