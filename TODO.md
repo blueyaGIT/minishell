@@ -1,6 +1,6 @@
 
 
-
+- [ ] [check kill_fds](./srcs/execution/ft_exec.c#L27)
 - [ ] [kill_fds if pipe_flag == true](./srcs/execution/children.c#L43)
 - [ ] [fix segfault when piped input]
 - [x] [develop builtin cmds](./srcs/builtin/)
