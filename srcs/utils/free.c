@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:48:05 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/11 15:34:12 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/24 15:25:56 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	ft_free_command(t_command *cmd)
 		}
 		free(cmd->args);
 	}
-	free(cmd->pipe_fd);
 	ft_free_io(cmd->io);
 	free(cmd);
 }

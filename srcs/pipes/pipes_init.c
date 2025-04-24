@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:20:13 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/10 14:41:14 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/24 15:26:11 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 bool	pipes_init(t_shell *shell)
 {
-	int			*fd;
+	int			fd[2];
 	t_command	*instr;
 
 	instr = shell->cmd_list;
 	while (instr)
 	{
-		if (instr->pipe_flag || (instr->prev && instr->prev->pipe_flag))
+		if (instr->pipe_flag)
 		{
-			fd = malloc(sizeof(*fd) * 2);
-			if (!fd || pipe(fd) != 0)
+			if (pipe(fd) != 0)
 				return (reload_shell(shell), FAIL);
 			instr->pipe_fd = fd;
 		}
