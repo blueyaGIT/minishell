@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 11:01:18 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/10 14:38:23 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/24 17:14:52 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ static int	check_children(t_shell *shell)
 	int		exit_status;
 	int		temp;
 
-	wpid = 0;
+	kill_fds(shell->cmd_list, false);
 	temp = 0;
+	wpid = 0;
 	while (wpid != -1 || errno != ECHILD)
 	{
 		wpid = waitpid(-1, &exit_status, 0);

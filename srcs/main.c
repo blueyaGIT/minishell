@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:34:35 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/11 16:19:59 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/24 17:19:44 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	initialize_shell(t_shell *shell, char **argv, char **envp)
 {
 	(void)argv;
 	ft_memset(shell, 0, sizeof(t_shell));
-	if (shell_init(shell, envp) != SUCCESS)
+	if (!shell_init(shell, envp))
 		exit(EXIT_FAILURE);
 	ft_print_logo(envp);
 }
@@ -41,18 +41,17 @@ int	main(int argc, char *argv[], char **envp)
 	{
 		init_signals();
 		shell.input = readline(PROMPT);
-		if (!shell.input || shell.input[0] == '\0')
-		{
-			set_exit_code(&shell, 0);
-			continue ;
-		}
-		process_and_execute_input(&shell);
 		refresh_signals();
+		if (!shell.input)
+			break ;
 		if (ft_strcmp(shell.input, "./minishell") == 0)
 			check_shlvl(&shell);
-		g_ecode = ft_exec(&shell);
+		if (process_and_execute_input(&shell))
+			g_ecode = ft_exec(&shell);
+		else
+			g_ecode = 1;
 		reload_shell(&shell);
 	}
-	kill_shell(&shell, 1);
+	kill_shell(&shell, g_ecode);
 	return (0);
 }

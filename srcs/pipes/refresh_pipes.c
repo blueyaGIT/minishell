@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:44:18 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/10 14:41:14 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/04/24 16:43:56 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,22 @@
 
 bool	refresh_pipes(t_redir *io)
 {
+	bool	temp;
+
+	temp = true;
 	if (!io)
-		return (true);
+		return (temp);
 	io->stdin_backup = dup(STDIN_FILENO);
 	if (io->stdin_backup == -1)
-		return (printf(RED "ERROR:"
-				"FAILED SETTING STDIN_BACKUP IN REFRESH_PIPES" RESET), FAIL);
+		temp = false;
 	io->stdout_backup = dup(STDOUT_FILENO);
 	if (io->stdout_backup == -1)
-		return (printf(RED "ERROR:"
-				"FAILED SETTING STDOUT_BACKUP IN REFRESH_PIPES" RESET), FAIL);
+		temp = false;
 	if (io->fd_in != -1)
 		if (dup2(io->fd_in, STDIN_FILENO) == -1)
-			return (printf(RED "ERROR:"
-					"FAILED DUP2 STDIN_FILENO IN REFRESH_PIPES" RESET), FAIL);
+			temp = false;
 	if (io->fd_out != -1)
 		if (dup2(io->fd_out, STDOUT_FILENO) == -1)
-			return (printf(RED "ERROR:"
-					"FAILED DUP2 STDOUT_FILENO IN REFRESH_PIPES" RESET), FAIL);
-	return (SUCCESS);
+			temp = false;
+	return (temp);
 }
