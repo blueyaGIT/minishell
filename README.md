@@ -21,15 +21,15 @@ To use `minishell`, clone the repository in the root of your project using one o
 
 #### SSH
 ```bash
-git clone git@github.com:LauraNierobisch/Minishell.git
+git clone git@github.com:blueyaGIT/minishell.git
 ```
 #### HTTPS
 ```bash
-git clone https://github.com/LauraNierobisch/Minishell.git
+git clone https://github.com/blueyaGIT/minishell.git
 ```
 #### GitHub CLI
 ```bash
-gh repo clone LauraNierobisch/Minishell
+gh repo clone blueyaGIT/minishell
 ```
 This will create a directory called `minishell/`. Enter it with the command:
 
