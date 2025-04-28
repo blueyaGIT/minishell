@@ -5,7 +5,7 @@
 <p align="center">
   Score: <i>WIP/100</i><br>
   Finished: <i>??.??.2025</i><br>
-  Team: <a href="https://github.com/LauraNierobisch" target="_blank">@Laura</a> & <a href="https://github.com/blueyaGIT" target="_blank">@Marzia</a>
+  Team: <a href="TBD" target="_blank">@TBD</a> & <a href="https://github.com/blueyaGIT" target="_blank">@Marzia</a>
 </p>
 
 # minishell
@@ -79,10 +79,10 @@ This will run the minishell executable
 
 For more details, refer to the project documentation or the `42` subject PDF.
 
-<!-- ## 🚀 Next Project
+## 🚀 Next Project
 
-<a href="https://github.com/LauraNierobisch/cub3d"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=BF94E4&width=435&lines=cub3d"></a> -->
+<a href="https://github.com/blueyaGIT/philo"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=BF94E4&width=435&lines=Philosophers"></a> -->
 
-<!-- ## ⏳ Previous Project
+## ⏳ Previous Project
 
-<a href="https://github.com/LauraNierobisch/philo"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=BF94E4&width=435&lines=Philosophers"></a> -->
+<a href="https://github.com/blueyaGIT/push_swap"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=BF94E4&width=435&lines=push_swap"></a>
