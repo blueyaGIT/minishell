@@ -31,6 +31,10 @@ WHITE       = \033[37m
 LIGHT_PINK  = \033[38;5;168m
 NC          = \033[0m   # No Color (Reset)
 
+
+
+
+
 # Other Formatting
 UNDERLINE   = \033[4m
 REVERSED    = \033[7m
