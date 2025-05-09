@@ -247,4 +247,4 @@ debug: CFLAGS += -DDEBUG=1
 debug: clean all
 
 # Phony targets
-.PHONY: all clean fclean re libft init-submodules remove-submodules fastre norm debug relink container-build container-up container prune
+.PHONY: all clean fclean re init-submodules remove-submodules fastre norm debug relink container-build container-up container prune
