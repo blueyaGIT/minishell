@@ -202,7 +202,7 @@ fclean: clean
 re: fclean all
 
 # Rebuild everything faster
-fastre: remove-submodules
+fre: remove-submodules
 	@rm -rf $(OBJ_DIR)
 	@rm -rf $(LIBFT_DIR)
 	@rm -rf $(NAME)
@@ -211,40 +211,10 @@ fastre: remove-submodules
 norm:
 	@norminette $(SRC_DIRS) $(INC_DIR) $(LIBFT_DIR) | grep "Error" || printf "$(GREEN)✅ Norme OK ✅ $(NC)\n"
 
-container-build:
-	@if ! docker ps | grep -q dev_container; then \
-		printf "$(YELLOW)🚧 Building the container environment 🚧 $(NC)\n"; \
-		docker compose -f ./.docker/docker-compose.yml build --no-cache; \
-	else \
-		printf "$(YELLOW)🚧 Container already built.. skip build process 🚧 $(NC)\n"; \
-	fi
-
-container-up:
-	@if ! docker ps | grep -q dev_container; then \
-		printf "$(YELLOW)🚧 Starting the container environment 🚧 $(NC)\n"; \
-		docker compose -p dev_container -f ./.docker/docker-compose.yml up -d; \
-	else \
-		printf "$(YELLOW)🚧 Container already running.. skip its creation 🚧 $(NC)\n"; \
-	fi
-
-container:
-	@make container-build
-	@make container-up
-	@docker exec -it dev_container bash
-
-prune:
-	@if docker ps -a | grep -q dev_container; then \
-		printf "$(RED)🚧 Removing existing container... 🚧 $(NC)\n"; \
-		docker stop dev_container > /dev/null 2>&1 && docker rm dev_container > /dev/null 2>&1; \
-	else \
-		printf "$(YELLOW)🚧 No container named 'dev_container' to remove. 🚧 $(NC)\n"; \
-	fi
-	@printf "$(GREEN)✅ All done! ✅$(NC)\n"
-
 debug: CFLAGS += -g
 debug: CFLAGS += -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=all -fsanitize=float-divide-by-zero -fsanitize=float-cast-overflow -fno-sanitize=null -fno-sanitize=alignment
 debug: CFLAGS += -DDEBUG=1
 debug: clean all
 
 # Phony targets
-.PHONY: all clean fclean re init-submodules remove-submodules fastre norm debug relink container-build container-up container prune
+.PHONY: all clean fclean re init-submodules remove-submodules fre norm debug relink
