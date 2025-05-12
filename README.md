@@ -5,7 +5,7 @@
 <p align="center">
   Score: <i>WIP/100</i><br>
   Finished: <i>??.??.2025</i><br>
-  Team: <a href="TBD" target="_blank">@TBD</a> & <a href="https://github.com/blueyaGIT" target="_blank">@Marzia</a>
+  Team: <a href="https://github.com/lilikts" target="_blank">@Lilli</a> & <a href="https://github.com/blueyaGIT" target="_blank">@Marzia</a>
 </p>
 
 # minishell

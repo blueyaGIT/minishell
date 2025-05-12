@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:20:37 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/28 13:38:33 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/05/12 15:10:34 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_print_logo(char **envp)
 		"█████████████████████████████████████████████████\n" LIGHT_PINK
 		"\n"
 		"                             	" LIGHT_PINK UNDERLINE ITALIC
-		"insert_user" NO_UNDERLINE LIGHT_PINK " && " UNDERLINE "dalbano\n"
+		"lkloters" NO_UNDERLINE LIGHT_PINK " && " UNDERLINE "dalbano\n"
 		"\033[0m"
 		"\n");
 	print_username(envp);
