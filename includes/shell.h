@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/12 14:28:30 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/06/23 14:33:28 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,6 @@ typedef enum e_token_type
 	DQT,
 	SQT,
 }						t_token_type;
-
-/*
-only exampel for how we can sort the 
-tokens in the list nothing in ore decided for now :)
-*/
-typedef struct s_node
-{
-	char				*command;
-	char				*args;
-	char				**filename;
-	char				**rds;
-	struct s_node		*next;
-}						t_node;
 
 //neuer Struct für command
 typedef struct s_redir
@@ -66,24 +53,11 @@ typedef struct s_command
 	struct s_command	*prev;
 }						t_command;
 
-/*
-tk value == the string witch is teh tk
-tp == ENUM Value
-*/
-typedef struct s_token
-{
-	char				*token_value;
-	t_token_type		tp;
-	struct s_token		*next;
-}						t_token;
-
 typedef struct s_shell
 {
 	char				*input;
 	char				**tokens;
 	char				**env;
-	t_node				*node;
-	t_list				*list;
 	t_command			*cmd_list;
 	bool				has_error;
 	int					last_exitcode;
