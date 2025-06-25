@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:40:40 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/11 15:32:55 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/06/25 15:10:47 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,13 @@
 # include "libft/libft.h"
 # include "shell.h"
 # include "builtin.h"
-# include "debug.h"
 # include "env.h"
-# include "error.h"
 # include "exec.h"
-# include "expander.h"
+# include "error.h"
 # include "format.h"
 # include "io.h"
 # include "pipes.h"
 # include "signals.h"
-# include "token.h"
 # include "utils.h"
 
 /* READLINE INCLUDES */

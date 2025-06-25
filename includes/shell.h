@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/06/23 14:33:28 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/06/25 15:09:24 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ bool					shell_init(t_shell *shell, char **envp);
 t_shell					*get_shell(void);
 int						kill_shell(t_shell *shell, int ecode);
 void					refresh_shell(t_shell *shell);
-void					ft_free_node(t_node **lst, void (*del)(void *));
-void					ft_free_token(t_token **lst, void (*del)(void *));
+// void					ft_free_node(t_node **lst, void (*del)(void *));
+// void					ft_free_token(t_token **lst, void (*del)(void *));
 void					ft_free_shell(t_shell *shell);
 void					reload_shell(t_shell *shell);
 

@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:34:35 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/24 17:19:44 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/06/25 15:14:11 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ int	main(int argc, char *argv[], char **envp)
 			break ;
 		if (ft_strcmp(shell.input, "./minishell") == 0)
 			check_shlvl(&shell);
-		if (process_and_execute_input(&shell))
-			g_ecode = ft_exec(&shell);
-		else
-			g_ecode = 1;
+		// if (process_and_execute_input(&shell))
+		// 	g_ecode = ft_exec(&shell);
+		// else
+		// 	g_ecode = 1;
+		if (ft_strcmp(shell.input, "exit") == 0)
+			exit(1);
 		reload_shell(&shell);
 	}
 	kill_shell(&shell, g_ecode);

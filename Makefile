@@ -64,18 +64,12 @@ SRCS	+=	bin.c \
 			children.c \
 			ft_exec.c \
 
-# EXPANDER
-SRCS	+=	expand_var.c \
-			expand_helper.c \
 # ERROR
 SRCS	+=	syntax_error.c \
 			syntax_helper.c \
-			
+
 # TOKENIZER
-SRCS	+=	create_token.c \
-			token_to_list.c \
-			token_helper.c \
-			process_token.c \
+SRCS	+=	
 
 # PIPES
 SRCS	+=	kill_pipes.c \
@@ -96,14 +90,9 @@ SRCS	+=	kill_shell.c \
 SRCS	+=	init_signals.c \
 
 # UTILS
-SRCS	+=	file_extractor.c \
-			free.c \
-			parser_helper.c \
+SRCS	+=	free.c \
 			print_logo.c \
 			sys_path_extractor.c \
-
-# DEBUG
-SRCS	+=	print_shell.c \
 
 # Object files
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
