@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/06/25 15:09:24 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/06/25 15:23:02 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ typedef enum e_token_type
 //neuer Struct für command
 typedef struct s_redir
 {
-	char				*infile;
-	char				*outfile;
-	char				*hrd_sep;
-	bool				hrd_flag;
+	char				*infile; //lilli
+	char				*outfile; //lilli
+	char				*hrd_sep; //lilli
+	bool				hrd_flag; //lilli
 	int					fd_in;
 	int					fd_out;
 	int					stdin_backup;
@@ -42,11 +42,11 @@ typedef struct s_redir
 
 typedef struct s_command
 {
-	char				*command;
+	char				*command; //lilli
 	char				*cpath;
-	char				*filename;
-	char				**args;
-	bool				pipe_flag;
+	char				*filename; //lilli
+	char				**args; //lilli
+	bool				pipe_flag; //lilli "wenn | im input flag = true"
 	int					*pipe_fd;
 	t_redir				*io;
 	struct s_command	*next;
