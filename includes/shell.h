@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/06/25 15:33:05 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/01 10:53:43 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,18 @@
 
 typedef enum e_token_type
 {
-	T_WORD,
-	T_PIPE,
-	T_REDIR_IN,
-	T_REDIR_OUT,
-	T_APPEND,
-	T_HEREDOC,
-	T_DQT,
-	T_SQT,
-}						t_token_type;
+	T_WORD, // Befehle, Argumente, Dateinamen
+	T_PIPE, // |
+	T_REDIR_IN, // <
+	T_REDIR_OUT, // >
+	T_APPEND, // >>
+	T_HEREDOC, // <<
+	T_DQT, // "
+	T_SQT, // '
+	T_ENV, // $VAR
+	T_EOF, // Ende der Eingabe
+	T_ERROR, // Fehlerhaftes Token
+}	t_token_type;
 
 typedef struct s_token
 {
@@ -33,6 +36,16 @@ typedef struct s_token
 	char			*value;
 	struct s_token	*next;
 }					t_token;
+
+#endif
+
+typedef enum e_command_type
+{
+	BUILTIN,
+	COMMAND,
+	PIPE,
+}	t_command_type;
+
 
 //neuer Struct für command
 typedef struct s_redir
@@ -51,6 +64,7 @@ typedef struct s_command
 {
 	char				*command; //lilli
 	char				*cpath;
+	int					cmd_type; // hinweis
 	char				*filename; //lilli
 	char				**args; //lilli
 	bool				pipe_flag; //lilli "wenn | im input flag = true"
