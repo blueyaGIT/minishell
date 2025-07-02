@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   debug.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 10:52:30 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/02 11:26:51 by dalbano          ###   ########.fr       */
+/*   Created: 2025/07/02 11:06:18 by dalbano           #+#    #+#             */
+/*   Updated: 2025/07/02 11:07:19 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef DEBUG_H
+# define DEBUG_H
 
-int process_and_execute_input(t_shell *shell)
-{
-	t_token *token;
-	
-	token = lexer(shell->input);
-	if(!token)
-		return (0);
-	shell->token = token;
-}
+# include "minishell.h"
+
+void print_shell(t_shell *shell);
+
+#endif /* DEBUG_H */

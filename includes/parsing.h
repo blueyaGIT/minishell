@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 10:52:30 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/02 11:26:51 by dalbano          ###   ########.fr       */
+/*   Created: 2025/07/02 11:15:34 by dalbano           #+#    #+#             */
+/*   Updated: 2025/07/02 11:29:25 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef PARSING_H
+# define PARSING_H
 
-int process_and_execute_input(t_shell *shell)
-{
-	t_token *token;
-	
-	token = lexer(shell->input);
-	if(!token)
-		return (0);
-	shell->token = token;
-}
+# include "minishell.h"
+
+t_token	*new_token(t_token_type type, char *value);
+t_token	*token_last(t_token *token);
+void	token_add_back(t_token **token, t_token *new);
+void	handle_redirectory(t_token **token, char *input, int *i);
+bool	ft_isspace_ms(char c);
+bool	is_redirectory(char c);
+t_token	*lexer(char *input);
+#endif /* PARSING_H */

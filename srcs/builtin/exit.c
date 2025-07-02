@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 18:01:56 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/10 14:37:02 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/02 11:29:25 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	get_ecode(char *param, bool *temp)
 	i = 0;
 	if (!param)
 		return (g_ecode);
-	while (ft_isspace(param[i]))
+	while (ft_isspace_ms(param[i]))
 		i++;
 	if (param[i] == '\0')
 		return (*temp = true, 0);
@@ -28,7 +28,7 @@ static int	get_ecode(char *param, bool *temp)
 	if (!ft_isdigit(param[i]))
 		return (*temp = true, 0);
 	while (param[i] != '\0')
-		if (!ft_isdigit(param[i]) && !ft_isspace(param[i]))
+		if (!ft_isdigit(param[i]) && !ft_isspace_ms(param[i]))
 			return (*temp = true, 0);
 	else
 		i++;
