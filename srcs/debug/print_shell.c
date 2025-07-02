@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 13:47:02 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/02 11:09:02 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/02 11:27:44 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void print_shell(t_shell *shell)
 {
     int i;
 
-	printf("\n\n\n");
+    printf("\n\n\n");
     if (!shell)
     {
         printf("Shell pointer is NULL.\n");
@@ -41,7 +41,29 @@ void print_shell(t_shell *shell)
     {
         printf("Environment Variables: (null)\n");
     }
-	printf("\n");
+    printf("\n");
+
+    // Print token
+    if (shell->token)
+    {
+        printf("Tokens:\n");
+        t_token *current = shell->token;
+        i = 0;
+        while (current)
+        {
+            printf("  [%d]: type=%d, value='%s'\n", i, 
+                   current->type, 
+                   current->value ? current->value : "null");
+            current = current->next;
+            i++;
+        }
+    }
+    else
+    {
+        printf("Tokens: (null)\n");
+    }
+    printf("\n");
+
     // Print current input
     printf("Current Input: %s\n", shell->input ? shell->input : "null");
     // Print error state
@@ -49,5 +71,5 @@ void print_shell(t_shell *shell)
     // Print exit code
     printf("Exit Code: %d\n", shell->last_exitcode);
     printf("------------------");
-	printf("\n\n\n");
+    printf("\n\n\n");
 }

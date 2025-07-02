@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/01 10:53:43 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/02 11:26:54 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ typedef struct s_token
 	char			*value;
 	struct s_token	*next;
 }					t_token;
-
-#endif
 
 typedef enum e_command_type
 {
@@ -79,6 +77,7 @@ typedef struct s_shell
 	char				*input;
 	char				**tokens;
 	char				**env;
+	t_token				*token;
 	t_command			*cmd_list;
 	bool				has_error;
 	int					last_exitcode;

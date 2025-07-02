@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 13:43:01 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/01 17:40:56 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/02 11:29:25 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool ft_isspace(char c)
+bool ft_isspace_ms(char c)
 {
 	if (c == ' ' || c == '\t')
 		return (true);
@@ -33,7 +33,7 @@ t_token *lexer(char *input)
 
 	while (input[i])
 	{
-		if (ft_isspace(input[i]))
+		if (ft_isspace_ms(input[i]))
 			i++;
 		else if (input[i] == '|')
 			handle_pipe();

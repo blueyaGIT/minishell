@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:40:40 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/02 11:07:28 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/02 11:28:06 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # include "error.h"
 # include "format.h"
 # include "io.h"
+# include "parsing.h"
 # include "pipes.h"
 # include "signals.h"
 # include "utils.h"
