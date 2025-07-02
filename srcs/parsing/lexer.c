@@ -6,18 +6,11 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 13:43:01 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/02 14:13:53 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/02 14:16:43 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-bool ft_isspace_ms(char c)
-{
-	if (c == ' ' || c == '\t')
-		return (true);
-	return (false);
-}
 
 bool is_redirectory(char c)
 {
@@ -46,7 +39,7 @@ t_token *lexer(char *input)
 
 	while (input[i])
 	{
-		if (ft_isspace_ms(input[i]))
+		if (ft_isspace(input[i]))
 			i++;
 		else if (input[i] == '|')
 			handle_pipe(&token, &i);
