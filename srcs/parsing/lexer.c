@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 13:43:01 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/02 14:59:11 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/03 12:52:20 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ t_token *lexer(char *input)
 		else if (is_empty_quote(input, i))
 			handle_empty_quote(&token, &i);
 		else
-			handle_word()
+			handle_word(&token, input, &i);
 	}
 }
