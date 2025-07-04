@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 13:43:01 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/04 10:02:08 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/04 10:44:51 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_token *lexer(char *input)
 	t_token *token = NULL;
 	int i = 0;
 
-	if (!check_input(input))
+	if (!valid_input(input))
 		return ;
 	while (input[i])
 	{

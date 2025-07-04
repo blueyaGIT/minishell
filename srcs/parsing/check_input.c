@@ -6,8 +6,126 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 10:02:46 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/04 10:02:48 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/04 14:12:11 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include 
+#include "minishell.h"
+
+static bool valid_quotes(const char *input)
+{
+	int i;
+	char quote;
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '\'' || input[i] == '\"')
+		{
+			quote = input[i];
+			i++;
+			while (input[i] && input[i] != quote)
+				i++;
+			if (input[i] != quote)
+				return (false);
+			i++;
+		}
+		else
+			i++;
+	}
+	return (true);
+}
+
+static bool valid_pipe(const char *input)
+{
+	int i;
+	char quote;
+	i = 0;
+	quote = 0;
+	while (input[i] && ft_isspace(input[i]))
+		i++;
+	if (input[i] == '|')
+		return (false);
+	while (input[i])
+	{
+		if (input[i] == '|')
+		{
+			i++;
+			while (input[i] && ft_isspace(input[i]))
+				i++;
+			if (input[i] == '|' || input[i] == '\0')
+				return (false);
+		}
+		else if (input[i] == '\'' || input[i] == '\"')
+		{
+			quote = input[i];
+			i++;
+			while (input[i] && input[i] != quote)
+				i++;
+			if (input[i] == quote)
+				i++;
+		}
+		else
+			i++;
+	}
+	return (true);
+}
+
+static bool valid_escape_chars(const char *input)
+{
+	int i;
+	char quote;
+	
+	i = 0;
+	quote = 0;
+	while (input[i])
+	{
+		if (quote == 0 && (input[i] == '\'' || input[i] == '\"'))
+			quote = input[i];
+		else if (quote == input[i])
+			quote = 0;
+		if (input[i] == '\\')
+		{
+			if (input[i + 1] == '\0')
+				return (false);
+			if (quote != '\'')
+			{
+				if (input[i + 1] == '\'')
+				i++;
+			}
+			else
+				i++;
+		}
+		i++;
+	}
+	return (true);
+}
+
+static bool is_only_whitespace(const char *input)
+{
+	int i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (!ft_isspace(input[i]))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+
+bool valid_input(const char *input)
+{
+	if (!input || input[0] == '\0')
+		return (false);
+	if (is_only_whitespace(input))
+		return (false); // error message
+	if (!valid_quotes(input))
+		return (false); // error message
+	if (!valid_pipe(input))
+		return (false); // error message
+	if (!valid_escape_chars(input))
+		return (false); // error_message
+	return (true);
+}
