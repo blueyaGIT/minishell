@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:45:13 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/03 13:59:34 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/04 09:59:40 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ void handle_redirectory(t_token **token, char *input, int *i)
 		if (input[*i + 1] == '>')
 		{
 			token_add_back(token, new_token(T_APPEND, ft_strdup(">>")));
-			i++;
+			(*i)++;
 		}
 		else
 			token_add_back(token, new_token(T_REDIR_OUT, ft_strdup(">")));
-		i++;
+		(*i)++;
 	}
 	if (input[*i] == '<')
 	{
 		if (input[*i + 1] == '<')
 		{
 			token_add_back(token, new_token(T_HEREDOC, ft_strdup("<<")));
-			i++;
+			(*i)++;
 		}
 		else
 			token_add_back(token, new_token(T_REDIR_IN, ft_strdup("<")));
-		i++;
+		(*i)++;
 	}
 }
 
@@ -66,29 +66,30 @@ int parse_word_content(char *input, int *i, char *word, int length)
 			if (input[*i] == quote)
 				(*i)++;
 		}
+		else
+			word[j++] = input[(*i)++];
 	}
 	word[j] = '\0';
-	return (1);
+	return (j);
 }
 
 
 void handle_word(t_token **token, char *input, int *i)
 {
 	char *word;
-	int j;
 	int length;
-	
-	j = 0;
+	int written;
+
 	length = calc_word_length(input, *i);
 	word = (char *)malloc(length + 1);
 	if (!word)
 		return ;
-	if (!parse_word_content(input, i, word, length))
+	written = parse_word_content(input, i, word, length);
+	if (written < 0)
 	{
 		free(word);
 		return ;
 	}
-	word[j] = '\0';
-	token_add_back(token, new_token(T_WORD, strdup(word)));
+	token_add_back(token, new_token(T_WORD, word));
 	free(word);
 }

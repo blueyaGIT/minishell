@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 13:43:01 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/03 12:52:20 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/04 10:02:08 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ t_token *lexer(char *input)
 	t_token *token = NULL;
 	int i = 0;
 
+	if (!check_input(input))
+		return ;
 	while (input[i])
 	{
 		if (ft_isspace(input[i]))
@@ -72,4 +74,5 @@ t_token *lexer(char *input)
 		else
 			handle_word(&token, input, &i);
 	}
+	return (token);
 }
