@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 11:15:34 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/02 14:16:50 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/04 14:54:58 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,14 @@ void	token_add_back(t_token **token, t_token *new);
 void	handle_redirectory(t_token **token, char *input, int *i);
 bool	is_redirectory(char c);
 t_token	*lexer(char *input);
+int		calc_word_length(char *input, int i);
+bool	is_token_seperator(char c);
+bool	is_empty_quote(char *input, int i);
+bool	after_is_word(char *input, int i);
+bool	before_is_word(char *input, int i);
+void	handle_pipe(t_token **token, int *i);
+void	handle_empty_quote(t_token **token, int *i);
+int		parse_word_content(char *input, int *i, char *word, int length);
+void	handle_word(t_token **token, char *input, int *i);
+bool	valid_input(const char *input);
 #endif /* PARSING_H */

@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:56 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/02 11:24:06 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/04 14:56:42 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	ft_print_logo(char **envp);
 void	extract_filepaths(const char *input);
 void	ft_free_command(t_command *cmd);
 void	ft_free_io(t_redir *io);
-// void	ft_free_nodes(t_node *head);
-// void	ft_free_tokens(t_token **lst);
+void	free_token(t_token *token);
 bool	process_input(t_shell *shell);
 bool	handle_syntax_and_exit(t_shell *shell);
 bool	execute_commands(t_shell *shell);

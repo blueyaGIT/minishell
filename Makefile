@@ -72,7 +72,12 @@ SRCS	+=	syntax_error.c \
 			syntax_helper.c \
 
 # TOKENIZER
-SRCS	+=	
+SRCS	+=	check_input.c \
+			create_token.c \
+			handle_token.c \
+			lexer_utils.c \
+			lexer.c \
+			parsing.c \
 
 # PIPES
 SRCS	+=	kill_pipes.c \
