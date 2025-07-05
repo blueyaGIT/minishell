@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   handle_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 10:52:30 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/05 14:12:42 by lkloters         ###   ########.fr       */
+/*   Created: 2025/07/05 13:58:20 by lkloters          #+#    #+#             */
+/*   Updated: 2025/07/05 14:04:48 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int process_and_execute_input(t_shell *shell)
+void	free_token(t_token *token)
 {
-    t_token *token;
+	t_token	*temp;
 
-    token = lexer(shell->input);
-    if (!token)
-        return 0;
-    shell->token = token;
-    return 1;
+	while (token)
+	{
+		temp = token->next;
+		free(token);
+		token = temp;
+	}
 }

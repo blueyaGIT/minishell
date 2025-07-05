@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 11:15:34 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/02 14:16:50 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/05 14:05:06 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,31 @@
 
 # include "minishell.h"
 
-t_token	*new_token(t_token_type type, char *value);
+//parsing
+int process_and_execute_input(t_shell *shell);
+
+// lexer
+t_token *lexer(char *input);
+
+// validate input
+bool valid_input(const char *input);
+
+// handle input
+void handle_word(t_token **token, char *input, int *i);
+void handle_empty_quote(t_token **token, int *i);
+void handle_pipe(t_token **token, int *i);
+void handle_redirectory(t_token **token, char *input, int *i);
+
+// create token
+t_token *new_token(t_token_type type, char *value);
 t_token	*token_last(t_token *token);
 void	token_add_back(t_token **token, t_token *new);
-void	handle_redirectory(t_token **token, char *input, int *i);
-bool	is_redirectory(char c);
-t_token	*lexer(char *input);
+
+//utils
+bool is_token_seperator(char c);
+int calc_word_length(char *input, int i);
+
+//error
+void	free_token(t_token *token);
+
 #endif /* PARSING_H */

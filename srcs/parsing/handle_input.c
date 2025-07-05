@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_token.c                                     :+:      :+:    :+:   */
+/*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:45:13 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/04 09:59:40 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/05 14:21:03 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,32 @@
 
 void handle_redirectory(t_token **token, char *input, int *i)
 {
-	if (input[*i] == '>')
-	{
-		if (input[*i + 1] == '>')
-		{
-			token_add_back(token, new_token(T_APPEND, ft_strdup(">>")));
-			(*i)++;
-		}
-		else
-			token_add_back(token, new_token(T_REDIR_OUT, ft_strdup(">")));
-		(*i)++;
-	}
-	if (input[*i] == '<')
-	{
-		if (input[*i + 1] == '<')
-		{
-			token_add_back(token, new_token(T_HEREDOC, ft_strdup("<<")));
-			(*i)++;
-		}
-		else
-			token_add_back(token, new_token(T_REDIR_IN, ft_strdup("<")));
-		(*i)++;
-	}
+    if (input[*i] == '>')
+    {
+        if (input[*i + 1] == '>')
+        {
+            token_add_back(token, new_token(T_APPEND, ft_strdup(">>")));
+            (*i) += 2;
+        }
+        else
+        {
+            token_add_back(token, new_token(T_REDIR_OUT, ft_strdup(">")));
+            (*i)++;
+        }
+    }
+    else if (input[*i] == '<')
+    {
+        if (input[*i + 1] == '<')
+        {
+            token_add_back(token, new_token(T_HEREDOC, ft_strdup("<<")));
+            (*i) += 2;
+        }
+        else
+        {
+            token_add_back(token, new_token(T_REDIR_IN, ft_strdup("<")));
+            (*i)++;
+        }
+    }
 }
 
 void handle_pipe(t_token **token, int *i)
@@ -50,7 +54,7 @@ void handle_empty_quote(t_token **token, int *i)
 	(*i) += 2;
 }
 
-int parse_word_content(char *input, int *i, char *word, int length)
+static int parse_word_content(char *input, int *i, char *word, int length)
 {
 	int j;
 	char quote;

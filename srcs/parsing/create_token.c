@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 17:25:12 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/01 17:32:57 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/05 14:16:33 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token *new_token(t_token_type type, char *value)
 	
 	new = malloc(sizeof(t_token));
 	if (!new)
-		free_token(new); // still to do
+		return (NULL);
 	new->value = value;
 	new->type = type;
 	new->next = NULL;

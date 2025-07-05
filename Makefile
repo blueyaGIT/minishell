@@ -97,6 +97,15 @@ SRCS	+=	free.c \
 			print_logo.c \
 			sys_path_extractor.c \
 
+# LEXER
+SRCS	+=	create_token.c \
+			handle_input.c \
+			lexer_utils.c \
+			lexer.c \
+			parsing.c \
+			validate_input.c \
+			handle_error.c \
+
 # Object files
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 

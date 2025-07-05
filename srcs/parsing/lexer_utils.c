@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 13:18:53 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/03 13:32:54 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/05 14:15:08 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,13 @@ int calc_word_length(char *input, int i)
 		if(input[i] == '\'' || input[i] == '\"')
 		{
 			quote = input[i++];
+			while(input[i] && input[i] != quote)
 			{
-				while(input[i] && input[i] != quote)
-				{
-					length++;
-					i++;
-				}
-				if (input[i] == quote)
-					i++;
+				length++;
+				i++;
 			}
+			if (input[i] == quote)
+				i++;
 		}
 		else
 		{

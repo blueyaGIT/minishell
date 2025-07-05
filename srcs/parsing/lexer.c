@@ -6,20 +6,20 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 13:43:01 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/04 10:44:51 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/05 13:52:18 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool is_redirectory(char c)
+static bool is_redirectory(char c)
 {
 	if (c == '<' || c == '>')
 		return (true);
 	return (false);
 }
 
-bool before_is_word(char *input, int i)
+static bool before_is_word(char *input, int i)
 {
 	unsigned char c;
 	if (i <= 0)
@@ -29,7 +29,7 @@ bool before_is_word(char *input, int i)
 		return (true);
 	return (false);
 }
-bool after_is_word(char *input, int i)
+static bool after_is_word(char *input, int i)
 {
 	unsigned char c;
 	if (input[i + 1] == '\0')
@@ -40,7 +40,7 @@ bool after_is_word(char *input, int i)
 	return (false);
 }
 
-bool is_empty_quote(char *input, int i)
+static bool is_empty_quote(char *input, int i)
 {
 	char c;
 	c = input[i];
@@ -60,7 +60,7 @@ t_token *lexer(char *input)
 	int i = 0;
 
 	if (!valid_input(input))
-		return ;
+		return (NULL);
 	while (input[i])
 	{
 		if (ft_isspace(input[i]))
