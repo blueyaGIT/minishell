@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 13:43:01 by lkloters          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/07/05 13:52:18 by lkloters         ###   ########.fr       */
+=======
+/*   Updated: 2025/07/04 14:54:18 by dalbano          ###   ########.fr       */
+>>>>>>> 4aae29301e4a46862f1da7dbbe1a2ce1f86e7892
 /*                                                                            */
 /* ************************************************************************** */
 

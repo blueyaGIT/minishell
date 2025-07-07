@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/02 11:26:54 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/07 18:20:39 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,27 @@ typedef enum e_token_type
 	T_REDIR_OUT, // >
 	T_APPEND, // >>
 	T_HEREDOC, // <<
-	T_DQT, // "
-	T_SQT, // '
-	T_ENV, // $VAR
-	T_EOF, // Ende der Eingabe
-	T_ERROR, // Fehlerhaftes Token
 }	t_token_type;
+
+typedef enum e_word_type
+{
+	BUILTIN,
+	COMMAND,
+	ARGUMENT,
+	ENV,
+	ASSIGNMENT,
+	FILENAME,
+	HEREDOC_DELIM,
+	UNKNOWN,
+}	t_word_type;
 
 typedef struct s_token
 {
 	t_token_type	type;
 	char			*value;
 	struct s_token	*next;
+	t_word_type		word_type;
 }					t_token;
-
-typedef enum e_command_type
-{
-	BUILTIN,
-	COMMAND,
-	PIPE,
-}	t_command_type;
 
 
 //neuer Struct für command
@@ -62,10 +63,9 @@ typedef struct s_command
 {
 	char				*command; //lilli
 	char				*cpath;
-	int					cmd_type; // hinweis
 	char				*filename; //lilli
-	char				**args; //lilli
-	bool				pipe_flag; //lilli "wenn | im input flag = true"
+	char				**args; //lilli 		{echo ; hello; NULL} | {ls; NULL}
+	bool				pipe_flag; //lilli "wenn | im input flag = true" 1 | 0
 	int					*pipe_fd;
 	t_redir				*io;
 	struct s_command	*next;
