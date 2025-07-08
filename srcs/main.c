@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:34:35 by dalbano           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/07/04 14:39:42 by lkloters         ###   ########.fr       */
-=======
-/*   Updated: 2025/07/04 14:56:50 by dalbano          ###   ########.fr       */
->>>>>>> 4aae29301e4a46862f1da7dbbe1a2ce1f86e7892
+/*   Updated: 2025/07/08 13:28:19 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

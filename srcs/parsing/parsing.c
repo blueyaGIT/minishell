@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 10:52:30 by lkloters          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/07/05 14:12:42 by lkloters         ###   ########.fr       */
-=======
-/*   Updated: 2025/07/04 14:56:37 by dalbano          ###   ########.fr       */
->>>>>>> 4aae29301e4a46862f1da7dbbe1a2ce1f86e7892
+/*   Updated: 2025/07/08 13:29:32 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +14,6 @@
 
 int process_and_execute_input(t_shell *shell)
 {
-<<<<<<< HEAD
     t_token *token;
 
     token = lexer(shell->input);
@@ -26,21 +21,12 @@ int process_and_execute_input(t_shell *shell)
         return 0;
     shell->token = token;
     return 1;
-=======
-	t_token *token;
-	
-	token = lexer(shell->input);
-	if(!token)
-		return (0);
-	shell->token = token;
-	return (0);
->>>>>>> 4aae29301e4a46862f1da7dbbe1a2ce1f86e7892
 }
 t_command *parse_code(t_token *token)
 {
 	t_command *cmd;
 	int arg_count;
-	cmd = (t_command)malloc(sizeof(t_command));
+	cmd = malloc(sizeof(t_command));
 	cmd->args = 0;
 	arg_count = count_arguments(token);
 	cmd->args = (char **)malloc(sizeof(char *) * (arg_count + 1));
