@@ -110,6 +110,13 @@ SRCS	+=	create_token.c \
 			parsing.c \
 			validate_input.c \
 			handle_error.c \
+			handle_builtin.c \
+			handle_word.c \
+
+# PARSING
+SRCS	+=	parsing.c \
+			parsing_utils.c \
+			
 
 # Object files
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))

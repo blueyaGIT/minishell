@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 17:25:12 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/05 14:16:33 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:07:44 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ t_token *new_token(t_token_type type, char *value)
 	new = malloc(sizeof(t_token));
 	if (!new)
 		return (NULL);
+	init_value(new);
 	new->value = value;
 	new->type = type;
-	new->next = NULL;
 	return (new);
 }
 
@@ -36,10 +36,12 @@ t_token	*token_last(t_token *token)
 
 void	token_add_back(t_token **token, t_token *new)
 {
-	if (!token)
+	t_token *temp;
+	if (!token || !new)
 		return ;
 	if (!*token)
 		*token = new;
-	else
-		(token_last(*token))->next = new;
+	temp = token_last(*token);
+	temp->next = new;
+	new->prev = temp;
 }

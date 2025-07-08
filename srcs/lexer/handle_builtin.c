@@ -6,13 +6,13 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:02:36 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/07 17:13:25 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/08 11:13:12 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool is_echo_option(const char *str)
+static bool is_echo_option(const char *str)
 {
 	int i;
 	
@@ -27,7 +27,7 @@ bool is_echo_option(const char *str)
 	return (true);
 }
 
-bool is_echo(t_token *token)
+static bool is_echo(t_token *token)
 {
 	int i;
 	

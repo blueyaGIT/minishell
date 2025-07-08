@@ -52,25 +52,29 @@ static bool is_assignment(const char *token)
     return true;
 }
 
-// static bool is_command(t_token *token)
-// {
-// 	if (!token || token->type != T_WORD)
-// 		return (false);
-// 	t_token *prev = token->prev;
-	
-// }
+static bool is_command(t_token *token)
+{
+	t_token *current;
+	if (!token || token->type != T_WORD)
+		return (false);
+	if (!token->prev)
+		return (true);
+	if(token->prev->type == T_PIPE)
+		return (true);
+	if (token->prev->type == T_REDIR_IN || token->prev->type == T_REDIR_OUT || token->prev->type == T_APPEND || token->prev->type == T_HEREDOC || (token->prev->type == T_WORD && token->prev->word_type == FILENAME))
+		return (is_command(token->prev));
+	return (false);
+}
 
 void handle_word(t_token *token)
 {
-	t_token *prev;
-	prev = NULL;
 	while (token)
 	{
 		if (token->type == T_WORD)
 		{
-			if (is_filename(prev))
+			if (is_filename(token->prev))
 				token->word_type = FILENAME;
-			else if (is_heredoc_delim(prev))
+			else if (is_heredoc_delim(token->prev))
 				token->word_type = HEREDOC_DELIM;
 			else if (is_assignment(token->value))
 				token->word_type = ASSIGNMENT;
@@ -81,7 +85,6 @@ void handle_word(t_token *token)
 			else
 				token->word_type = ARGUMENT;
 		}
-		prev = token;
 		token = token->next;
 	}
 }

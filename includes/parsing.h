@@ -43,9 +43,14 @@ void	token_add_back(t_token **token, t_token *new);
 //utils
 bool is_token_seperator(char c);
 int calc_word_length(char *input, int i);
+void	init_token(t_token *token);
 
 //error
 void	free_token(t_token *token);
+
+// handle word
+void handle_word(t_token *token);
+bool is_builtin(t_token *token);
 
 =======
 void	handle_redirectory(t_token **token, char *input, int *i);
