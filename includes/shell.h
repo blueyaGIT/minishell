@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/08 10:51:47 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/08 14:04:30 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef enum e_word_type
 	ASSIGNMENT,
 	FILENAME,
 	HEREDOC_DELIM,
-	UNKNOWN,
 }	t_word_type;
 
 typedef struct s_token
@@ -62,15 +61,16 @@ typedef struct s_redir
 
 typedef struct s_command
 {
+	char				**args;
+	struct s_command	*next;
+	struct s_command	*prev;
+	
 	char				*command; //lilli
 	char				*cpath;
 	char				*filename; //lilli
-	char				**args; //lilli 		{echo ; hello; NULL} | {ls; NULL}
 	bool				pipe_flag; //lilli "wenn | im input flag = true" 1 | 0
 	int					*pipe_fd;
 	t_redir				*io;
-	struct s_command	*next;
-	struct s_command	*prev;
 }						t_command;
 
 typedef struct s_shell

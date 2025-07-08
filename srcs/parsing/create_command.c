@@ -1,46 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_token.c                                     :+:      :+:    :+:   */
+/*   create_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 17:25:12 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/08 13:12:07 by lkloters         ###   ########.fr       */
+/*   Created: 2025/07/08 13:05:06 by lkloters          #+#    #+#             */
+/*   Updated: 2025/07/08 13:14:53 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token *new_token(t_token_type type, char *value)
+t_command *new_command(t_token_type type, char *value)
 {
-	t_token *new;
+	t_command *new;
 	
 	new = malloc(sizeof(t_token));
 	if (!new)
 		return (NULL);
-	init_token(new);
-	new->value = value;
-	new->type = type;
+	init_command(new);
+	// new->value = value;
+	// new->type = type; still to do
 	return (new);
 }
 
-t_token	*token_last(t_token *token)
+t_command	*command_last(t_command *command)
 {
-	if (!token)
+	if (!command)
 		return (NULL);
-	while (token->next)
-		token = token->next;
-	return (token);
+	while (command->next)
+		command = command->next;
+	return (command);
 }
-void	token_add_back(t_token **token, t_token *new)
+void	token_add_back(t_command **command, t_command *new)
 {
-	t_token *temp;
-	if (!token || !new)
+	t_command *temp;
+	if (!command || !new)
 		return ;
-	if (!*token)
-		*token = new;
-	temp = token_last(*token);
+	if (!*command)
+		*command = new;
+	temp = command_last(*command);
 	temp->next = new;
 	new->prev = temp;
 }

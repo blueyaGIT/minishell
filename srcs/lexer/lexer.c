@@ -61,6 +61,7 @@ static bool is_empty_quote(char *input, int i)
 t_token *lexer(char *input)
 {
 	t_token *token = NULL;
+	token = malloc(sizeof(t_token));
 	int i = 0;
 
 	if (!valid_input(input))

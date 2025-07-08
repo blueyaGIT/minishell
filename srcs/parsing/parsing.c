@@ -38,11 +38,9 @@ int process_and_execute_input(t_shell *shell)
 }
 t_command *parse_code(t_token *token)
 {
-	t_command *cmd;
-	int arg_count;
-	cmd = (t_command)malloc(sizeof(t_command));
-	cmd->args = 0;
-	arg_count = count_arguments(token);
-	cmd->args = (char **)malloc(sizeof(char *) * (arg_count + 1));
-	while (token)
+	t_command *command = NULL;
+	command = malloc(sizeof(t_command));
+	if (!valid_syntax(token))
+		return (NULL);
+	fill_commands(token, command)
 }
