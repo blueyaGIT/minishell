@@ -99,15 +99,15 @@ SRCS	+=	create_token.c \
 			handle_input.c \
 			lexer_utils.c \
 			lexer.c \
-			parsing.c \
 			validate_input.c \
-			handle_error.c \
+			tokenize_word.c \
 			handle_builtin.c \
-			handle_word.c \
 
 # PARSING
 SRCS	+=	parsing.c \
+			create_command.c \
 			parsing_utils.c \
+			validate_tokens.c \
 			
 
 # Object files

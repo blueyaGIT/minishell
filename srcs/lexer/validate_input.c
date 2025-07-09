@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_input.c                                      :+:      :+:    :+:   */
+/*   validate_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 10:02:46 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/04 14:12:11 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/09 14:44:50 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,41 +28,6 @@ static bool valid_quotes(const char *input)
 			if (input[i] != quote)
 				return (false);
 			i++;
-		}
-		else
-			i++;
-	}
-	return (true);
-}
-
-static bool valid_pipe(const char *input)
-{
-	int i;
-	char quote;
-	i = 0;
-	quote = 0;
-	while (input[i] && ft_isspace(input[i]))
-		i++;
-	if (input[i] == '|')
-		return (false);
-	while (input[i])
-	{
-		if (input[i] == '|')
-		{
-			i++;
-			while (input[i] && ft_isspace(input[i]))
-				i++;
-			if (input[i] == '|' || input[i] == '\0')
-				return (false);
-		}
-		else if (input[i] == '\'' || input[i] == '\"')
-		{
-			quote = input[i];
-			i++;
-			while (input[i] && input[i] != quote)
-				i++;
-			if (input[i] == quote)
-				i++;
 		}
 		else
 			i++;
@@ -122,8 +87,6 @@ bool valid_input(const char *input)
 	if (is_only_whitespace(input))
 		return (false); // error message
 	if (!valid_quotes(input))
-		return (false); // error message
-	if (!valid_pipe(input))
 		return (false); // error message
 	if (!valid_escape_chars(input))
 		return (false); // error_message

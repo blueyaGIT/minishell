@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 13:18:53 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/08 11:04:19 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/09 13:29:00 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ void	init_token(t_token *token)
 {
 	if (!token)
 		return ;
-	
 	token->value = NULL;
 	token->type = 0;
-	token->word_type = 0;
 	token->next = NULL;
 	token->prev = NULL;
 }

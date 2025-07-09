@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 11:15:34 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/08 13:29:02 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/09 16:20:48 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,39 @@
 
 # include "minishell.h"
 
-// parsing
-int		process_and_execute_input(t_shell *shell);
+//lexer
+t_token *lexer(char *input);
+bool valid_input(const char *input);
 
-// lexer
-t_token	*lexer(char *input);
-
-// validate input
-bool	valid_input(const char *input);
-
-// handle input
-void	handle_word(t_token **token, char *input, int *i);
-void	handle_empty_quote(t_token **token, int *i);
-void	handle_pipe(t_token **token, int *i);
-void	handle_redirectory(t_token **token, char *input, int *i);
+// lexer utils
+void	init_token(t_token *token);
+bool is_token_seperator(char c);
+int calc_word_length(char *input, int i);
 
 // create token
-t_token	*new_token(t_token_type type, char *value);
-t_token	*token_last(t_token *token);
 void	token_add_back(t_token **token, t_token *new);
+t_token	*token_last(t_token *token);
+t_token *new_token(t_token_type type, char *value);
 
-// utils
-bool	is_token_seperator(char c);
-int		calc_word_length(char *input, int i);
-void	init_token(t_token *token);
+// handle input
+void handle_redirection(t_token **token, char *input, int *i);
+void handle_pipe(t_token **token, int *i);
+void handle_empty_quote(t_token **token, int *i);
+void handle_word(t_token **token, char *input, int *i);
 
-// error
-void	free_token(t_token *token);
+// tokenize words
+void tokenize_word(t_token *token);
+bool is_builtin(t_token *token);
 
-// handle word
-bool	is_builtin(t_token *token);
+// create token
+// t_token *new_token(t_token_type type, char *value);
+// t_token	*token_last(t_token *token);
+// void	token_add_back(t_token **token, t_token *new);
+
+// parsing
+int process_and_execute_input(t_shell *shell);
+// t_command *parse_code(t_token *token);
+bool valid_syntax(t_token *token);
+
 
 #endif /* PARSING_H */

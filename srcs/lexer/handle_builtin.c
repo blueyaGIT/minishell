@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:02:36 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/08 11:13:12 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/09 13:09:13 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static bool is_echo(t_token *token)
 bool is_builtin(t_token *token)
 {
 	if (!token || token->type != T_WORD)
+		return (false);
 	if (is_echo(token))
 		return (true);
 	if (ft_strcmp(token->value, "cd") == 0 || \

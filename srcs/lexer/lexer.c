@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 13:43:01 by lkloters          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/07/05 13:52:18 by lkloters         ###   ########.fr       */
-=======
-/*   Updated: 2025/07/04 14:54:18 by dalbano          ###   ########.fr       */
->>>>>>> 4aae29301e4a46862f1da7dbbe1a2ce1f86e7892
+/*   Updated: 2025/07/09 13:09:04 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool is_redirectory(char c)
+static bool is_redirection(char c)
 {
 	if (c == '<' || c == '>')
 		return (true);
@@ -71,12 +67,13 @@ t_token *lexer(char *input)
 			i++;
 		else if (input[i] == '|')
 			handle_pipe(&token, &i);
-		else if (is_redirectory(input[i]))
-			handle_redirectory(&token, input, &i);
+		else if (is_redirection(input[i]))
+			handle_redirection(&token, input, &i);
 		else if (is_empty_quote(input, i))
 			handle_empty_quote(&token, &i);
 		else
 			handle_word(&token, input, &i);
 	}
+	tokenize_word(token);
 	return (token);
 }

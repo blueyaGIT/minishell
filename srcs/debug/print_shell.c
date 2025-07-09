@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_shell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 13:47:02 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/02 11:27:44 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/09 13:28:42 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
