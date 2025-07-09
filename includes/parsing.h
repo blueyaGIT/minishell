@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 11:15:34 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/09 13:09:28 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/09 15:07:32 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ bool is_builtin(t_token *token);
 // parsing
 int process_and_execute_input(t_shell *shell);
 // t_command *parse_code(t_token *token);
-// bool valid_syntax(t_token *token);
+bool valid_syntax(t_token *token);
 
 
 #endif /* PARSING_H */

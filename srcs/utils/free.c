@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:48:05 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/04 14:50:58 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/09 13:54:10 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,16 @@ void	ft_free_command(t_command *cmd)
 	free(cmd);
 }
 
-void	free_token(t_token *token)
+void free_token(t_token *token)
 {
-	if (!token)
-		return ;
-	if (token->value)
-		free(token->value);
-	free(token);
+	t_token *tmp;
+
+	while (token)
+	{
+		tmp = token->next;
+		if (token->value)
+			free(token->value);
+		free(token);
+		token = tmp;
+	}
 }
