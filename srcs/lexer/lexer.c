@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 13:43:01 by lkloters          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/07/05 13:52:18 by lkloters         ###   ########.fr       */
-=======
-/*   Updated: 2025/07/04 14:54:18 by dalbano          ###   ########.fr       */
->>>>>>> 4aae29301e4a46862f1da7dbbe1a2ce1f86e7892
+/*   Updated: 2025/07/09 11:04:51 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +57,6 @@ static bool is_empty_quote(char *input, int i)
 t_token *lexer(char *input)
 {
 	t_token *token = NULL;
-	token = malloc(sizeof(t_token));
 	int i = 0;
 
 	if (!valid_input(input))
@@ -79,5 +74,6 @@ t_token *lexer(char *input)
 		else
 			handle_word(&token, input, &i);
 	}
+	// tokenize_word(token);
 	return (token);
 }

@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 17:25:12 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/08 13:12:07 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/09 10:50:28 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ void	token_add_back(t_token **token, t_token *new)
 	if (!token || !new)
 		return ;
 	if (!*token)
+	{
 		*token = new;
+		return ;
+	}
 	temp = token_last(*token);
 	temp->next = new;
 	new->prev = temp;

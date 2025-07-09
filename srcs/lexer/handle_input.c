@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:45:13 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/05 14:21:03 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/09 11:02:13 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,4 @@ void handle_word(t_token **token, char *input, int *i)
 		return ;
 	}
 	token_add_back(token, new_token(T_WORD, word));
-	free(word);
 }
