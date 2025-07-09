@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:32:31 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/09 13:27:51 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:08:29 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static bool is_command(t_token *token)
 	current = token->prev;
 	while (current && current->type != T_PIPE)
 	{
-		if (current->type == T_WORD && (current->type == COMMAND || current->type == BUILTIN))
+		if (current->type == COMMAND || current->type == BUILTIN)
 			return (false);
 		current = current->prev;
 	}
