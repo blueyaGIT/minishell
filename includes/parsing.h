@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 11:15:34 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/09 10:44:57 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/09 13:09:28 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ t_token	*token_last(t_token *token);
 t_token *new_token(t_token_type type, char *value);
 
 // handle input
-void handle_redirectory(t_token **token, char *input, int *i);
+void handle_redirection(t_token **token, char *input, int *i);
 void handle_pipe(t_token **token, int *i);
 void handle_empty_quote(t_token **token, int *i);
 void handle_word(t_token **token, char *input, int *i);
 
 // tokenize words
-// void tokenize_word(t_token *token);
-// bool is_builtin(t_token *token);
+void tokenize_word(t_token *token);
+bool is_builtin(t_token *token);
 
 // create token
 // t_token *new_token(t_token_type type, char *value);

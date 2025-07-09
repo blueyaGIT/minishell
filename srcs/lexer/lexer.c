@@ -6,13 +6,13 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 13:43:01 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/09 11:04:51 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/09 13:09:04 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool is_redirectory(char c)
+static bool is_redirection(char c)
 {
 	if (c == '<' || c == '>')
 		return (true);
@@ -67,13 +67,13 @@ t_token *lexer(char *input)
 			i++;
 		else if (input[i] == '|')
 			handle_pipe(&token, &i);
-		else if (is_redirectory(input[i]))
-			handle_redirectory(&token, input, &i);
+		else if (is_redirection(input[i]))
+			handle_redirection(&token, input, &i);
 		else if (is_empty_quote(input, i))
 			handle_empty_quote(&token, &i);
 		else
 			handle_word(&token, input, &i);
 	}
-	// tokenize_word(token);
+	tokenize_word(token);
 	return (token);
 }

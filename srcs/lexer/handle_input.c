@@ -6,13 +6,13 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:45:13 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/09 11:02:13 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/09 13:00:56 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void handle_redirectory(t_token **token, char *input, int *i)
+void handle_redirection(t_token **token, char *input, int *i)
 {
     if (input[*i] == '>')
     {

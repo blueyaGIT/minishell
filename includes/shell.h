@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/08 14:04:30 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/09 13:35:40 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,13 @@ typedef enum e_token_type
 	T_REDIR_OUT, // >
 	T_APPEND, // >>
 	T_HEREDOC, // <<
-}	t_token_type;
-
-typedef enum e_word_type
-{
 	BUILTIN,
 	COMMAND,
 	ARGUMENT,
-	ENV,
 	ASSIGNMENT,
 	FILENAME,
 	HEREDOC_DELIM,
-}	t_word_type;
+}	t_token_type;
 
 typedef struct s_token
 {
@@ -42,7 +37,6 @@ typedef struct s_token
 	char			*value;
 	struct s_token	*next;
 	struct s_token	*prev;
-	t_word_type		word_type;
 }					t_token;
 
 
