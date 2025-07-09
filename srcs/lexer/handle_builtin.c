@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:02:36 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/09 13:09:13 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:21:47 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ static bool is_echo_option(const char *str)
 
 static bool is_echo(t_token *token)
 {
-	int i;
-	
-	i = 0;
 	if (!token || ft_strcmp(token->value, "echo") != 0)
 		return (false);
 	t_token *next = token->next;
