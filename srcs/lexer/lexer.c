@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 13:43:01 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/09 13:09:04 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/10 19:43:41 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,30 @@ static bool is_empty_quote(char *input, int i)
 	return (false);
 }
 
-t_token *lexer(char *input)
+t_token *lexer(char *input, t_shell *shell)
 {
 	t_token *token = NULL;
 	int i = 0;
+	char *temp;
 
 	if (!valid_input(input))
 		return (NULL);
+	temp = check_env(input, shell);
+	free(input);
+	input = temp;
 	while (input[i])
 	{
 		if (ft_isspace(input[i]))
 			i++;
 		else if (input[i] == '|')
-			handle_pipe(&token, &i);
+			tokenize_pipe(&token, &i);
 		else if (is_redirection(input[i]))
-			handle_redirection(&token, input, &i);
+			tokenize_redirection(&token, input, &i);
 		else if (is_empty_quote(input, i))
 			handle_empty_quote(&token, &i);
 		else
-			handle_word(&token, input, &i);
+			tokenize_word(&token, input, &i);
 	}
-	tokenize_word(token);
+	tokenize_word_token(token);
 	return (token);
 }

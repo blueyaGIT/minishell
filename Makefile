@@ -102,6 +102,7 @@ SRCS	+=	create_token.c \
 			validate_input.c \
 			tokenize_word.c \
 			handle_builtin.c \
+			handle_env.c \
 
 # PARSING
 SRCS	+=	parsing.c \

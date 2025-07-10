@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:48:05 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/09 13:54:10 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/10 19:35:32 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_free_command(t_command *cmd)
 	i = 0;
 	if (!cmd)
 		return ;
-	free(cmd->command);
+	free(cmd->cmd);
 	free(cmd->cpath);
 	free(cmd->filename);
 	if (cmd->args)

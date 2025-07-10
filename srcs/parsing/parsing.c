@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 10:52:30 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/09 16:20:03 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/10 19:45:20 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,37 @@ int process_and_execute_input(t_shell *shell)
 	t_token *token;
 	// t_command *command;
 	
-	token = lexer(shell->input);
+	token = lexer(shell->input, shell);
 	if(!token)
 		return (1);
 	if (!valid_syntax(token))
 	{
-		token->value = NULL;
 		free_token(token);
 		return (0);
 	}
 	shell->token = token;
 	// command = parse_code(shell->token);
 	// if (!command)
+	// {
+	// 	free_token(token);	
 	// 	return (0);
+	// }
 	// shell->cmd_list = command;
 	return (1);
 }
 // t_command *parse_code(t_token *token)
 // {
 // 	t_command *command = NULL;
-	
+// 	while (token)
+// 	{
+// 		if (token->type == T_PIPE)
+// 			token = handle_pipe(token, &command);
+// 		else if (is_redirection(token->type))
+// 			token = handle_redirection(token, &command);
+// 		else if (is_word(token->type))
+// 			token = handle_word(token, &command);
+// 		else
+// 		// error?
+// 	}
 // 	return (command);
 // }

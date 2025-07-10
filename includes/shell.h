@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/09 13:35:40 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/10 12:58:41 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ typedef struct s_redir
 
 typedef struct s_command
 {
-	char				**args;
+	char				**args; // hello
 	struct s_command	*next;
 	struct s_command	*prev;
+	char				*cmd; // echo
+	bool				pipe_flag; // "wenn | im input flag = true" 1 | 0
 	
-	char				*command; //lilli
-	char				*cpath;
 	char				*filename; //lilli
-	bool				pipe_flag; //lilli "wenn | im input flag = true" 1 | 0
+	char				*cpath;
 	int					*pipe_fd;
 	t_redir				*io;
 }						t_command;

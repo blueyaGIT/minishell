@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bin.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:50:06 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/24 17:13:40 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/10 19:34:36 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static bool	is_dir(char *cmd)
 
 int	exec_sys(t_shell *shell, t_command *cmd)
 {
-	if (!cmd->command || cmd->command[0] == '\0')
+	if (!cmd->cmd || cmd->cmd[0] == '\0')
 		return (127);
-	if (is_dir(cmd->command))
+	if (is_dir(cmd->cmd))
 		return (127);
-	cmd->cpath = find_command_path(shell, cmd->command);
+	cmd->cpath = find_command_path(shell, cmd->cmd);
 	if (cmd->cpath == NULL)
 		return (127);
-	cmd->args = ft_str_to_array_front(cmd->args, cmd->command);
+	cmd->args = ft_str_to_array_front(cmd->args, cmd->cmd);
 	printf("SYS\n");
 	for (int i = 0; i < ft_arrlen(cmd->args); i++)
 		printf("%s\n", cmd->args[i]);
@@ -42,19 +42,19 @@ int	exec_sys(t_shell *shell, t_command *cmd)
 
 int	exec_local(t_shell *shell, t_command *cmd)
 {
-	if (ft_strchr(cmd->command, '/') == NULL && env_idx(shell->env, "PATH")
+	if (ft_strchr(cmd->cmd, '/') == NULL && env_idx(shell->env, "PATH")
 		!= -1)
 		return (127);
-	if (access(cmd->command, F_OK) != 0)
+	if (access(cmd->cmd, F_OK) != 0)
 		return (printf(RED "ERROR: No such file or directory" RESET), 127);
-	if (is_dir(cmd->command))
+	if (is_dir(cmd->cmd))
 		return (printf(RED "ERROR: Command is a Directory" RESET), 126);
-	if (access(cmd->command, F_OK | X_OK) != 0)
+	if (access(cmd->cmd, F_OK | X_OK) != 0)
 		return (printf(RED "ERROR: Permission denied" RESET), 126);
-	cmd->cpath = find_command_path(shell, cmd->command);
+	cmd->cpath = find_command_path(shell, cmd->cmd);
 	if (cmd->cpath == NULL)
 	return (127);
-	cmd->args = ft_str_to_array_front(cmd->args, cmd->command);
+	cmd->args = ft_str_to_array_front(cmd->args, cmd->cmd);
 	if (execve(cmd->cpath, cmd->args, shell->env) == -1)
 		return (errno);
 	return (EXIT_FAILURE);

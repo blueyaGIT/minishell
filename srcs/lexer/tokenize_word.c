@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:32:31 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/09 16:08:29 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/10 19:44:25 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static bool is_command(t_token *token)
 	return (true);
 }
 
-void tokenize_word(t_token *token)
+void tokenize_word_token(t_token *token)
 {
 	while (token)
 	{

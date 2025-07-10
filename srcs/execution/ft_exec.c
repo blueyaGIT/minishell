@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 16:00:12 by dalbano           #+#    #+#             */
-/*   Updated: 2025/04/24 17:10:07 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/10 19:35:05 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ static void	if_cmd_empty(t_shell *shell, t_command *cmd)
 {
 	int	i;
 
-	if (!cmd || !cmd->command || cmd->command[0] == '\0')
+	if (!cmd || !cmd->cmd || cmd->cmd[0] == '\0')
 	{
 		if (cmd && cmd->args && cmd->args[1])
 		{
-			if (cmd->command)
-				free(cmd->command);
-			cmd->command = ft_strdup(cmd->args[1]);
+			if (cmd->cmd)
+				free(cmd->cmd);
+			cmd->cmd = ft_strdup(cmd->args[1]);
 			i = 1;
 			while (cmd->args[i])
 			{
@@ -48,7 +48,7 @@ int	prep_cmd(t_shell *shell, t_command *cmd)
 	if (!refresh_pipes(cmd->io))
 		kill_shell(shell, EXIT_FAILURE);
 	kill_fds(shell->cmd_list, false);
-	if (ft_strchr(cmd->command, '/') == NULL)
+	if (ft_strchr(cmd->cmd, '/') == NULL)
 	{
 		ecode = exec_builtin(shell, cmd);
 		if (ecode != 127)
@@ -67,19 +67,19 @@ int	exec_builtin(t_shell *shell, t_command *instr)
 	int	temp;
 
 	temp = 127;
-	if (ft_strncmp(instr->command, "pwd", 4) == 0)
+	if (ft_strncmp(instr->cmd, "pwd", 4) == 0)
 		temp = exec_pwd(shell);
-	else if (ft_strncmp(instr->command, "env", 4) == 0)
+	else if (ft_strncmp(instr->cmd, "env", 4) == 0)
 		temp = exec_env(shell, instr->args);
-	else if (ft_strncmp(instr->command, "exit", 5) == 0)
+	else if (ft_strncmp(instr->cmd, "exit", 5) == 0)
 		temp = exec_exit(shell, instr->args);
-	else if (ft_strncmp(instr->command, "cd", 3) == 0)
+	else if (ft_strncmp(instr->cmd, "cd", 3) == 0)
 		temp = exec_cd(shell, instr->args);
-	else if (ft_strncmp(instr->command, "echo", 5) == 0)
+	else if (ft_strncmp(instr->cmd, "echo", 5) == 0)
 		temp = exec_echo(instr->args);
-	else if (ft_strncmp(instr->command, "export", 7) == 0)
+	else if (ft_strncmp(instr->cmd, "export", 7) == 0)
 		temp = exec_export(shell, instr->args);
-	else if (ft_strncmp(instr->command, "unset", 6) == 0)
+	else if (ft_strncmp(instr->cmd, "unset", 6) == 0)
 		temp = exec_unset(shell, instr->args);
 	shell->last_exitcode = temp;
 	return (temp);
@@ -89,7 +89,7 @@ static int	check_data(t_shell *shell)
 {
 	if (!shell || !shell->cmd_list)
 		return (EXIT_SUCCESS);
-	if (!shell->cmd_list->command)
+	if (!shell->cmd_list->cmd)
 	{
 		if (shell->cmd_list->io && !check_io(shell->cmd_list->io, true))
 			return (EXIT_FAILURE);

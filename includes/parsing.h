@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 11:15:34 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/09 16:20:48 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/10 19:46:14 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,28 @@
 # include "minishell.h"
 
 //lexer
-t_token *lexer(char *input);
+t_token *lexer(char *input, t_shell *shell);
 bool valid_input(const char *input);
+char *check_env(char *input, t_shell *shell);
 
 // lexer utils
 void	init_token(t_token *token);
 bool is_token_seperator(char c);
 int calc_word_length(char *input, int i);
 
-// create token
+// // create token
 void	token_add_back(t_token **token, t_token *new);
 t_token	*token_last(t_token *token);
 t_token *new_token(t_token_type type, char *value);
 
-// handle input
-void handle_redirection(t_token **token, char *input, int *i);
-void handle_pipe(t_token **token, int *i);
+// // handle input
+void tokenize_redirection(t_token **token, char *input, int *i);
+void tokenize_pipe(t_token **token, int *i);
 void handle_empty_quote(t_token **token, int *i);
-void handle_word(t_token **token, char *input, int *i);
+void tokenize_word(t_token **token, char *input, int *i);
 
 // tokenize words
-void tokenize_word(t_token *token);
+void tokenize_word_token(t_token *token);
 bool is_builtin(t_token *token);
 
 // create token

@@ -6,13 +6,13 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:45:13 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/09 13:00:56 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/10 19:43:55 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void handle_redirection(t_token **token, char *input, int *i)
+void tokenize_redirection(t_token **token, char *input, int *i)
 {
     if (input[*i] == '>')
     {
@@ -42,7 +42,7 @@ void handle_redirection(t_token **token, char *input, int *i)
     }
 }
 
-void handle_pipe(t_token **token, int *i)
+void tokenize_pipe(t_token **token, int *i)
 {
 	token_add_back(token, new_token(T_PIPE, ft_strdup("|")));
 	(*i)++;
@@ -78,7 +78,7 @@ static int parse_word_content(char *input, int *i, char *word, int length)
 }
 
 
-void handle_word(t_token **token, char *input, int *i)
+void tokenize_word(t_token **token, char *input, int *i)
 {
 	char *word;
 	int length;

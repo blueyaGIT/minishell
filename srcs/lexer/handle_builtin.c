@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:02:36 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/09 16:21:47 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/10 19:44:06 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
