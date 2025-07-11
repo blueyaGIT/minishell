@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 10:52:30 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/10 19:45:20 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/11 13:01:26 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int process_and_execute_input(t_shell *shell)
 	token = lexer(shell->input, shell);
 	if(!token)
 		return (1);
-	if (!valid_syntax(token))
-	{
-		free_token(token);
-		return (0);
-	}
+	// if (!valid_syntax(token))
+	// {
+	// 	free_token(token);
+	// 	return (0);
+	// }
 	shell->token = token;
 	// command = parse_code(shell->token);
 	// if (!command)

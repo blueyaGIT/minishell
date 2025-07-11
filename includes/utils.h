@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:56 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/04 14:56:42 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/07/11 12:50:37 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ bool	execute_commands(t_shell *shell);
 char	*find_command_path(t_shell *shell, char *cmd);
 void	ft_free_env(char **env);
 int		process_and_execute_input(t_shell *shell);
+char *read_line(const char *prompt);
 
 #endif /* UTILS_H */

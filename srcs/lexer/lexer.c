@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 13:43:01 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/10 19:43:41 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/11 15:45:58 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_token *lexer(char *input, t_shell *shell)
 
 	if (!valid_input(input))
 		return (NULL);
-	temp = check_env(input, shell);
+	temp = handle_env(shell);
 	free(input);
 	input = temp;
 	while (input[i])
