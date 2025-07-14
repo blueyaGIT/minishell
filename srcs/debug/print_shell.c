@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_shell.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 13:47:02 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/09 13:28:42 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/14 15:34:07 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,56 @@ void print_shell(t_shell *shell)
     else
     {
         printf("Tokens: (null)\n");
+    }
+    printf("\n");
+
+    // Print commands
+    if (shell->cmd_list)
+    {
+        printf("Commands:\n");
+        t_command *current_cmd = shell->cmd_list;
+        i = 0;
+        while (current_cmd)
+        {
+            printf("  [%d]: cmd='%s'\n", i, 
+                   current_cmd->cmd ? current_cmd->cmd : "null");
+            
+            if (current_cmd->args)
+            {
+                printf("       args: ");
+                int j = 0;
+                while (current_cmd->args[j])
+                {
+                    printf("'%s' ", current_cmd->args[j]);
+                    j++;
+                }
+                printf("\n");
+            }
+            else
+            {
+                printf("       args: (null)\n");
+            }
+            
+            printf("       pipe_flag: %s\n", current_cmd->pipe_flag ? "true" : "false");
+            printf("       filename: %s\n", current_cmd->filename ? current_cmd->filename : "null");
+            printf("       cpath: %s\n", current_cmd->cpath ? current_cmd->cpath : "null");
+            
+            if (current_cmd->io)
+            {
+                printf("       I/O redirections:\n");
+                printf("         infile: %s\n", current_cmd->io->infile ? current_cmd->io->infile : "null");
+                printf("         outfile: %s\n", current_cmd->io->outfile ? current_cmd->io->outfile : "null");
+                printf("         hrd_sep: %s\n", current_cmd->io->hrd_sep ? current_cmd->io->hrd_sep : "null");
+                printf("         hrd_flag: %s\n", current_cmd->io->hrd_flag ? "true" : "false");
+            }
+            
+            current_cmd = current_cmd->next;
+            i++;
+        }
+    }
+    else
+    {
+        printf("Commands: (null)\n");
     }
     printf("\n");
 
