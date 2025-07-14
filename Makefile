@@ -111,6 +111,7 @@ SRCS	+=	parsing.c \
 			create_command.c \
 			parsing_utils.c \
 			validate_tokens.c \
+			parse_tokens.c \
 			
 
 # Object files

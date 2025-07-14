@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 11:15:34 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/14 09:44:07 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/14 17:04:58 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 //lexer
 t_token *lexer(char *input, t_shell *shell);
 bool valid_input(const char *input);
-// char *handle_env(t_shell *shell);
 
 // lexer utils
 void	init_token(t_token *token);
@@ -46,14 +45,27 @@ void tokenize_word_token(t_token *token);
 bool is_builtin(t_token *token);
 
 // create token
-// t_token *new_token(t_token_type type, char *value);
-// t_token	*token_last(t_token *token);
-// void	token_add_back(t_token **token, t_token *new);
+t_token *new_token(t_token_type type, char *value);
+t_token	*token_last(t_token *token);
+void	token_add_back(t_token **token, t_token *new);
 
 // parsing
 int process_and_execute_input(t_shell *shell);
-// t_command *parse_code(t_token *token);
-// bool valid_syntax(t_token *token);
+t_command *parse_code(t_token *token);
+bool valid_syntax(t_token *token);
+t_token *handle_word(t_token *token, t_command **command);
+t_token *handle_pipe(t_token *token, t_command **command);
+
+
+// create command
+void	command_add_back(t_command **command, t_command *new);
+t_command	*command_last(t_command *command);
+t_command *new_command(void);
+
+// parsing utils
+void init_command(t_command *command);
+bool is_word(t_token_type type);
+
 
 
 #endif /* PARSING_H */

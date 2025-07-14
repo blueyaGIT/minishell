@@ -6,10 +6,6 @@ static bool should_expand_tilde(const char *s, int index)
 		return (false);
 	if (!s[index + 1] || s[index + 1] == '/' || ft_isspace((unsigned char)s[index + 1]))
 		return (true);
-	// while (s[index + 1] && ft_isalnum((unsigned char)s[index + 1]))
-	// 	index++;
-	// if (!s[index + 1] || s[index + 1] == '/' || ft_isspace((unsigned char)s[index + 1]))
-	// 	return (false);
 	return (false);
 }
 
