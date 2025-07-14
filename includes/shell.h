@@ -6,9 +6,10 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/14 16:04:35 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/14 16:08:09 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef SHELL_H
 # define SHELL_H
@@ -46,6 +47,7 @@ typedef struct s_redir
 	char				*infile; //lilli
 	char				*outfile; //lilli
 	char				*hrd_sep; //lilli welches zeichen
+	char				*hrd_del; //lilli wort nach <<
 	bool				hrd_flag; //lilli gibt es heredoc
 	int					fd_in;
 	int					fd_out;
