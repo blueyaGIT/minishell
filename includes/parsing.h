@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 11:15:34 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/11 17:02:54 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/14 09:44:07 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 //lexer
 t_token *lexer(char *input, t_shell *shell);
 bool valid_input(const char *input);
-char *handle_env(t_shell *shell);
+// char *handle_env(t_shell *shell);
 
 // lexer utils
 void	init_token(t_token *token);
 bool is_token_seperator(char c);
 int calc_word_length(char *input, int i);
+
 // // create token
 void	token_add_back(t_token **token, t_token *new);
 t_token	*token_last(t_token *token);

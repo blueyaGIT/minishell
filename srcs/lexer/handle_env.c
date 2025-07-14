@@ -33,7 +33,6 @@ static char *env_to_input(char *input, t_shell *shell)
 			temp = make_expansion(input, &i, shell);
 			if (!temp)
 				return (NULL);
-			free(input);
 			input = temp;
 		}
 		else
@@ -41,7 +40,7 @@ static char *env_to_input(char *input, t_shell *shell)
 	}
 	return (input);
 }
-
+ 
 char *handle_env(t_shell *shell)
 {
 	char *input_copy;

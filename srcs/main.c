@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:34:35 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/11 12:50:12 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/14 10:32:01 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char *argv[], char **envp)
 {
 	t_shell	shell;
 
-	if (argc != 1)
+	if (argc == 0)
 		return (ft_printf(RED "ERROR Input format: ./minishell\n" RESET));
 	initialize_shell(&shell, argv, envp);
 	while (1)

@@ -62,7 +62,6 @@ char *handle_dollar_expansion(char *input_dup, int start, int *i, t_shell *shell
 	if (env_value)
 	{
 		new_input = replace_with_value(input_dup, start - 1, end, env_value);
-		free(env_value);
 		free(var_name);
 		free(input_dup);
 		if (!new_input)
