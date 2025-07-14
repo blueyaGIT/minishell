@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/10 12:58:41 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/14 16:04:35 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ typedef enum e_token_type
 {
 	T_WORD, // Befehle, Argumente, Dateinamen
 	T_PIPE, // |
-	T_REDIR_IN, // <
-	T_REDIR_OUT, // >
-	T_APPEND, // >>
-	T_HEREDOC, // <<
+	T_REDIR_IN, // < infile
+	T_REDIR_OUT, // >outfile
+	T_APPEND, // >> outfile
+	T_HEREDOC, // << temp file + infile
 	BUILTIN,
 	COMMAND,
 	ARGUMENT,
@@ -45,8 +45,8 @@ typedef struct s_redir
 {
 	char				*infile; //lilli
 	char				*outfile; //lilli
-	char				*hrd_sep; //lilli
-	bool				hrd_flag; //lilli
+	char				*hrd_sep; //lilli welches zeichen
+	bool				hrd_flag; //lilli gibt es heredoc
 	int					fd_in;
 	int					fd_out;
 	int					stdin_backup;

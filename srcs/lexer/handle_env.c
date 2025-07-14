@@ -1,5 +1,18 @@
 #include "minishell.h"
 
+static bool should_expand_tilde(const char *s, int index)
+{
+	if (index > 0 && !ft_isspace((unsigned char)s[index - 1]))
+		return (true);
+	if (!s[index + 1] || s[index + 1] == '/' || ft_isspace((unsigned char)s[index + 1]))
+		return (false);
+	while (s[index + 1] && ft_isalnum((unsigned char)s[index + 1]))
+		i++;
+	if (!s[index + 1] || s[index + 1] == '/' || ft_isspace((unsigned char)s[index + 1]))
+		return (false);
+	return (true);
+}
+
 static char *make_expansion(char *input, int *i, t_shell *shell)
 {
 	char expansion_char;
@@ -28,7 +41,7 @@ static char *env_to_input(char *input, t_shell *shell)
 	i = 0;
 	while (input[i])
 	{
-		if(input[i] == '$' || input[i] == '~')
+		if(input[i] == '$' || (input[i] == '~' && should_expand_tilde(input, i)))
 		{
 			temp = make_expansion(input, &i, shell);
 			if (!temp)
