@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/10 12:58:41 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/14 15:47:35 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_redir
 	char				*infile; //lilli
 	char				*outfile; //lilli
 	char				*hrd_sep; //lilli
+	char				*hrd_del; //lilli
 	bool				hrd_flag; //lilli
 	int					fd_in;
 	int					fd_out;
