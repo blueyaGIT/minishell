@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:53:52 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/15 14:57:30 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:32:31 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ static char	*make_expansion(char *input, int *i, t_shell *shell)
 	(*i)++;
 	start = *i;
 	if (expansion_char == '$')
-		result = handle_dollar_expansion(input, start, i, shell);
+		result = handle_dollar_exp(input, start, i, shell);
 	else if (expansion_char == '~')
-		result = handle_tilde_expansion(input, start, i, shell);
+		result = handle_tilde_exp(input, start, i, shell);
 	else
 		result = input;
 	return (result);
