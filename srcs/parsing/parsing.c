@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 10:52:30 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/14 17:05:53 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/15 14:38:53 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ t_command *parse_code(t_token *token)
 	{
 		if (token->type == T_PIPE)
 			token = handle_pipe(token, &command);
-		// else if (is_redirection(token->type))
-		// 	token = handle_redirection(token, &command);
+		else if (is_redirection_token(token))
+			token = handle_redirection(token, &command);
 		else if (is_word(token->type))
 			token = handle_word(token, &command);
-		// else
-		// // error?
+		else
+			return (NULL);
 	}
 	return (command);
 }

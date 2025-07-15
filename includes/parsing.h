@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 11:15:34 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/14 17:04:58 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/15 14:22:51 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_command *parse_code(t_token *token);
 bool valid_syntax(t_token *token);
 t_token *handle_word(t_token *token, t_command **command);
 t_token *handle_pipe(t_token *token, t_command **command);
+t_token *handle_redirection(t_token *token, t_command **command);
 
 
 // create command
@@ -65,7 +66,8 @@ t_command *new_command(void);
 // parsing utils
 void init_command(t_command *command);
 bool is_word(t_token_type type);
-
+bool is_redirection_token(t_token *token);
+void init_redir(t_redir *redir);
 
 
 #endif /* PARSING_H */

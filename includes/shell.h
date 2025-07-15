@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/14 16:08:09 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/15 14:11:11 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ typedef struct s_redir
 {
 	char				*infile; //lilli
 	char				*outfile; //lilli
-	char				*hrd_sep; //lilli welches zeichen
+	// char				*hrd_sep; //lilli welches zeichen
+	t_token_type		hrd_sep;
 	char				*hrd_del; //lilli wort nach <<
 	bool				hrd_flag; //lilli gibt es heredoc
 	int					fd_in;
@@ -62,11 +63,11 @@ typedef struct s_command
 	struct s_command	*prev;
 	char				*cmd; // echo
 	bool				pipe_flag; // "wenn | im input flag = true" 1 | 0
+	t_redir				*io;
 	
 	char				*filename; //lilli
 	char				*cpath;
 	int					*pipe_fd;
-	t_redir				*io;
 }						t_command;
 
 typedef struct s_shell

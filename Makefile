@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -g3 -g
 DEPFLAGS = -MMD -MP
 SYSLIBFLAGS = -lreadline
 OBJ_DIR := obj
@@ -112,7 +112,7 @@ SRCS	+=	parsing.c \
 			parsing_utils.c \
 			validate_tokens.c \
 			parse_tokens.c \
-			
+			parse_redirections.c \
 
 # Object files
 OBJS := $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))

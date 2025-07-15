@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:00:59 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/14 16:50:56 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/15 10:56:15 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ static bool valid_pipe_syntax(t_token *token)
 		}
 		token = token->next;
 	}
-	if (token && token->prev && token->prev->type == T_PIPE)
-		return (false);
+	// if (token && token->prev && token->prev->type == T_PIPE)
+	// 	return (false);
 	return (true);
 }
+
 
 static bool valid_redirection_syntax(t_token *token)
 {

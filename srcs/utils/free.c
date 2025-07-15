@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 14:48:05 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/10 19:35:32 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/15 14:19:12 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_free_io(t_redir *io)
 	if (io->hrd_sep)
 	{
 		unlink(io->infile);
-		ft_free_ptr(io->hrd_sep);
+		// ft_free_ptr(io->hrd_sep);
 	}
 	if (io->infile)
 		ft_free_ptr(io->infile);
