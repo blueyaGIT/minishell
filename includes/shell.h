@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/15 14:11:11 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:29:44 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_redir
 {
 	char				*infile; //lilli
 	char				*outfile; //lilli
-	// char				*hrd_sep; //lilli welches zeichen
 	t_token_type		hrd_sep;
 	char				*hrd_del; //lilli wort nach <<
 	bool				hrd_flag; //lilli gibt es heredoc

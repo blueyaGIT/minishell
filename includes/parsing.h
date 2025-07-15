@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 11:15:34 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/15 14:22:51 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:24:00 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ bool valid_input(const char *input);
 void	init_token(t_token *token);
 bool is_token_seperator(char c);
 int calc_word_length(char *input, int i);
+void	handle_output_redirection(t_token **token, char *input, int *i);
+void	handle_input_redirection(t_token **token, char *input, int *i);
 
 // // create token
 void	token_add_back(t_token **token, t_token *new);
@@ -37,8 +39,8 @@ void tokenize_word(t_token **token, char *input, int *i);
 
 // handle env
 char *handle_env(t_shell *shell);
-char *handle_tilde_expansion(char *input_dup, int start, int *i, t_shell *shell);
-char *handle_dollar_expansion(char *input_dup, int start, int *i, t_shell *shell);
+char *handle_tilde_exp(char *input_dup, int start, int *i, t_shell *shell);
+char *handle_dollar_exp(char *input_dup, int start, int *i, t_shell *shell);
 
 // tokenize words
 void tokenize_word_token(t_token *token);

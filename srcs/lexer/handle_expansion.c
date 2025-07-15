@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_expansion.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/15 15:21:58 by lkloters          #+#    #+#             */
+/*   Updated: 2025/07/15 15:23:31 by lkloters         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static char *copy_word(const char *str, int start)
+static char	*copy_word(const char *str, int start)
 {
-	int i;
-	char *word;
-	int word_length;
+	int		i;
+	char	*word;
+	int		word_length;
 
 	if (!str || start < 0)
 		return (NULL);
@@ -22,12 +34,12 @@ static char *copy_word(const char *str, int start)
 	return (word);
 }
 
-static char *replace_with_value(char *input, int start, int end, char *value)
+static char	*replace_with_value(char *input, int start, int end, char *value)
 {
-	int input_len;
-	int value_len;
-	int new_len;
-	char *new_input;
+	int		input_len;
+	int		value_len;
+	int		new_len;
+	char	*new_input;
 
 	if (!input || !value || start < 0 || end < start)
 		return (NULL);
@@ -44,12 +56,12 @@ static char *replace_with_value(char *input, int start, int end, char *value)
 	return (new_input);
 }
 
-char *handle_dollar_expansion(char *input_dup, int start, int *i, t_shell *shell)
+char	*handle_dollar_exp(char *input_dup, int start, int *i, t_shell *shell)
 {
-	char *var_name;
-	char *env_value;
-	char *new_input;
-	int end;
+	char	*var_name;
+	char	*env_value;
+	char	*new_input;
+	int		end;
 
 	var_name = copy_word(input_dup, start);
 	if (!var_name)
@@ -80,12 +92,12 @@ char *handle_dollar_expansion(char *input_dup, int start, int *i, t_shell *shell
 	return (new_input);
 }
 
-char *handle_tilde_expansion(char *input_dup, int start, int *i, t_shell *shell)
+char	*handle_tilde_exp(char *input_dup, int start, int *i, t_shell *shell)
 {
-	char *new_input;
-	char *home_env;
-	char *home_path;
-	int end;
+	char	*new_input;
+	char	*home_env;
+	char	*home_path;
+	int		end;
 
 	end = start;
 	while (input_dup[end] && input_dup[end] != '/' && !ft_isspace((unsigned char)input_dup[end]))

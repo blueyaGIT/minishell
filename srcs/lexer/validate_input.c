@@ -6,16 +6,17 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 10:02:46 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/10 19:31:02 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/15 14:50:50 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool valid_quotes(const char *input)
+static bool	valid_quotes(const char *input)
 {
-	int i;
-	char quote;
+	int		i;
+	char	quote;
+
 	i = 0;
 	while (input[i])
 	{
@@ -35,11 +36,11 @@ static bool valid_quotes(const char *input)
 	return (true);
 }
 
-static bool valid_escape_chars(const char *input)
+static bool	valid_escape_chars(const char *input)
 {
-	int i;
-	char quote;
-	
+	int		i;
+	char	quote;
+
 	i = 0;
 	quote = 0;
 	while (input[i])
@@ -55,7 +56,7 @@ static bool valid_escape_chars(const char *input)
 			if (quote != '\'')
 			{
 				if (input[i + 1] == '\'')
-				i++;
+					i++;
 			}
 			else
 				i++;
@@ -65,9 +66,9 @@ static bool valid_escape_chars(const char *input)
 	return (true);
 }
 
-static bool is_only_whitespace(const char *input)
+static bool	is_only_whitespace(const char *input)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (input[i])
@@ -79,16 +80,15 @@ static bool is_only_whitespace(const char *input)
 	return (true);
 }
 
-
-bool valid_input(const char *input)
+bool	valid_input(const char *input)
 {
 	if (!input || input[0] == '\0')
 		return (false);
 	if (is_only_whitespace(input))
-		return (false); // error message
+		return (false);
 	if (!valid_quotes(input))
-		return (false); // error message
+		return (false);
 	if (!valid_escape_chars(input))
-		return (false); // error_message
+		return (false);
 	return (true);
 }

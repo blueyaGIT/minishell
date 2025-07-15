@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:22:36 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/15 14:21:14 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:28:50 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,6 @@ void init_redir(t_redir *redir)
 	// redir->hrd_sep = NULL;
 	redir->hrd_del = NULL;
 	redir->hrd_flag = false;
-	// redir->fd_in = -1;
-	// redir->fd_out = -1;
-	// redir->stdin_backup = -1;
-	// redir->stdout_backup = -1; @marzia please check if correct
 }
 
 bool is_word(t_token_type type)

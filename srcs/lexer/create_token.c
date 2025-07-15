@@ -6,16 +6,16 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 17:25:12 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/10 19:44:13 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:19:39 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token *new_token(t_token_type type, char *value)
+t_token	*new_token(t_token_type type, char *value)
 {
-	t_token *new;
-	
+	t_token	*new;
+
 	new = malloc(sizeof(t_token));
 	if (!new)
 		return (NULL);
@@ -33,9 +33,11 @@ t_token	*token_last(t_token *token)
 		token = token->next;
 	return (token);
 }
+
 void	token_add_back(t_token **token, t_token *new)
 {
-	t_token *temp;
+	t_token	*temp;
+
 	if (!token || !new)
 		return ;
 	if (!*token)

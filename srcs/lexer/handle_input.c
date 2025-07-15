@@ -6,59 +6,37 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:45:13 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/10 19:43:55 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:07:03 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void tokenize_redirection(t_token **token, char *input, int *i)
+void	tokenize_redirection(t_token **token, char *input, int *i)
 {
-    if (input[*i] == '>')
-    {
-        if (input[*i + 1] == '>')
-        {
-            token_add_back(token, new_token(T_APPEND, ft_strdup(">>")));
-            (*i) += 2;
-        }
-        else
-        {
-            token_add_back(token, new_token(T_REDIR_OUT, ft_strdup(">")));
-            (*i)++;
-        }
-    }
-    else if (input[*i] == '<')
-    {
-        if (input[*i + 1] == '<')
-        {
-            token_add_back(token, new_token(T_HEREDOC, ft_strdup("<<")));
-            (*i) += 2;
-        }
-        else
-        {
-            token_add_back(token, new_token(T_REDIR_IN, ft_strdup("<")));
-            (*i)++;
-        }
-    }
+	if (input[*i] == '>')
+		handle_output_redirection(token, input, i);
+	else if (input[*i] == '<')
+		handle_input_redirection(token, input, i);
 }
 
-void tokenize_pipe(t_token **token, int *i)
+void	tokenize_pipe(t_token **token, int *i)
 {
 	token_add_back(token, new_token(T_PIPE, ft_strdup("|")));
 	(*i)++;
 }
 
-void handle_empty_quote(t_token **token, int *i)
+void	handle_empty_quote(t_token **token, int *i)
 {
 	token_add_back(token, new_token(T_WORD, ft_strdup("")));
 	(*i) += 2;
 }
 
-static int parse_word_content(char *input, int *i, char *word, int length)
+static int	parse_word_content(char *input, int *i, char *word, int length)
 {
-	int j;
-	char quote;
-	
+	int		j;
+	char	quote;
+
 	j = 0;
 	while (input[*i] && j < length)
 	{
@@ -77,12 +55,11 @@ static int parse_word_content(char *input, int *i, char *word, int length)
 	return (j);
 }
 
-
-void tokenize_word(t_token **token, char *input, int *i)
+void	tokenize_word(t_token **token, char *input, int *i)
 {
-	char *word;
-	int length;
-	int written;
+	char	*word;
+	int		length;
+	int		written;
 
 	length = calc_word_length(input, *i);
 	word = (char *)malloc(length + 1);

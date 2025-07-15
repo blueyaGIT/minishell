@@ -6,22 +6,23 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:32:31 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/10 19:44:25 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:17:59 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool is_filename(t_token *prev)
+static bool	is_filename(t_token *prev)
 {
 	if (!prev)
 		return (false);
-	if (prev->type == T_REDIR_IN || prev->type == T_REDIR_OUT || prev->type == T_APPEND)
+	if (prev->type == T_REDIR_IN || prev->type == T_REDIR_OUT || \
+		prev->type == T_APPEND)
 		return (true);
 	return (false);
 }
 
-static bool is_heredoc_delim(t_token *prev)
+static bool	is_heredoc_delim(t_token *prev)
 {
 	if (!prev)
 		return (false);
@@ -30,37 +31,33 @@ static bool is_heredoc_delim(t_token *prev)
 	return (false);
 }
 
-static bool is_assignment(const char *token)
+static bool	is_assignment(const char *token)
 {
-    int i;
+	int			i;
+	const char	*equals;
+	int			name_len;
+
 	i = 0;
 	if (!token || !strchr(token, '='))
-        return (false);
-    if (token[0] == '=')
-        return (false);
-    const char *equals = strchr(token, '=');
-    int name_len = equals - token;
-    while (i < name_len)
-    {
-        if (i == 0)
-        {
-            if (!isalpha(token[i]) && token[i] != '_')
-                return false;
-        }
-        else
-        {
-            if (!isalnum(token[i]) && token[i] != '_')
-                return false;
-        }
+		return (false);
+	if (token[0] == '=')
+		return (false);
+	equals = strchr(token, '=');
+	name_len = equals - token;
+	while (i < name_len)
+	{
+		if ((i == 0 && !isalpha(token[i]) && token[i] != '_') || \
+		(i > 0 && !isalnum(token[i]) && token[i] != '_'))
+			return (false);
 		i++;
-    }
-    return true;
+	}
+	return (true);
 }
 
-static bool is_command(t_token *token)
+static bool	is_command(t_token *token)
 {
-	t_token *current;
-	
+	t_token	*current;
+
 	if (!token || token->type != T_WORD)
 		return (false);
 	if (!token->prev)
@@ -77,7 +74,7 @@ static bool is_command(t_token *token)
 	return (true);
 }
 
-void tokenize_word_token(t_token *token)
+void	tokenize_word_token(t_token *token)
 {
 	while (token)
 	{

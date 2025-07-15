@@ -6,16 +6,16 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:02:36 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/10 19:44:06 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:21:45 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool is_echo_option(const char *str)
+static bool	is_echo_option(const char *str)
 {
-	int i;
-	
+	int	i;
+
 	i = 1;
 	if (str[0] != '-')
 		return (false);
@@ -27,17 +27,19 @@ static bool is_echo_option(const char *str)
 	return (true);
 }
 
-static bool is_echo(t_token *token)
+static bool	is_echo(t_token *token)
 {
+	t_token	*next;
+
 	if (!token || ft_strcmp(token->value, "echo") != 0)
 		return (false);
-	t_token *next = token->next;
+	next = token->next;
 	while (next && next->type == T_WORD && is_echo_option(next->value))
-	next = next->next;
+		next = next->next;
 	return (true);
 }
 
-bool is_builtin(t_token *token)
+bool	is_builtin(t_token *token)
 {
 	if (!token || token->type != T_WORD)
 		return (false);
@@ -49,6 +51,6 @@ bool is_builtin(t_token *token)
 	ft_strcmp(token->value, "unset") == 0 || \
 	ft_strcmp(token->value, "env") == 0 || \
 	ft_strcmp(token->value, "exit") == 0)
-        return true;
-    return false;
+		return (true);
+	return (false);
 }
