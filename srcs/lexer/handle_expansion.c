@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 15:21:58 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/15 15:23:31 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/16 13:46:59 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*copy_word(const char *str, int start)
 	if (!str || start < 0)
 		return (NULL);
 	i = start;
-	while (str[i] && !ft_isspace((unsigned char)str[i]) && str[i] != '$')
+	while (str[i] && !ft_isspace((unsigned char)str[i]) && str[i] != '$' && str[i] != '\'' && str[i] != '\"')
 		i++;
 	word_length = i - start;
 	if (word_length == 0)
