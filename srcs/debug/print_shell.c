@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 13:47:02 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/15 14:16:05 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/17 10:27:01 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ const char *token_type_to_str(int type)
 		case T_REDIR_OUT: return "T_REDIR_OUT";
 		case T_APPEND: return "T_APPEND";
 		case T_HEREDOC: return "T_HEREDOC";
+		case BUILTIN: return "BUILTIN";
 		default: return "UNKNOWN";
 	}
 }
@@ -169,24 +170,26 @@ void print_shell(t_shell *shell)
 
 	// Print tokens
 	if (shell->token)
+{
+	printf("Tokens:\n");
+	t_token *current = shell->token;
+	i = 0;
+	while (current)
 	{
-		printf("Tokens:\n");
-		t_token *current = shell->token;
-		i = 0;
-		while (current)
-		{
-			printf("  [%d]: type=%d, value='%s'\n", i, 
-			       current->type, 
-			       current->value ? current->value : "null");
-			current = current->next;
-			i++;
-		}
+		printf("  [%d]: type=%d (%s), value='%s', is_echo_n=%s\n", 
+		       i,
+		       current->type,
+		       token_type_to_str(current->type),
+		       current->value ? current->value : "null",
+		       current->is_echo_n ? "true" : "false");
+		current = current->next;
+		i++;
 	}
-	else
-	{
-		printf("Tokens: (null)\n");
-	}
-	printf("\n");
+}
+else
+{
+	printf("Tokens: (null)\n");
+}
 
 	// Print commands
 	if (shell->cmd_list)

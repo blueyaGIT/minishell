@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:34:35 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/16 13:27:55 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/16 18:22:19 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char *argv[], char **envp)
 {
 	t_shell	shell;
 
-	if (argc == 0)
+	if (argc != 1)
 		return (ft_printf(RED "ERROR Input format: ./minishell\n" RESET));
 	initialize_shell(&shell, argv, envp);
 	while (1)
@@ -47,14 +47,14 @@ int	main(int argc, char *argv[], char **envp)
 			break ;
 		if (ft_strcmp(shell.input, "./minishell") == 0)
 			check_shlvl(&shell);
-		// g_ecode = process_and_execute_input(&shell);
-		if (process_and_execute_input(&shell))
-			g_ecode = ft_exec(&shell);
-		else
-			g_ecode = 1;
-		// print_shell(&shell);
-		// if (ft_strcmp(shell.input, "exit") == 0)
-		// 	exit(1);
+		g_ecode = process_and_execute_input(&shell);
+		// if (process_and_execute_input(&shell))
+		// 	g_ecode = ft_exec(&shell);
+		// else
+		// 	g_ecode = 1;
+		print_shell(&shell);
+		if (ft_strcmp(shell.input, "exit") == 0)
+			exit(1);
 		reload_shell(&shell);
 	}
 	kill_shell(&shell, g_ecode);

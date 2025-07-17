@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:26 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/15 15:29:44 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/17 10:36:19 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_token
 {
 	t_token_type	type;
 	char			*value;
+	bool			is_echo_n;
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
@@ -62,6 +63,7 @@ typedef struct s_command
 	struct s_command	*prev;
 	char				*cmd; // echo
 	bool				pipe_flag; // "wenn | im input flag = true" 1 | 0
+	bool				is_echo_n; // wenn echo -n
 	t_redir				*io;
 	
 	char				*filename; //lilli

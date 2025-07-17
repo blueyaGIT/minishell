@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:02:36 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/15 15:21:45 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/17 10:21:42 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,40 @@ static bool	is_echo_option(const char *str)
 	{
 		if (str[i] != 'n')
 			return (false);
+		i++;
 	}
 	return (true);
 }
 
+static void	remove_token(t_token **head, t_token *prev, t_token *echo_option)
+{
+	if (!echo_option)
+		return ;
+
+	if (prev)
+		prev->next = echo_option->next;
+	else
+		*head = echo_option->next;
+
+	free(echo_option->value);
+	free(echo_option);
+}
+
 static bool	is_echo(t_token *token)
 {
-	t_token	*next;
+	t_token	*current;
+	t_token *prev;
 
 	if (!token || ft_strcmp(token->value, "echo") != 0)
 		return (false);
-	next = token->next;
-	while (next && next->type == T_WORD && is_echo_option(next->value))
-		next = next->next;
+	current = token->next;
+	prev = token;
+	while (current && current->type == T_WORD && is_echo_option(current->value))
+	{
+		token->is_echo_n = true;
+		remove_token(&token->next, prev, current);
+		current = prev->next;
+	}
 	return (true);
 }
 
