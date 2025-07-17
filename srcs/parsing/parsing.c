@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 10:52:30 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/15 14:38:53 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/17 13:56:15 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

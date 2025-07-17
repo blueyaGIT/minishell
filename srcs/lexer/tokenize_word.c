@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_word.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 16:32:31 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/15 15:17:59 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/17 13:56:04 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
