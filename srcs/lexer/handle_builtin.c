@@ -43,7 +43,7 @@ static bool	is_echo(t_token *token)
 	while (current && current->type == T_WORD && is_echo_option(current->value))
 	{
 		token->is_echo_n = true;
-		remove_token(&token->next, prev, current);
+		remove_token(&token->next, prev, current); // first arg -n
 		current = prev->next;
 	}
 	return (true);

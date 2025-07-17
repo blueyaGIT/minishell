@@ -45,36 +45,6 @@ static int	parse_word_content(char *input, int *i, char *word, int length)
 	return (j);
 }
 
-// static int	parse_word_content(char *input, int *i, char *word, int length)
-// {
-// 	int		j = 0;
-// 	char	quote = 0;
-// 	bool	in_quote = false;
-
-// 	while (input[*i] && j < length)
-// 	{
-// 		if (!in_quote && (input[*i] == '\'' || input[*i] == '\"'))
-// 		{
-// 			in_quote = true;
-// 			quote = input[(*i)++];
-// 		}
-// 		else if (in_quote && input[*i] == quote)
-// 		{
-// 			in_quote = false;
-// 			(*i)++;
-// 		}
-// 		else
-// 		{
-// 			word[j++] = input[*i];
-// 			(*i)++;
-// 		}
-// 	}
-
-// 	word[j] = '\0';
-// 	return (j);
-// }
-
-
 void	tokenize_word(t_token **token, char *input, int *i)
 {
 	char	*word;
@@ -82,6 +52,7 @@ void	tokenize_word(t_token **token, char *input, int *i)
 	int		written;
 
 	length = calc_word_length(input, *i);
+	printf("Length: %d\n", length);
 	word = (char *)malloc(length + 1);
 	if (!word)
 		return ;

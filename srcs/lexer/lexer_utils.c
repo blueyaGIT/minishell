@@ -20,31 +20,61 @@ bool	is_token_seperator(char c)
 	return (false);
 }
 
+// int	calc_word_length(char *input, int i)
+// {
+// 	int		length = 0;
+// 	char	quote;
+
+// 	quote = '\0';
+// 	while (input[i] && !ft_isspace(input[i]) && !is_token_seperator(input[i]) && (input[i] != '\'' || input[i] != '\"'))
+// 	{
+// 		if ((input[i] == '\'' || input[i] == '\"') || input[i] == quote)
+// 		{
+// 			quote = input[i++];
+// 			while (input[i] && input[i] != quote)
+// 			{
+// 				length++;
+// 				i++;
+// 			}
+// 			return (length);
+// 		}
+// 		else
+// 		{
+// 			length++;
+// 			i++;
+// 		}
+// 	}
+// 	printf("Lenght: %d\n", length);
+// 	return (length);
+// }
+
 int	calc_word_length(char *input, int i)
 {
 	int		length;
 	char	quote;
 
 	length = 0;
-	while (input[i] && !is_token_seperator(input[i]) && !ft_isspace(input[i]))
+	quote = '\0';
+	while (input[i] && !ft_isspace(input[i]) && !is_token_seperator(input[i]) && input[i] != quote)
 	{
 		if (input[i] == '\'' || input[i] == '\"')
 		{
-			quote = input[i++];
-			while (input[i] && input[i] != quote)
+			quote = input[i];
+				i++;
+			while(input[i] && input[i] != quote)
 			{
 				length++;
 				i++;
 			}
-			if (input[i] == quote)
-				length++;
-			return (length);
 		}
-		while (input[i] && !ft_isspace)
+		else
+		{
+			length++;
+			i++;
+		}
 	}
 	return (length);
 }
-
 
 void	handle_output_redirection(t_token **token, char *input, int *i)
 {
