@@ -210,6 +210,10 @@ fclean: clean
 # Rebuild everything
 re: fclean all
 
+# Clean all generate files faster
+fc: clean
+	@rm -rf $(NAME)
+
 # Rebuild everything faster
 fre: remove-submodules
 	@rm -rf $(OBJ_DIR)
@@ -226,4 +230,4 @@ debug: CFLAGS += -DDEBUG=1
 debug: clean all
 
 # Phony targets
-.PHONY: all clean fclean re init-submodules remove-submodules fre norm debug relink
+.PHONY: all clean fclean re init-submodules remove-submodules fc fre norm debug relink

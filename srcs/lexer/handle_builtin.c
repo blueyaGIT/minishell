@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   handle_builtin.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/07 17:02:36 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/17 10:21:42 by lkloters         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -66,11 +55,11 @@ bool	is_builtin(t_token *token)
 		return (false);
 	if (is_echo(token))
 		return (true);
-	if (ft_strcmp(token->value, "cd") == 0 || \
-	ft_strcmp(token->value, "pwd") == 0 || \
-	ft_strcmp(token->value, "export") == 0 || \
-	ft_strcmp(token->value, "unset") == 0 || \
-	ft_strcmp(token->value, "env") == 0 || \
+	if (ft_strcmp(token->value, "cd") == 0 ||
+	ft_strcmp(token->value, "pwd") == 0 ||
+	ft_strcmp(token->value, "export") == 0 ||
+	ft_strcmp(token->value, "unset") == 0 ||
+	ft_strcmp(token->value, "env") == 0 ||
 	ft_strcmp(token->value, "exit") == 0)
 		return (true);
 	return (false);
