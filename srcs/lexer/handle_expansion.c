@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 15:21:58 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/16 18:08:16 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/17 14:03:19 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ char	*handle_dollar_exp(char *input_dup, int start, int *i, t_shell *shell)
 	}
 	return (new_input);
 }
+
 
 char	*handle_tilde_exp(char *input_dup, int start, int *i, t_shell *shell)
 {

@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 13:18:53 by lkloters          #+#    #+#             */
-/*   Updated: 2025/07/16 19:03:57 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/17 14:01:56 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,14 @@ int	calc_word_length(char *input, int i)
 				i++;
 			}
 			if (input[i] == quote)
-				i++;
+				length++;
+			return (length);
 		}
-		else
-		{
-			length++;
-			i++;
-		}
+		while (input[i] && !ft_isspace)
 	}
 	return (length);
 }
+
 
 void	handle_output_redirection(t_token **token, char *input, int *i)
 {

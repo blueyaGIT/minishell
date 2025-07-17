@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:34:35 by dalbano           #+#    #+#             */
-/*   Updated: 2025/07/16 18:22:19 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/07/17 11:03:46 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int argc, char *argv[], char **envp)
 	{
 		init_signals();
 		shell.input = read_line(PROMPT);
-		// shell.input = "echo hello |";
+		// shell.input = "echo "\'"hello"\'"";
 		refresh_signals();
 		if (!shell.input)
 			break ;
