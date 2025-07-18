@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 char	**refresh_env(t_shell *shell, int size)

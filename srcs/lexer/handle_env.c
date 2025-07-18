@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 static bool	should_exp_tilde(const char *s, int i)

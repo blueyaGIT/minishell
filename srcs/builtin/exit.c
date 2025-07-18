@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 static int	get_ecode(char *param, bool *temp)

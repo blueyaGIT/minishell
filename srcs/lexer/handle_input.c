@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 void	tokenize_redirection(t_token **token, char *input, int *i)

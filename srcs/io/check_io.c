@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 bool	check_io(t_redir *io, bool temp)

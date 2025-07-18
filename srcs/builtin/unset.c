@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 static int	is_valid_identifier(t_shell *shell, char *str)

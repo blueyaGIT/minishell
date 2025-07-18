@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 bool	refresh_pipes(t_redir *io)

@@ -93,7 +93,7 @@ SRCS	+=	init_signals.c \
 SRCS	+=	free.c \
 			print_logo.c \
 			sys_path_extractor.c \
-			read_line.c
+			read_line.c \
 
 # LEXER
 SRCS	+=	create_token.c \

@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 static bool	is_filename(t_token *prev)

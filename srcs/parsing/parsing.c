@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 int process_and_execute_input(t_shell *shell)

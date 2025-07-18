@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 static void	if_cmd_empty(t_shell *shell, t_command *cmd)

@@ -1,10 +1,8 @@
-
-
 #include "minishell.h"
 
 bool	pipes_init(t_shell *shell)
 {
-	int			fd[2];
+	int			*fd;
 	t_command	*temp;
 
 	temp = shell->cmd_list;
@@ -12,7 +10,8 @@ bool	pipes_init(t_shell *shell)
 	{
 		if (temp->pipe_flag || (temp->prev && temp->prev->pipe_flag))
 		{
-			if (pipe(fd) != 0)
+			fd = malloc(sizeof * fd * 2);
+			if (!fd || pipe(fd) != 0)
 			{
 				reload_shell(shell);
 				return (false);

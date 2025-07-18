@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 int	exec_cd(t_shell *shell, char **args)

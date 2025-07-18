@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 void init_command(t_command *command)

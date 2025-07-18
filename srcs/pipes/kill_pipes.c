@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 void	kill_pipes(t_command *commands, t_command *temp)

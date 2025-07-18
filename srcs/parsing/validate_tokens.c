@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 static bool valid_pipe_syntax(t_token *token)

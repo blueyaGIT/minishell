@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 t_token	*new_token(t_token_type type, char *value)

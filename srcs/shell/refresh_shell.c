@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 // static void	ft_delone_token(t_token *lst, void (*del)(void *))

@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 static void	print_nl(int temp)

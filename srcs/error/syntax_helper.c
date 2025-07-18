@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 int	check_empty_input(const char *str, t_shell *shell)

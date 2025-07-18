@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 static char	*find_shlvl_value(char **env)

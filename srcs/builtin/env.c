@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 int	exec_env(t_shell *shell, char **args)

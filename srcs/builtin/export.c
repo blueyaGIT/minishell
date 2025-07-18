@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 static void	parse_key_value(char *arg, char **key, char **value)

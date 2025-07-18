@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 static char	*copy_word(const char *str, int start)

@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 int	kill_shell(t_shell *shell, int ecode)

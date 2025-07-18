@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 static bool	is_echo_option(const char *str)

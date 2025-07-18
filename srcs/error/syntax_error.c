@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 int	print_error(const char *message, t_shell *shell)

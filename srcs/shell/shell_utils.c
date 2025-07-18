@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 void	reload_shell(t_shell *shell)

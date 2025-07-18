@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 static bool	valid_quotes(const char *input)
@@ -61,6 +59,6 @@ bool	valid_input(const char *input)
 	if (!valid_quotes(input))
 		return (ft_printf("minishell: syntax error: unclosed quote"), 1);
 	if (!valid_escape_chars(input))
-		return (ft_printf("minishell: syntax error: unclosed quote"), 1);
+		return (ft_printf("minishell: syntax error: invalid use of backslash"), 1);
 	return (true);
 }

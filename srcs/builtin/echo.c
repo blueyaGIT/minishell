@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 static int	check_flag(char **args)

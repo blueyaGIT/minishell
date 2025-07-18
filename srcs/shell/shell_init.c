@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 // static void	dir_init(t_shell *shell)

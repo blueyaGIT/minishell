@@ -1,5 +1,3 @@
-
-
 #include "minishell.h"
 
 void	ft_free_io(t_redir *io)
