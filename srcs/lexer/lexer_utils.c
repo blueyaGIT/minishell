@@ -20,57 +20,36 @@ bool	is_token_seperator(char c)
 	return (false);
 }
 
-// int	calc_word_length(char *input, int i)
-// {
-// 	int		length = 0;
-// 	char	quote;
-
-// 	quote = '\0';
-// 	while (input[i] && !ft_isspace(input[i]) && !is_token_seperator(input[i]) && (input[i] != '\'' || input[i] != '\"'))
-// 	{
-// 		if ((input[i] == '\'' || input[i] == '\"') || input[i] == quote)
-// 		{
-// 			quote = input[i++];
-// 			while (input[i] && input[i] != quote)
-// 			{
-// 				length++;
-// 				i++;
-// 			}
-// 			return (length);
-// 		}
-// 		else
-// 		{
-// 			length++;
-// 			i++;
-// 		}
-// 	}
-// 	printf("Lenght: %d\n", length);
-// 	return (length);
-// }
-
 int	calc_word_length(char *input, int i)
 {
 	int		length;
 	char	quote;
+	int		flag;
 
+	flag = 0;
 	length = 0;
 	quote = '\0';
 	while (input[i] && !ft_isspace(input[i]) && !is_token_seperator(input[i]) && input[i] != quote)
 	{
 		if (input[i] == '\'' || input[i] == '\"')
 		{
+			if (flag == 1)
+				return (length);
 			quote = input[i];
-				i++;
+			i++;
 			while(input[i] && input[i] != quote)
 			{
 				length++;
 				i++;
+				printf("Length if: %d\n", length);
 			}
 		}
 		else
 		{
+			flag = 1;
 			length++;
 			i++;
+			printf("Length else: %d\n", length);
 		}
 	}
 	return (length);
