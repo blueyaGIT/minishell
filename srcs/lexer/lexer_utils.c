@@ -37,11 +37,10 @@ int	calc_word_length(char *input, int i)
 				return (length);
 			quote = input[i];
 			i++;
-			while(input[i] && input[i] != quote)
+			while (input[i] && input[i] != quote)
 			{
 				length++;
 				i++;
-				printf("Length if: %d\n", length);
 			}
 		}
 		else
@@ -49,7 +48,6 @@ int	calc_word_length(char *input, int i)
 			flag = 1;
 			length++;
 			i++;
-			printf("Length else: %d\n", length);
 		}
 	}
 	return (length);

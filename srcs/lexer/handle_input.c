@@ -52,7 +52,6 @@ void	tokenize_word(t_token **token, char *input, int *i)
 	int		written;
 
 	length = calc_word_length(input, *i);
-	printf("Length: %d\n", length);
 	word = (char *)malloc(length + 1);
 	if (!word)
 		return ;

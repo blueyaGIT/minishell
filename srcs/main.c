@@ -40,8 +40,8 @@ int	main(int argc, char *argv[], char **envp)
 		if (process_and_execute_input(&shell))
 			g_ecode = ft_exec(&shell);
 		else
-			g_ecode = 1;
-		print_shell(&shell);
+		// 	g_ecode = 1;
+		// print_shell(&shell);
 		// if (ft_strcmp(shell.input, "exit") == 0)
 		// 	exit(1);
 		reload_shell(&shell);

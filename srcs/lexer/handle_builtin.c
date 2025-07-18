@@ -35,6 +35,7 @@ static bool	is_echo(t_token *token)
 {
 	t_token	*current;
 	t_token *prev;
+	// t_token *n_token;
 
 	if (!token || ft_strcmp(token->value, "echo") != 0)
 		return (false);
@@ -46,6 +47,14 @@ static bool	is_echo(t_token *token)
 		remove_token(&token->next, prev, current); // first arg -n
 		current = prev->next;
 	}
+	// if (token->is_echo_n)
+	// {
+	// 	n_token = new_token(ARGUMENT, ft_strdup("-n"));
+	// 	if (!n_token)
+	// 		return (true);
+	// 	n_token->next = token->next;
+	// 	token->next = n_token;
+	// }
 	return (true);
 }
 

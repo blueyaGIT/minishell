@@ -56,29 +56,11 @@ static bool	valid_escape_chars(const char *input)
 	return (true);
 }
 
-static bool	is_only_whitespace(const char *input)
-{
-	int	i;
-
-	i = 0;
-	while (input[i])
-	{
-		if (!ft_isspace(input[i]))
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
 bool	valid_input(const char *input)
 {
-	if (!input || input[0] == '\0')
-		return (false);
-	if (is_only_whitespace(input))
-		return (false);
 	if (!valid_quotes(input))
-		return (false);
+		return (ft_printf("minishell: syntax error: unclosed quote"), 1);
 	if (!valid_escape_chars(input))
-		return (false);
+		return (ft_printf("minishell: syntax error: unclosed quote"), 1);
 	return (true);
 }

@@ -43,23 +43,23 @@ void	token_add_back(t_token **token, t_token *new);
 
 // parsing
 int process_and_execute_input(t_shell *shell);
-// t_command *parse_code(t_token *token);
-// bool valid_syntax(t_token *token);
-// t_token *handle_word(t_token *token, t_command **command);
-// t_token *handle_pipe(t_token *token, t_command **command);
-// t_token *handle_redirection(t_token *token, t_command **command);
+t_command *parse_code(t_token *token);
+bool valid_syntax(t_token *token);
+t_token *handle_word(t_token *token, t_command **command);
+t_token *handle_pipe(t_token *token, t_command **command);
+t_token *handle_redirection(t_token *token, t_command **command);
 
 
 // create command
-// void	command_add_back(t_command **command, t_command *new);
-// t_command	*command_last(t_command *command);
-// t_command *new_command(void);
+void	command_add_back(t_command **command, t_command *new);
+t_command	*command_last(t_command *command);
+t_command *new_command(void);
 
 // parsing utils
-// void init_command(t_command *command);
-// bool is_word(t_token_type type);
-// bool is_redirection_token(t_token *token);
-// void init_redir(t_redir *redir);
+void init_command(t_command *command);
+bool is_word(t_token_type type);
+bool is_redirection_token(t_token *token);
+void init_redir(t_redir *redir);
 
 
 #endif /* PARSING_H */
