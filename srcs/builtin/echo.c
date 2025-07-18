@@ -1,18 +1,11 @@
 #include "minishell.h"
 
-static int	check_flag(char **args)
-{
-	if (ft_strcmp(args[0], "-n") == 0)
-		return (1);
-	return (0);
-}
-
-int	exec_echo(char **args)
+int	exec_echo(t_shell *shell, char **args)
 {
 	int	i;
 	int	status;
 
-	i = check_flag(args);
+	i = 0;
 	status = 0;
 	while (args[i])
 	{
@@ -23,7 +16,7 @@ int	exec_echo(char **args)
 			return (EXIT_FAILURE);
 		i++;
 	}
-	if (check_flag(args) == 0)
+	if (!shell->cmd_list->is_echo_n)
 		status = ft_printf("\n", 1);
 	if (status == -1)
 		return (EXIT_FAILURE);

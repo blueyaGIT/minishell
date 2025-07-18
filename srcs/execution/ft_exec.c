@@ -64,7 +64,7 @@ int	exec_builtin(t_shell *shell, t_command *instr)
 	else if (ft_strncmp(instr->cmd, "cd", 3) == 0)
 		temp = exec_cd(shell, instr->args);
 	else if (ft_strncmp(instr->cmd, "echo", 5) == 0)
-		temp = exec_echo(instr->args);
+		temp = exec_echo(shell, instr->args);
 	else if (ft_strncmp(instr->cmd, "export", 7) == 0)
 		temp = exec_export(shell, instr->args);
 	else if (ft_strncmp(instr->cmd, "unset", 6) == 0)
