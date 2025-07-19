@@ -78,6 +78,7 @@ SRCS	+=	kill_pipes.c \
 
 # IO
 SRCS	+=	check_io.c \
+			init_io.c \
 			refresh_io.c \
 
 # SHELL

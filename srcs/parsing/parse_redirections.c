@@ -14,7 +14,7 @@ t_token *handle_redirection(t_token *token, t_command **command)
 		current->io = malloc(sizeof(t_redir));
 		if (!current->io)
 			return (NULL);
-		init_redir(current->io);
+		init_redir(current);
 	}
 	if (token->next && token->next->type == FILENAME && token->next->value)
 	{
