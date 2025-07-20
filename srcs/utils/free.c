@@ -54,6 +54,8 @@ void	ft_free_command(t_command *cmd)
 		}
 		free(cmd->args);
 	}
+	if (cmd->pipe_fd)
+		free(cmd->pipe_fd);
 	ft_free_io(cmd->io);
 	free(cmd);
 }
