@@ -48,6 +48,7 @@ void	tokenize_word(t_token **token, char *input, int *i)
 	char	*word;
 	int		length;
 	int		written;
+	t_token *new;
 
 	length = calc_word_length(input, *i);
 	word = (char *)malloc(length + 1);
@@ -59,5 +60,11 @@ void	tokenize_word(t_token **token, char *input, int *i)
 		free(word);
 		return ;
 	}
-	token_add_back(token, new_token(T_WORD, word));
+	new = new_token(T_WORD, word);
+	if (!new)
+	{
+		free(word);
+		return ;
+	}
+	token_add_back(token, new);
 }
