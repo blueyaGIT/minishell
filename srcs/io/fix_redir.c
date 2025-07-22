@@ -28,10 +28,11 @@ void	fix_redir(t_shell *shell)
 	}
 	
 	// // Handle heredoc
-	// if (shell->cmd_list->io->hrd_flag && shell->cmd_list->io->hrd_del)
-	// {
-	// 	// Heredoc handling - typically fd_in is set up during parsing
-	// 	// This could involve creating a pipe and writing heredoc content
-	// 	// Implementation depends on how heredoc is handled in your parser
-	// }
+	if (shell->cmd_list->io->hrd_flag && shell->cmd_list->io->hrd_del)
+	{
+		
+		// Heredoc handling - typically fd_in is set up during parsing
+		// This could involve creating a pipe and writing heredoc content
+		// Implementation depends on how heredoc is handled in your parser
+	}
 }
