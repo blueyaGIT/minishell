@@ -92,6 +92,9 @@ int	ft_exec(t_shell *shell)
 {
 	int	temp;
 
+	if (shell->cmd_list->filename)
+		shell->cmd_list->io->fd_out = open(shell->cmd_list->filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	
 	temp = check_data(shell);
 	if (temp != 127)
 		return (temp);

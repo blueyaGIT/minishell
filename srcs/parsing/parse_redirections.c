@@ -9,13 +9,7 @@ t_token *handle_redirection(t_token *token, t_command **command)
 	current = command_last(*command);
 	if(!current)
 		return (NULL);
-	if (!current->io)
-	{
-		current->io = malloc(sizeof(t_redir));
-		if (!current->io)
-			return (NULL);
-		init_redir(current);
-	}
+	init_redir(current);
 	if (token->next && token->next->type == FILENAME && token->next->value)
 	{
 		current->filename = ft_strdup(token->next->value);
