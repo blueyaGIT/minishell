@@ -32,9 +32,13 @@ void	fix_redir(t_shell *shell)
 			shell->last_exitcode = 1;
 		}
 	}
+	
 	// Handle heredoc
-	shell->cmd_list->io->hrd_flag = true;
-	shell->cmd_list->io->hrd_del = "stop";
+
+	// // DEBUG
+	// shell->cmd_list->io->hrd_flag = true;
+	// shell->cmd_list->io->hrd_del = "stop";
+
 	if (shell->cmd_list->io->hrd_flag && shell->cmd_list->io->hrd_del)
 	{
 		temp_file = "/tmp/heredoc_temp";
