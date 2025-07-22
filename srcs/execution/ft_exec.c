@@ -77,6 +77,7 @@ static int	check_data(t_shell *shell)
 {
 	if (!shell || !shell->cmd_list)
 		return (EXIT_SUCCESS);
+	fix_redir(shell);
 	if (!shell->cmd_list->cmd)
 	{
 		if (shell->cmd_list->io && !check_io(shell->cmd_list->io, true))
@@ -92,9 +93,6 @@ int	ft_exec(t_shell *shell)
 {
 	int	temp;
 
-	if (shell->cmd_list->filename)
-		shell->cmd_list->io->fd_out = open(shell->cmd_list->filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	
 	temp = check_data(shell);
 	if (temp != 127)
 		return (temp);
