@@ -73,10 +73,10 @@ bool valid_syntax(t_token *token)
 	if (!token)
 		return (false);
 	if (!valid_pipe_syntax(token))
-		return (ft_printf("minishell: syntax error: invalid pipe", 0));
+		return (false); // error message
 	if (!valid_redirection_syntax(token))
-		return (ft_printf("minishell: syntax error: invalid redirection", 0));
+		return (false); // error message
 	if (!valid_command_syntax(token))
-		return (ft_printf("minishell: syntax error: invalid command", 0));
+		return (false); // error message
 	return (true);
 }

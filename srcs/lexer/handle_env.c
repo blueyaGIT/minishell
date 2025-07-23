@@ -39,11 +39,6 @@ static char	*env_to_input(char *input, t_shell *shell)
 	{
 		if (input[i] == '$' || (input[i] == '~' && should_exp_tilde(input, i)))
 		{
-			if (input[i + 1] == '?')
-			{
-				input = ft_itoa(g_ecode);
-				return (input);
-			}
 			temp = make_expansion(input, &i, shell);
 			if (!temp)
 				return (NULL);

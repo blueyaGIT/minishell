@@ -57,8 +57,6 @@ t_token	*lexer(char *input, t_shell *shell)
 	if (!valid_input(input))
 		return (NULL);
 	temp = handle_env(shell);
-	if (!temp)
-		return (NULL);
 	input = temp;
 	while (input[i])
 	{
@@ -74,6 +72,5 @@ t_token	*lexer(char *input, t_shell *shell)
 			tokenize_word(&token, input, &i);
 	}
 	tokenize_word_token(token);
-	free(temp);
 	return (token);
 }
