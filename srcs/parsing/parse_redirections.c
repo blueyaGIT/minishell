@@ -10,7 +10,7 @@ t_token *handle_redirection(t_token *token, t_command **command)
 	if(!current)
 		return (NULL);
 	init_redir(current);
-	if (token->next && token->next->type == FILENAME && token->next->value)
+	if (token->next && (token->next->type == FILENAME || token->next->type == HEREDOC_DELIM) && token->next->value)
 	{
 		current->filename = ft_strdup(token->next->value);
 		if (!current->filename)
