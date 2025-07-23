@@ -66,5 +66,6 @@ void	tokenize_word(t_token **token, char *input, int *i)
 		free(word);
 		return ;
 	}
+	free(word);
 	token_add_back(token, new);
 }
