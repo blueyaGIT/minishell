@@ -5,15 +5,15 @@ void	ft_free_io(t_redir *io)
 	if (!io)
 		return ;
 	refresh_io(io);
-	if (io->hrd_sep)
-	{
-		unlink(io->infile);
+	// if (io->hrd_sep)
+	// {
+		// unlink(io->infile);
 		// ft_free_ptr(io->hrd_sep);
-	}
-	if (io->infile)
-		ft_free_ptr(io->infile);
-	if (io->outfile)
-		ft_free_ptr(io->outfile);
+	// }
+	// if (io->infile)
+	// 	ft_free_ptr(io->infile);
+	// if (io->outfile)
+	// 	ft_free_ptr(io->outfile);
 	if (io)
 		ft_free_ptr(io);
 }
@@ -54,6 +54,8 @@ void	ft_free_command(t_command *cmd)
 		}
 		free(cmd->args);
 	}
+	if (cmd->pipe_fd)
+		free(cmd->pipe_fd);
 	ft_free_io(cmd->io);
 	free(cmd);
 }

@@ -31,10 +31,10 @@ static bool valid_redirection_syntax(t_token *token)
 		{
 			if (!token->next)
 				return (false);
-			if (token->type == T_HEREDOC && token->next->type != HEREDOC_DELIM)
-				return (false);
-			else if (token->next->type != FILENAME)
-					return (false);
+			// if (token->type == T_HEREDOC && token->next->type != HEREDOC_DELIM)
+			// 	return (false);
+			// else if (token->next->type != FILENAME)
+			// 		return (false);
 			token = token->next;
 		}
 		token = token->next;

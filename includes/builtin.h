@@ -7,7 +7,7 @@ int		exec_env(t_shell *shell, char **args);
 int		exec_exit(t_shell *shell, char **args);
 int		exec_pwd(t_shell *shell);
 int		exec_cd(t_shell *shell, char **args);
-int		exec_echo(char **args);
+int		exec_echo(t_shell *shell, char **args);
 int		exec_export(t_shell *shell, char **args);
 int		exec_unset(t_shell *shell, char **args);
 char	*ft_strjoin_three(const char *s1, const char *s2, const char *s3);
