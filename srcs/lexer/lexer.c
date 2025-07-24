@@ -72,6 +72,5 @@ t_token	*lexer(char *input, t_shell *shell)
 			tokenize_word(&token, input, &i);
 	}
 	tokenize_word_token(token);
-	free(temp);
-	return (token);
+	return (free(temp), token);
 }

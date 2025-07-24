@@ -11,14 +11,14 @@ void	init_token(t_token *token)
 	token->prev = NULL;
 }
 
-bool	is_tok_seperator(char c)
+bool	is_tok_sep(char c)
 {
 	if (c == '|' || c == '<' || c == '>')
 		return (true);
 	return (false);
 }
 
-int	calc_word_length(char *input, int i)
+int	calc_word_length(char *input, int i) // still needs to be shortened
 {
 	int		length;
 	char	quote;

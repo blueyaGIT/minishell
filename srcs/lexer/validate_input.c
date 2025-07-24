@@ -24,6 +24,36 @@ static bool	valid_quotes(const char *input)
 	return (true);
 }
 
+// static bool	valid_escape_chars(const char *input)
+// {
+// 	int		i;
+// 	char	quote;
+
+// 	i = 0;
+// 	quote = 0;
+// 	while (input[i])
+// 	{
+// 		if (quote == 0 && (input[i] == '\'' || input[i] == '\"'))
+// 			quote = input[i];
+// 		else if (quote == input[i])
+// 			quote = 0;
+// 		if (input[i] == '\\')
+// 		{
+// 			if (input[i + 1] == '\0')
+// 				return (false);
+// 			if (quote != '\'')
+// 			{
+// 				if (input[i + 1] == '\'')
+// 					i++;
+// 			}
+// 			else
+// 				i++;
+// 		}
+// 		i++;
+// 	}
+// 	return (true);
+// }
+
 static bool	valid_escape_chars(const char *input)
 {
 	int		i;
@@ -33,20 +63,15 @@ static bool	valid_escape_chars(const char *input)
 	quote = 0;
 	while (input[i])
 	{
-		if (quote == 0 && (input[i] == '\'' || input[i] == '\"'))
+		if (!quote && (input[i] == '\'' || input[i] == '\"'))
 			quote = input[i];
-		else if (quote == input[i])
+		else if (quote && input[i] == quote)
 			quote = 0;
-		if (input[i] == '\\')
+		else if (input[i] == '\\')
 		{
-			if (input[i + 1] == '\0')
+			if (!input[i + 1])
 				return (false);
 			if (quote != '\'')
-			{
-				if (input[i + 1] == '\'')
-					i++;
-			}
-			else
 				i++;
 		}
 		i++;

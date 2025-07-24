@@ -45,39 +45,42 @@ static char	*replace_with_value(char *input, int start, int end, char *value)
 	return (new_input);
 }
 
-char	*handle_dollar_exp(char *input_dup, int start, int *i, t_shell *shell)
+static char	*handle_env_val(char *dup, int start, int *end, t_shell *shell)
 {
 	char	*var_name;
 	char	*env_value;
+	char	*result;
+
+	var_name = copy_word(dup, start);
+	if (!var_name)
+		return (dup);
+	env_value = env_get(shell->env, var_name);
+	*end = start + (int)ft_strlen(var_name);
+	if (env_value)
+		result = ft_strdup(env_value);
+	else
+		result = ft_strdup("");
+	return (result);
+}
+
+char	*handle_dollar_exp(char *input_dup, int start, int *i, t_shell *shell)
+{
 	char	*new_input;
 	int		end;
+	char	*env_value;
 
-	var_name = copy_word(input_dup, start);
-	if (!var_name)
+	env_value = handle_env_val(input_dup, start, &end, shell);
+	if (!env_value)
 	{
 		(*i)++;
 		return (input_dup);
 	}
-	env_value = env_get(shell->env, var_name);
-	end = start + (int)ft_strlen(var_name);
-	if (env_value)
-	{
-		new_input = replace_with_value(input_dup, start - 1, end, env_value);
-		free(var_name);
-		free(input_dup);
-		if (!new_input)
-			return (NULL);
-		*i = (start - 1) + (int)ft_strlen(env_value);
-	}
-	else
-	{
-		new_input = replace_with_value(input_dup, start - 1, end, "");
-		free(var_name);
-		free(input_dup);
-		if (!new_input)
-			return (NULL);
-		(*i) = start - 1;
-	}
+	new_input = replace_with_value(input_dup, start - 1, end, env_value);
+	free(env_value);
+	free(input_dup);
+	if (!new_input)
+		return (NULL);
+	*i = (start - 1) + (int)ft_strlen(env_value);
 	return (new_input);
 }
 
