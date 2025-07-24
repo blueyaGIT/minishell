@@ -9,7 +9,7 @@ bool		valid_input(const char *input);
 
 // lexer utils
 void		init_token(t_token *token);
-bool		is_token_seperator(char c);
+bool		is_tok_sep(char c);
 int			calc_word_length(char *input, int i);
 void		handle_output_redirection(t_token **token, char *input, int *i);
 void		handle_input_redirection(t_token **token, char *input, int *i);
