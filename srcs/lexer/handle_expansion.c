@@ -9,7 +9,8 @@ static char	*copy_word(const char *str, int start)
 	if (!str || start < 0)
 		return (NULL);
 	i = start;
-	while (str[i] && !ft_isspace((unsigned char)str[i]) && str[i] != '$' && str[i] != '\'' && str[i] != '\"')
+	while (str[i] && !ft_isspace((unsigned char)str[i]) && \
+	str[i] != '$' && str[i] != '\'' && str[i] != '\"')
 		i++;
 	word_length = i - start;
 	if (word_length == 0)
@@ -70,18 +71,17 @@ char	*handle_dollar_exp(char *input_dup, int start, int *i, t_shell *shell)
 	}
 	else
 	{
-		new_input  = replace_with_value(input_dup, start - 1, end, ""); // should be handled differently
+		new_input = replace_with_value(input_dup, start - 1, end, "");
 		free(var_name);
 		free(input_dup);
-		if(!new_input)
+		if (!new_input)
 			return (NULL);
 		(*i) = start - 1;
 	}
 	return (new_input);
 }
 
-
-char	*handle_tilde_exp(char *input_dup, int start, int *i, t_shell *shell)
+char	*handle_tilde_exp(char *dup, int start, int *i, t_shell *shell)
 {
 	char	*new_input;
 	char	*home_env;
@@ -89,7 +89,7 @@ char	*handle_tilde_exp(char *input_dup, int start, int *i, t_shell *shell)
 	int		end;
 
 	end = start;
-	while (input_dup[end] && input_dup[end] != '/' && !ft_isspace((unsigned char)input_dup[end]))
+	while (dup[end] && dup[end] != '/' && !ft_isspace((unsigned char)dup[end]))
 		end++;
 	home_env = env_get(shell->env, "HOME");
 	if (!home_env)
@@ -97,15 +97,15 @@ char	*handle_tilde_exp(char *input_dup, int start, int *i, t_shell *shell)
 	else
 		home_path = ft_strdup(home_env);
 	if (!home_path)
-		return (input_dup);
-	new_input = replace_with_value(input_dup, start - 1, end, home_path);
+		return (dup);
+	new_input = replace_with_value(dup, start - 1, end, home_path);
 	if (!new_input)
 	{
 		free(home_path);
-			return (NULL);
+		return (NULL);
 	}
 	*i = (start - 1) + (int)ft_strlen(home_path);
 	free(home_path);
-	free(input_dup);
+	free(dup);
 	return (new_input);
 }

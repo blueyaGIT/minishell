@@ -1,8 +1,9 @@
 #include "minishell.h"
 
-t_token *handle_pipe(t_token *token, t_command **command)
+t_token	*handle_pipe(t_token *token, t_command **command)
 {
-	t_command *new_cmd;
+	t_command	*new_cmd;
+
 	new_cmd = new_command();
 	if (!new_cmd)
 		return (NULL);
@@ -12,11 +13,11 @@ t_token *handle_pipe(t_token *token, t_command **command)
 	return (token->next);
 }
 
-static void add_arg(t_command *command, char *word)
+static void	add_arg(t_command *command, char *word)
 {
-	int argc;
-	char **temp;
-	int i;
+	int		argc;
+	char	**temp;
+	int		i;
 
 	i = 0;
 	argc = 0;
@@ -41,14 +42,14 @@ static void add_arg(t_command *command, char *word)
 	command->args = temp;
 }
 
-t_token *handle_word(t_token *token, t_command **command)
+t_token	*handle_word(t_token *token, t_command **command)
 {
-	t_command *current;
+	t_command	*current;
 
 	if (!*command)
 		command_add_back(command, new_command());
 	current = command_last(*command);
-	if(!current)
+	if (!current)
 		return (NULL);
 	if (!current->cmd)
 	{
@@ -57,7 +58,6 @@ t_token *handle_word(t_token *token, t_command **command)
 			return (NULL);
 		if (token->is_echo_n)
 			current->is_echo_n = true;
-
 	}
 	else
 		add_arg(current, token->value);

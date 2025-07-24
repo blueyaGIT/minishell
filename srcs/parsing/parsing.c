@@ -1,12 +1,12 @@
 #include "minishell.h"
 
-int process_and_execute_input(t_shell *shell)
+int	process_and_execute_input(t_shell *shell)
 {
-	t_token *token;
-	t_command *command;
-	
+	t_token		*token;
+	t_command	*command;
+
 	token = lexer(shell->input, shell);
-	if(!token)
+	if (!token)
 		return (1);
 	if (!valid_syntax(token))
 	{
@@ -17,15 +17,18 @@ int process_and_execute_input(t_shell *shell)
 	command = parse_code(shell->token);
 	if (!command)
 	{
-		free_token(token);	
+		free_token(token);
 		return (0);
 	}
 	shell->cmd_list = command;
 	return (1);
 }
-t_command *parse_code(t_token *token)
+
+t_command	*parse_code(t_token *token)
 {
-	t_command *command = NULL;
+	t_command	*command;
+
+	command = NULL;
 	while (token)
 	{
 		if (token->type == T_PIPE)

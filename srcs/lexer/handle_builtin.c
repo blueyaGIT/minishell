@@ -16,16 +16,14 @@ static bool	is_echo_option(const char *str)
 	return (true);
 }
 
-static void	remove_token(t_token **head, t_token *prev, t_token *echo_option)
+static void	ft_remove_token(t_token **head, t_token *prev, t_token *echo_option)
 {
 	if (!echo_option)
 		return ;
-
 	if (prev)
 		prev->next = echo_option->next;
 	else
 		*head = echo_option->next;
-
 	free(echo_option->value);
 	free(echo_option);
 }
@@ -33,8 +31,7 @@ static void	remove_token(t_token **head, t_token *prev, t_token *echo_option)
 static bool	is_echo(t_token *token)
 {
 	t_token	*current;
-	t_token *prev;
-	// t_token *n_token;
+	t_token	*prev;
 
 	if (!token || ft_strcmp(token->value, "echo") != 0)
 		return (false);
@@ -43,17 +40,9 @@ static bool	is_echo(t_token *token)
 	while (current && current->type == T_WORD && is_echo_option(current->value))
 	{
 		token->is_echo_n = true;
-		remove_token(&token->next, prev, current); // first arg -n
+		ft_remove_token(&token->next, prev, current);
 		current = prev->next;
 	}
-	// if (token->is_echo_n)
-	// {
-	// 	n_token = new_token(ARGUMENT, ft_strdup("-n"));
-	// 	if (!n_token)
-	// 		return (true);
-	// 	n_token->next = token->next;
-	// 	token->next = n_token;
-	// }
 	return (true);
 }
 
@@ -63,11 +52,11 @@ bool	is_builtin(t_token *token)
 		return (false);
 	if (is_echo(token))
 		return (true);
-	if (ft_strcmp(token->value, "cd") == 0 ||
-	ft_strcmp(token->value, "pwd") == 0 ||
-	ft_strcmp(token->value, "export") == 0 ||
-	ft_strcmp(token->value, "unset") == 0 ||
-	ft_strcmp(token->value, "env") == 0 ||
+	if (ft_strcmp(token->value, "cd") == 0 || \
+	ft_strcmp(token->value, "pwd") == 0 || \
+	ft_strcmp(token->value, "export") == 0 || \
+	ft_strcmp(token->value, "unset") == 0 || \
+	ft_strcmp(token->value, "env") == 0 || \
 	ft_strcmp(token->value, "exit") == 0)
 		return (true);
 	return (false);

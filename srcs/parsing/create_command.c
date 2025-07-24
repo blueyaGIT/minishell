@@ -1,9 +1,9 @@
 #include "minishell.h"
 
-t_command *new_command(void)
+t_command	*new_command(void)
 {
-	t_command *new;
-	
+	t_command	*new;
+
 	new = malloc(sizeof(t_command));
 	if (!new)
 		return (NULL);
@@ -19,9 +19,11 @@ t_command	*command_last(t_command *command)
 		command = command->next;
 	return (command);
 }
+
 void	command_add_back(t_command **command, t_command *new)
 {
-	t_command *temp;
+	t_command	*temp;
+
 	if (!command || !new)
 		return ;
 	if (!*command)

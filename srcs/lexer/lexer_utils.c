@@ -11,7 +11,7 @@ void	init_token(t_token *token)
 	token->prev = NULL;
 }
 
-bool	is_token_seperator(char c)
+bool	is_tok_seperator(char c)
 {
 	if (c == '|' || c == '<' || c == '>')
 		return (true);
@@ -27,7 +27,7 @@ int	calc_word_length(char *input, int i)
 	flag = 0;
 	length = 0;
 	quote = '\0';
-	while (input[i] && !ft_isspace(input[i]) && !is_token_seperator(input[i]) && input[i] != quote)
+	while (input[i] && !ft_isspace(input[i]) && !is_tok_sep(input[i]) && input[i] != quote)
 	{
 		if (input[i] == '\'' || input[i] == '\"')
 		{
