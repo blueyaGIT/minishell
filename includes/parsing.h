@@ -26,10 +26,12 @@ void		handle_empty_quote(t_token **token, int *i);
 void		tokenize_word(t_token **token, char *input, int *i);
 
 // handle env
-char	*handle_env(t_shell *shell);
-char	*replace_with_value(char *input, int start, int end, char *value);
-char	*handle_tilde_exp(char *input_dup, int start, int *i, t_shell *shell);
-char	*handle_dollar_exp(char *input_dup, int start, int *i, t_shell *shell);
+char		*handle_env(t_shell *shell);
+char		*replace_with_value(char *input, int start, int end, char *value);
+char		*handle_tilde_exp(char *input_dup, int start, int *i,
+				t_shell *shell);
+char		*handle_dollar_exp(char *input_dup, int start, int *i,
+				t_shell *shell);
 
 // tokenize words
 void		tokenize_word_token(t_token *token);
