@@ -107,6 +107,7 @@ SRCS	+=	create_token.c \
 			handle_builtin.c \
 			handle_env.c \
 			handle_expansion.c \
+			handle_dollar_expansion.c \
 
 # PARSING
 SRCS	+=	parsing.c \
