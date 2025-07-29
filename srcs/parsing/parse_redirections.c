@@ -1,5 +1,25 @@
 #include "minishell.h"
 
+void	redirection_helper(t_token *token, t_command *current)
+{
+	if (token->type == T_REDIR_OUT || token->type == T_APPEND)
+	{
+		current->io->outfile = current->filename;
+		current->io->hrd_sep = token->type;
+	}
+	else if (token->type == T_REDIR_IN)
+	{
+		current->io->infile = current->filename;
+		current->io->hrd_sep = token->type;
+	}
+	else if (token->type == T_HEREDOC)
+	{
+		current->io->hrd_del = current->filename;
+		current->io->hrd_flag = true;
+		current->io->hrd_sep = token->type;
+	}
+}
+
 t_token	*handle_redirection(t_token *token, t_command **command)
 {
 	t_command	*current;
@@ -16,22 +36,7 @@ t_token	*handle_redirection(t_token *token, t_command **command)
 		current->filename = ft_strdup(token->next->value);
 		if (!current->filename)
 			return (NULL);
-		if (token->type == T_REDIR_OUT || token->type == T_APPEND)
-		{
-			current->io->outfile = current->filename;
-			current->io->hrd_sep = token->type;
-		}
-		else if (token->type == T_REDIR_IN)
-		{
-			current->io->infile = current->filename;
-			current->io->hrd_sep = token->type;
-		}
-		else if (token->type == T_HEREDOC)
-		{
-			current->io->hrd_del = current->filename;
-			current->io->hrd_flag = true;
-			current->io->hrd_sep = token->type;
-		}
+		redirection_helper(token, current);
 	}
 	token = token->next;
 	return (token->next);
