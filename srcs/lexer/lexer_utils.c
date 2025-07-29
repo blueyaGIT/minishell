@@ -1,16 +1,5 @@
 #include "minishell.h"
 
-void	init_token(t_token *token)
-{
-	if (!token)
-		return ;
-	token->value = NULL;
-	token->type = 0;
-	token->is_echo_n = false;
-	token->next = NULL;
-	token->prev = NULL;
-}
-
 bool	is_tok_sep(char c)
 {
 	if (c == '|' || c == '<' || c == '>')
@@ -18,7 +7,13 @@ bool	is_tok_sep(char c)
 	return (false);
 }
 
-int	calc_word_length(char *input, int i) // still needs to be shortened
+static void	calc_helper(int *length, int *i)
+{
+	(*i)++;
+	(*length)++;
+}
+
+int	calc_word_length(char *ip, int i)
 {
 	int		length;
 	char	quote;
@@ -27,25 +22,21 @@ int	calc_word_length(char *input, int i) // still needs to be shortened
 	flag = 0;
 	length = 0;
 	quote = '\0';
-	while (input[i] && !ft_isspace(input[i]) && !is_tok_sep(input[i]) && input[i] != quote)
+	while (ip[i] && !ft_isspace(ip[i]) && !is_tok_sep(ip[i]) && ip[i] != quote)
 	{
-		if (input[i] == '\'' || input[i] == '\"')
+		if (ip[i] == '\'' || ip[i] == '\"')
 		{
 			if (flag == 1)
 				return (length);
-			quote = input[i];
+			quote = ip[i];
 			i++;
-			while (input[i] && input[i] != quote)
-			{
-				length++;
-				i++;
-			}
+			while (ip[i] && ip[i] != quote)
+				calc_helper(&length, &i);
 		}
 		else
 		{
 			flag = 1;
-			length++;
-			i++;
+			calc_helper(&length, &i);
 		}
 	}
 	return (length);

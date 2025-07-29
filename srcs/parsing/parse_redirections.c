@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	redirection_helper(t_token *token, t_command *current)
+static void redirection_to_command(t_token *token, t_command *current)
 {
 	if (token->type == T_REDIR_OUT || token->type == T_APPEND)
 	{
@@ -36,7 +36,7 @@ t_token	*handle_redirection(t_token *token, t_command **command)
 		current->filename = ft_strdup(token->next->value);
 		if (!current->filename)
 			return (NULL);
-		redirection_helper(token, current);
+		redirection_to_command(token, current);
 	}
 	token = token->next;
 	return (token->next);

@@ -1,5 +1,16 @@
 #include "minishell.h"
 
+void	init_token(t_token *token)
+{
+	if (!token)
+		return ;
+	token->value = NULL;
+	token->type = 0;
+	token->is_echo_n = false;
+	token->next = NULL;
+	token->prev = NULL;
+}
+
 t_token	*new_token(t_token_type type, char *value)
 {
 	t_token	*new;
