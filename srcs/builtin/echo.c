@@ -9,6 +9,7 @@ int	exec_echo(t_shell *shell, char **args)
 	status = 0;
 	while (args[i])
 	{
+
 		if (status == -1)
 			return (EXIT_FAILURE);
 		status = ft_printf(args[i], 1);
