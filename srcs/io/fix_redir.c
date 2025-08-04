@@ -75,42 +75,36 @@ void	fix_redir(t_shell *shell)
 	
 	// Handle heredoc
 
-	// // DEBUG
-	// shell->cmd_list->io->hrd_flag = true;
-	// shell->cmd_list->io->hrd_del = "stop";
-    t_shell *current = shell;
-    int	del_count;
-	int	temp_del;
-
-	if (shell->cmd_list->io->hrd_flag && shell->cmd_list->io->hrd_del)
-	{
-		del_count = 0;
-		temp_del = 0;
-		// Go to the last cmd_list
-		while (current->cmd_list)
-		{
-			if(current->cmd_list->io->hrd_flag && current->cmd_list->io->hrd_del)
-				del_count++;
-			if (current->cmd_list->next)
-				current->cmd_list = current->cmd_list->next;
-			else
-				break ;
-		}
-		while (temp_del < del_count)
-		{
-			unlink(temp_file);
-			do_heredoc(current, temp_file, temp_fd, line);
-			while (current)
-			{
-				if (current->cmd_list->io && current->cmd_list->io->hrd_flag && current->cmd_list->io->hrd_del)
-				{
-					// Found heredoc, set this cmd_list as current
-					current->cmd_list = current->cmd_list;
-					break;
-				}
-				current->cmd_list = current->cmd_list->next;
-			}
-			temp_del++;
-		}
-	}
+    // // DEBUG
+    // shell->cmd_list->io->hrd_flag = true;
+    // shell->cmd_list->io->hrd_del = "stop";
+	// Search through cmd_list for first heredoc
+    if (shell->cmd_list->io->hrd_flag && shell->cmd_list->io->hrd_del)
+    {
+        do_heredoc(shell, temp_file, temp_fd, line);
+        
+        // Check for additional heredocs in the next cmd_list
+        t_command *current = shell->cmd_list->next;
+        while (current && current->io)
+        {
+            if (current->io->hrd_flag && current->io->hrd_del)
+            {
+                // Clear the temp file content
+                temp_fd = open("/tmp/heredoc_temp", O_WRONLY | O_TRUNC);
+                if (temp_fd != -1)
+                    close(temp_fd);
+                
+                // Update shell to point to current cmd for heredoc processing
+                t_command *original_cmd = shell->cmd_list;
+                shell->cmd_list = current;
+                
+                // Process the next heredoc
+                do_heredoc(shell, temp_file, temp_fd, line);
+                
+                // Restore original cmd_list pointer
+                shell->cmd_list = original_cmd;
+            }
+            current = current->next;
+        }
+    }
 }
