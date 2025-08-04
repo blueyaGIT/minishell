@@ -19,7 +19,12 @@ static char	*make_expansion(char *input, int *i, t_shell *shell)
 	(*i)++;
 	start = *i;
 	if (expansion_char == '$')
-		result = handle_dollar_exp(input, start, i, shell);
+	{
+		if (input[start] != '\0' && !ft_isspace((unsigned char)input[start]))
+			result = handle_dollar_exp(input, start, i, shell);
+		else
+			result = input;
+	}
 	else if (expansion_char == '~')
 		result = handle_tilde_exp(input, start, i, shell);
 	else
