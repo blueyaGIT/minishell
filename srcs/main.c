@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 volatile sig_atomic_t	g_ecode = 0;
@@ -29,15 +28,7 @@ int	main(int argc, char *argv[], char **envp)
 	while (1)
 	{
 		init_signals();
-		if (isatty(fileno(stdin)))
-			shell.input = read_line(PROMPT);
-		else
-		{
-			char *line;
-			line = get_next_line(fileno(stdin));
-			shell.input = ft_strtrim(line, "\n");
-			free(line);
-		}
+		shell.input = read_line(PROMPT);
 		refresh_signals();
 		if (!shell.input)
 			break ;
@@ -47,6 +38,7 @@ int	main(int argc, char *argv[], char **envp)
 			g_ecode = ft_exec(&shell);
 		else
 			g_ecode = 1;
+		// print_shell(&shell);
 		reload_shell(&shell);
 	}
 	kill_shell(&shell, g_ecode);

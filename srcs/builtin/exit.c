@@ -43,8 +43,8 @@ int	exec_exit(t_shell *shell, char **args)
 
 	temp = false;
 	check_commands(shell);
-	// if (check_commands(shell))
-		// ft_putendl_fd("exit", 2);
+	if (check_commands(shell))
+		ft_putendl_fd("exit", 2);
 	if (!args || !args[1])
 		ecode = g_ecode;
 	else

@@ -5,38 +5,37 @@
 
 typedef enum e_token_type
 {
-	T_WORD, // Befehle, Argumente, Dateinamen
-	T_PIPE, // |
-	T_REDIR_IN, // < infile
-	T_REDIR_OUT, // >outfile
-	T_APPEND, // >> outfile
-	T_HEREDOC, // << temp file + infile
+	T_WORD,
+	T_PIPE,
+	T_REDIR_IN,
+	T_REDIR_OUT,
+	T_APPEND,
+	T_HEREDOC,
 	BUILTIN,
 	COMMAND,
 	ARGUMENT,
 	ASSIGNMENT,
 	FILENAME,
 	HEREDOC_DELIM,
-}	t_token_type;
+}						t_token_type;
 
 typedef struct s_token
 {
-	t_token_type	type;
-	char			*value;
-	bool			is_echo_n;
-	struct s_token	*next;
-	struct s_token	*prev;
-}					t_token;
+	t_token_type		type;
+	char				*value;
+	bool				is_echo_n;
+	struct s_token		*next;
+	struct s_token		*prev;
+}						t_token;
 
-
-//neuer Struct für command
+// neuer Struct für command
 typedef struct s_redir
 {
-	char				*infile; //lilli
-	char				*outfile; //lilli
+	char				*infile;
+	char				*outfile;
 	t_token_type		hrd_sep;
-	char				*hrd_del; //lilli wort nach <<
-	bool				hrd_flag; //lilli gibt es heredoc
+	char				*hrd_del;
+	bool				hrd_flag;
 	int					fd_in;
 	int					fd_out;
 	int					stdin_backup;
@@ -45,17 +44,16 @@ typedef struct s_redir
 
 typedef struct s_command
 {
-	char				**args; // hello
+	char				*cmd;
+	char				*cpath;
+	char				**args;
+	char				*filename;
+	bool				is_echo_n;
+	bool				pipe_flag;
+	int					*pipe_fd;
+	t_redir				*io;
 	struct s_command	*next;
 	struct s_command	*prev;
-	char				*cmd; // echo
-	bool				pipe_flag; // "wenn | im input flag = true" 1 | 0
-	bool				is_echo_n; // wenn echo -n
-	t_redir				*io;
-	
-	char				*filename; //lilli
-	char				*cpath;
-	int					*pipe_fd;
 }						t_command;
 
 typedef struct s_shell
@@ -74,9 +72,8 @@ bool					shell_init(t_shell *shell, char **envp);
 t_shell					*get_shell(void);
 int						kill_shell(t_shell *shell, int ecode);
 void					refresh_shell(t_shell *shell);
-// void					ft_free_node(t_node **lst, void (*del)(void *));
-// void					ft_free_token(t_token **lst, void (*del)(void *));
 void					ft_free_shell(t_shell *shell);
 void					reload_shell(t_shell *shell);
+void					ft_free_tok(t_shell *shell);
 
 #endif /* SHELL_H */
