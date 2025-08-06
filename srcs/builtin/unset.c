@@ -1,14 +1,14 @@
 #include "minishell.h"
 
-static int	is_valid_identifier(t_shell *shell, char *str)
-{
-	int	idx;
+// static int	is_valid_identifier(t_shell *shell, char *str)
+// {
+// 	int	idx;
 
-	idx = env_idx(shell->env, str);
-	if (idx == -1)
-		return (0);
-	return (idx);
-}
+// 	idx = env_idx(shell->env, str);
+// 	if (idx == -1)
+// 		return (0);
+// 	return (idx);
+// }
 
 static bool	remove_env_var(t_shell *shell, int idx)
 {
@@ -30,6 +30,24 @@ static bool	remove_env_var(t_shell *shell, int idx)
 	return (true);
 }
 
+bool	is_valid_varname(char *str)
+{
+	int	i;
+
+	if (!str || !*str)
+		return (false);
+	if (!ft_isalpha(str[0]) && str[0] != '_')
+		return (false);
+	i = 1;
+	while (str[i])
+	{
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 int	exec_unset(t_shell *shell, char **args)
 {
 	int	i;
@@ -39,19 +57,20 @@ int	exec_unset(t_shell *shell, char **args)
 	exit_status = 0;
 	i = 0;
 	if (!args[0])
-		return (print_error("unset: not enough arguments\n", shell), 1);
+		return (0);
 	while (args[i])
 	{
-		idx = is_valid_identifier(shell, args[i]);
-		if (idx != -1)
+		if (!is_valid_varname(args[i]))
 		{
-			if (remove_env_var(shell, idx) == false)
-				return (print_error("unset: failed to remove var\n", shell), 1);
+			ft_printf("unset: `%s': not a valid identifier\n", args[i]);
+			exit_status = 1;
 		}
 		else
 		{
-			print_error("unset: '%s': not a valid identifier\n", shell);
-			exit_status = 1;
+			idx = env_idx(shell->env, args[i]);
+			if (idx != -1)
+				if (remove_env_var(shell, idx) == false)
+					return (ft_printf("unset: failed to remove variable\n"), 1);
 		}
 		i++;
 	}

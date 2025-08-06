@@ -15,7 +15,7 @@ char	*ft_strjoin_three(const char *s1, const char *s2, const char *s3)
 	return (result);
 }
 
-int	is_valid_varname(const char *s)
+int	is_valid_varname_export(const char *s)
 {
 	int	i;
 

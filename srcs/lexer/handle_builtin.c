@@ -7,6 +7,8 @@ static bool	is_echo_option(const char *str)
 	i = 1;
 	if (str[0] != '-')
 		return (false);
+	if (str[1] == '\0')
+		return (false);
 	while (str[i])
 	{
 		if (str[i] != 'n')

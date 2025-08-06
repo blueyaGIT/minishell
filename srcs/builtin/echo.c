@@ -3,22 +3,27 @@
 int	exec_echo(t_shell *shell, char **args)
 {
 	int	i;
-	int	status;
 
 	i = 0;
-	status = 0;
+	if (!args[0] && !shell->cmd_list->is_echo_n)
+		return (ft_printf("\n"), EXIT_SUCCESS);
+	else if (!args[0])
+		return (EXIT_SUCCESS);
 	while (args[i])
 	{
-		if (status == -1)
+		if (ft_printf("%s", args[i]) == -1)
 			return (EXIT_FAILURE);
-		status = ft_printf(args[i], 1);
-		if (status == -1)
-			return (EXIT_FAILURE);
+		if (args[i + 1])
+		{
+			if (ft_printf(" ") == -1)
+				return (EXIT_FAILURE);
+		}
 		i++;
 	}
 	if (!shell->cmd_list->is_echo_n)
-		status = ft_printf("\n", 1);
-	if (status == -1)
-		return (EXIT_FAILURE);
+	{
+		if (ft_printf("\n") == -1)
+			return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }

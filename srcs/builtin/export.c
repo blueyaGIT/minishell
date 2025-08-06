@@ -23,7 +23,7 @@ static int	handle_export_arg(t_shell *shell, char *arg, int *exit_code)
 	char	*value;
 
 	parse_key_value(arg, &key, &value);
-	if (!is_valid_varname(key))
+	if (!is_valid_varname_export(key))
 	{
 		ft_printf("export: `%s`: not a valid identifier\n", arg);
 		free(key);
