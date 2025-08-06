@@ -15,5 +15,6 @@ int		is_valid_varname(const char *s);
 int		update_existing_env(t_shell *shell, char *key, char *value);
 int		add_new_env(t_shell *shell, char *key, char *value);
 int		set_or_update_env(t_shell *shell, char *key, char *value);
+int		show_env_sorted(t_shell *shell);
 
 #endif /* BUILTIN_H */

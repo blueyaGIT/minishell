@@ -47,7 +47,7 @@ int	exec_export(t_shell *shell, char **args)
 	int	exit_code;
 
 	if (ft_arrlen(args) == 0)
-		return (exec_env(shell, NULL));
+		return (show_env_sorted(shell));
 	exit_code = 0;
 	i = 0;
 	while (args[i])
