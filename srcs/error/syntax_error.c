@@ -2,7 +2,7 @@
 
 int	print_error(const char *message, t_shell *shell)
 {
-	(ft_fprintf(STDERR_FILENO, RED"%s"RESET, message));
+	(ft_fprintf(STDERR_FILENO, "%s\n", message));
 	set_exit_code(shell, 2);
 	return (1);
 }

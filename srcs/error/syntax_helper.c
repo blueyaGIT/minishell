@@ -21,6 +21,7 @@ void	set_exit_code(t_shell *shell, int code)
 {
 	if (shell)
 		shell->last_exitcode = code;
+	g_ecode = code;
 }
 
 int	run_syntax_checks(t_shell *shell)
