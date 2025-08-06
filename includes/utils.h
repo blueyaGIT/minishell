@@ -14,6 +14,6 @@ bool	execute_commands(t_shell *shell);
 char	*find_command_path(t_shell *shell, char *cmd);
 void	ft_free_env(char **env);
 int		process_and_execute_input(t_shell *shell);
-char *read_line(const char *prompt);
+char	*read_line(const char *prompt);
 
 #endif /* UTILS_H */
