@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+int			g_ecode;
+
 static void	if_cmd_empty(t_shell *shell, t_command *cmd)
 {
 	int	i;
