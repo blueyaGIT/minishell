@@ -24,35 +24,6 @@ static bool	valid_quotes(const char *input)
 	return (true);
 }
 
-// static bool	valid_escape_chars(const char *input)
-// {
-// 	int		i;
-// 	char	quote;
-
-// 	i = 0;
-// 	quote = 0;
-// 	while (input[i])
-// 	{
-// 		if (quote == 0 && (input[i] == '\'' || input[i] == '\"'))
-// 			quote = input[i];
-// 		else if (quote == input[i])
-// 			quote = 0;
-// 		if (input[i] == '\\')
-// 		{
-// 			if (input[i + 1] == '\0')
-// 				return (false);
-// 			if (quote != '\'')
-// 			{
-// 				if (input[i + 1] == '\'')
-// 					i++;
-// 			}
-// 			else
-// 				i++;
-// 		}
-// 		i++;
-// 	}
-// 	return (true);
-// }
 
 static bool	valid_escape_chars(const char *input)
 {
@@ -79,11 +50,12 @@ static bool	valid_escape_chars(const char *input)
 	return (true);
 }
 
+
 bool	valid_input(const char *input)
 {
 	if (!valid_quotes(input))
-		return (ft_printf("minishell: syntax error: unclosed quote"), 1);
+		return (ft_printf("minishell: syntax error: unclosed quote\n"), 1); // muss readen wenn invalid input
 	if (!valid_escape_chars(input))
-		return (ft_printf("minishell: syntax error: invalid backslash"), 1);
+		return (ft_printf("minishell: syntax error: invalid backslash\n"), 1); // nicht richtig gehandled
 	return (true);
 }
