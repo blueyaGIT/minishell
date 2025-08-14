@@ -13,11 +13,6 @@ int	exec_echo(t_shell *shell, char **args)
 	{
 		if (ft_printf("%s", args[i]) == -1)
 			return (EXIT_FAILURE);
-		if (args[i + 1])
-		{
-			if (ft_printf(" ") == -1)
-				return (EXIT_FAILURE);
-		}
 		i++;
 	}
 	if (!shell->cmd_list->is_echo_n)
