@@ -39,6 +39,7 @@ static bool	is_echo(t_token *token)
 		return (false);
 	current = token->next;
 	prev = token;
+	token->is_echo = true;
 	while (current && current->type == T_WORD && is_echo_option(current->value))
 	{
 		token->is_echo_n = true;

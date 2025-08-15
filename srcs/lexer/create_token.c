@@ -6,6 +6,7 @@ void	init_token(t_token *token)
 		return ;
 	token->value = NULL;
 	token->type = 0;
+	token->is_echo = false;
 	token->is_echo_n = false;
 	token->next = NULL;
 	token->prev = NULL;

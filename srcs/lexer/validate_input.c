@@ -5,6 +5,8 @@ static bool	valid_quotes(const char *input)
 	int		i;
 	char	quote;
 
+	if (!input)
+		return (false);
 	i = 0;
 	while (input[i])
 	{
@@ -23,7 +25,6 @@ static bool	valid_quotes(const char *input)
 	}
 	return (true);
 }
-
 
 static bool	valid_escape_chars(const char *input)
 {
@@ -49,7 +50,6 @@ static bool	valid_escape_chars(const char *input)
 	}
 	return (true);
 }
-
 
 bool	valid_input(const char *input)
 {

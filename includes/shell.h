@@ -24,6 +24,7 @@ typedef struct s_token
 	t_token_type		type;
 	char				*value;
 	bool				is_echo_n;
+	bool				is_echo;
 	struct s_token		*next;
 	struct s_token		*prev;
 }						t_token;
@@ -48,6 +49,7 @@ typedef struct s_command
 	char				*cpath;
 	char				**args;
 	char				*filename;
+	bool				is_echo;
 	bool				is_echo_n;
 	bool				pipe_flag;
 	int					*pipe_fd;

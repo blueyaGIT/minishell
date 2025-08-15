@@ -10,6 +10,7 @@ void	init_command(t_command *command)
 	command->cmd = NULL;
 	command->pipe_flag = false;
 	command->is_echo_n = false;
+	command->is_echo = false;
 	command->io = NULL;
 	command->filename = NULL;
 	command->cpath = NULL;

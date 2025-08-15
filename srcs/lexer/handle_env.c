@@ -9,6 +9,34 @@ static bool	should_exp_tilde(const char *s, int i)
 	return (false);
 }
 
+static bool	should_exp_env(char *input, int pos)
+{
+	int		i;
+	bool	in_single_quotes;
+	bool	in_double_quotes;
+
+	if (!input || pos < 0 || input[pos] != '$')
+		return (false);
+	i = 0;
+	in_single_quotes = false;
+	in_double_quotes = false;
+	while (i < pos)
+	{
+		if (input[i] == '\'' && !in_double_quotes)
+			in_single_quotes = !in_single_quotes;
+		else if (input[i] == '"' && !in_single_quotes)
+			in_double_quotes = !in_double_quotes;
+		i++;
+	}
+	if (in_single_quotes)
+		return (false);
+	if (pos + 1 >= (int)ft_strlen(input))
+		return (false);
+	if (!ft_isalnum(input[pos + 1]) && input[pos + 1] != '_')
+		return (false);
+	return (true);
+}
+
 static char	*make_expansion(char *input, int *i, t_shell *shell)
 {
 	char	expansion_char;
@@ -42,7 +70,7 @@ static char	*env_to_input(char *input, t_shell *shell)
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == '$' || (input[i] == '~' && should_exp_tilde(input, i)))
+		if ((input[i] == '$' && should_exp_env(input, i)) || (input[i] == '~' && should_exp_tilde(input, i)))
 		{
 			temp = make_expansion(input, &i, shell);
 			if (!temp)
