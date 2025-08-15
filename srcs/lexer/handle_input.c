@@ -20,12 +20,26 @@ void	handle_empty_quote(t_token **token, int *i)
 	(*i) += 2;
 }
 
+static int	is_assignment(char *input, int start)
+{
+	int	i;
+
+	i = start;
+	if (!ft_isalpha(input[i]) && input[i] != '_')
+		return (0);
+	while (input[i] && (ft_isalnum(input[i]) || input[i] == '_'))
+		i++;
+	return (input[i] == '=');
+}
+
 static int	parse_word_content(char *input, int *i, char *word, int length)
 {
 	int		j;
 	char	quote;
+	int		is_assign;
 
 	j = 0;
+	is_assign = is_assignment(input, *i);
 	while (input[*i] && j < length)
 	{
 		if (input[*i] == '\'' || input[*i] == '\"')
@@ -36,6 +50,10 @@ static int	parse_word_content(char *input, int *i, char *word, int length)
 			if (input[*i] == quote)
 				(*i)++;
 		}
+		else if (input[*i] == '=' && is_assign)
+			word[j++] = input[(*i)++];
+		else if (ft_isspace(input[*i]) && !is_assign)
+			break;
 		else
 			word[j++] = input[(*i)++];
 	}
@@ -43,13 +61,49 @@ static int	parse_word_content(char *input, int *i, char *word, int length)
 	return (j);
 }
 
+static int	calc_word_length_with_assignment(char *input, int start)
+{
+	int		length;
+	int		i;
+	char	quote;
+	int		is_assign;
+
+	length = 0;
+	i = start;
+	is_assign = is_assignment(input, start);
+	
+	while (input[i])
+	{
+		if (input[i] == '\'' || input[i] == '\"')
+		{
+			quote = input[i++];
+			while (input[i] && input[i] != quote)
+			{
+				length++;
+				i++;
+			}
+			if (input[i] == quote)
+				i++;
+		}
+		else if (ft_isspace(input[i]) && !is_assign)
+			break;
+		else
+		{
+			length++;
+			i++;
+		}
+	}
+	return (length);
+}
+
 void	tokenize_word(t_token **token, char *input, int *i)
 {
-	char	*word;
-	int		length;
-	int		written;
+	char		*word;
+	int			length;
+	int			written;
+	t_token_type	type;
 
-	length = calc_word_length(input, *i);
+	length = calc_word_length_with_assignment(input, *i);
 	word = (char *)malloc(length + 1);
 	if (!word)
 		return ;
@@ -59,5 +113,10 @@ void	tokenize_word(t_token **token, char *input, int *i)
 		free(word);
 		return ;
 	}
-	token_add_back(token, new_token(T_WORD, word));
+	if (is_assignment(word, 0))
+		type = ASSIGNMENT;
+	else
+		type = T_WORD;
+	
+	token_add_back(token, new_token(type, word));
 }
