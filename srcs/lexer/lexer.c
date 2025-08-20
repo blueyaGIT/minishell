@@ -21,27 +21,27 @@ t_token	*lexer(char *input, t_shell *shell)
 {
 	t_token	*token;
 	int		i;
-	char	*temp;
+	char	*input_man;
 
 	token = NULL;
 	i = 0;
-	if (!valid_input(input))
+	input_man = handle_input(input, shell);
+	if (!input_man)
 		return (NULL);
-	temp = handle_env(shell);
-	input = temp;
-	while (input[i])
+	while (input_man[i])
 	{
-		if (ft_isspace(input[i]))
+		if (ft_isspace(input_man[i]))
 			i++;
-		else if (input[i] == '|')
+		else if (input_man[i] == '|')
 			tokenize_pipe(&token, &i);
-		else if (is_redirection(input[i]))
-			tokenize_redirection(&token, input, &i);
-		else if (is_empty_quote(input, i))
+		else if (is_redirection(input_man[i]))
+			tokenize_redirection(&token, input_man, &i);
+		else if (is_empty_quote(input_man, i))
 			handle_empty_quote(&token, &i);
 		else
-			tokenize_word(&token, input, &i);
+			tokenize_word(&token, input_man, &i);
 	}
-	tokenize_word_token(token);
-	return (free(temp), token);
+	tokenize_token(token);
+	free(input_man);
+	return (token);
 }

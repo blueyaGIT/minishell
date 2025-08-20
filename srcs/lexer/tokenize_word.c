@@ -1,86 +1,54 @@
 #include "minishell.h"
 
-static bool	is_filename(t_token *prev)
+static int	parse_word_content(char *input, int *i, char *word, int length)
 {
-	if (!prev)
-		return (false);
-	if (prev->type == T_REDIR_IN || prev->type == T_REDIR_OUT || \
-		prev->type == T_APPEND)
-		return (true);
-	return (false);
-}
+	int		j;
+	char	quote;
+	int		is_assign;
 
-static bool	is_heredoc_delim(t_token *prev)
-{
-	if (!prev)
-		return (false);
-	if (prev->type == T_HEREDOC)
-		return (true);
-	return (false);
-}
-
-static bool	is_assignment(const char *token)
-{
-	int			i;
-	const char	*equals;
-	int			name_len;
-
-	i = 0;
-	if (!token || !strchr(token, '='))
-		return (false);
-	if (token[0] == '=')
-		return (false);
-	equals = strchr(token, '=');
-	name_len = equals - token;
-	while (i < name_len)
+	j = 0;
+	is_assign = check_assignment(input, *i);
+	while (input[*i] && j < length)
 	{
-		if ((i == 0 && !isalpha(token[i]) && token[i] != '_') || \
-		(i > 0 && !isalnum(token[i]) && token[i] != '_'))
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
-static bool	is_command(t_token *token)
-{
-	t_token	*current;
-
-	if (!token || token->type != T_WORD)
-		return (false);
-	if (!token->prev)
-		return (true);
-	if (token->prev->type == T_PIPE)
-		return (true);
-	current = token->prev;
-	while (current && current->type != T_PIPE)
-	{
-		if (current->type == COMMAND || current->type == BUILTIN)
-			return (false);
-		current = current->prev;
-	}
-	return (true);
-}
-
-void	tokenize_word_token(t_token *token)
-{
-	while (token)
-	{
-		if (token->type == T_WORD)
+		if (input[*i] == '\'' || input[*i] == '\"')
 		{
-			if (is_filename(token->prev))
-				token->type = FILENAME;
-			else if (is_heredoc_delim(token->prev))
-				token->type = HEREDOC_DELIM;
-			else if (is_assignment(token->value))
-				token->type = ASSIGNMENT;
-			else if (is_builtin(token))
-				token->type = BUILTIN;
-			else if (is_command(token))
-				token->type = COMMAND;
-			else
-				token->type = ARGUMENT;
+			quote = input[(*i)++];
+			while (input[*i] && input[*i] != quote && j < length)
+				word[j++] = input[(*i)++];
+			if (input[*i] == quote)
+				(*i)++;
 		}
-		token = token->next;
+		else if (input[*i] == '=' && is_assign)
+			word[j++] = input[(*i)++];
+		else if (ft_isspace(input[*i]) && !is_assign)
+			break ;
+		else
+			word[j++] = input[(*i)++];
 	}
+	word[j] = '\0';
+	return (j);
+}
+
+void	tokenize_word(t_token **token, char *input, int *i)
+{
+	char			*word;
+	int				length;
+	int				written;
+	t_token_type	type;
+
+	length = calc_word_length_with_assignment(input, *i);
+	word = (char *)malloc(length + 1);
+	if (!word)
+		return ;
+	written = parse_word_content(input, i, word, length);
+	if (written < 0)
+	{
+		free(word);
+		return ;
+	}
+	if (check_assignment(word, 0))
+		type = ASSIGNMENT;
+	else
+		type = T_WORD;
+	token_add_back(token, new_token(type, word));
 }

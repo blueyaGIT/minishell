@@ -8,6 +8,7 @@ void	init_token(t_token *token)
 	token->type = 0;
 	token->is_echo = false;
 	token->is_echo_n = false;
+	token->add_space = false;
 	token->next = NULL;
 	token->prev = NULL;
 }

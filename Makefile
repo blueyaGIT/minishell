@@ -99,18 +99,24 @@ SRCS	+=	free.c \
 			sys_path_extractor.c \
 			read_line.c \
 
-# LEXER
-SRCS	+=	create_token.c \
-			handle_input.c \
-			lexer_utils.c \
-			lexer.c \
+# INPUT
+SRCS	+=	handle_input.c \
 			validate_input.c \
-			tokenize_word.c \
-			handle_builtin.c \
 			handle_env.c \
-			handle_expansion.c \
+			handle_tilde_expansion.c \
 			handle_dollar_expansion.c \
 
+# LEXER
+SRCS	+=	lexer.c \
+			create_token.c \
+			calculate_length.c \
+			lexer_utils.c \
+			tokenize_pipe.c \
+			tokenize_redirection.c \
+			tokenize_token.c \
+			tokenize_word.c \
+			handle_builtin.c \
+		
 # PARSING
 SRCS	+=	parsing.c \
 			create_command.c \

@@ -52,12 +52,13 @@ void print_shell(t_shell *shell)
 	i = 0;
 	while (current)
 	{
-		printf("  [%d]: type=%d (%s), value='%s', is_echo_n=%s\n", 
+		printf("  [%d]: type=%d (%s), value='%s', is_echo_n=%s, add_space=%s\n", 
 		       i,
 		       current->type,
 		       token_type_to_str(current->type),
 		       current->value ? current->value : "null",
-		       current->is_echo_n ? "true" : "false");
+		       current->is_echo_n ? "true" : "false",
+			   current->add_space ? "true" : "false");
 		current = current->next;
 		i++;
 	}

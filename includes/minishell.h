@@ -31,6 +31,8 @@
 # include "pipes.h"
 # include "signals.h"
 # include "utils.h"
+# include "input.h"
+# include "lexer.h"
 
 /* READLINE INCLUDES */
 # include <readline/history.h>

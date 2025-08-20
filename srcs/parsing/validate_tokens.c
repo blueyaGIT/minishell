@@ -40,38 +40,6 @@ static bool	valid_redirection_syntax(t_token *token)
 	return (true);
 }
 
-// static bool	valid_command_syntax(t_token *token)
-// {
-// 	bool	has_command;
-
-// 	has_command = false;
-// 	if (!token)
-// 		return (false);
-// 	while (token)
-// 	{
-// 		if (token->type == COMMAND || token->type == BUILTIN)
-// 		{
-// 			if (has_command)
-// 				return (false);
-// 			has_command = true;
-// 		}
-// 		else if (is_redirection_token(token))
-// 		{
-// 			if (!token)
-// 		}
-// 		if (token->type == T_PIPE)
-// 		{
-// 			if (!has_command)
-// 				return (false);
-// 			has_command = false;
-// 		}
-// 		token = token->next;
-// 	}
-// 	if (!has_command)
-// 		return (false);
-// 	return (true);
-// }
-
 bool	valid_syntax(t_token *token)
 {
 	if (!token)
@@ -79,17 +47,12 @@ bool	valid_syntax(t_token *token)
 	if (!valid_pipe_syntax(token))
 	{
 		ft_printf("minishell: syntax error: invalid pipe\n");
-		return (false); // needs to read again until valid input
+		return (false);
 	}
 	if (!valid_redirection_syntax(token))
 	{
 		ft_printf("minishell: syntax error near unexpected token 'newline'\n");
 		return (false);
 	}
-	// if (!valid_command_syntax(token))
-	// {
-	// 	ft_printf("minishell: syntax error: invalid command\n");
-	// 	return (false);
-	// }
 	return (true);
 }

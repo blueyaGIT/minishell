@@ -25,11 +25,11 @@ typedef struct s_token
 	char				*value;
 	bool				is_echo_n;
 	bool				is_echo;
+	bool				add_space;
 	struct s_token		*next;
 	struct s_token		*prev;
 }						t_token;
 
-// neuer Struct für command
 typedef struct s_redir
 {
 	char				*infile;
