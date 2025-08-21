@@ -10,7 +10,9 @@ TODO
 
 - [ ] Heredoc ohne command
 - [ ] Heredoc als builtin splitten
-- [ ] Echo segfaults
-- [ ] env mit quotes
-- [ ] echo space arg
-- [ ] env-var initialization als ein char ("Test=test")
+- [ ] check if env variable already exists
+	- if yes -> replace value
+- [x] Echo segfaults
+- [x] env mit quotes
+- [x] echo space arg
+- [x] env-var initialization als ein char ("Test=test")

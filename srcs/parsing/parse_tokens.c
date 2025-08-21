@@ -57,7 +57,7 @@ t_token	*handle_word(t_token *token, t_command **command)
 		if (!current->cmd)
 			return (NULL);
 		if (token->is_echo && (!token->next || !is_word(token->next->type)))
-			add_arg(current, "\n");
+			add_arg(current, "");
 		if (token->is_echo_n)
 			current->is_echo_n = true;
 	}

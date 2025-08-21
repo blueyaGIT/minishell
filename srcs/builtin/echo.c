@@ -5,14 +5,17 @@ int	exec_echo(t_shell *shell, char **args)
 	int	i;
 
 	i = 0;
-	if (!args[0] && !shell->cmd_list->is_echo_n)
-		return (ft_printf("\n"), EXIT_SUCCESS);
-	else if (!args[0])
+	if (!args[0])
 		return (EXIT_SUCCESS);
 	while (args[i])
 	{
 		if (ft_printf("%s", args[i]) == -1)
 			return (EXIT_FAILURE);
+		if (args[i + 1])
+		{
+			if (ft_printf(" ") == -1)
+				return (EXIT_FAILURE);
+		}
 		i++;
 	}
 	if (!shell->cmd_list->is_echo_n)
