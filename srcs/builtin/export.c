@@ -17,19 +17,38 @@ static void	parse_key_value(char *arg, char **key, char **value)
 	}
 }
 
+static int	check_existing_env_string(t_shell *shell, char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (shell->env[i])
+	{
+		if (ft_strcmp(shell->env[i], arg) == 0)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
 static int	handle_export_arg(t_shell *shell, char *arg, int *exit_code)
 {
 	char	*key;
 	char	*value;
+	int		existing_idx;
 
+	existing_idx = check_existing_env_string(shell, arg);
+	if (existing_idx != -1)
+	{
+		free(shell->env[existing_idx]);
+		shell->env[existing_idx] = ft_strdup(arg);
+		return (0);
+	}
 	parse_key_value(arg, &key, &value);
 	if (!is_valid_varname_export(key))
 	{
 		ft_printf("export: `%s`: not a valid identifier\n", arg);
-		free(key);
-		free(value);
-		*exit_code = 2;
-		return (0);
+		return (free(key), free(value), *exit_code = 2, 0);
 	}
 	if (set_or_update_env(shell, key, value) == -1)
 	{
