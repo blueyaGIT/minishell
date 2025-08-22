@@ -35,5 +35,6 @@ bool	shell_init(t_shell *shell, char **envp)
 	shell->pid = -1;
 	shell->has_error = false;
 	shell->last_exitcode = 0;
+	rl_variable_bind("enable-bracketed-paste", "off");
 	return (SUCCESS);
 }

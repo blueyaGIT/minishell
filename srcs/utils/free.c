@@ -26,6 +26,16 @@ void	ft_free_env(char **env)
 	}
 }
 
+void	help_free(t_command *cmd)
+{
+	if (cmd->cmd)
+		free(cmd->cmd);
+	if (cmd->cpath)
+		free(cmd->cpath);
+	if (cmd->filename)
+		free(cmd->filename);
+}
+
 void	ft_free_command(t_command *cmd)
 {
 	int	i;
@@ -33,9 +43,7 @@ void	ft_free_command(t_command *cmd)
 	i = 0;
 	if (!cmd)
 		return ;
-	free(cmd->cmd);
-	free(cmd->cpath);
-	free(cmd->filename);
+	help_free(cmd);
 	if (cmd->args)
 	{
 		while (cmd->args[i])

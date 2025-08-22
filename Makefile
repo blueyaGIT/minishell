@@ -50,6 +50,7 @@ SRCS	+=	cd.c \
 			export_env_utils.c \
 			export_utils.c \
 			export.c \
+			heredoc.c \
 			pwd.c \
 			unset.c \
 
@@ -79,7 +80,6 @@ SRCS	+=	kill_pipes.c \
 
 # IO
 SRCS	+=	check_io.c \
-			fix_redir_utils.c \
 			fix_redir.c \
 			init_io.c \
 			refresh_io.c \

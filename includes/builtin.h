@@ -10,6 +10,7 @@ int		exec_cd(t_shell *shell, char **args);
 int		exec_echo(t_shell *shell, char **args);
 int		exec_export(t_shell *shell, char **args);
 int		exec_unset(t_shell *shell, char **args);
+int		exec_heredoc(t_shell *shell, char *delimiter);
 char	*ft_strjoin_three(const char *s1, const char *s2, const char *s3);
 int		is_valid_varname_export(const char *s);
 bool	is_valid_varname(char *str);

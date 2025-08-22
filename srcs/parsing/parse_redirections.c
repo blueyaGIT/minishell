@@ -15,7 +15,11 @@ static void	redirection_to_command(t_token *token, t_command *current)
 	else if (token->type == T_HEREDOC)
 	{
 		if (!current->cmd)
-			current->cmd = "HRD";
+		{
+			current->cmd = ft_strdup("HRD");
+			if (!current->cmd)
+				return ;
+		}
 		current->io->hrd_del = current->filename;
 		current->io->hrd_flag = true;
 		current->io->hrd_sep = token->type;
