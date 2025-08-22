@@ -48,7 +48,7 @@ static int	handle_export_arg(t_shell *shell, char *arg, int *exit_code)
 	if (!is_valid_varname_export(key))
 	{
 		ft_printf("export: `%s`: not a valid identifier\n", arg);
-		return (free(key), free(value), *exit_code = 2, 0);
+		return (free(key), free(value), *exit_code = 1, 0);
 	}
 	if (set_or_update_env(shell, key, value) == -1)
 	{

@@ -34,7 +34,7 @@ static void	read_heredoc_input(t_shell *shell, int temp_fd, char *delimiter)
 	(void)shell;
 	while (1)
 	{
-		line = readline("> ");
+		line = readline("");
 		if (!line)
 			break ;
 		if (ft_strcmp(line, delimiter) == 0)
