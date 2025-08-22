@@ -50,6 +50,7 @@ SRCS	+=	cd.c \
 			export_env_utils.c \
 			export_utils.c \
 			export.c \
+			heredoc_utils.c \
 			heredoc.c \
 			pwd.c \
 			unset.c \
@@ -67,6 +68,7 @@ SRCS	+=	env_copy.c \
 # EXECUTION
 SRCS	+=	bin.c \
 			children.c \
+			exec_utils.c \
 			ft_exec.c \
 
 # ERROR

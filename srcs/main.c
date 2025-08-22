@@ -36,7 +36,6 @@ int	main(int argc, char *argv[], char **envp)
 			g_ecode = ft_exec(&shell);
 		else
 			g_ecode = 1;
-		// print_shell(&shell);
 		reload_shell(&shell);
 	}
 	kill_shell(&shell, g_ecode);

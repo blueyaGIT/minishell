@@ -71,34 +71,11 @@ int	exec_builtin(t_shell *shell, t_command *instr)
 		temp = exec_export(shell, instr->args);
 	else if (ft_strncmp(instr->cmd, "unset", 6) == 0)
 		temp = exec_unset(shell, instr->args);
-	else if (ft_strncmp(instr->cmd, "HRD", 4) == 0 || (instr->io && instr->io->hrd_flag))
+	else if (ft_strncmp(instr->cmd, "HRD", 4) == 0 || (instr->io
+			&& instr->io->hrd_flag))
 		temp = exec_heredoc(shell, instr->filename);
 	shell->last_exitcode = temp;
 	return (temp);
-}
-
-static int	process_heredocs(t_shell *shell)
-{
-	t_command	*cmd;
-	t_command	*original_cmd;
-
-	cmd = shell->cmd_list;
-	original_cmd = shell->cmd_list;
-	while (cmd)
-	{
-		if (cmd->io && cmd->io->hrd_flag && cmd->io->hrd_del)
-		{
-			shell->cmd_list = cmd;
-			if (exec_heredoc(shell, cmd->io->hrd_del) != EXIT_SUCCESS)
-			{
-				shell->cmd_list = original_cmd;
-				return (EXIT_FAILURE);
-			}
-		}
-		cmd = cmd->next;
-	}
-	shell->cmd_list = original_cmd;
-	return (EXIT_SUCCESS);
 }
 
 static int	check_data(t_shell *shell)

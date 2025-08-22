@@ -18,5 +18,7 @@ int		update_existing_env(t_shell *shell, char *key, char *value);
 int		add_new_env(t_shell *shell, char *key, char *value);
 int		set_or_update_env(t_shell *shell, char *key, char *value);
 int		show_env_sorted(t_shell *shell);
+int		open_heredoc_temp(char *temp_file);
+char	*generate_temp_filename(void);
 
 #endif /* BUILTIN_H */

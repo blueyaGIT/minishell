@@ -9,5 +9,6 @@ int	exec_sys(t_shell *shell, t_command *cmd);
 int	exec_builtin(t_shell *shell, t_command *instr);
 int	prep_cmd(t_shell *shell, t_command *cmd);
 int	make_children(t_shell *shell);
+int	process_heredocs(t_shell *shell);
 
 #endif /* EXEC_H */
