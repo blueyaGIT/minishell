@@ -8,9 +8,9 @@ valgrind --leak-check=full --show-leak-kinds=all --suppressions=/app/core/minish
 
 TODO
 
-- [ ] Heredoc ohne command
-- [ ] Heredoc als builtin splitten
-- [ ] check if env variable already exists
+- [x] Heredoc ohne command
+- [x] Heredoc als builtin splitten
+- [x] check if env variable already exists
 	- if yes -> replace value
 - [x] Echo segfaults
 - [x] env mit quotes
