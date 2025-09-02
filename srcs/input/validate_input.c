@@ -54,8 +54,8 @@ static bool	valid_escape_chars(const char *input)
 bool	valid_input(const char *input)
 {
 	if (!valid_quotes(input))
-		return (ft_printf("minishell: syntax error: unclosed quote\n"), 1);
+		return (ft_printf("minishell: syntax error: unclosed quote\n"), 0);
 	if (!valid_escape_chars(input))
-		return (ft_printf("minishell: syntax error: invalid backslash\n"), 1);
+		return (ft_printf("minishell: syntax error: invalid backslash\n"), 0);
 	return (true);
 }
