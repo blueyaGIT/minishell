@@ -9,8 +9,8 @@ valgrind --leak-check=full --show-leak-kinds=all --suppressions=/app/core/minish
 TODO
 
 # LILLI
-- [ ] $?
-- [ ] echo error msg
+- [x] $?
+- [x] echo error msg
 
 # MARZIA
 - [x] exit 42
