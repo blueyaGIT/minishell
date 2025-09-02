@@ -1,6 +1,6 @@
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -g
+CFLAGS = -Wall -Wextra -Werror -g3 -g -gdwarf-4
 DEPFLAGS = -MMD -MP
 SYSLIBFLAGS = -lreadline
 OBJ_DIR := obj

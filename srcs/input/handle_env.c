@@ -32,7 +32,7 @@ static bool	should_exp_env(char *input, int pos)
 		return (false);
 	if (pos + 1 >= (int)ft_strlen(input))
 		return (false);
-	if (!ft_isalnum(input[pos + 1]) && input[pos + 1] != '_')
+	if (!ft_isalnum(input[pos + 1]) && input[pos + 1] != '_' && input[pos + 1] != '?')
 		return (false);
 	return (true);
 }
