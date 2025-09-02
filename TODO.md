@@ -13,6 +13,6 @@ TODO
 - [ ] echo error msg
 
 # MARZIA
-- [ ] exit 42
+- [x] exit 42
 - [ ] free proof everything
 - [ ] signals
