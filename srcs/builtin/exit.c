@@ -45,15 +45,16 @@ int	exec_exit(t_shell *shell, char **args)
 	check_commands(shell);
 	if (check_commands(shell))
 		ft_putendl_fd("exit", 2);
-	if (!args || !args[1])
+	if (!args || !args[0])
 		ecode = g_ecode;
 	else
 	{
-		ecode = get_ecode(args[1], &temp);
+		ecode = get_ecode(args[0], &temp);
+		ecode = ft_atoi(args[0]);
 		if (temp)
 			return (ft_putendl_fd("numeric argument required", 2),
 				kill_shell(shell, 255), 255);
-		else if (args[2])
+		else if (ft_arrlen(args) > 1)
 			return (ft_putendl_fd("too many arguments", 2), 1);
 	}
 	return (kill_shell(shell, ecode), ecode);
