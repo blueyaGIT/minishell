@@ -7,7 +7,7 @@ int	process_and_execute_input(t_shell *shell)
 
 	token = lexer(shell->input, shell);
 	if (!token)
-		return (1);
+		return (0);
 	if (!valid_syntax(token))
 	{
 		free_token(token);
@@ -15,7 +15,7 @@ int	process_and_execute_input(t_shell *shell)
 	}
 	shell->token = token;
 	command = parse_code(shell->token);
-	if (!command)
+	if (!command && shell->token)
 	{
 		free_token(token);
 		return (0);
