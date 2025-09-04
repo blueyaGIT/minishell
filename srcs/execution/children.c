@@ -88,7 +88,7 @@ int	make_children(t_shell *shell)
 	{
 		shell->pid = fork();
 		if (shell->pid == -1)
-			return (printf(RED "ERROR: FORK" RESET), EXIT_FAILURE);
+			return (ft_printf(RED "ERROR: FORK" RESET), EXIT_FAILURE);
 		else if (shell->pid == 0)
 			prep_cmd(shell, command);
 		command = command->next;

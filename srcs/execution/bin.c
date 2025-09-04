@@ -30,11 +30,11 @@ int	exec_local(t_shell *shell, t_command *cmd)
 		!= -1)
 		return (127);
 	if (access(cmd->cmd, F_OK) != 0)
-		return (printf(RED "ERROR: No such file or directory" RESET), 127);
+		return (ft_printf(RED "ERROR: No such file or directory" RESET), 127);
 	if (is_dir(cmd->cmd))
-		return (printf(RED "ERROR: Command is a Directory" RESET), 126);
+		return (ft_printf(RED "ERROR: Command is a Directory" RESET), 126);
 	if (access(cmd->cmd, F_OK | X_OK) != 0)
-		return (printf(RED "ERROR: Permission denied" RESET), 126);
+		return (ft_printf(RED "ERROR: Permission denied" RESET), 126);
 	cmd->cpath = find_command_path(shell, cmd->cmd);
 	if (cmd->cpath == NULL)
 		return (127);

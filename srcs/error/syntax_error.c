@@ -53,7 +53,7 @@ int	check_unclosed_quotes(const char *input, t_shell *shell)
 	}
 	if (single_quotes || double_quotes)
 	{
-		(printf(RED "minishell: syntax error: unclosed quote\n" RESET));
+		(ft_printf(RED "minishell: syntax error: unclosed quote\n" RESET));
 		set_exit_code(shell, 2);
 		return (1);
 	}
@@ -70,7 +70,7 @@ int	check_redirect_syntax(const char *str, t_shell *shell)
 	{
 		if ((str[i] == '<' || str[i] == '>') && str[i + 1] == '\0')
 		{
-			(printf(RED "minishell: syntax error"
+			(ft_printf(RED "minishell: syntax error"
 					" near unexpected tk 'newline'\n" RESET));
 			set_exit_code(shell, 2);
 			return (1);
@@ -78,7 +78,7 @@ int	check_redirect_syntax(const char *str, t_shell *shell)
 		if ((str[i] == '<' && str[i + 1] == '<' && str[i + 2] == '<')
 			|| (str[i] == '>' && str[i + 1] == '>' && str[i + 2] == '>'))
 		{
-			printf(RED "minishell: syntax error"
+			ft_printf(RED "minishell: syntax error"
 				" near unexpected tk '%c'" RESET "\n",
 				str[i]);
 			set_exit_code(shell, 2);
