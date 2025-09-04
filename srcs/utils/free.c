@@ -5,6 +5,12 @@ void	ft_free_io(t_redir *io)
 	if (!io)
 		return ;
 	refresh_io(io);
+	if (io && io->outfile)
+		free(io->outfile);
+	if (io && io->infile)
+		free(io->infile);
+	if (io && io->hrd_del)
+		free(io->hrd_del);
 	if (io)
 		ft_free_ptr(io);
 }
@@ -33,7 +39,10 @@ void	help_free(t_command *cmd)
 	if (cmd->cpath)
 		free(cmd->cpath);
 	if (cmd->filename)
+	{
 		free(cmd->filename);
+		cmd->filename = NULL;
+	}
 }
 
 void	ft_free_command(t_command *cmd)

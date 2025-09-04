@@ -32,7 +32,7 @@ int	main(int argc, char *argv[], char **envp)
 			break ;
 		if (ft_strcmp(shell.input, "./minishell") == 0)
 			check_shlvl(&shell);
-		if (process_and_execute_input(&shell))
+ 		if (process_and_execute_input(&shell))
 			g_ecode = ft_exec(&shell);
 		else
 			g_ecode = 1;
