@@ -24,7 +24,7 @@ static bool	valid_redirection_syntax(t_token *token)
 {
 	if (!token)
 		return (false);
-	if (is_redirection_token(token))
+	if (is_redirection_token(token)) //WTFFFF
 		return (false);
 	while (token)
 	{
