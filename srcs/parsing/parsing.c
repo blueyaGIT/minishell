@@ -17,7 +17,8 @@ int	process_and_execute_input(t_shell *shell)
 	command = parse_code(shell->token);
 	if (!command && shell->token)
 	{
-		free_token(token);
+		free_token(shell->token);
+		shell->token = NULL;
 		return (0);
 	}
 	shell->cmd_list = command;

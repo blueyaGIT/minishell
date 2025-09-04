@@ -1,47 +1,64 @@
 #include "minishell.h"
 
-void	reload_shell(t_shell *shell)
+static void	free_command_list(t_command *cmd_list)
 {
 	t_command	*current;
 	t_command	*temp;
 
+	if (!cmd_list)
+		return ;
+	kill_pipes(cmd_list, NULL);
+	current = cmd_list;
+	while (current->prev)
+		current = current->prev;
+	while (current)
+	{
+		temp = current->next;
+		ft_free_command(current);
+		current = temp;
+	}
+}
+
+void	reload_shell(t_shell *shell)
+{
 	if (shell && shell->input)
 	{
 		free(shell->input);
 		shell->input = NULL;
 	}
 	if (shell && shell->token)
+	{
 		free_token(shell->token);
+		shell->token = NULL;
+	}
 	if (shell && shell->tokens)
+	{
 		ft_free_arr(shell->tokens);
+		shell->tokens = NULL;
+	}
 	if (shell && shell->cmd_list)
 	{
-		kill_pipes(shell->cmd_list, NULL);
-		current = shell->cmd_list;
-		while (current->prev)
-			current = current->prev;
-		while (current)
-		{
-			temp = current->next;
-			ft_free_command(current);
-			current = temp;
-		}
+		free_command_list(shell->cmd_list);
+		shell->cmd_list = NULL;
 	}
 }
 
 void	ft_free_tok(t_shell *shell)
 {
 	if (shell && shell->token)
+	{
 		free_token(shell->token);
+		shell->token = NULL;
+	}
 	if (shell && shell->tokens)
+	{
 		ft_free_arr(shell->tokens);
+		shell->tokens = NULL;
+	}
 }
 
 void	ft_free_shell(t_shell *shell)
 {
-	t_command	*current;
-	t_command	*temp;
-
 	if (shell && shell->input)
 	{
 		free(shell->input);
@@ -50,19 +67,14 @@ void	ft_free_shell(t_shell *shell)
 	ft_free_tok(shell);
 	if (shell && shell->cmd_list)
 	{
-		kill_pipes(shell->cmd_list, NULL);
-		current = shell->cmd_list;
-		while (current->prev)
-			current = current->prev;
-		while (current)
-		{
-			temp = current->next;
-			ft_free_command(current);
-			current = temp;
-		}
+		free_command_list(shell->cmd_list);
+		shell->cmd_list = NULL;
 	}
 	if (shell && shell->env)
+	{
 		ft_free_env(shell->env);
+		shell->env = NULL;
+	}
 	rl_clear_history();
 }
 

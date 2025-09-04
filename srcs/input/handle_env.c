@@ -32,7 +32,8 @@ static bool	should_exp_env(char *input, int pos)
 		return (false);
 	if (pos + 1 >= (int)ft_strlen(input))
 		return (false);
-	if (!ft_isalnum(input[pos + 1]) && input[pos + 1] != '_' && input[pos + 1] != '?')
+	if (!ft_isalnum(input[pos + 1]) && input[pos + 1] != '_' && input[pos
+			+ 1] != '?')
 		return (false);
 	return (true);
 }
@@ -70,8 +71,8 @@ static char	*env_to_input(char *input, t_shell *shell)
 	i = 0;
 	while (input[i])
 	{
-		if ((input[i] == '$' && should_exp_env(input, i)) || \
-		(input[i] == '~' && should_exp_tilde(input, i)))
+		if ((input[i] == '$' && should_exp_env(input, i)) || (input[i] == '~'
+				&& should_exp_tilde(input, i)))
 		{
 			temp = make_expansion(input, &i, shell);
 			if (!temp)

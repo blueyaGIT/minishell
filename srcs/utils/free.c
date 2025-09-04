@@ -67,7 +67,10 @@ void	free_token(t_token *token)
 	{
 		tmp = token->next;
 		if (token->value)
+		{
 			free(token->value);
+			token->value = NULL;
+		}
 		free(token);
 		token = tmp;
 	}
