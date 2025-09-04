@@ -14,5 +14,5 @@ TODO
 
 # MARZIA
 - [x] exit 42
-- [ ] free proof everything
-- [ ] signals
+- [x] free proof everything
+- [x] signals

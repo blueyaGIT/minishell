@@ -16,13 +16,20 @@ static void	refresh_rl(int signum)
 	rl_redisplay();
 }
 
-void	init_signals(void)
+static void	sig_ignore(void)
 {
 	struct sigaction	sa;
 
 	ft_memset(&sa, 0, sizeof(sa));
 	sa.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &sa, NULL);
+}
+
+void	init_signals(void)
+{
+	struct sigaction	sa;
+
+	sig_ignore();
 	ft_memset(&sa, 0, sizeof(sa));
 	sa.sa_handler = &refresh_rl;
 	sigaction(SIGINT, &sa, NULL);
