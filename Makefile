@@ -55,9 +55,6 @@ SRCS	+=	cd.c \
 			pwd.c \
 			unset.c \
 
-# DEBUG
-SRCS	+= print_shell.c \
-
 # ENV
 SRCS	+=	env_copy.c \
 			env_get.c \
