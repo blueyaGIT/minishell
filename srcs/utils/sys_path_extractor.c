@@ -58,7 +58,13 @@ char	*find_command_path(t_shell *shell, char *cmd)
 	{
 		full_path = build_full_command_path(paths[i], cmd);
 		if (access(full_path, X_OK) == 0)
-			return (free(paths[i]), free(paths), full_path);
+		{
+			i = -1;
+			while (paths[++i])
+				free(paths[i]);
+			free(paths);
+			return (full_path);
+		}
 		free(full_path);
 	}
 	i = -1;
