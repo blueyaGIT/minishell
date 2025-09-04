@@ -12,7 +12,7 @@ char	*replace_with_value(char *input, int start, int end, char *value)
 	input_len = (int)ft_strlen(input);
 	value_len = (int)ft_strlen(value);
 	new_len = input_len - (end - start) + value_len;
-	new_input = (char *)malloc(sizeof (char) * (new_len + 1));
+	new_input = (char *)malloc(sizeof(char) * (new_len + 1));
 	if (!new_input)
 		return (NULL);
 	ft_memcpy(new_input, input, start);
@@ -22,16 +22,11 @@ char	*replace_with_value(char *input, int start, int end, char *value)
 	return (new_input);
 }
 
-char	*handle_tilde_exp(char *dup, int start, int *i, t_shell *shell)
+static char	*get_home_path(t_shell *shell)
 {
-	char	*new_input;
 	char	*home_env;
 	char	*home_path;
-	int		end;
 
-	end = start;
-	while (dup[end] && dup[end] != '/' && !ft_isspace((unsigned char)dup[end]))
-		end++;
 	home_env = env_get(shell->env, "HOME");
 	if (!home_env)
 		home_path = ft_strdup("/");
@@ -39,6 +34,19 @@ char	*handle_tilde_exp(char *dup, int start, int *i, t_shell *shell)
 		home_path = ft_strdup(home_env);
 	if (home_env)
 		free(home_env);
+	return (home_path);
+}
+
+char	*handle_tilde_exp(char *dup, int start, int *i, t_shell *shell)
+{
+	char	*home_path;
+	int		end;
+	char	*new_input;
+
+	end = start;
+	while (dup[end] && dup[end] != '/' && !ft_isspace((unsigned char)dup[end]))
+		end++;
+	home_path = get_home_path(shell);
 	if (!home_path)
 		return (dup);
 	new_input = replace_with_value(dup, start - 1, end, home_path);

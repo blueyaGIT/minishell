@@ -1,15 +1,16 @@
 #include "minishell.h"
 
-static void	redirection_to_command(t_token *token, t_command *current)
+static void	handle_output_redirection(t_token *token, t_command *current)
 {
-	if (token->type == T_REDIR_OUT || token->type == T_APPEND)
-	{
-		if (current->io->outfile)
-			free(current->io->outfile);
-		current->io->outfile = ft_strdup(current->filename);
-		current->io->hrd_sep = token->type;
-	}
-	else if (token->type == T_REDIR_IN)
+	if (current->io->outfile)
+		free(current->io->outfile);
+	current->io->outfile = ft_strdup(current->filename);
+	current->io->hrd_sep = token->type;
+}
+
+static void	handle_input_and_heredoc(t_token *token, t_command *current)
+{
+	if (token->type == T_REDIR_IN)
 	{
 		if (current->io->infile)
 			free(current->io->infile);
@@ -30,6 +31,14 @@ static void	redirection_to_command(t_token *token, t_command *current)
 		current->io->hrd_flag = true;
 		current->io->hrd_sep = token->type;
 	}
+}
+
+static void	redirection_to_command(t_token *token, t_command *current)
+{
+	if (token->type == T_REDIR_OUT || token->type == T_APPEND)
+		handle_output_redirection(token, current);
+	else
+		handle_input_and_heredoc(token, current);
 }
 
 t_token	*handle_redirection(t_token *token, t_command **command)

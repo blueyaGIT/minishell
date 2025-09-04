@@ -24,6 +24,36 @@ static char	*build_full_command_path(char *dir, char *cmd)
 	return (full_path);
 }
 
+static void	free_paths_array(char **paths)
+{
+	int	i;
+
+	i = -1;
+	while (paths[++i])
+		free(paths[i]);
+	free(paths);
+}
+
+static char	*search_in_paths(char **paths, char *cmd)
+{
+	char	*full_path;
+	int		i;
+
+	i = -1;
+	while (paths[++i])
+	{
+		full_path = build_full_command_path(paths[i], cmd);
+		if (access(full_path, X_OK) == 0)
+		{
+			free_paths_array(paths);
+			return (full_path);
+		}
+		free(full_path);
+	}
+	free_paths_array(paths);
+	return (NULL);
+}
+
 /**
  * find_command_path
 	- Finds the executable path of a command using the PATH environment variable.
@@ -45,9 +75,7 @@ static char	*build_full_command_path(char *dir, char *cmd)
 char	*find_command_path(t_shell *shell, char *cmd)
 {
 	char	**paths;
-	char	*full_path;
 	char	*path_env;
-	int		i;
 
 	if (!cmd || ft_strchr(cmd, '/'))
 		return (ft_strdup(cmd));
@@ -58,23 +86,5 @@ char	*find_command_path(t_shell *shell, char *cmd)
 	free(path_env);
 	if (!paths)
 		return (NULL);
-	i = -1;
-	while (paths[++i])
-	{
-		full_path = build_full_command_path(paths[i], cmd);
-		if (access(full_path, X_OK) == 0)
-		{
-			i = -1;
-			while (paths[++i])
-				free(paths[i]);
-			free(paths);
-			return (full_path);
-		}
-		free(full_path);
-	}
-	i = -1;
-	while (paths[++i])
-		free(paths[i]);
-	free(paths);
-	return (NULL);
+	return (search_in_paths(paths, cmd));
 }
