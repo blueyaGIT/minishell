@@ -1,12 +1,5 @@
 #include "minishell.h"
 
-// void leaks(void)
-// {
-//  printf("\n");
-//  system("leaks minishell");
-// }
-// atexit(leaks);
-
 static void	initialize_shell(t_shell *shell, char **argv, char **envp)
 {
 	(void)argv;
