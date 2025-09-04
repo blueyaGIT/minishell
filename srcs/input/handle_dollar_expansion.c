@@ -59,6 +59,7 @@ char	*handle_dollar_exp(char *input_dup, int start, int *i, t_shell *shell)
 	char	*new_input;
 	int		end;
 	char	*env_value;
+	int		env_value_len;
 
 	if (input_dup[start] == '?')
 		env_value = handle_questionmark(start, &end);
@@ -69,11 +70,12 @@ char	*handle_dollar_exp(char *input_dup, int start, int *i, t_shell *shell)
 		(*i)++;
 		return (input_dup);
 	}
+	env_value_len = (int)ft_strlen(env_value);
 	new_input = replace_with_value(input_dup, start - 1, end, env_value);
 	free(env_value);
 	free(input_dup);
 	if (!new_input)
 		return (NULL);
-	*i = (start - 1) + (int)ft_strlen(env_value);
+	*i = (start - 1) + env_value_len;
 	return (new_input);
 }
