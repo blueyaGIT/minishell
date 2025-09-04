@@ -37,6 +37,8 @@ char	*handle_tilde_exp(char *dup, int start, int *i, t_shell *shell)
 		home_path = ft_strdup("/");
 	else
 		home_path = ft_strdup(home_env);
+	if (home_env)
+		free(home_env);
 	if (!home_path)
 		return (dup);
 	new_input = replace_with_value(dup, start - 1, end, home_path);

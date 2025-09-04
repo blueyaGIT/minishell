@@ -35,9 +35,13 @@ static char	*handle_env_val(char *dup, int start, int *end, t_shell *shell)
 	env_value = env_get(shell->env, var_name);
 	*end = start + (int)ft_strlen(var_name);
 	if (env_value)
+	{
 		result = ft_strdup(env_value);
+		free(env_value);
+	}
 	else
 		result = ft_strdup("");
+	free(var_name);
 	return (result);
 }
 

@@ -46,11 +46,16 @@ char	*find_command_path(t_shell *shell, char *cmd)
 {
 	char	**paths;
 	char	*full_path;
+	char	*path_env;
 	int		i;
 
 	if (!cmd || ft_strchr(cmd, '/'))
 		return (ft_strdup(cmd));
-	paths = ft_split(env_get(shell->env, "PATH"), ':');
+	path_env = env_get(shell->env, "PATH");
+	if (!path_env)
+		return (NULL);
+	paths = ft_split(path_env, ':');
+	free(path_env);
 	if (!paths)
 		return (NULL);
 	i = -1;
