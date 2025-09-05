@@ -23,13 +23,21 @@ int	main(int argc, char *argv[], char **envp)
 		refresh_signals();
 		if (!shell.input)
 			break ;
+		printf("hello\n");
 		if (ft_strcmp(shell.input, "./minishell") == 0)
 			check_shlvl(&shell);
+		printf("hello1\n");
 		if (process_and_execute_input(&shell))
+		{
+			printf("hello2\n");
 			g_ecode = ft_exec(&shell);
+			printf("hello3\n");
+		}
 		else
 			g_ecode = 1;
+		printf("hello4\n");
 		reload_shell(&shell);
+		printf("hello5\n");
 	}
 	kill_shell(&shell, g_ecode);
 	return (0);

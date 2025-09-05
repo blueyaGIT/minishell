@@ -51,11 +51,35 @@ static bool	valid_escape_chars(const char *input)
 	return (true);
 }
 
+static bool	valid_unset_usage(const char *input)
+{
+	int		i;
+
+	if (!input)
+		return (false);
+	i = 0;
+	while (input[i] && ft_isspace(input[i]))
+		i++;
+	if (ft_strncmp(input, "unset", 5) == 0)
+	{
+		i += 5;
+		while (input[i] && ft_isspace(input[i]))
+			i++;
+		if (input[i] == '$')
+			return (false);
+		if (!is_valid_varname((char *)&input[i]))
+			return (false);
+	}
+	return (true);
+}
+
 bool	valid_input(const char *input)
 {
 	if (!valid_quotes(input))
 		return (ft_printf("minishell: syntax error: unclosed quote\n"), 0);
 	if (!valid_escape_chars(input))
 		return (ft_printf("minishell: syntax error: invalid backslash\n"), 0);
+	if (!valid_unset_usage(input))
+		return (0);
 	return (true);
 }
