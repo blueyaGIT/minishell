@@ -19,12 +19,16 @@ static int	parse_word_content(char *input, int *i, char *word, int length)
 				(*i)++;
 		}
 		else if (input[*i] == '=' && is_assign)
+		{
 			word[j++] = input[(*i)++];
+			is_assign = 0;
+		}
 		else if (ft_isspace(input[*i]) && !is_assign)
 			break ;
 		else
 			word[j++] = input[(*i)++];
 	}
+	printf("Word: %s\n", word);
 	word[j] = '\0';
 	return (j);
 }
