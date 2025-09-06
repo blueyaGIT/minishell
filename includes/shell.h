@@ -66,6 +66,7 @@ typedef struct s_shell
 	t_token				*token;
 	t_command			*cmd_list;
 	bool				has_error;
+	int					amount_here;
 	int					last_exitcode;
 	pid_t				pid;
 }						t_shell;
