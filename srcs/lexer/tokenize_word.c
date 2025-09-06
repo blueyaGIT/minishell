@@ -28,7 +28,6 @@ static int	parse_word_content(char *input, int *i, char *word, int length)
 		else
 			word[j++] = input[(*i)++];
 	}
-	printf("Word: %s\n", word);
 	word[j] = '\0';
 	return (j);
 }
