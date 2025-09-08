@@ -57,6 +57,6 @@ int	exec_cd(t_shell *shell, char **args)
 	}
 	cwd = getcwd(buf, PATH_MAX);
 	if (chdir(target_dir) == -1)
-		return (print_error("cd", shell), 1);
+		return (print_error("cd: No such file or directory", shell), 1);
 	return (update_env_vars(shell, cwd));
 }

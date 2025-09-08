@@ -56,19 +56,19 @@ static void	configure_env(t_shell *shell)
 	if (!shell->env)
 	{
 		ft_printf(RED "Error: FAILED TO ALLOCATE SHELL->ENV" RESET);
-		exit(EXIT_FAILURE);
+		kill_shell(shell, g_ecode);
 	}
 	shell->env[0] = ft_strjoin("PWD=", getcwd(temp, PATH_MAX));
 	if (!shell->env[0])
 	{
 		ft_printf(RED "Error: FAILED TO SET PWD IN SHELL->ENV[0]" RESET);
-		exit(EXIT_FAILURE);
+		kill_shell(shell, g_ecode);
 	}
 	shell->env[1] = ft_strdup("SHLVL=1");
 	if (!shell->env[1])
 	{
 		ft_printf(RED "Error: FAILED TO SET SHLVL IN SHELL->ENV[1]" RESET);
-		exit(EXIT_FAILURE);
+		kill_shell(shell, g_ecode);
 	}
 	shell->env[2] = NULL;
 }
