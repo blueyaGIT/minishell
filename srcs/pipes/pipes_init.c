@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:47:11 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:47:12 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/08 14:54:45 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	pipes_init(t_shell *shell)
 		}
 		temp = temp->next;
 	}
-	return (SUCCESS);
+	return (true);
 }
 
 bool	fds_init(t_command *temp, t_command *cmd)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_idx.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:45:56 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:45:57 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/08 14:54:45 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @brief Gets the idx of an entry in the environment.
  * @param env env to search in.
  * @param key key to search for.
- * @return idx of entry if SUCCESS; -1 on error or not found.
+ * @return idx of entry if true; -1 on error or not found.
  */
 int	env_idx(char **env, char *key)
 {

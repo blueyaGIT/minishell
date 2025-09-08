@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:44:59 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:45:00 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/08 14:54:54 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static bool	remove_env_var(t_shell *shell, int idx)
 	int	i;
 
 	if (idx > ft_arrlen(shell->env))
-		return (FAIL);
+		return (false);
 	ft_free_ptr(shell->env[idx]);
 	i = idx;
 	while (shell->env[i + 1])
@@ -38,7 +38,7 @@ static bool	remove_env_var(t_shell *shell, int idx)
 	}
 	shell->env = refresh_env(shell, i);
 	if (!shell->env)
-		return (FAIL);
+		return (false);
 	return (true);
 }
 

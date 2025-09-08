@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_env_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:46:00 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:46:01 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/08 14:54:54 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ bool	set_env_var(t_shell *shell, char *key, char *value)
 		value = "";
 	temp = ft_strjoin("=", value);
 	if (!temp)
-		return (FAIL);
+		return (false);
 	if (idx >= 0 && shell->env[idx])
 	{
 		ft_free_ptr(shell->env[idx]);
@@ -53,9 +53,9 @@ bool	set_env_var(t_shell *shell, char *key, char *value)
 		idx = ft_arrlen(shell->env);
 		shell->env = refresh_env(shell, idx + 1);
 		if (!shell->env)
-			return (ft_free_ptr(temp), FAIL);
+			return (ft_free_ptr(temp), false);
 		shell->env[idx] = ft_strjoin(key, temp);
 	}
 	ft_free_ptr(temp);
-	return (SUCCESS);
+	return (true);
 }

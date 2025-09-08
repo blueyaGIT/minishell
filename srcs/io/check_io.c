@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_io.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:46:24 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:46:25 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/08 14:54:54 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ bool	check_io(t_redir *io, bool temp)
 	{
 		if (temp)
 			ft_printf(RED"ERROR: No such file or dir\n"RESET);
-		return (FAIL);
+		return (false);
 	}
 	else if (io->outfile && io->fd_out == -1)
 	{
 		if (temp)
 			ft_printf(RED"ERROR: No such file or dir\n"RESET);
-		return (FAIL);
+		return (false);
 	}
-	return (SUCCESS);
+	return (true);
 }
