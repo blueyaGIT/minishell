@@ -1,9 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenize_word.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/08 14:46:49 by dalbano           #+#    #+#             */
+/*   Updated: 2025/09/08 14:49:04 by dalbano          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
+
+static int	handle_quoted_content(char *input, int *i, char *word, int *j)
+{
+	char	quote;
+
+	quote = input[(*i)++];
+	while (input[*i] && input[*i] != quote)
+		word[(*j)++] = input[(*i)++];
+	if (input[*i] == quote)
+		(*i)++;
+	return (0);
+}
+
+static int	handle_assignment_char(char *input, int *i, char *word, int *j)
+{
+	word[(*j)++] = input[(*i)++];
+	return (0);
+}
 
 static int	parse_word_content(char *input, int *i, char *word, int length)
 {
 	int		j;
-	char	quote;
 	int		is_assign;
 
 	j = 0;
@@ -11,16 +40,10 @@ static int	parse_word_content(char *input, int *i, char *word, int length)
 	while (input[*i] && j < length)
 	{
 		if (input[*i] == '\'' || input[*i] == '\"')
-		{
-			quote = input[(*i)++];
-			while (input[*i] && input[*i] != quote && j < length)
-				word[j++] = input[(*i)++];
-			if (input[*i] == quote)
-				(*i)++;
-		}
+			handle_quoted_content(input, i, word, &j);
 		else if (input[*i] == '=' && is_assign)
 		{
-			word[j++] = input[(*i)++];
+			handle_assignment_char(input, i, word, &j);
 			is_assign = 0;
 		}
 		else if (ft_isspace(input[*i]) && !is_assign)
