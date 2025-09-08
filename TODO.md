@@ -14,3 +14,7 @@ TODO
 - [x] exit 42
 - [x] free proof everything
 - [x] signals
+
+
+- [ ][fix export && weg](./srcs/builtin/export_utils.c#L56)
+- [ ][\n in error msgs](./srcs/exection/bin.c#L45)
