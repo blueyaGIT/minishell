@@ -42,6 +42,7 @@ CLEAR_LINE  = \033[2K\r
 # Source files
 SRCS	:=	main.c \
 
+SRCS	+=	print_shell.c \
 # BUILTINS
 SRCS	+=	cd.c \
 			echo.c \

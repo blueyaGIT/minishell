@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:46:13 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:46:14 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/08 15:42:14 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,6 @@ int	exec_builtin(t_shell *shell, t_command *instr)
 		temp = exec_export(shell, instr->args);
 	else if (ft_strncmp(instr->cmd, "unset", 6) == 0)
 		temp = exec_unset(shell, instr->args);
-	else if (ft_strncmp(instr->cmd, "HRD", 4) == 0 || (instr->io
-			&& instr->io->hrd_flag))
-		temp = exec_heredoc(shell, instr->filename);
 	shell->last_exitcode = temp;
 	return (temp);
 }
