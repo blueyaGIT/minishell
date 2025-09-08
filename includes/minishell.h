@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:42:49 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 15:31:07 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/08 15:44:19 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,4 @@ extern int	g_ecode;
 #  define DEBUG 0
 # endif
 
-void	print_shell(t_shell *shell);
 #endif /* MINISHELL_H */
