@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:47:37 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 15:40:29 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/08 15:44:37 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	main(int argc, char *argv[], char **envp)
 			g_ecode = ft_exec(&shell);
 		else
 			g_ecode = 1;
-		// print_shell(&shell);
 		reload_shell(&shell);
 	}
 	kill_shell(&shell, g_ecode);
