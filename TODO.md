@@ -18,3 +18,4 @@ TODO
 
 - [ ][fix export && weg](./srcs/builtin/export_utils.c#L56)
 - [ ][\n in error msgs](./srcs/exection/bin.c#L45)
+- [ ][itterate through cmd_list when creating files](./srcs/io/fix_redir.c)
