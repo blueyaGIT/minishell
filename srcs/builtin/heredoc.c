@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:44:47 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:44:50 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/12 11:11:30 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	read_heredoc_input(t_shell *shell, int temp_fd, char *delimiter)
 	(void)shell;
 	while (1)
 	{
-		line = readline("");
+		line = readline("> ");
 		if (!line)
 			break ;
 		if (ft_strcmp(line, delimiter) == 0)
