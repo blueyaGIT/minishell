@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:47:37 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 15:44:37 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/12 12:11:32 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ int	main(int argc, char *argv[], char **envp)
 		refresh_signals();
 		if (!shell.input)
 			break ;
-		if (ft_strcmp(shell.input, "./minishell") == 0)
-			check_shlvl(&shell);
 		if (process_and_execute_input(&shell))
 			g_ecode = ft_exec(&shell);
 		else
