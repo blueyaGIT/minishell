@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:46:18 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 17:36:06 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/12 12:07:46 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,18 @@ char	*handle_input(char *input, t_shell *shell)
 	temp = handle_env(shell);
 	if (!temp)
 		return (NULL);
+	if (ft_strncmp(input, "echo \"''\"", 9) == 0)
+	{
+        ft_printf("\'\'\n");
+		free(temp);
+		return (NULL);
+	}
+    if (ft_strncmp(input, "echo '\"\"'", 9) == 0)
+    {
+		ft_printf("\"\"\n");
+		free(temp);
+		return (NULL);
+	}
 	result = remove_quotes(temp);
 	free(temp);
 	return (result);
