@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:44:34 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:44:35 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/12 12:15:14 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ int	update_existing_env(t_shell *shell, char *key, char *value)
 	i = 0;
 	while (shell->env[i])
 	{
-		if (ft_strncmp(shell->env[i], key, key_len) == 0
-			&& shell->env[i][key_len] == '=')
+		if (ft_strncmp(shell->env[i], key, key_len) == 0)
 		{
 			free(shell->env[i]);
 			if (value)
