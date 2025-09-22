@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:46:37 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:46:38 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/22 16:45:50 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,31 @@ static bool	is_echo_option(const char *str)
 	return (true);
 }
 
-static void	ft_remove_token(t_token **head, t_token *prev, t_token *echo_option)
-{
-	if (!echo_option)
-		return ;
-	if (prev)
-		prev->next = echo_option->next;
-	else
-		*head = echo_option->next;
-	free(echo_option->value);
-	free(echo_option);
-}
+// static void	ft_remove_token(t_token **head, t_token *prev, t_token *echo_option)
+// {
+// 	if (!echo_option)
+// 		return ;
+// 	if (prev)
+// 		prev->next = echo_option->next;
+// 	else
+// 		*head = echo_option->next;
+// 	// free(echo_option->value);
+// 	// free(echo_option);
+// }
 
 static bool	is_echo(t_token *token)
 {
 	t_token	*current;
-	t_token	*prev;
 
 	if (!token || ft_strcmp(token->value, "echo") != 0)
 		return (false);
 	current = token->next;
-	prev = token;
 	token->is_echo = true;
 	while (current && current->type == T_WORD && is_echo_option(current->value))
 	{
 		token->is_echo_n = true;
-		ft_remove_token(&token->next, prev, current);
-		current = prev->next;
+		current->is_removed = true;
+		current = current->next;
 	}
 	return (true);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:43:07 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:43:08 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/22 15:18:52 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_token
 	t_token_type		type;
 	char				*value;
 	bool				is_echo_n;
+	bool				is_removed;
 	bool				is_echo;
 	bool				add_space;
 	struct s_token		*next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:46:59 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:47:00 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/22 16:48:49 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ t_token	*handle_word(t_token *token, t_command **command)
 {
 	t_command	*current;
 
+	if (token->is_removed)
+        return (token->next);
 	if (!*command)
 		command_add_back(command, new_command());
 	current = command_last(*command);

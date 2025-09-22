@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_token.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:46:35 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:46:36 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/22 15:19:20 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_token(t_token *token)
 	token->type = 0;
 	token->is_echo = false;
 	token->is_echo_n = false;
+	token->is_removed = false;
 	token->add_space = false;
 	token->next = NULL;
 	token->prev = NULL;
