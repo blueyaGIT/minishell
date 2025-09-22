@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:46:24 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:54:54 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:12:57 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	check_io(t_redir *io, bool temp)
 	if (io->infile && io->fd_in == -1)
 	{
 		if (temp)
-			ft_printf(RED"ERROR: No such file or dir\n"RESET);
+			// ft_printf(RED"ERROR: No such file or dir\n"RESET);
 		return (false);
 	}
 	else if (io->outfile && io->fd_out == -1)
