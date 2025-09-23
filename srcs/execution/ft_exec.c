@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:46:13 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/12 14:45:56 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/09/23 15:30:06 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,10 @@ int	ft_exec(t_shell *shell)
 	if (temp != 127)
 		return (temp);
 	temp = make_children(shell);
-	if (temp == 127)
+	if (shell->cmd_list && shell->cmd_list->cmd
+		&& ft_strcmp(shell->cmd_list->cmd, "HRD") == 0)
+		ft_printf("");
+	else if (temp == 127)
 		ft_printf("minishell: command not found: %s\n", shell->cmd_list->cmd);
 	return (temp);
 }
