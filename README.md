@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  Score: <i>96/100</i><br>
-  Finished: <i>06.09.2025</i><br>
+  Score: <i>100/100</i><br>
+  Finished: <i>24.09.2025</i><br>
   Team: <a href="https://github.com/lilikts" target="_blank">@Lilli</a> & <a href="https://github.com/blueyaGIT" target="_blank">@Marzia</a>
 </p>
 
