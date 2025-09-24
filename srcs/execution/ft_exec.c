@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:46:13 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/24 18:09:37 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/24 18:15:19 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	prep_cmd(t_shell *shell, t_command *cmd)
 {
 	int	ecode;
 
-	init_signals(1);
 	if (cmd && cmd->io && !check_io(cmd->io))
 		kill_shell(shell, EXIT_FAILURE);
 	if_cmd_empty(shell, cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:47:37 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/24 11:11:55 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/09/24 18:13:10 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char *argv[], char **envp)
 	initialize_shell(&shell, argv, envp);
 	while (1)
 	{
-		init_signals(0);
+		init_signals();
 		shell.input = read_line(PROMPT);
 		if (!shell.input)
 			break ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   children.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:46:09 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/24 16:26:45 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/09/24 18:15:28 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,7 @@ int	make_children(t_shell *shell)
 		if (shell->pid == -1)
 			return (ft_printf(RED "ERROR: FORK" RESET), EXIT_FAILURE);
 		else if (shell->pid == 0)
-		{
-			init_signals(1);
 			prep_cmd(shell, command);
-		}
 		command = command->next;
 	}
 	return (check_children(shell));
