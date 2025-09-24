@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:42:39 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/24 17:56:57 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/24 18:08:57 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "minishell.h"
 
-bool	check_io(t_redir *io, bool temp);
+bool	check_io(t_redir *io);
 bool	refresh_io(t_redir *io);
 void	init_redir(t_command *cmd);
 void	fix_redir(t_shell *shell);

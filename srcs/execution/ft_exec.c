@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:46:13 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/24 16:50:25 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/09/24 18:09:37 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	prep_cmd(t_shell *shell, t_command *cmd)
 	int	ecode;
 
 	init_signals(1);
-	if (cmd && cmd->io && !check_io(cmd->io, true))
+	if (cmd && cmd->io && !check_io(cmd->io))
 		kill_shell(shell, EXIT_FAILURE);
 	if_cmd_empty(shell, cmd);
 	fds_init(shell->cmd_list, cmd);
@@ -97,7 +97,7 @@ static int	check_data(t_shell *shell)
 	fix_redir(shell);
 	if (!shell->cmd_list->cmd)
 	{
-		if (shell->cmd_list->io && !check_io(shell->cmd_list->io, true))
+		if (shell->cmd_list->io && !check_io(shell->cmd_list->io))
 			return (EXIT_FAILURE);
 		return (EXIT_SUCCESS);
 	}
@@ -114,7 +114,7 @@ int	ft_exec(t_shell *shell)
 	if (temp != 127)
 		return (temp);
 	if (!shell->cmd_list->pipe_flag && !shell->cmd_list->prev
-		&& check_io(shell->cmd_list->io, false))
+		&& check_io(shell->cmd_list->io))
 	{
 		refresh_pipes(shell->cmd_list->io);
 		temp = exec_builtin(shell, shell->cmd_list);
