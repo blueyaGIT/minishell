@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:46:57 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:46:58 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/24 17:56:57 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,25 @@
 
 static void	handle_output_redirection(t_token *token, t_command *current)
 {
-	if (current->io->outfile)
-		free(current->io->outfile);
-	current->io->outfile = ft_strdup(current->filename);
+	t_redir_file	*new_file;
+
+	new_file = new_redir_file(current->filename, token->type);
+	if (!new_file)
+		return ;
+	add_redir_file(&current->io->outfiles, new_file);
 	current->io->hrd_sep = token->type;
 }
 
 static void	handle_input_and_heredoc(t_token *token, t_command *current)
 {
+	t_redir_file	*new_file;
+
 	if (token->type == T_REDIR_IN)
 	{
-		if (current->io->infile)
-			free(current->io->infile);
-		current->io->infile = ft_strdup(current->filename);
+		new_file = new_redir_file(current->filename, token->type);
+		if (!new_file)
+			return ;
+		add_redir_file(&current->io->infiles, new_file);
 		current->io->hrd_sep = token->type;
 	}
 	else if (token->type == T_HEREDOC)

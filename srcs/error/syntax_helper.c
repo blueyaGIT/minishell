@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:46:04 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:46:05 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/24 17:56:57 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,21 @@ static int	check_file_and_set_exit_code(const char *filename, int flags,
 
 int	check_redirections(t_command *cmd, t_shell *shell)
 {
-	if (cmd->io->infile)
+	t_redir_file	*current;
+
+	current = cmd->io->infiles;
+	while (current)
 	{
-		if (check_file_and_set_exit_code(cmd->io->infile, O_RDONLY, shell))
+		if (check_file_and_set_exit_code(current->filename, O_RDONLY, shell))
 			return (1);
+		current = current->next;
 	}
-	if (cmd->io->outfile)
+	current = cmd->io->outfiles;
+	while (current)
 	{
-		if (check_file_and_set_exit_code(cmd->io->outfile, O_WRONLY, shell))
+		if (check_file_and_set_exit_code(current->filename, O_WRONLY, shell))
 			return (1);
+		current = current->next;
 	}
 	return (0);
 }

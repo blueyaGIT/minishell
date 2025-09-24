@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:43:07 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/22 15:18:52 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/09/24 17:56:57 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,17 @@ typedef struct s_token
 	struct s_token		*prev;
 }						t_token;
 
+typedef struct s_redir_file
+{
+	char				*filename;
+	t_token_type		type;
+	struct s_redir_file	*next;
+}						t_redir_file;
+
 typedef struct s_redir
 {
-	char				*infile;
-	char				*outfile;
+	t_redir_file		*infiles;
+	t_redir_file		*outfiles;
 	t_token_type		hrd_sep;
 	char				*hrd_del;
 	bool				hrd_flag;

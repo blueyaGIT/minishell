@@ -3,38 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:47:02 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/24 16:39:37 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/09/24 17:44:28 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void print_tokens(t_token *head)
-{
-    t_token *current = head;
-    int index = 0;
+// static void print_tokens(t_token *head)
+// {
+//     t_token *current = head;
+//     int index = 0;
 
-    printf("------ TOKEN LIST ------\n");
-    while (current)
-    {
-        printf("Token[%d]:\n", index);
-        printf("  value      : %s\n", current->value ? current->value : "NULL");
-        printf("  type       : %d\n", current->type);
-        printf("  is_echo    : %s\n", current->is_echo ? "true" : "false");
-        printf("  is_echo_n  : %s\n", current->is_echo_n ? "true" : "false");
-        printf("  is_removed : %s\n", current->is_removed ? "true" : "false");
-        printf("  add_space  : %s\n", current->add_space ? "true" : "false");
-        printf("  next       : %p\n", (void *)current->next);
-        printf("  prev       : %p\n", (void *)current->prev);
-        printf("------------------------\n");
+//     printf("------ TOKEN LIST ------\n");
+//     while (current)
+//     {
+//         printf("Token[%d]:\n", index);
+//         printf("  value      : %s\n", current->value ? current->value : "NULL");
+//         printf("  type       : %d\n", current->type);
+//         printf("  is_echo    : %s\n", current->is_echo ? "true" : "false");
+//         printf("  is_echo_n  : %s\n", current->is_echo_n ? "true" : "false");
+//         printf("  is_removed : %s\n", current->is_removed ? "true" : "false");
+//         printf("  add_space  : %s\n", current->add_space ? "true" : "false");
+//         printf("  next       : %p\n", (void *)current->next);
+//         printf("  prev       : %p\n", (void *)current->prev);
+//         printf("------------------------\n");
 
-        current = current->next;
-        index++;
-    }
-}
+//         current = current->next;
+//         index++;
+//     }
+// }
 
 static t_token *create_pipe_token(void)
 {
@@ -136,7 +136,7 @@ int	process_and_execute_input(t_shell *shell)
 	}
 	insert_pipe(token);
 	
-	print_tokens(token);
+	// print_tokens(token);
 	shell->token = token;
 	command = parse_code(shell->token);
 	if (!command && shell->token)
