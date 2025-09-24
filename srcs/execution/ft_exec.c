@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:46:13 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/23 15:30:06 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/09/24 11:00:39 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	prep_cmd(t_shell *shell, t_command *cmd)
 {
 	int	ecode;
 
+	init_signals(1);
 	if (cmd && cmd->io && !check_io(cmd->io, true))
 		kill_shell(shell, EXIT_FAILURE);
 	if_cmd_empty(shell, cmd);

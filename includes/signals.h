@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:43:11 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:43:13 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/24 15:28:05 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,5 @@
 
 # include "minishell.h"
 
-void	init_signals(void);
-void	refresh_signals(void);
-
+void	init_signals(int is_child);
 #endif /* SIGNALS_H */

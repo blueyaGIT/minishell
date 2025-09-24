@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:47:37 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/22 15:28:11 by lkloters         ###   ########.fr       */
+/*   Updated: 2025/09/24 11:11:55 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ int	main(int argc, char *argv[], char **envp)
 	initialize_shell(&shell, argv, envp);
 	while (1)
 	{
-		init_signals();
+		init_signals(0);
 		shell.input = read_line(PROMPT);
-		refresh_signals();
 		if (!shell.input)
 			break ;
 		if (process_and_execute_input(&shell))

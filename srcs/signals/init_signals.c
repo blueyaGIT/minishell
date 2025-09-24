@@ -3,56 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   init_signals.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/08 14:47:28 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:47:29 by dalbano          ###   ########.fr       */
+/*   Created: 2025/09/24 10:25:51 by lkloters          #+#    #+#             */
+/*   Updated: 2025/09/24 16:28:59 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	print_nl(int temp)
+
+static void    parent_handler(int sig)
 {
-	(void)temp;
-	ft_printf("\n");
-	rl_on_new_line();
+    if (sig == SIGINT)
+    {
+        g_ecode = 130;
+        write(STDOUT_FILENO, "^C\n", 3);
+        rl_replace_line("", 0);
+        rl_on_new_line();
+        rl_redisplay();
+    }
+    else if (sig == SIGQUIT)
+        g_ecode = 0;
+    else if (sig == SIGTSTP)
+        g_ecode = 0;
+}
+static void child_handler(int sig)
+{
+    if (sig == SIGINT)
+    {
+        g_ecode = 130;
+        write(STDOUT_FILENO, "\n", 1);
+        exit(130);
+    }
+    else if (sig == SIGQUIT)
+    {
+        g_ecode = 131;
+        write(STDOUT_FILENO, "Quit: 3\n", 9);
+        exit(131);
+    }
 }
 
-static void	refresh_rl(int signum)
-{
-	(void)signum;
-	ft_printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
-
-static void	sig_ignore(void)
+void	init_signals(int is_child)
 {
 	struct sigaction	sa;
 
-	ft_memset(&sa, 0, sizeof(sa));
-	sa.sa_handler = SIG_IGN;
-	sigaction(SIGQUIT, &sa, NULL);
-}
+	sa.sa_flags = SA_RESTART;
+	sigemptyset(&sa.sa_mask);
 
-void	init_signals(void)
-{
-	struct sigaction	sa;
-
-	sig_ignore();
-	ft_memset(&sa, 0, sizeof(sa));
-	sa.sa_handler = &refresh_rl;
-	sigaction(SIGINT, &sa, NULL);
-}
-
-void	refresh_signals(void)
-{
-	struct sigaction	sa;
-
-	ft_memset(&sa, 0, sizeof(sa));
-	sa.sa_handler = &print_nl;
-	sigaction(SIGINT, &sa, NULL);
-	sigaction(SIGQUIT, &sa, NULL);
+	if (is_child == 0)
+	{
+		sa.sa_handler = &parent_handler;
+		sigaction(SIGINT, &sa, NULL);
+		sigaction(SIGQUIT, &sa, NULL);
+		sigaction(SIGTSTP, &sa, NULL);
+		rl_catch_signals = 0;
+	}
+	else if (is_child == 1)
+	{
+		sa.sa_handler = &child_handler;
+		sigaction(SIGINT, &sa, NULL);
+		sigaction(SIGQUIT, &sa, NULL);
+	}
+	else if (is_child == 2)
+	{
+		sa.sa_handler = SIG_IGN;
+		sigaction(SIGINT, &sa, NULL);
+		sigaction(SIGQUIT, &sa, NULL);
+	}
 }
