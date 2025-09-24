@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/blueyaGIT/blueyaGIT/blob/master/42_badges/minishelln.png?raw=true" alt="minishell"/>
+  <img src="https://github.com/blueyaGIT/blueyaGIT/blob/master/42_badges/minishelle.png?raw=true" alt="minishell"/>
 </p>
 
 <p align="center">
