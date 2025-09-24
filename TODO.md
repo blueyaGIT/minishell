@@ -1,7 +1,6 @@
 
 
 
-valgrind --leak-check=full --show-leak-kinds=all --suppressions=/home/lkloters/42/projects/circle3/minishell/srcs/readline.supp --track-origins=yes --verbose ./minishell
 valgrind --leak-check=full --show-leak-kinds=all --suppressions=./srcs/utils/readline.supp --track-origins=yes --track-fds=yes ./minishell
 valgrind --leak-check=full --show-leak-kinds=all --suppressions=./sub.sub --track-origins=yes --track-fds=yes ./minishell
 
