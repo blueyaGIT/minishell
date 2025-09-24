@@ -6,7 +6,7 @@
 /*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:47:30 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:47:31 by dalbano          ###   ########.fr       */
+/*   Updated: 2025/09/24 17:25:45 by dalbano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,17 @@ void	ft_free_io(t_redir *io)
 		return ;
 	refresh_io(io);
 	if (io && io->outfile)
+	{
+		if (io->fd_out > 2)
+			close(io->fd_out);
 		free(io->outfile);
+	}
 	if (io && io->infile)
+	{
+		if (io->fd_in > 2)
+			close(io->fd_in);
 		free(io->infile);
+	}
 	if (io && io->hrd_del)
 		free(io->hrd_del);
 	if (io)
