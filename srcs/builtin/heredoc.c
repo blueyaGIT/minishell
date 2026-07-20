@@ -15,8 +15,8 @@
 static void	read_heredoc_input(t_shell *shell, int temp_fd, char *delimiter)
 {
 	char	*line;
+	char	*expanded;
 
-	(void)shell;
 	while (1)
 	{
 		line = readline("> ");
@@ -27,8 +27,12 @@ static void	read_heredoc_input(t_shell *shell, int temp_fd, char *delimiter)
 			free(line);
 			break ;
 		}
-		ft_fprintf(temp_fd, "%s\n", line);
+		expanded = expand_env_string_heredoc(line, shell);
 		free(line);
+		if (!expanded)
+			break ;
+		ft_fprintf(temp_fd, "%s\n", expanded);
+		free(expanded);
 	}
 }
 

@@ -21,26 +21,32 @@ static bool	should_exp_tilde(const char *s, int i)
 	return (false);
 }
 
-static bool	should_exp_env(char *input, int pos)
+static bool	should_exp_env(char *input, int pos, bool ignore_quotes)
 {
 	int		i;
 	bool	in_single_quotes;
 	bool	in_double_quotes;
+	bool	escaped;
 
 	if (!input || pos < 0 || input[pos] != '$')
 		return (false);
 	i = 0;
 	in_single_quotes = false;
 	in_double_quotes = false;
+	escaped = false;
 	while (i < pos)
 	{
-		if (input[i] == '\'' && !in_double_quotes)
+		if (escaped)
+			escaped = false;
+		else if (!ignore_quotes && input[i] == '\'' && !in_double_quotes)
 			in_single_quotes = !in_single_quotes;
-		else if (input[i] == '"' && !in_single_quotes)
+		else if (!ignore_quotes && input[i] == '"' && !in_single_quotes)
 			in_double_quotes = !in_double_quotes;
+		else if (input[i] == '\\' && !in_single_quotes)
+			escaped = true;
 		i++;
 	}
-	if (in_single_quotes)
+	if (escaped || in_single_quotes)
 		return (false);
 	if (pos + 1 >= (int)ft_strlen(input))
 		return (false);
@@ -73,7 +79,7 @@ static char	*make_expansion(char *input, int *i, t_shell *shell)
 	return (result);
 }
 
-static char	*env_to_input(char *input, t_shell *shell)
+static char	*env_to_input(char *input, t_shell *shell, bool ignore_quotes)
 {
 	int		i;
 	char	*temp;
@@ -83,8 +89,8 @@ static char	*env_to_input(char *input, t_shell *shell)
 	i = 0;
 	while (input[i])
 	{
-		if ((input[i] == '$' && should_exp_env(input, i)) || (input[i] == '~'
-				&& should_exp_tilde(input, i)))
+		if ((input[i] == '$' && should_exp_env(input, i, ignore_quotes))
+			|| (input[i] == '~' && should_exp_tilde(input, i)))
 		{
 			temp = make_expansion(input, &i, shell);
 			if (!temp)
@@ -97,21 +103,38 @@ static char	*env_to_input(char *input, t_shell *shell)
 	return (input);
 }
 
-char	*handle_env(t_shell *shell)
+static char	*expand_env_impl(char *str, t_shell *shell, bool ignore_quotes)
 {
 	char	*input_copy;
 	char	*result;
 
-	if (!shell || !shell->input)
+	if (!str || !shell)
 		return (NULL);
-	input_copy = ft_strdup(shell->input);
+	input_copy = ft_strdup(str);
 	if (!input_copy)
 		return (NULL);
-	result = env_to_input(input_copy, shell);
+	result = env_to_input(input_copy, shell, ignore_quotes);
 	if (!result)
 	{
 		free(input_copy);
 		return (NULL);
 	}
 	return (result);
+}
+
+char	*expand_env_string(char *str, t_shell *shell)
+{
+	return (expand_env_impl(str, shell, false));
+}
+
+char	*expand_env_string_heredoc(char *str, t_shell *shell)
+{
+	return (expand_env_impl(str, shell, true));
+}
+
+char	*handle_env(t_shell *shell)
+{
+	if (!shell || !shell->input)
+		return (NULL);
+	return (expand_env_string(shell->input, shell));
 }

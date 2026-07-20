@@ -67,6 +67,11 @@ int	calc_word_length_with_assignment(char *input, int start)
 			if (input[i] == quote)
 				i++;
 		}
+		else if (input[i] == '\\' && input[i + 1])
+		{
+			i++;
+			calc_helper(&length, &i);
+		}
 		else if (ft_isspace(input[i]) && !is_assign)
 			break ;
 		else

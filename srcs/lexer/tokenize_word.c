@@ -30,6 +30,13 @@ static int	handle_assignment_char(char *input, int *i, char *word, int *j)
 	return (0);
 }
 
+static int	handle_escaped_char(char *input, int *i, char *word, int *j)
+{
+	(*i)++;
+	word[(*j)++] = input[(*i)++];
+	return (0);
+}
+
 static int	parse_word_content(char *input, int *i, char *word, int length)
 {
 	int		j;
@@ -41,6 +48,8 @@ static int	parse_word_content(char *input, int *i, char *word, int length)
 	{
 		if (input[*i] == '\'' || input[*i] == '\"')
 			handle_quoted_content(input, i, word, &j);
+		else if (input[*i] == '\\' && input[*i + 1])
+			handle_escaped_char(input, i, word, &j);
 		else if (input[*i] == '=' && is_assign)
 		{
 			handle_assignment_char(input, i, word, &j);

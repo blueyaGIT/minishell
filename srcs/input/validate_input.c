@@ -20,22 +20,25 @@ static bool	valid_quotes(const char *input)
 	if (!input)
 		return (false);
 	i = 0;
+	quote = 0;
 	while (input[i])
 	{
-		if (input[i] == '\'' || input[i] == '\"')
+		if (!quote && input[i] == '\\' && input[i + 1])
+			i += 2;
+		else if (!quote && (input[i] == '\'' || input[i] == '\"'))
 		{
 			quote = input[i];
 			i++;
-			while (input[i] && input[i] != quote)
-				i++;
-			if (input[i] != quote)
-				return (false);
+		}
+		else if (quote && input[i] == quote)
+		{
+			quote = 0;
 			i++;
 		}
 		else
 			i++;
 	}
-	return (true);
+	return (quote == 0);
 }
 
 static bool	valid_escape_chars(const char *input)
