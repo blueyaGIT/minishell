@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:46:48 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:46:49 by dalbano          ###   ########.fr       */
+/*   Updated: 2026/07/20 16:55:40 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ static bool	is_assignment(const char *token)
 	int			name_len;
 
 	i = 0;
-	if (!token || !strchr(token, '='))
+	if (!token || !ft_strchr(token, '='))
 		return (false);
 	if (token[0] == '=')
 		return (false);
-	equals = strchr(token, '=');
+	equals = ft_strchr(token, '=');
 	name_len = equals - token;
 	while (i < name_len)
 	{
-		if ((i == 0 && !isalpha(token[i]) && token[i] != '_') || \
-		(i > 0 && !isalnum(token[i]) && token[i] != '_'))
+		if ((i == 0 && !ft_isalpha(token[i]) && token[i] != '_') || \
+		(i > 0 && !ft_isalnum(token[i]) && token[i] != '_'))
 			return (false);
 		i++;
 	}

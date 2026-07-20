@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_get.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:45:55 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 14:45:56 by dalbano          ###   ########.fr       */
+/*   Updated: 2026/07/20 16:56:01 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*get_env_value(const char *name, char **env)
 		j = 0;
 		while (entry[j] && entry[j] != '=')
 			j++;
-		if (strncmp(entry, name, j) == 0 && name[j] == '\0')
+		if (ft_strncmp(entry, name, j) == 0 && name[j] == '\0')
 			return (ft_strdup(entry + j + 1));
 		i++;
 	}
