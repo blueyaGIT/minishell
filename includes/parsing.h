@@ -17,6 +17,7 @@
 
 int			process_and_execute_input(t_shell *shell);
 t_command	*parse_code(t_token *token);
+int			insert_pipe(t_token *token);
 bool		valid_syntax(t_token *token);
 t_token		*handle_word(t_token *token, t_command **command);
 t_token		*handle_pipe(t_token *token, t_command **command);

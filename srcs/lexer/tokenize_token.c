@@ -16,8 +16,8 @@ static bool	is_filename(t_token *prev)
 {
 	if (!prev)
 		return (false);
-	if (prev->type == T_REDIR_IN || prev->type == T_REDIR_OUT || \
-		prev->type == T_APPEND)
+	if (prev->type == T_REDIR_IN || prev->type == T_REDIR_OUT
+		|| prev->type == T_APPEND)
 		return (true);
 	return (false);
 }
@@ -46,8 +46,8 @@ static bool	is_assignment(const char *token)
 	name_len = equals - token;
 	while (i < name_len)
 	{
-		if ((i == 0 && !ft_isalpha(token[i]) && token[i] != '_') || \
-		(i > 0 && !ft_isalnum(token[i]) && token[i] != '_'))
+		if ((i == 0 && !ft_isalpha(token[i]) && token[i] != '_')
+			|| (i > 0 && !ft_isalnum(token[i]) && token[i] != '_'))
 			return (false);
 		i++;
 	}

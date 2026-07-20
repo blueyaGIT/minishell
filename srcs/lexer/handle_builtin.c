@@ -30,18 +30,6 @@ static bool	is_echo_option(const char *str)
 	return (true);
 }
 
-// static void	ft_remove_token(t_token **head, t_token *prev, t_token *echo_option)
-// {
-// 	if (!echo_option)
-// 		return ;
-// 	if (prev)
-// 		prev->next = echo_option->next;
-// 	else
-// 		*head = echo_option->next;
-// 	// free(echo_option->value);
-// 	// free(echo_option);
-// }
-
 static bool	is_echo(t_token *token)
 {
 	t_token	*current;
@@ -59,18 +47,28 @@ static bool	is_echo(t_token *token)
 	return (true);
 }
 
+static bool	is_shell_builtin_name(char *name)
+{
+	if (ft_strcmp(name, "cd") == 0)
+		return (true);
+	if (ft_strcmp(name, "pwd") == 0)
+		return (true);
+	if (ft_strcmp(name, "export") == 0)
+		return (true);
+	if (ft_strcmp(name, "unset") == 0)
+		return (true);
+	if (ft_strcmp(name, "env") == 0)
+		return (true);
+	if (ft_strcmp(name, "exit") == 0)
+		return (true);
+	return (false);
+}
+
 bool	is_builtin(t_token *token)
 {
 	if (!token || token->type != T_WORD)
 		return (false);
 	if (is_echo(token))
 		return (true);
-	if (ft_strcmp(token->value, "cd") == 0 || \
-	ft_strcmp(token->value, "pwd") == 0 || \
-	ft_strcmp(token->value, "export") == 0 || \
-	ft_strcmp(token->value, "unset") == 0 || \
-	ft_strcmp(token->value, "env") == 0 || \
-	ft_strcmp(token->value, "exit") == 0)
-		return (true);
-	return (false);
+	return (is_shell_builtin_name(token->value));
 }

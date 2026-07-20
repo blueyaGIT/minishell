@@ -52,12 +52,12 @@ char	*handle_input(char *input, t_shell *shell)
 		return (NULL);
 	if (ft_strncmp(input, "echo \"''\"", 9) == 0)
 	{
-        ft_printf("\'\'\n");
+		ft_printf("\'\'\n");
 		free(temp);
 		return (NULL);
 	}
-    if (ft_strncmp(input, "echo '\"\"'", 9) == 0)
-    {
+	if (ft_strncmp(input, "echo '\"\"'", 9) == 0)
+	{
 		ft_printf("\"\"\n");
 		free(temp);
 		return (NULL);

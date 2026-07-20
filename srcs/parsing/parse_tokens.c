@@ -59,7 +59,7 @@ t_token	*handle_word(t_token *token, t_command **command)
 	t_command	*current;
 
 	if (token->is_removed)
-        return (token->next);
+		return (token->next);
 	if (!*command)
 		command_add_back(command, new_command());
 	current = command_last(*command);

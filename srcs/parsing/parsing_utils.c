@@ -31,17 +31,17 @@ void	init_command(t_command *command)
 
 bool	is_word(t_token_type type)
 {
-	if (type == BUILTIN || type == COMMAND || \
-	type == ARGUMENT || type == ASSIGNMENT || \
-	type == FILENAME || type == HEREDOC_DELIM)
+	if (type == BUILTIN || type == COMMAND
+		|| type == ARGUMENT || type == ASSIGNMENT
+		|| type == FILENAME || type == HEREDOC_DELIM)
 		return (true);
 	return (false);
 }
 
 bool	is_redirection_token(t_token *token)
 {
-	if (token->type == T_APPEND || token->type == T_HEREDOC || \
-	token->type == T_REDIR_IN || token->type == T_REDIR_OUT)
+	if (token->type == T_APPEND || token->type == T_HEREDOC
+		|| token->type == T_REDIR_IN || token->type == T_REDIR_OUT)
 		return (true);
 	return (false);
 }

@@ -17,7 +17,7 @@ int	exec_echo(t_shell *shell, char **args)
 	int	i;
 
 	i = 0;
-	if (!args[0])
+	if (!args || !args[0])
 		return (EXIT_SUCCESS);
 	while (args[i])
 	{

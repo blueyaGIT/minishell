@@ -41,6 +41,15 @@ void	handle_infile(t_shell *shell)
 	}
 }
 
+static int	open_outfile(t_redir_file *current_file)
+{
+	if (current_file->type == T_APPEND)
+		return (open(current_file->filename,
+				O_CREAT | O_WRONLY | O_APPEND, 0644));
+	return (open(current_file->filename,
+			O_CREAT | O_WRONLY | O_TRUNC, 0644));
+}
+
 void	handle_outfile(t_shell *shell)
 {
 	t_command		*cmd;
@@ -56,12 +65,7 @@ void	handle_outfile(t_shell *shell)
 			{
 				if (cmd->io->fd_out != -1)
 					close(cmd->io->fd_out);
-				if (current_file->type == T_APPEND)
-					cmd->io->fd_out = open(current_file->filename,
-							O_CREAT | O_WRONLY | O_APPEND, 0644);
-				else
-					cmd->io->fd_out = open(current_file->filename,
-							O_CREAT | O_WRONLY | O_TRUNC, 0644);
+				cmd->io->fd_out = open_outfile(current_file);
 				if (cmd->io->fd_out == -1)
 				{
 					perror(current_file->filename);

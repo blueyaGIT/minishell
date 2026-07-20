@@ -12,6 +12,15 @@
 
 #include "minishell.h"
 
+static bool	is_word_char(char c)
+{
+	if (ft_isspace((unsigned char)c))
+		return (false);
+	if (c == '$' || c == '\'' || c == '\"')
+		return (false);
+	return (true);
+}
+
 static char	*copy_word(const char *str, int start)
 {
 	int		i;
@@ -21,8 +30,7 @@ static char	*copy_word(const char *str, int start)
 	if (!str || start < 0)
 		return (NULL);
 	i = start;
-	while (str[i] && !ft_isspace((unsigned char)str[i]) && \
-	str[i] != '$' && str[i] != '\'' && str[i] != '\"')
+	while (str[i] && is_word_char(str[i]))
 		i++;
 	word_length = i - start;
 	if (word_length == 0)

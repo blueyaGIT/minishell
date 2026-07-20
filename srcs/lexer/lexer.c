@@ -12,9 +12,6 @@
 
 #include "minishell.h"
 
-
-
-
 static bool	is_redirection(char c)
 {
 	if (c == '<' || c == '>')

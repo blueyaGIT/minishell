@@ -23,5 +23,8 @@ char	*expand_env_string_heredoc(char *str, t_shell *shell);
 char	*handle_dollar_exp(char *input_dup, int start, int *i, t_shell *shell);
 char	*handle_tilde_exp(char *dup, int start, int *i, t_shell *shell);
 char	*replace_with_value(char *input, int start, int end, char *value);
+bool	should_exp_tilde(const char *s, int i);
+bool	should_exp_env(char *input, int pos, bool ignore_quotes);
+char	*make_expansion(char *input, int *i, t_shell *shell);
 
 #endif

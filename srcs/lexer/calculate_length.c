@@ -47,35 +47,46 @@ int	calc_word_length(char *ip, int i)
 	return (length);
 }
 
+static int	process_length_char(char *input, int *length, int *i,
+	int is_assign)
+{
+	char	quote;
+
+	if (input[*i] == '\'' || input[*i] == '\"')
+	{
+		quote = input[(*i)++];
+		while (input[*i] && input[*i] != quote)
+			calc_helper(length, i);
+		if (input[*i] == quote)
+			(*i)++;
+	}
+	else if (input[*i] == '\\' && input[*i + 1])
+	{
+		(*i)++;
+		calc_helper(length, i);
+	}
+	else if (ft_isspace(input[*i]) && !is_assign)
+		return (1);
+	else if (is_tok_sep(input[*i]))
+		return (1);
+	else
+		calc_helper(length, i);
+	return (0);
+}
+
 int	calc_word_length_with_assignment(char *input, int start)
 {
-	int		length;
-	int		i;
-	char	quote;
-	int		is_assign;
+	int	length;
+	int	i;
+	int	is_assign;
 
 	length = 0;
 	i = start;
 	is_assign = check_assignment(input, start);
 	while (input[i])
 	{
-		if (input[i] == '\'' || input[i] == '\"')
-		{
-			quote = input[i++];
-			while (input[i] && input[i] != quote)
-				calc_helper(&length, &i);
-			if (input[i] == quote)
-				i++;
-		}
-		else if (input[i] == '\\' && input[i + 1])
-		{
-			i++;
-			calc_helper(&length, &i);
-		}
-		else if (ft_isspace(input[i]) && !is_assign)
+		if (process_length_char(input, &length, &i, is_assign))
 			break ;
-		else
-			calc_helper(&length, &i);
 	}
 	return (length);
 }

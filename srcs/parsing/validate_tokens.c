@@ -42,8 +42,8 @@ static bool	valid_redirection_syntax(t_token *token)
 		{
 			if (!token->next)
 				return (false);
-			if (is_redirection_token(token->next) || \
-			token->next->type == T_PIPE)
+			if (is_redirection_token(token->next)
+				|| token->next->type == T_PIPE)
 				return (false);
 			token = token->next;
 		}

@@ -107,4 +107,3 @@ int	make_children(t_shell *shell)
 	}
 	return (check_children(shell));
 }
-

@@ -57,6 +57,8 @@ static int	parse_word_content(char *input, int *i, char *word, int length)
 		}
 		else if (ft_isspace(input[*i]) && !is_assign)
 			break ;
+		else if (is_tok_sep(input[*i]))
+			break ;
 		else
 			word[j++] = input[(*i)++];
 	}

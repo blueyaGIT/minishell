@@ -102,6 +102,7 @@ SRCS	+=	free.c \
 SRCS	+=	handle_input.c \
 			validate_input.c \
 			handle_env.c \
+			handle_env_utils.c \
 			handle_tilde_expansion.c \
 			handle_dollar_expansion.c \
 
@@ -118,6 +119,7 @@ SRCS	+=	lexer.c \
 		
 # PARSING
 SRCS	+=	parsing.c \
+			insert_pipe.c \
 			create_command.c \
 			parsing_utils.c \
 			validate_tokens.c \
