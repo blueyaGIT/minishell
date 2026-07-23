@@ -94,8 +94,10 @@ static int	check_children(t_shell *shell)
 int	make_children(t_shell *shell)
 {
 	t_command	*command;
+	int			status;
 
 	command = shell->cmd_list;
+	refresh_signals();
 	while (shell->pid != 0 && command)
 	{
 		shell->pid = fork();
@@ -105,5 +107,7 @@ int	make_children(t_shell *shell)
 			prep_cmd(shell, command);
 		command = command->next;
 	}
-	return (check_children(shell));
+	status = check_children(shell);
+	init_signals();
+	return (status);
 }

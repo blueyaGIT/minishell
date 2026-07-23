@@ -57,6 +57,7 @@ SRCS	+=	cd.c \
 
 # ENV
 SRCS	+=	env_copy.c \
+			env_filter.c \
 			env_get.c \
 			env_idx.c \
 			env_init.c \

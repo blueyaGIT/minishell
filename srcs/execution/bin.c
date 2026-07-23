@@ -23,6 +23,8 @@ static bool	is_dir(char *cmd)
 
 int	exec_sys(t_shell *shell, t_command *cmd)
 {
+	char	**envp;
+
 	if (!cmd->cmd || cmd->cmd[0] == '\0')
 		return (127);
 	if (is_dir(cmd->cmd))
@@ -31,13 +33,16 @@ int	exec_sys(t_shell *shell, t_command *cmd)
 	if (cmd->cpath == NULL)
 		return (127);
 	cmd->args = ft_str_to_array_front(cmd->args, cmd->cmd);
-	if (execve(cmd->cpath, cmd->args, shell->env) == -1)
-		return (errno);
+	envp = build_envp(shell->env);
+	if (execve(cmd->cpath, cmd->args, envp) == -1)
+		return (free(envp), errno);
 	return (EXIT_FAILURE);
 }
 
 int	exec_local(t_shell *shell, t_command *cmd)
 {
+	char	**envp;
+
 	if (ft_strchr(cmd->cmd, '/') == NULL && env_idx(shell->env, "PATH")
 		!= -1)
 		return (127);
@@ -51,7 +56,8 @@ int	exec_local(t_shell *shell, t_command *cmd)
 	if (cmd->cpath == NULL)
 		return (127);
 	cmd->args = ft_str_to_array_front(cmd->args, cmd->cmd);
-	if (execve(cmd->cpath, cmd->args, shell->env) == -1)
-		return (errno);
+	envp = build_envp(shell->env);
+	if (execve(cmd->cpath, cmd->args, envp) == -1)
+		return (free(envp), errno);
 	return (EXIT_FAILURE);
 }
