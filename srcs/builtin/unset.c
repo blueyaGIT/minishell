@@ -63,21 +63,14 @@ bool	is_valid_varname(char *str)
 int	exec_unset(t_shell *shell, char **args)
 {
 	int	i;
-	int	exit_status;
 	int	idx;
 
-	exit_status = 0;
 	i = 0;
 	if (!args[0])
 		return (0);
 	while (args[i])
 	{
-		if (!is_valid_varname(args[i]))
-		{
-			ft_printf("unset: `%s': not a valid identifier\n", args[i]);
-			exit_status = 1;
-		}
-		else
+		if (is_valid_varname(args[i]))
 		{
 			idx = env_idx(shell->env, args[i]);
 			if (idx != -1)
@@ -86,5 +79,5 @@ int	exec_unset(t_shell *shell, char **args)
 		}
 		i++;
 	}
-	return (exit_status);
+	return (0);
 }

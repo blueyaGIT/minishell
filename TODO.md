@@ -25,7 +25,6 @@ TODO
 
 Signal in mehreren shells mehrfach ausgefuehrt, fuer jede offene shell
 echo """"abc
-export alles in quotes nach =
 unset test 7=4 sollte trotzdem unset machen
 echo >> moin hallo
 
