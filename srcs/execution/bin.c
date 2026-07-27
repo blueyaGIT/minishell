@@ -21,6 +21,30 @@ static bool	is_dir(char *cmd)
 	return (S_ISDIR(cmd_stat.st_mode));
 }
 
+static char	**add_child_flag(char **envp)
+{
+	int		count;
+	char	**new_envp;
+	int		i;
+
+	count = 0;
+	while (envp[count])
+		count++;
+	new_envp = ft_calloc(count + 2, sizeof(char *));
+	if (!new_envp)
+		return (envp);
+	i = 0;
+	while (i < count)
+	{
+		new_envp[i] = envp[i];
+		i++;
+	}
+	new_envp[i] = "MINISHELL_CHILD=1";
+	new_envp[i + 1] = NULL;
+	free(envp);
+	return (new_envp);
+}
+
 int	exec_sys(t_shell *shell, t_command *cmd)
 {
 	char	**envp;
@@ -34,6 +58,7 @@ int	exec_sys(t_shell *shell, t_command *cmd)
 		return (127);
 	cmd->args = ft_str_to_array_front(cmd->args, cmd->cmd);
 	envp = build_envp(shell->env);
+	envp = add_child_flag(envp);
 	if (execve(cmd->cpath, cmd->args, envp) == -1)
 		return (free(envp), errno);
 	return (EXIT_FAILURE);
@@ -57,6 +82,7 @@ int	exec_local(t_shell *shell, t_command *cmd)
 		return (127);
 	cmd->args = ft_str_to_array_front(cmd->args, cmd->cmd);
 	envp = build_envp(shell->env);
+	envp = add_child_flag(envp);
 	if (execve(cmd->cpath, cmd->args, envp) == -1)
 		return (free(envp), errno);
 	return (EXIT_FAILURE);

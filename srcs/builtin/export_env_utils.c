@@ -50,7 +50,9 @@ static void	sort_env(char **env)
 
 int	show_env_sorted(t_shell *shell)
 {
-	int	i;
+	int		i;
+	char	*equal_pos;
+	char	*key;
 
 	if (!shell->env)
 		return (1);
@@ -58,8 +60,17 @@ int	show_env_sorted(t_shell *shell)
 	i = 0;
 	while (shell->env[i])
 	{
-		ft_printf("declare -x ");
-		ft_putendl_fd(shell->env[i], STDOUT_FILENO);
+		equal_pos = ft_strchr(shell->env[i], '=');
+		if (equal_pos)
+		{
+			key = ft_substr(shell->env[i], 0, equal_pos - shell->env[i]);
+			ft_printf("declare -x %s=\"%s\"\n", key, equal_pos + 1);
+			free(key);
+		}
+		else
+		{
+			ft_printf("declare -x %s\n", shell->env[i]);
+		}
 		i++;
 	}
 	return (0);
