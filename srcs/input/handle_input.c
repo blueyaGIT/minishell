@@ -32,7 +32,10 @@ static char	*remove_quotes(const char *input)
 		{
 			quote = input[i];
 			if (input[i + 1] == quote)
+			{
 				i += 2;
+				continue ;
+			}
 		}
 		result[j++] = input[i++];
 	}
