@@ -27,7 +27,3 @@ Signal in mehreren shells mehrfach ausgefuehrt, fuer jede offene shell
 echo """"abc
 unset test 7=4 sollte trotzdem unset machen
 echo >> moin hallo
-
-env -i ./minishell
-lksab
-ERROR: No such file or directory
