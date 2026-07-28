@@ -70,7 +70,12 @@ static void	configure_env(t_shell *shell)
 		ft_printf(RED "Error: FAILED TO ALLOCATE SHELL->ENV" RESET);
 		kill_shell(shell, g_ecode);
 	}
-	shell->env[0] = ft_strjoin("PWD=", getcwd(temp, PATH_MAX));
+	if (!getcwd(temp, PATH_MAX))
+	{
+		ft_printf(RED "Error: FAILED TO GET CURRENT WORKING DIRECTORY" RESET);
+		kill_shell(shell, g_ecode);
+	}
+	shell->env[0] = ft_strjoin("PWD=", temp);
 	if (!shell->env[0])
 	{
 		ft_printf(RED "Error: FAILED TO SET PWD IN SHELL->ENV[0]" RESET);

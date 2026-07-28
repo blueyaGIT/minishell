@@ -22,6 +22,8 @@ char	*ft_strjoin_three(const char *s1, const char *s2, const char *s3)
 	char	*result;
 
 	tmp = ft_strjoin(s1, s2);
+	if (!tmp)
+		return (NULL);
 	result = ft_strjoin(tmp, s3);
 	free(tmp);
 	return (result);
@@ -54,11 +56,15 @@ int	update_existing_env(t_shell *shell, char *key, char *value)
 	{
 		if (ft_strncmp(shell->env[i], key, key_len) == 0)
 		{
-			free(shell->env[i]);
+			char	*new_var;
 			if (value)
-				shell->env[i] = ft_strjoin_three(key, "=", value);
+				new_var = ft_strjoin_three(key, "=", value);
 			else
-				shell->env[i] = ft_strdup(key);
+				new_var = ft_strdup(key);
+			if (!new_var)
+				return (0);
+			free(shell->env[i]);
+			shell->env[i] = new_var;
 			return (1);
 		}
 		i++;
@@ -70,6 +76,8 @@ int	add_new_env(t_shell *shell, char *key, char *value)
 {
 	int		i;
 	char	**new_env;
+	char	*new_var;
+	char	**old_env;
 
 	i = 0;
 	while (shell->env[i])
@@ -81,12 +89,19 @@ int	add_new_env(t_shell *shell, char *key, char *value)
 	while (shell->env[++i])
 		new_env[i] = shell->env[i];
 	if (value)
-		new_env[i] = ft_strjoin_three(key, "=", value);
+		new_var = ft_strjoin_three(key, "=", value);
 	else
-		new_env[i] = ft_strdup(key);
+		new_var = ft_strdup(key);
+	if (!new_var)
+	{
+		free(new_env);
+		return (-1);
+	}
+	new_env[i] = new_var;
 	new_env[i + 1] = NULL;
-	free(shell->env);
+	old_env = shell->env;
 	shell->env = new_env;
+	free(old_env);
 	return (0);
 }
 

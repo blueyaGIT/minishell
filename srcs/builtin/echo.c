@@ -23,7 +23,7 @@ int	exec_echo(t_shell *shell, char **args)
 	{
 		if (ft_printf("%s", args[i]) == -1)
 			return (EXIT_FAILURE);
-		if (args[i + 1])
+		if (args[i + 1] && args[i][0] != '\0')
 		{
 			if (ft_printf(" ") == -1)
 				return (EXIT_FAILURE);

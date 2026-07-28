@@ -23,8 +23,14 @@ bool	pipes_init(t_shell *shell)
 		if (temp->pipe_flag || (temp->prev && temp->prev->pipe_flag))
 		{
 			fd = malloc(sizeof * fd * 2);
-			if (!fd || pipe(fd) != 0)
+			if (!fd)
 			{
+				reload_shell(shell);
+				return (false);
+			}
+			if (pipe(fd) != 0)
+			{
+				free(fd);
 				reload_shell(shell);
 				return (false);
 			}
@@ -40,9 +46,15 @@ bool	fds_init(t_command *temp, t_command *cmd)
 	if (!cmd)
 		return (false);
 	if (cmd->prev && cmd->prev->pipe_flag)
-		dup2(cmd->prev->pipe_fd[0], STDIN_FILENO);
+	{
+		if (dup2(cmd->prev->pipe_fd[0], STDIN_FILENO) == -1)
+			return (false);
+	}
 	if (cmd->pipe_flag)
-		dup2(cmd->pipe_fd[1], STDOUT_FILENO);
+	{
+		if (dup2(cmd->pipe_fd[1], STDOUT_FILENO) == -1)
+			return (false);
+	}
 	kill_pipes(temp, cmd);
 	return (true);
 }

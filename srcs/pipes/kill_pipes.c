@@ -27,6 +27,8 @@ void	kill_pipes(t_command *commands, t_command *temp)
 
 void	kill_fds(t_command *commands, bool temp)
 {
+	if (!commands)
+		return ;
 	if (commands->io)
 	{
 		if (commands->io->fd_in != -1)

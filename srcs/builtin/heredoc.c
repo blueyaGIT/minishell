@@ -81,10 +81,12 @@ int	exec_heredoc(t_shell *shell, char *delimiter)
 	result = create_heredoc_file(shell, delimiter, temp_file);
 	if (result != EXIT_SUCCESS)
 	{
+		unlink(temp_file);
 		free(temp_file);
 		return (result);
 	}
 	result = setup_heredoc_input(shell, temp_file);
+	unlink(temp_file);
 	free(temp_file);
 	if (result != EXIT_SUCCESS)
 		return (result);

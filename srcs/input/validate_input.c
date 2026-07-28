@@ -75,14 +75,14 @@ static bool	valid_unset_usage(const char *input)
 	i = 0;
 	while (input[i] && ft_isspace(input[i]))
 		i++;
-	if (ft_strncmp(input, "unset", 5) == 0)
+	if (ft_strncmp(input + i, "unset", 5) == 0)
 	{
 		i += 5;
 		while (input[i] && ft_isspace(input[i]))
 			i++;
+		if (input[i] == '\0')
+			return (true);
 		if (input[i] == '$')
-			return (false);
-		if (!is_valid_varname((char *)&input[i]))
 			return (false);
 	}
 	return (true);

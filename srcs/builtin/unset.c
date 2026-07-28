@@ -22,10 +22,14 @@
 // 	return (idx);
 // }
 
-static bool	remove_env_var(t_shell *shell, int idx)
+static bool	remove_env_var(t_shell *shell, char *varname)
 {
+	int	idx;
 	int	i;
 
+	idx = env_idx(shell->env, varname);
+	if (idx == -1)
+		return (true);
 	if (idx > ft_arrlen(shell->env))
 		return (false);
 	ft_free_ptr(shell->env[idx]);
@@ -63,7 +67,6 @@ bool	is_valid_varname(char *str)
 int	exec_unset(t_shell *shell, char **args)
 {
 	int	i;
-	int	idx;
 
 	i = 0;
 	if (!args[0])
@@ -72,10 +75,8 @@ int	exec_unset(t_shell *shell, char **args)
 	{
 		if (is_valid_varname(args[i]))
 		{
-			idx = env_idx(shell->env, args[i]);
-			if (idx != -1)
-				if (remove_env_var(shell, idx) == false)
-					return (ft_printf("unset: failed to remove variable\n"), 1);
+			if (remove_env_var(shell, args[i]) == false)
+				return (ft_printf("unset: failed to remove variable\n"), 1);
 		}
 		i++;
 	}

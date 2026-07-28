@@ -50,12 +50,16 @@ static int	check_children(t_shell *shell)
 	kill_fds(shell->cmd_list, false);
 	temp = 0;
 	wpid = 0;
-	while (wpid != -1 || errno != ECHILD)
+	while (1)
 	{
 		wpid = waitpid(-1, &exit_status, 0);
-		if (wpid == shell->pid)
+		if (wpid == -1)
+		{
+			if (errno == ECHILD)
+				break ;
+		}
+		else if (wpid == shell->pid)
 			temp = exit_status;
-		continue ;
 	}
 	if (WIFSIGNALED(temp))
 		exit_status = 128 + WTERMSIG(temp);

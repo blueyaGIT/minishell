@@ -36,6 +36,7 @@ bool	set_env_var(t_shell *shell, char *key, char *value)
 {
 	int		idx;
 	char	*temp;
+	char	*new_var;
 
 	idx = env_idx(shell->env, key);
 	if (value == NULL)
@@ -45,8 +46,11 @@ bool	set_env_var(t_shell *shell, char *key, char *value)
 		return (false);
 	if (idx >= 0 && shell->env[idx])
 	{
+		new_var = ft_strjoin(key, temp);
+		if (!new_var)
+			return (ft_free_ptr(temp), false);
 		ft_free_ptr(shell->env[idx]);
-		shell->env[idx] = ft_strjoin(key, temp);
+		shell->env[idx] = new_var;
 	}
 	else
 	{
@@ -54,7 +58,10 @@ bool	set_env_var(t_shell *shell, char *key, char *value)
 		shell->env = refresh_env(shell, idx + 1);
 		if (!shell->env)
 			return (ft_free_ptr(temp), false);
-		shell->env[idx] = ft_strjoin(key, temp);
+		new_var = ft_strjoin(key, temp);
+		if (!new_var)
+			return (ft_free_ptr(temp), false);
+		shell->env[idx] = new_var;
 	}
 	ft_free_ptr(temp);
 	return (true);
