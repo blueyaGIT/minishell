@@ -24,4 +24,3 @@ TODO
 
 
 Signal in mehreren shells mehrfach ausgefuehrt, fuer jede offene shell
-unset test 7=4 sollte trotzdem unset machen
