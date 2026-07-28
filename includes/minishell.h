@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:42:49 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/08 15:44:19 by dalbano          ###   ########.fr       */
+/*   Updated: 2026/07/28 14:58:06 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 extern int	g_ecode;
 
 # define PROMPT "\033[38;5;168m\033[1m🧚>$ \033[0m"
+// # define PROMPT "> "
 
 # define STDIN 0
 # define STDOUT 1
