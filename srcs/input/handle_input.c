@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static char	*remove_quotes(const char *input)
+char	*remove_quotes(const char *input)
 {
 	char		*result;
 	size_t		i;
@@ -31,13 +31,14 @@ static char	*remove_quotes(const char *input)
 		if (input[i] == '\'' || input[i] == '\"')
 		{
 			quote = input[i];
-			if (input[i + 1] == quote)
-			{
-				i += 2;
-				continue ;
-			}
+			i++;
+			while (i < ft_strlen(input) && input[i] != quote)
+				result[j++] = input[i++];
+			if (i < ft_strlen(input))
+				i++;
 		}
-		result[j++] = input[i++];
+		else
+			result[j++] = input[i++];
 	}
 	result[j] = '\0';
 	return (result);
@@ -46,26 +47,11 @@ static char	*remove_quotes(const char *input)
 char	*handle_input(char *input, t_shell *shell)
 {
 	char	*result;
-	char	*temp;
 
 	if (!valid_input(input))
 		return (NULL);
-	temp = handle_env(shell);
-	if (!temp)
+	result = handle_env(shell);
+	if (!result)
 		return (NULL);
-	if (ft_strncmp(input, "echo \"''\"", 9) == 0)
-	{
-		ft_printf("\'\'\n");
-		free(temp);
-		return (NULL);
-	}
-	if (ft_strncmp(input, "echo '\"\"'", 9) == 0)
-	{
-		ft_printf("\"\"\n");
-		free(temp);
-		return (NULL);
-	}
-	result = remove_quotes(temp);
-	free(temp);
 	return (result);
 }

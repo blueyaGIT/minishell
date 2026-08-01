@@ -30,6 +30,10 @@ static bool	valid_quotes(const char *input)
 			quote = input[i];
 			i++;
 		}
+		else if (quote && input[i] == '\\' && input[i + 1] && quote != '\'')
+		{
+			i += 2;
+		}
 		else if (quote && input[i] == quote)
 		{
 			quote = 0;

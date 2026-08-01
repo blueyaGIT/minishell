@@ -15,10 +15,25 @@
 static int	handle_quoted_content(char *input, int *i, char *word, int *j)
 {
 	char	quote;
+	char	next;
 
 	quote = input[(*i)++];
 	while (input[*i] && input[*i] != quote)
-		word[(*j)++] = input[(*i)++];
+	{
+		if (quote != '\'' && input[*i] == '\\' && input[*i + 1])
+		{
+			next = input[*i + 1];
+			if (next == '$' || next == '"' || next == '\\' || next == '`')
+			{
+				(*i)++;
+				word[(*j)++] = input[(*i)++];
+			}
+			else
+				word[(*j)++] = input[(*i)++];
+		}
+		else
+			word[(*j)++] = input[(*i)++];
+	}
 	if (input[*i] == quote)
 		(*i)++;
 	return (0);
