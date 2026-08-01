@@ -75,3 +75,36 @@ int	show_env_sorted(t_shell *shell)
 	}
 	return (0);
 }
+
+int	add_new_env(t_shell *shell, char *key, char *value)
+{
+	int		i;
+	char	**new_env;
+	char	*new_var;
+
+	i = count_env(shell->env);
+	new_env = malloc(sizeof(char *) * (i + 2));
+	if (!new_env)
+		return (-1);
+	if (value)
+		new_var = ft_strjoin_three(key, "=", value);
+	else
+		new_var = ft_strdup(key);
+	if (!new_var)
+		return (free(new_env), -1);
+	i = -1;
+	while (shell->env[++i])
+		new_env[i] = shell->env[i];
+	new_env[i] = new_var;
+	new_env[i + 1] = NULL;
+	free(shell->env);
+	shell->env = new_env;
+	return (0);
+}
+
+int	set_or_update_env(t_shell *shell, char *key, char *value)
+{
+	if (update_existing_env(shell, key, value))
+		return (0);
+	return (add_new_env(shell, key, value));
+}

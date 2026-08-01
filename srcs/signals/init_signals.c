@@ -15,16 +15,13 @@
 static void	print_nl(int temp)
 {
 	(void)temp;
-	ft_printf("\n");
+	write(STDOUT_FILENO, "\n", 1);
 }
 
 static void	refresh_rl(int signum)
 {
 	(void)signum;
-	ft_printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	write(STDOUT_FILENO, "\n", 1);
 }
 
 static void	sig_ignore(void)

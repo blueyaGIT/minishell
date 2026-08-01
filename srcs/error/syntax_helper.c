@@ -69,6 +69,8 @@ int	check_redirections(t_command *cmd, t_shell *shell)
 {
 	t_redir_file	*current;
 
+	if (!cmd || !cmd->io)
+		return (0);
 	current = cmd->io->infiles;
 	while (current)
 	{

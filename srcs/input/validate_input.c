@@ -12,6 +12,28 @@
 
 #include "minishell.h"
 
+static void	process_quote_char(const char *input, int *i, char *quote)
+{
+	if (!*quote && input[*i] == '\\' && input[*i + 1])
+		*i += 2;
+	else if (!*quote && (input[*i] == '\'' || input[*i] == '\"'))
+	{
+		*quote = input[*i];
+		(*i)++;
+	}
+	else if (*quote && input[*i] == '\\' && input[*i + 1] && *quote != '\'')
+	{
+		*i += 2;
+	}
+	else if (*quote && input[*i] == *quote)
+	{
+		*quote = 0;
+		(*i)++;
+	}
+	else
+		(*i)++;
+}
+
 static bool	valid_quotes(const char *input)
 {
 	int		i;
@@ -22,26 +44,7 @@ static bool	valid_quotes(const char *input)
 	i = 0;
 	quote = 0;
 	while (input[i])
-	{
-		if (!quote && input[i] == '\\' && input[i + 1])
-			i += 2;
-		else if (!quote && (input[i] == '\'' || input[i] == '\"'))
-		{
-			quote = input[i];
-			i++;
-		}
-		else if (quote && input[i] == '\\' && input[i + 1] && quote != '\'')
-		{
-			i += 2;
-		}
-		else if (quote && input[i] == quote)
-		{
-			quote = 0;
-			i++;
-		}
-		else
-			i++;
-	}
+		process_quote_char(input, &i, &quote);
 	return (quote == 0);
 }
 

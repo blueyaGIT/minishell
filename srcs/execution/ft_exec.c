@@ -60,6 +60,8 @@ int	prep_cmd(t_shell *shell, t_command *cmd)
 			kill_shell(shell, ecode);
 	}
 	ecode = exec_local(shell, cmd);
+	if (ecode == 127)
+		ft_printf("minishell: %s: command not found\n", cmd->cmd);
 	kill_shell(shell, ecode);
 	return (ecode);
 }
@@ -122,13 +124,5 @@ int	ft_exec(t_shell *shell)
 	if (temp != 127)
 		return (temp);
 	temp = make_children(shell);
-	if (shell->cmd_list && shell->cmd_list->cmd
-		&& ft_strcmp(shell->cmd_list->cmd, "HRD") == 0)
-		ft_printf("");
-	else if (shell->cmd_list && shell->cmd_list->cmd
-		&& ft_strcmp(shell->cmd_list->cmd, "cat") == 0)
-		ft_printf("");
-	else if (temp == 127)
-		ft_printf("minishell: command not found: %s\n", shell->cmd_list->cmd);
 	return (temp);
 }

@@ -69,6 +69,8 @@ t_token	*handle_redirection(t_token *token, t_command **command)
 	if (!current)
 		return (NULL);
 	init_redir(current);
+	if (!current->io)
+		return (NULL);
 	if (token->next && (token->next->type == FILENAME
 			|| token->next->type == HEREDOC_DELIM) && token->next->value)
 	{

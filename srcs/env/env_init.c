@@ -55,11 +55,23 @@ void	check_shlvl(t_shell *shell)
 	free(value);
 }
 
-/**
- * @brief Manually sets shell->env with all necessary data
- * sets PWD, SHLVL and adds another NULL-string
- * @param shell our t_shell struct
- */
+static void	setup_pwd_shlvl(t_shell *shell, char *temp)
+{
+	shell->env[0] = ft_strjoin("PWD=", temp);
+	if (!shell->env[0])
+	{
+		ft_printf(RED "Error: FAILED TO SET PWD IN SHELL->ENV[0]" RESET);
+		kill_shell(shell, g_ecode);
+	}
+	shell->env[1] = ft_strdup("SHLVL=1");
+	if (!shell->env[1])
+	{
+		ft_printf(RED "Error: FAILED TO SET SHLVL IN SHELL->ENV[1]" RESET);
+		kill_shell(shell, g_ecode);
+	}
+	shell->env[2] = NULL;
+}
+
 static void	configure_env(t_shell *shell)
 {
 	char	temp[PATH_MAX];
@@ -75,19 +87,7 @@ static void	configure_env(t_shell *shell)
 		ft_printf(RED "Error: FAILED TO GET CURRENT WORKING DIRECTORY" RESET);
 		kill_shell(shell, g_ecode);
 	}
-	shell->env[0] = ft_strjoin("PWD=", temp);
-	if (!shell->env[0])
-	{
-		ft_printf(RED "Error: FAILED TO SET PWD IN SHELL->ENV[0]" RESET);
-		kill_shell(shell, g_ecode);
-	}
-	shell->env[1] = ft_strdup("SHLVL=1");
-	if (!shell->env[1])
-	{
-		ft_printf(RED "Error: FAILED TO SET SHLVL IN SHELL->ENV[1]" RESET);
-		kill_shell(shell, g_ecode);
-	}
-	shell->env[2] = NULL;
+	setup_pwd_shlvl(shell, temp);
 }
 
 /**

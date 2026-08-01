@@ -32,11 +32,39 @@ char	**refresh_env(t_shell *shell, int size)
 	return (temp);
 }
 
+static bool	update_existing_var(t_shell *shell, int idx, char *key, char *temp)
+{
+	char	*new_var;
+
+	new_var = ft_strjoin(key, temp);
+	if (!new_var)
+		return (false);
+	ft_free_ptr(shell->env[idx]);
+	shell->env[idx] = new_var;
+	return (true);
+}
+
+static bool	add_new_var(t_shell *shell, char *key, char *temp)
+{
+	int		idx;
+	char	*new_var;
+
+	idx = ft_arrlen(shell->env);
+	shell->env = refresh_env(shell, idx + 1);
+	if (!shell->env)
+		return (false);
+	new_var = ft_strjoin(key, temp);
+	if (!new_var)
+		return (false);
+	shell->env[idx] = new_var;
+	return (true);
+}
+
 bool	set_env_var(t_shell *shell, char *key, char *value)
 {
 	int		idx;
 	char	*temp;
-	char	*new_var;
+	bool	result;
 
 	idx = env_idx(shell->env, key);
 	if (value == NULL)
@@ -45,24 +73,9 @@ bool	set_env_var(t_shell *shell, char *key, char *value)
 	if (!temp)
 		return (false);
 	if (idx >= 0 && shell->env[idx])
-	{
-		new_var = ft_strjoin(key, temp);
-		if (!new_var)
-			return (ft_free_ptr(temp), false);
-		ft_free_ptr(shell->env[idx]);
-		shell->env[idx] = new_var;
-	}
+		result = update_existing_var(shell, idx, key, temp);
 	else
-	{
-		idx = ft_arrlen(shell->env);
-		shell->env = refresh_env(shell, idx + 1);
-		if (!shell->env)
-			return (ft_free_ptr(temp), false);
-		new_var = ft_strjoin(key, temp);
-		if (!new_var)
-			return (ft_free_ptr(temp), false);
-		shell->env[idx] = new_var;
-	}
+		result = add_new_var(shell, key, temp);
 	ft_free_ptr(temp);
-	return (true);
+	return (result);
 }

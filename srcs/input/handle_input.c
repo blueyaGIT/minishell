@@ -12,12 +12,28 @@
 
 #include "minishell.h"
 
+static void	process_input_char(const char *input, size_t *i, char *result,
+		size_t *j)
+{
+	char	quote;
+
+	if (input[*i] == '\'' || input[*i] == '\"')
+	{
+		quote = input[(*i)++];
+		while (*i < ft_strlen(input) && input[*i] != quote)
+			result[(*j)++] = input[(*i)++];
+		if (*i < ft_strlen(input))
+			(*i)++;
+	}
+	else
+		result[(*j)++] = input[(*i)++];
+}
+
 char	*remove_quotes(const char *input)
 {
 	char		*result;
 	size_t		i;
 	size_t		j;
-	char		quote;
 
 	if (!input)
 		return (NULL);
@@ -27,19 +43,7 @@ char	*remove_quotes(const char *input)
 	i = 0;
 	j = 0;
 	while (i < ft_strlen(input))
-	{
-		if (input[i] == '\'' || input[i] == '\"')
-		{
-			quote = input[i];
-			i++;
-			while (i < ft_strlen(input) && input[i] != quote)
-				result[j++] = input[i++];
-			if (i < ft_strlen(input))
-				i++;
-		}
-		else
-			result[j++] = input[i++];
-	}
+		process_input_char(input, &i, result, &j);
 	result[j] = '\0';
 	return (result);
 }

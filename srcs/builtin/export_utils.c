@@ -3,19 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dalbano <dalbano@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:44:34 by dalbano           #+#    #+#             */
-/*   Updated: 2025/09/12 12:15:14 by dalbano          ###   ########.fr       */
+/*   Updated: 2026/08/01 19:59:07 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-Helper function that concatenates three strings.
-Assumes ft_strjoin exists.
-*/
 char	*ft_strjoin_three(const char *s1, const char *s2, const char *s3)
 {
 	char	*tmp;
@@ -47,8 +43,9 @@ int	is_valid_varname_export(const char *s)
 
 int	update_existing_env(t_shell *shell, char *key, char *value)
 {
-	int	i;
-	int	key_len;
+	int		i;
+	int		key_len;
+	char	*new_var;
 
 	key_len = ft_strlen(key);
 	i = 0;
@@ -56,7 +53,6 @@ int	update_existing_env(t_shell *shell, char *key, char *value)
 	{
 		if (ft_strncmp(shell->env[i], key, key_len) == 0)
 		{
-			char	*new_var;
 			if (value)
 				new_var = ft_strjoin_three(key, "=", value);
 			else
@@ -70,44 +66,4 @@ int	update_existing_env(t_shell *shell, char *key, char *value)
 		i++;
 	}
 	return (0);
-}
-
-int	add_new_env(t_shell *shell, char *key, char *value)
-{
-	int		i;
-	char	**new_env;
-	char	*new_var;
-	char	**old_env;
-
-	i = 0;
-	while (shell->env[i])
-		i++;
-	new_env = malloc(sizeof(char *) * (i + 2));
-	if (!new_env)
-		return (-1);
-	i = -1;
-	while (shell->env[++i])
-		new_env[i] = shell->env[i];
-	if (value)
-		new_var = ft_strjoin_three(key, "=", value);
-	else
-		new_var = ft_strdup(key);
-	if (!new_var)
-	{
-		free(new_env);
-		return (-1);
-	}
-	new_env[i] = new_var;
-	new_env[i + 1] = NULL;
-	old_env = shell->env;
-	shell->env = new_env;
-	free(old_env);
-	return (0);
-}
-
-int	set_or_update_env(t_shell *shell, char *key, char *value)
-{
-	if (update_existing_env(shell, key, value))
-		return (0);
-	return (add_new_env(shell, key, value));
 }

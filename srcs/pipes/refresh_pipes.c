@@ -12,19 +12,11 @@
 
 #include "minishell.h"
 
-bool	refresh_pipes(t_redir *io)
+static bool	redirect_fds(t_redir *io)
 {
 	bool	temp;
 
 	temp = true;
-	if (!io)
-		return (temp);
-	io->stdin_backup = dup(STDIN_FILENO);
-	if (io->stdin_backup == -1)
-		temp = false;
-	io->stdout_backup = dup(STDOUT_FILENO);
-	if (io->stdout_backup == -1)
-		temp = false;
 	if (io->fd_in != -1)
 		if (dup2(io->fd_in, STDIN_FILENO) == -1)
 			temp = false;
@@ -32,4 +24,21 @@ bool	refresh_pipes(t_redir *io)
 		if (dup2(io->fd_out, STDOUT_FILENO) == -1)
 			temp = false;
 	return (temp);
+}
+
+bool	refresh_pipes(t_redir *io)
+{
+	if (!io)
+		return (true);
+	io->stdin_backup = dup(STDIN_FILENO);
+	if (io->stdin_backup == -1)
+		return (false);
+	io->stdout_backup = dup(STDOUT_FILENO);
+	if (io->stdout_backup == -1)
+	{
+		close(io->stdin_backup);
+		io->stdin_backup = -1;
+		return (false);
+	}
+	return (redirect_fds(io));
 }

@@ -62,7 +62,6 @@ int	exec_exit(t_shell *shell, char **args)
 	else
 	{
 		ecode = get_ecode(args[0], &temp);
-		ecode = ft_atoi(args[0]);
 		if (temp)
 			return (ft_putendl_fd("numeric argument required", 2),
 				kill_shell(shell, 255), 255);

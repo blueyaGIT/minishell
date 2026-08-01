@@ -48,6 +48,7 @@ static char	**add_child_flag(char **envp)
 int	exec_sys(t_shell *shell, t_command *cmd)
 {
 	char	**envp;
+	int		err;
 
 	if (!cmd->cmd || cmd->cmd[0] == '\0')
 		return (127);
@@ -60,14 +61,17 @@ int	exec_sys(t_shell *shell, t_command *cmd)
 	envp = build_envp(shell->env);
 	envp = add_child_flag(envp);
 	if (execve(cmd->cpath, cmd->args, envp) == -1)
-		return (free(envp), errno);
+	{
+		err = errno;
+		ft_free_arr(cmd->args);
+		free(envp);
+		return (err);
+	}
 	return (EXIT_FAILURE);
 }
 
-int	exec_local(t_shell *shell, t_command *cmd)
+static int	validate_local_cmd(t_shell *shell, t_command *cmd)
 {
-	char	**envp;
-
 	if (ft_strchr(cmd->cmd, '/') == NULL && env_idx(shell->env, "PATH")
 		!= -1)
 		return (127);
@@ -75,8 +79,20 @@ int	exec_local(t_shell *shell, t_command *cmd)
 		return (127);
 	if (is_dir(cmd->cmd))
 		return (126);
-	if (access(cmd->cmd, F_OK | X_OK) != 0)
+	if (access(cmd->cmd, X_OK) != 0)
 		return (126);
+	return (0);
+}
+
+int	exec_local(t_shell *shell, t_command *cmd)
+{
+	char	**envp;
+	int		err;
+	int		result;
+
+	result = validate_local_cmd(shell, cmd);
+	if (result != 0)
+		return (result);
 	cmd->cpath = find_command_path(shell, cmd->cmd);
 	if (cmd->cpath == NULL)
 		return (127);
@@ -84,6 +100,11 @@ int	exec_local(t_shell *shell, t_command *cmd)
 	envp = build_envp(shell->env);
 	envp = add_child_flag(envp);
 	if (execve(cmd->cpath, cmd->args, envp) == -1)
-		return (free(envp), errno);
+	{
+		err = errno;
+		ft_free_arr(cmd->args);
+		free(envp);
+		return (err);
+	}
 	return (EXIT_FAILURE);
 }

@@ -65,6 +65,11 @@ static int	setup_heredoc_input(t_shell *shell, char *temp_file)
 			close(shell->cmd_list->io->fd_in);
 		shell->cmd_list->io->fd_in = fd_in;
 	}
+	else
+	{
+		close(fd_in);
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
