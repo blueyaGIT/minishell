@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by lkloters
+*This project has been created as part of the 42 curriculum by lkloters*
 
 <p align="center">
   <img src="https://github.com/blueyaGIT/blueyaGIT/blob/master/42_badges/minishelle.png?raw=true" alt="minishell"/>
