@@ -17,7 +17,6 @@ LIBFT_DIR = $(INC_DIR)/libft
 LIBFT = libft.a
 LIBFT_LIB = $(LIBFT_DIR)/$(LIBFT)
 LIBFTFLAGS = -L$(LIBFT_DIR) -lft
-LIBFT_REPO = https://github.com/blueyaGIT/libft.git
 
 # Regular Colors
 BLACK       = \033[30m
@@ -134,7 +133,7 @@ TOTAL_SRCS = $(words $(SRCS))
 CURRENT = 0
 
 # Default rule to compile all
-all: init-submodules $(LIBFT_LIB) relink
+all: $(LIBFT_LIB) relink
 
 -include $(OBJS:.o=.d)
 
@@ -145,35 +144,8 @@ $(OBJ_DIR)/%.o: %.c
 	@printf "$(CLEAR_LINE)$(YELLOW)🚧 Compiling $(PERCENT)%% [$(CURRENT)/$(TOTAL_SRCS)] $(CYAN)$<$(NC) 🚧 "
 	@$(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
 
-# Initialize submodules
-init-submodules: init-libft
-
-# Initialize libft
-init-libft:
-	@sleep 0.15
-	@if [ ! -d "$(LIBFT_DIR)" ]; then \
-		echo "$(YELLOW)🚧 Adding LIBFT submodule 🚧$(NC)"; \
-		git submodule add $(LIBFT_REPO) $(LIBFT_DIR) > /dev/null 2>&1 || (echo "$(RED)Failed to add libft submodule$(NC)" && exit 1); \
-	elif [ -z "$$(ls -A $(LIBFT_DIR) 2>/dev/null)" ]; then \
-		echo "$(CYAN)🔄 Updating LIBFT submodule 🔄$(NC)"; \
-		git submodule update --init --recursive $(LIBFT_DIR) > /dev/null 2>&1 || (echo "$(RED)Failed to update libft submodule$(NC)" && exit 1); \
-	else \
-		echo "$(GREEN)✅ LIBFT submodule is already initialized ✅$(NC)"; \
-	fi
-
-# Remove submodules
-remove-submodules: remove-libft
-
-# Remove libft
-remove-libft:
-	@if [ -d "$(LIBFT_DIR)" ]; then \
-		git submodule deinit -q -f $(LIBFT_DIR) > /dev/null 2>&1; \
-		git rm -q -f $(LIBFT_DIR) > /dev/null 2>&1; \
-		rm -rf .git/modules/$(LIBFT_DIR) > /dev/null 2>&1; \
-	fi
-
 # Rule to compile libft
-$(LIBFT_LIB): init-libft
+$(LIBFT_LIB):
 	@if [ ! -f "$(LIBFT_LIB)" ]; then \
 		echo "$(CLEAR_LINE)$(YELLOW)🚧 Building LIBFT 🚧$(NC)"; \
 		$(MAKE) -C $(LIBFT_DIR); \
@@ -201,9 +173,9 @@ relink: $(OBJS)
 	fi
 
 # Clean object files and libraries
-clean: remove-submodules
+clean:
 	@rm -rf $(OBJ_DIR)
-	@rm -rf $(LIBFT_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) clean
 
 # Clean all generated files
 fclean: clean
@@ -218,6 +190,7 @@ fclean: clean
 	@printf "$(MAGENTA)🧴 Tidying Up 🧴$(NC)\n"
 	@sleep 0.15
 	@printf "$(GREEN)✅ Done Cleaning ✅$(NC)\n"
+	@$(MAKE) -C $(LIBFT_DIR) fclean
 	@rm -rf $(NAME)
 
 # Rebuild everything
@@ -228,10 +201,7 @@ fc: clean
 	@rm -rf $(NAME)
 
 # Rebuild everything faster
-fre: remove-submodules
-	@rm -rf $(OBJ_DIR)
-	@rm -rf $(LIBFT_DIR)
-	@rm -rf $(NAME)
+fre: fclean
 	@make
 
 norm:
@@ -243,4 +213,4 @@ debug: CFLAGS += -DDEBUG=1
 debug: clean all
 
 # Phony targets
-.PHONY: all clean fclean re init-submodules remove-submodules fc fre norm debug relink
+.PHONY: all clean fclean re fc fre norm debug relink
