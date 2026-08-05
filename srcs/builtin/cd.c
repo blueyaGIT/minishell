@@ -23,7 +23,7 @@ static int	update_env_vars(t_shell *shell, char *cwd)
 	return (0);
 }
 
-static char	*get_target_directory(char **args, int *error_code)
+static char	*get_target_directory(t_shell *shell, char **args, int *error_code)
 {
 	char	*target_dir;
 
@@ -31,13 +31,13 @@ static char	*get_target_directory(char **args, int *error_code)
 		return (*error_code = 2, NULL);
 	if (ft_arrlen(args) == 0)
 	{
-		target_dir = getenv("HOME");
+		target_dir = env_get(shell->env, "HOME");
 		if (!target_dir)
 			return (*error_code = 1, NULL);
 	}
 	else if (ft_strcmp(args[0], "-") == 0)
 	{
-		target_dir = getenv("OLDPWD");
+		target_dir = env_get(shell->env, "OLDPWD");
 		if (!target_dir)
 			return (*error_code = 1, NULL);
 	}
@@ -53,8 +53,11 @@ int	exec_cd(t_shell *shell, char **args)
 	char	*target_dir;
 	char	buf[PATH_MAX];
 	int		error_code;
+	int		result;
+	bool	should_free;
 
-	target_dir = get_target_directory(args, &error_code);
+	target_dir = get_target_directory(shell, args, &error_code);
+	should_free = (ft_arrlen(args) == 0 || ft_strcmp(args[0], "-") == 0);
 	if (!target_dir)
 	{
 		if (error_code == 2)
@@ -69,6 +72,13 @@ int	exec_cd(t_shell *shell, char **args)
 	}
 	cwd = getcwd(buf, PATH_MAX);
 	if (chdir(target_dir) == -1)
+	{
+		if (should_free)
+			free(target_dir);
 		return (print_error("cd: No such file or directory", shell), 1);
-	return (update_env_vars(shell, cwd));
+	}
+	result = update_env_vars(shell, cwd);
+	if (should_free)
+		free(target_dir);
+	return (result);
 }

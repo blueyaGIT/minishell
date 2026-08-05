@@ -48,10 +48,7 @@ static char	*expand_env_impl(char *str, t_shell *shell, bool ignore_quotes)
 		return (NULL);
 	result = env_to_input(input_copy, shell, ignore_quotes);
 	if (!result)
-	{
-		free(input_copy);
 		return (NULL);
-	}
 	return (result);
 }
 

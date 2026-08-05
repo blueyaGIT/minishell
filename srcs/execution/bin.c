@@ -39,7 +39,12 @@ static char	**add_child_flag(char **envp)
 		new_envp[i] = envp[i];
 		i++;
 	}
-	new_envp[i] = "MINISHELL_CHILD=1";
+	new_envp[i] = ft_strdup("MINISHELL_CHILD=1");
+	if (!new_envp[i])
+	{
+		free(new_envp);
+		return (envp);
+	}
 	new_envp[i + 1] = NULL;
 	free(envp);
 	return (new_envp);

@@ -28,11 +28,12 @@ static int	get_ecode(char *param, bool *temp)
 	if (!ft_isdigit(param[i]))
 		return (*temp = true, 0);
 	while (param[i] != '\0')
+	{
 		if (!ft_isdigit(param[i]) && !ft_isspace(param[i]))
 			return (*temp = true, 0);
-	else
 		i++;
-	i = ft_atoll(&param[i], temp);
+	}
+	i = ft_atoll(param, temp);
 	return ((int)(i % 256));
 }
 

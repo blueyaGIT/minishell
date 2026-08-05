@@ -25,6 +25,7 @@ static void	if_cmd_empty(t_shell *shell, t_command *cmd)
 			if (cmd->cmd)
 				free(cmd->cmd);
 			cmd->cmd = ft_strdup(cmd->args[1]);
+			free(cmd->args[0]);
 			i = 1;
 			while (cmd->args[i])
 			{

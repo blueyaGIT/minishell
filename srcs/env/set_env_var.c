@@ -24,6 +24,13 @@ char	**refresh_env(t_shell *shell, int size)
 	while (shell->env[i] && i < size)
 	{
 		temp[i] = ft_strdup(shell->env[i]);
+		if (!temp[i])
+		{
+			while (i > 0)
+				ft_free_ptr(temp[--i]);
+			free(temp);
+			return (NULL);
+		}
 		ft_free_ptr(shell->env[i]);
 		i++;
 	}
