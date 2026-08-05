@@ -47,38 +47,34 @@ static char	*get_target_directory(t_shell *shell, char **args, int *error_code)
 	return (target_dir);
 }
 
+static int	handle_target_error(int error_code, char **args, t_shell *shell)
+{
+	if (error_code == 2)
+		return (print_error("cd: too many arguments", shell), 2);
+	if (ft_arrlen(args) == 0)
+		return (print_error("cd: HOME not set", shell), 1);
+	return (print_error("cd: OLDPWD not set", shell), 1);
+}
+
 int	exec_cd(t_shell *shell, char **args)
 {
-	char	*cwd;
 	char	*target_dir;
 	char	buf[PATH_MAX];
 	int		error_code;
-	int		result;
 	bool	should_free;
 
 	target_dir = get_target_directory(shell, args, &error_code);
 	should_free = (ft_arrlen(args) == 0 || ft_strcmp(args[0], "-") == 0);
 	if (!target_dir)
-	{
-		if (error_code == 2)
-			return (print_error("cd: too many arguments", shell), 2);
-		else if (error_code == 1)
-		{
-			if (ft_arrlen(args) == 0)
-				return (print_error("cd: HOME not set", shell), 1);
-			else
-				return (print_error("cd: OLDPWD not set", shell), 1);
-		}
-	}
-	cwd = getcwd(buf, PATH_MAX);
+		return (handle_target_error(error_code, args, shell));
 	if (chdir(target_dir) == -1)
 	{
 		if (should_free)
 			free(target_dir);
 		return (print_error("cd: No such file or directory", shell), 1);
 	}
-	result = update_env_vars(shell, cwd);
+	error_code = update_env_vars(shell, getcwd(buf, PATH_MAX));
 	if (should_free)
 		free(target_dir);
-	return (result);
+	return (error_code);
 }

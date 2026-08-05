@@ -12,43 +12,27 @@
 
 #include "minishell.h"
 
-static int	process_heredoc_line(t_shell *shell, int temp_fd,
-		char *line, char *delimiter)
-{
-	char	*expanded;
-
-	if (ft_strcmp(line, delimiter) == 0)
-		return (0);
-	expanded = expand_env_string_heredoc(line, shell);
-	if (!expanded)
-		return (-1);
-	ft_fprintf(temp_fd, "%s\n", expanded);
-	free(expanded);
-	return (1);
-}
-
 static void	read_heredoc_input(t_shell *shell, int temp_fd, char *delimiter)
 {
 	char	*line;
-	int		status;
+	char	*expanded;
 
 	while (1)
 	{
 		line = readline("> ");
 		if (!line)
-		{
-			ft_fprintf(STDERR_FILENO, "warning: delimited by end-of-file (wanted `%s')\n", delimiter);
 			break ;
-		}
 		if (ft_strcmp(line, delimiter) == 0)
 		{
 			free(line);
 			break ;
 		}
-		status = process_heredoc_line(shell, temp_fd, line, delimiter);
+		expanded = expand_env_string_heredoc(line, shell);
 		free(line);
-		if (status <= 0)
+		if (!expanded)
 			break ;
+		ft_fprintf(temp_fd, "%s\n", expanded);
+		free(expanded);
 	}
 }
 
@@ -56,21 +40,13 @@ static int	create_heredoc_file(t_shell *shell, char *delimiter,
 		char *temp_file)
 {
 	int	temp_fd;
-	int	result;
 
 	temp_fd = open_heredoc_temp(temp_file);
 	if (temp_fd == -1)
 		return (EXIT_FAILURE);
-	init_heredoc_signals();
-	if (sigsetjmp(g_heredoc_jump, 1) == 0)
-		read_heredoc_input(shell, temp_fd, delimiter);
+	read_heredoc_input(shell, temp_fd, delimiter);
 	close(temp_fd);
-	if (g_heredoc_interrupted)
-		result = EXIT_FAILURE;
-	else
-		result = EXIT_SUCCESS;
-	restore_signals_after_heredoc();
-	return (result);
+	return (EXIT_SUCCESS);
 }
 
 static int	setup_heredoc_input(t_shell *shell, char *temp_file)

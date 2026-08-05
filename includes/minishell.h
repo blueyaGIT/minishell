@@ -6,7 +6,7 @@
 /*   By: lkloters <lkloters@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:42:49 by dalbano           #+#    #+#             */
-/*   Updated: 2026/07/28 14:58:06 by lkloters         ###   ########.fr       */
+/*   Updated: 2026/08/05 17:04:16 by lkloters         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,10 @@
 /* SETJMP INCLUDES */
 # include <setjmp.h>
 
-extern int		g_ecode;
-extern int		g_heredoc_interrupted;
-extern jmp_buf	g_heredoc_jump;
+extern int	g_ecode;
 
-# define PROMPT "\033[38;5;168m\033[1m🧚>$ \033[0m"
-// # define PROMPT "> "
+// # define PROMPT "\033[38;5;168m\033[1m🧚>$ \033[0m"
+# define PROMPT "fairyshell$ "
 
 # define STDIN 0
 # define STDOUT 1

@@ -14,14 +14,10 @@
 
 static void	helper_func(size_t old_size, size_t new_size, size_t *copy_size)
 {
-    if (old_size < new_size)
-    {
+	if (old_size < new_size)
 		*copy_size = old_size;
-	}
-    else
-    {
+	else
 		*copy_size = new_size;
-	}
 }
 
 /*
@@ -32,29 +28,25 @@ static void	helper_func(size_t old_size, size_t new_size, size_t *copy_size)
  * If ptr is NULL, behaves like malloc(size).
  * If size is 0, frees ptr and returns NULL.
  */
-void    *ft_realloc(void *ptr, size_t size)
+void	*ft_realloc(void *ptr, size_t size)
 {
-    void    *new_ptr;
-    size_t  old_size;
-    size_t  copy_size;
+	void	*new_ptr;
+	size_t	old_size;
+	size_t	copy_size;
 
-    if (!ptr)
-	{
+	if (!ptr)
 		return (malloc(size));
-	}
-    if (size == 0)
-    {
-        free(ptr);
-        return (NULL);
-    }
-    old_size = *((size_t *)ptr - 1);
-    new_ptr = malloc(size);
-    if (!new_ptr)
+	if (size == 0)
 	{
+		free(ptr);
 		return (NULL);
 	}
+	old_size = *((size_t *)ptr - 1);
+	new_ptr = malloc(size);
+	if (!new_ptr)
+		return (NULL);
 	helper_func(old_size, size, &copy_size);
-    ft_memcpy(new_ptr, ptr, copy_size);
-    free(ptr);
-    return (new_ptr);
+	ft_memcpy(new_ptr, ptr, copy_size);
+	free(ptr);
+	return (new_ptr);
 }

@@ -17,6 +17,4 @@
 
 void	init_signals(void);
 void	refresh_signals(void);
-void	init_heredoc_signals(void);
-void	restore_signals_after_heredoc(void);
 #endif /* SIGNALS_H */

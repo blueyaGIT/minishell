@@ -21,7 +21,6 @@ static long long	is_overflowing(long long result, char next_digit, int sign)
 	return (0);
 }
 
-
 long long	ft_atoll(const char *str, bool *overflow)
 {
 	int			sign;
@@ -47,6 +46,5 @@ long long	ft_atoll(const char *str, bool *overflow)
 	}
 	if (*str != '\0' && !(*str == ' ' || (*str >= '\t' && *str <= '\r')))
 		*overflow = true;
-
 	return (sign * result);
 }

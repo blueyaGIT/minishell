@@ -14,7 +14,7 @@
 
 /**
  * prepend_str_to_array - Adds a new string to the beginning of a
- *                        NULL-terminated array of strings.
+ * NULL-terminated array of strings.
  *
  * This function reallocates the given string array to prepend a duplicate
  * of the provided string and ensures the array remains NULL-terminated.
@@ -22,11 +22,12 @@
  * @param array: The original array of strings (can be NULL).
  * @param str: The string to add. A duplicate of this string will be stored.
  *
- * @return A pointer to the new array with the added string at the front, or NULL on allocation failure.
+ * @return A pointer to the new array with the added string at the front,
+ *	or NULL on allocation failure.
  */
-char **ft_str_to_array_front(char **array, char *str)
+char	**ft_str_to_array_front(char **array, char *str)
 {
-    int		len;
+	int		len;
 	char	**new_array;
 	int		i;
 

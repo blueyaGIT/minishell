@@ -13,7 +13,7 @@
 #include "libft.h"
 
 /// @brief Returns the absolute value of an int (INT_MAX returns INT_MAX)
-/// @param nb 
+/// @param nb
 /// @return the absolute value of the int
 int	ft_abs(int nb)
 {

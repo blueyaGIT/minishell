@@ -12,34 +12,45 @@
 
 #include "libft.h"
 
-/**
- * @brief Creates a deep copy of a string array.
- * @param arr The string array to copy.
- * @return The copied string array on success, NULL on error.
- */
-char **ft_arr_cpy(char **arr)
+static int	ft_arr_len(char **arr)
 {
-    int i = 0;
-    while (arr[i])
-        i++;
+	int	i;
 
-    char **arr_copy = malloc((i + 1) * sizeof(char *));
-    if (!arr_copy)
-        return (NULL);
-    
-    i = 0;
-    while (arr[i])
-    {
-        arr_copy[i] = ft_strdup(arr[i]);
-        if (!arr_copy[i])
-        {
-            while (i > 0)
-                free(arr_copy[--i]);
-            free(arr_copy);
-            return (NULL);
-        }
-        i++;
-    }
-    arr_copy[i] = NULL;
-    return (arr_copy);
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
+}
+
+static char	**copy_arr_strings(char **arr, char **arr_copy, int len)
+{
+	int	i;
+
+	i = 0;
+	while (i < len)
+	{
+		arr_copy[i] = ft_strdup(arr[i]);
+		if (!arr_copy[i])
+		{
+			while (i > 0)
+				free(arr_copy[--i]);
+			free(arr_copy);
+			return (NULL);
+		}
+		i++;
+	}
+	arr_copy[len] = NULL;
+	return (arr_copy);
+}
+
+char	**ft_arr_cpy(char **arr)
+{
+	int		len;
+	char	**arr_copy;
+
+	len = ft_arr_len(arr);
+	arr_copy = malloc((len + 1) * sizeof(char *));
+	if (!arr_copy)
+		return (NULL);
+	return (copy_arr_strings(arr, arr_copy, len));
 }

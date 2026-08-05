@@ -12,21 +12,19 @@
 
 #include "minishell.h"
 
-int		g_heredoc_interrupted = 0;
-jmp_buf	g_heredoc_jump;
-
 static void	print_nl(int temp)
 {
 	(void)temp;
-	write(STDOUT_FILENO, "\n", 1);
+	ft_printf("\n");
+	rl_on_new_line();
 }
 
 static void	refresh_rl(int signum)
 {
 	(void)signum;
-	write(STDOUT_FILENO, "\n", 1);
-	rl_replace_line("", 0);
+	ft_printf("\n");
 	rl_on_new_line();
+	rl_replace_line("", 0);
 	rl_redisplay();
 }
 
@@ -37,7 +35,6 @@ static void	sig_ignore(void)
 	ft_memset(&sa, 0, sizeof(sa));
 	sa.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &sa, NULL);
-	sigaction(SIGTSTP, &sa, NULL);
 }
 
 void	init_signals(void)
@@ -46,10 +43,7 @@ void	init_signals(void)
 
 	sig_ignore();
 	ft_memset(&sa, 0, sizeof(sa));
-	if (getenv("MINISHELL_CHILD"))
-		sa.sa_handler = &print_nl;
-	else
-		sa.sa_handler = &refresh_rl;
+	sa.sa_handler = &refresh_rl;
 	sigaction(SIGINT, &sa, NULL);
 }
 

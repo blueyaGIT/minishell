@@ -91,7 +91,6 @@ SRCS	+=	kill_shell.c \
 
 # SIGNALS
 SRCS	+=	init_signals.c \
-			heredoc_signals.c \
 
 # UTILS
 SRCS	+=	free.c \
