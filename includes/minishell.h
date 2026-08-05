@@ -50,7 +50,12 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 
-extern int	g_ecode;
+/* SETJMP INCLUDES */
+# include <setjmp.h>
+
+extern int		g_ecode;
+extern int		g_heredoc_interrupted;
+extern jmp_buf	g_heredoc_jump;
 
 # define PROMPT "\033[38;5;168m\033[1m🧚>$ \033[0m"
 // # define PROMPT "> "

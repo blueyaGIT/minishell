@@ -12,6 +12,9 @@
 
 #include "minishell.h"
 
+int		g_heredoc_interrupted = 0;
+jmp_buf	g_heredoc_jump;
+
 static void	print_nl(int temp)
 {
 	(void)temp;

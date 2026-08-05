@@ -91,6 +91,7 @@ SRCS	+=	kill_shell.c \
 
 # SIGNALS
 SRCS	+=	init_signals.c \
+			heredoc_signals.c \
 
 # UTILS
 SRCS	+=	free.c \
@@ -212,5 +213,8 @@ debug: CFLAGS += -fsanitize=address -fsanitize=undefined -fno-sanitize-recover=a
 debug: CFLAGS += -DDEBUG=1
 debug: clean all
 
+# Bonus rule
+bonus: all
+
 # Phony targets
-.PHONY: all clean fclean re fc fre norm debug relink
+.PHONY: all clean fclean re fc fre norm debug bonus relink
